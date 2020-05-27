@@ -1,0 +1,35 @@
+table{
+  width: 50%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+.example-element-row td {
+  background: #fafafa;
+  border-bottom-width: 0;
+}
+/* Odpowiada za zmiane koloru w czasie klikniecia */
+/*tr.example-element-row:not(.example-expanded-row):active {*/
+/*  background: #efefef;*/
+/*}*/
+
+.example-element-detail {
+  overflow: hidden;
+}
+
+.feature-detail{
+  margin: 10px 0;
+  padding: 10px 0;
+}
+
+.inner-feature-table{
+  width: 100%;
+  position: relative;
+  right: 1%;
+}
+
+.mat-raised-button{
+  margin: 10px;
+}

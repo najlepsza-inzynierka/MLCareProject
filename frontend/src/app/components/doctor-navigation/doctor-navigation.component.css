@@ -1,0 +1,42 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: fit-content;
+}
+.mat-list-item{
+  margin-bottom: 5px;
+}
+
+.example-spacer {
+  flex: 0.95 0.95 auto;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+.login-button{
+  width: 10%;
+  height: 120%;
+}

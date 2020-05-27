@@ -1,0 +1,68 @@
+<div class="example-container">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>First name</mat-label>
+      <label>
+        <input matInput
+               placeholder="First Name"
+               type="text"
+               required
+               [(ngModel)]="patient.firstName">
+      </label>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Middle name</mat-label>
+      <input matInput
+             placeholder="Middle Name"
+             type="text"
+             [(ngModel)]="patient.middleName">
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Last name</mat-label>
+      <input matInput
+             placeholder="Last Name"
+             type="text"
+             required
+             [(ngModel)]="patient.lastName">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Gender</mat-label>
+<!--todo-->
+      <mat-select disableRipple>
+        <mat-option value="0" [(ngModel)]="patient.gender">Male</mat-option>
+        <mat-option value="1" [(ngModel)]="patient.gender">Female</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Address</mat-label>
+      <input matInput
+             placeholder="Address"
+             type="text"
+             required
+             [(ngModel)]="patient.address">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Patient Id</mat-label>
+      <input matInput
+             placeholder="Patient Id"
+             type="text"
+             required
+             [(ngModel)]="patient.patientId">
+    </mat-form-field>
+    <br>
+
+    <button mat-raised-button
+            (click)="savePatient()"
+            class="btn btn-success"
+            [disabled]="!patient.firstName || !patient.lastName || !patient.patientId"
+            color="primary">Submit</button>
+  </div>
+
+
+
+</div>
+
