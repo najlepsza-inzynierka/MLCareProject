@@ -2,6 +2,7 @@
 Front and Backend application
 
 To run application:
+
 cd backend
 
 flask run
