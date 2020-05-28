@@ -1,5 +1,6 @@
 <div class="example-container">
   <div>
+    <form class="add-patient-form" #addPatient="ngForm">
     <mat-form-field appearance="fill">
       <mat-label>First name</mat-label>
       <label>
@@ -7,6 +8,7 @@
                placeholder="First Name"
                type="text"
                required
+               name="firstName"
                [(ngModel)]="patient.firstName">
       </label>
     </mat-form-field>
@@ -15,6 +17,7 @@
       <input matInput
              placeholder="Middle Name"
              type="text"
+             name="middleName"
              [(ngModel)]="patient.middleName">
     </mat-form-field>
     <br>
@@ -25,14 +28,20 @@
              placeholder="Last Name"
              type="text"
              required
+             name="lastName"
              [(ngModel)]="patient.lastName">
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Gender</mat-label>
-<!--todo-->
-      <mat-select disableRipple>
-        <mat-option value="0" [(ngModel)]="patient.gender">Male</mat-option>
-        <mat-option value="1" [(ngModel)]="patient.gender">Female</mat-option>
+<!--todo why da hell gender is not required.-->
+      <mat-select disableRipple
+                  required
+                  [(ngModel)]="this.patient.gender"
+                  ngDefaultControl
+                  name="gender"
+      >
+        <mat-option [value]=0>Male</mat-option>
+        <mat-option [value]=1>Female</mat-option>
       </mat-select>
     </mat-form-field>
     <br>
@@ -43,6 +52,7 @@
              placeholder="Address"
              type="text"
              required
+             name="address"
              [(ngModel)]="patient.address">
     </mat-form-field>
     <mat-form-field appearance="fill">
@@ -51,6 +61,7 @@
              placeholder="Patient Id"
              type="text"
              required
+             name="patientID"
              [(ngModel)]="patient.patientId">
     </mat-form-field>
     <br>
@@ -58,8 +69,9 @@
     <button mat-raised-button
             (click)="savePatient()"
             class="btn btn-success"
-            [disabled]="!patient.firstName || !patient.lastName || !patient.patientId"
+            [disabled]="!addPatient.valid"
             color="primary">Submit</button>
+    </form>
   </div>
 
 

@@ -20,22 +20,16 @@ export class AddPatientComponent implements OnInit {
 
   savePatient(){
     this.added = false;
-    const patientData = {
-      patientId: this.patient.patientId,
-      firstName: this.patient.firstName,
-      middleName: this.patient.middleName,
-      lastName: this.patient.lastName,
-    };
     this.patientService.createPatient(this.patient).subscribe(
-      response => {
-        console.log(response);
-        this.added = true;
-        this.clearPatientData();
-        this.openSnackBar('Patient added successfully', 'Close');
-      },
-      error => {
-        console.log(error);
-      }
+        response => {
+          console.log(response);
+          this.added = true;
+          this.clearPatientData();
+          this.openSnackBar('Patient added successfully', 'Close');
+        },
+        error => {
+          console.log(error);
+        }
     );
   }
 
