@@ -42,7 +42,7 @@ export class AddPatientComponent implements OnInit {
   clearPatientData(){
     this.added = false;
     this.patient = {
-      _id: -1,
+      _id: '-1',
       patientId: '',
       gender: -1,
       firstName: '',
