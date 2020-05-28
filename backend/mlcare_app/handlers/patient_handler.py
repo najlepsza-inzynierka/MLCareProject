@@ -25,7 +25,9 @@ def get_all_patients():
 def get_patient(patient_id):
     dao = PatientDAO()
     patient = dao.find_one_by_id(patient_id)
-    return jsonify(patient.data)
+    if not patient:
+        return mk_error('Patient not in database', 404)
+    return jsonify(patient)
 
 
 @app.route('/api/patients', methods=['POST'])
