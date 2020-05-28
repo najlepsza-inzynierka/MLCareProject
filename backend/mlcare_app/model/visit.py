@@ -11,9 +11,7 @@ class Visit(ModelDocument):
       patient_id: ObjectId     # id of patient in database
       doctorId: ObjectId,      # id of doctor who adds a visit
       doctorName: string,      # doctor first and last name
-      date: string,
-      exams: list[Exam],
-      predictions: list[Prediction]
+      date: Date
     }
     """
 

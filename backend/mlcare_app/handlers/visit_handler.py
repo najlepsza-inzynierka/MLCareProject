@@ -1,5 +1,7 @@
 import os
+from datetime import datetime
 
+from bson import ObjectId
 from flask import jsonify, Blueprint, g
 
 from .. import app
@@ -11,20 +13,37 @@ visit_bp = Blueprint('visits', __name__)
 
 
 # everywhere patient.id not patient.patientId
-@app.route('/api/patients/<patient_id>/add_visit', methods=['POST'])
+@app.route("/api/visits/<patient_id>", methods=["GET"])
+def get_all_visits_by_patient_id(patient_id):
+    dao = VisitDAO()
+    patients = dao.find_all_visits_by_patient_id(patient_id)
+    result = []
+    for patient in patients:
+        result.append(patient.data)
+    return jsonify(result)
+
+
+@app.route("/api/visit/<visit_id>", methods=["GET"])
+def get_visit(visit_id):
+    dao = VisitDAO()
+    visit = dao.find_one_by_id(visit_id)
+    if not visit:
+        return mk_error('Visit not in database', 404)
+    return jsonify(visit.data)
+
+
+@app.route("/api/patient/<patient_id>/add_visit", methods=["POST"])
 @expect_mime('application/json')
 @json_body
 def add_visit(patient_id):
+    print('AHA')
     body = g.body
 
     visit_data = {
-        'patientId': body['patientId'],
-        'doctorId': body['doctorId'],
+        'patientId': ObjectId(patient_id),
+        'doctorId': ObjectId(body.get('doctorId', '')),
         'doctorName': body.get('doctorName', None),
-        'date': body.get('date', None),
-        'lastName': body.get('lastName', None),
-        'exams': body.get('exams', []),
-        'predictions': body.get('predictions', []),
+        'date': datetime.utcnow(),
     }
 
     visit = Visit(visit_data)
@@ -34,31 +53,28 @@ def add_visit(patient_id):
     return jsonify({"confirmation": "OK"})
 
 
-@app.route('/api/patients/<patient_id>/delete_visit/<visit_id>')
-def delete_visit(patient_id, visit_id):
+@app.route('/api/visits/delete_visit/<visit_id>', methods=['DELETE'])
+def delete_visit(visit_id):
     visit_dao = VisitDAO()
-    visit_dao.delete_one(patient_id, visit_id)
+    visit_dao.delete_one(visit_id)
     return jsonify({"confirmation": "OK"})
 
 
-@app.route('/api/patients/<patient_id>/update_visit/<visit_id>', methods=[
-    'POST'])
+@app.route('/api/visits/update_visit/<visit_id>', methods=['PUT'])
 @expect_mime('application/json')
 @json_body
-def update_visit(patient_id, visit_id):
+def update_visit(visit_id):
     body = g.body
 
     visit_data = {
-        'doctorId': body['doctorId'],
+        'patientId': ObjectId(body['patientId']),
+        'doctorId': ObjectId(body['doctorId']),
         'doctorName': body.get('doctorName', None),
-        'date': body.get('date', None),
-        'lastName': body.get('lastName', None),
-        'exams': body.get('exams', []),
-        'predictions': body.get('predictions', []),
+        'date': body.get('date', None)
     }
 
     visit_dao = VisitDAO()
-    visit_dao.update_one_by_patient_id(patient_id, visit_id, visit_data)
+    visit_dao.update_one_by_id(visit_id, visit_data)
 
     return jsonify({"confirmation": "OK"})
 
