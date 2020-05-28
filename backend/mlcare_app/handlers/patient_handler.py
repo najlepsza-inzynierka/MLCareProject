@@ -15,12 +15,17 @@ patient_bp = Blueprint('patients', __name__)
 def get_all_patients():
     dao = PatientDAO()
     patients = dao.find_all_patients()
-    print(patients)
     result = []
     for patient in patients:
         result.append(patient.data)
-    print(result)
     return jsonify(result)
+
+
+@app.route("/api/patient/<patient_id>", methods=["GET"])
+def get_patient(patient_id):
+    dao = PatientDAO()
+    patient = dao.find_one_by_id(patient_id)
+    return jsonify(patient.data)
 
 
 @app.route('/api/patients', methods=['POST'])
