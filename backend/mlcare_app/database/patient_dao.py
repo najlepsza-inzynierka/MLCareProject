@@ -1,3 +1,5 @@
+from bson import ObjectId
+
 from . import db
 from ..model.patient import Patient
 
@@ -19,7 +21,7 @@ class PatientDAO:
             return None
 
     def find_one_by_id(self, _id):
-        query = {"_id": _id}
+        query = {"_id": ObjectId(_id)}
         return self.find_one(query)
 
     def find_one_by_object(self, patient):
