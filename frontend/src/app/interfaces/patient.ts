@@ -1,7 +1,7 @@
 import {Visit} from './visit';
 
 export interface Patient {
-  id: number;
+  _id: number;
   patientId: string;
   gender: number;
   firstName: string;
