@@ -67,6 +67,6 @@ export class InMemoryDataService implements InMemoryDbService {
   // if the patients array is not empty, the method below returns the highest
   // patient id + 1.
   genId(patients: Patient[]): number {
-    return patients.length > 0 ? Math.max(...patients.map(patient => patient.id)) + 1 : 1;
+    return patients.length > 0 ? Math.max(...patients.map(patient => +patient._id)) + 1 : 1;
   }
 }
