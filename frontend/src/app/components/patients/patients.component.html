@@ -6,7 +6,7 @@
   <!--  ID column  -->
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.patientId}} </mat-cell>
   </ng-container>
 <!--  First Name column  -->
   <ng-container matColumnDef="firstName">
@@ -29,7 +29,7 @@
     <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/patient/{{row.id}}" class="row-link"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/patient/{{row._id}}" class="row-link"></mat-row>
 </table>
 
 

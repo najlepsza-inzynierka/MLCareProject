@@ -32,7 +32,8 @@ export class PatientDetailsComponent implements OnInit {
       this.dataSource.data = this.patient.visits;
     }
     else {
-      const id = +this.route.snapshot.paramMap.get('id');
+      const id = this.route.snapshot.paramMap.get('id');
+      console.log(id);
       this.patientService.getPatient(id).subscribe(patient => {
         this.patient = patient;
         this.dataSource.data = patient.visits;
