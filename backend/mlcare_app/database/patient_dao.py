@@ -21,7 +21,7 @@ class PatientDAO:
             return None
 
     def find_one_by_id(self, _id):
-        query = {"_id": _id}
+        query = {"_id": ObjectId(_id)}
         return self.find_one(query)
 
     def find_one_by_object(self, patient):
@@ -47,13 +47,13 @@ class PatientDAO:
         query = {"_id": _id}
         new_patient = Patient(new_patient)
         new_patient.id = _id
-        self.coll.replace_one(query, new_patient)
+        self.coll.replace_one(query, new_patient.data)
 
     def add_visit(self, patient_id, visit):
         if not visit:
             raise ValueError('Visit cannot be an empty value')
 
-        query = {'_id': patient_id}
+        query = {'_id': ObjectId(patient_id)}
 
         update = {
             "$push": {'visits': visit.data}
@@ -64,9 +64,9 @@ class PatientDAO:
         if not new_visit_data:
             raise ValueError('Visit cannot be an empty value')
 
-        query = {'_id': patient_id}
+        query = {'_id': ObjectId(patient_id)}
         update = {
-            '$pull': {'visits': {'id': old_id}},
+            '$pull': {'visits': {'id': ObjectId(old_id)}},
             '$push': {'visits': new_visit_data}
         }
         self.coll.find_one_and_update(query, update)
@@ -75,9 +75,9 @@ class PatientDAO:
         if not visit_id:
             raise ValueError('Visit cannot be an empty value')
 
-        query = {'_id': patient_id}
+        query = {'_id': ObjectId(patient_id)}
         update = {
-            '$pull': {'visits': {'id': visit_id}}
+            '$pull': {'visits': {'id': ObjectId(visit_id)}}
         }
         self.coll.find_one_and_update(query, update)
 
@@ -86,6 +86,6 @@ class PatientDAO:
         self.coll.delete_one(query)
 
     def delete_one_by_id(self, _id):
-        query = {"_id": _id}
+        query = {"_id": ObjectId(_id)}
         self.coll.delete_one(query)
 
