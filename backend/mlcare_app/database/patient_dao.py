@@ -1,3 +1,5 @@
+from bson import ObjectId
+
 from . import db
 from ..model.patient import Patient
 
@@ -41,16 +43,11 @@ class PatientDAO:
         return self.find(query)
 
     # Update
-    def update_one(self, query, update):
-        self.coll.update_one(query, update)
-
-    def update_one_by_id(self, _id, update):
+    def update_one_by_id(self, _id, new_patient):
         query = {"_id": _id}
-        self.coll.update_one(query, update)
-
-    def update_one_by_patient_id(self, patient_id, update):
-        query = {"patientId": patient_id}
-        self.coll.update_one(query, update)
+        new_patient = Patient(new_patient)
+        new_patient.id = _id
+        self.coll.replace_one(query, new_patient)
 
     def add_visit(self, patient_id, visit):
         if not visit:
@@ -59,7 +56,7 @@ class PatientDAO:
         query = {'_id': patient_id}
 
         update = {
-            "$push": {'visits': visit}
+            "$push": {'visits': visit.data}
         }
         self.coll.find_one_and_update(query, update)
 

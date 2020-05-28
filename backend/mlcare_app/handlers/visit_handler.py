@@ -18,6 +18,7 @@ def add_visit(patient_id):
     body = g.body
 
     visit_data = {
+        'patientId': body['patientId'],
         'doctorId': body['doctorId'],
         'doctorName': body.get('doctorName', None),
         'date': body.get('date', None),
@@ -26,8 +27,9 @@ def add_visit(patient_id):
         'predictions': body.get('predictions', []),
     }
 
+    visit = Visit(visit_data)
     visit_dao = VisitDAO()
-    visit_dao.insert_one(patient_id, visit_data)
+    visit_dao.insert_one(visit)
 
     return jsonify({"confirmation": "OK"})
 
