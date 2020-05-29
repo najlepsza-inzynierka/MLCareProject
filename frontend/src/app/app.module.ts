@@ -20,7 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AddPatientComponent } from './components/add-patient/add-patient.component';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-// import { InMemoryDataService } from './services/in-memory-data.service';
+import { InMemoryDataService } from './services/in-memory-data.service';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar';
 import { VisitDetailsComponent } from './components/visit-details/visit-details.component';
@@ -29,6 +29,9 @@ import { PickDiseaseDialogComponent } from './components/pick-disease-dialog/pic
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { AddVisitComponent } from './components/add-visit/add-visit.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,7 @@ import {MatSelectModule} from '@angular/material/select';
     VisitDetailsComponent,
     PickDiseasePredictionComponent,
     PickDiseaseDialogComponent,
+    AddVisitComponent,
   ],
     imports: [
         BrowserModule,
@@ -57,14 +61,16 @@ import {MatSelectModule} from '@angular/material/select';
         HttpClientModule,
         AppRoutingModule,
         HttpClientModule,
-        // HttpClientInMemoryWebApiModule.forRoot(
-        //     InMemoryDataService, {dataEncapsulation: false}
-        // ),
+        HttpClientInMemoryWebApiModule.forRoot(
+            InMemoryDataService, {dataEncapsulation: false}
+        ),
         MatTableModule,
         MatSnackBarModule,
         MatDialogModule,
         MatCheckboxModule,
-        MatSelectModule
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
   entryComponents: [PickDiseaseDialogComponent],
   providers: [],

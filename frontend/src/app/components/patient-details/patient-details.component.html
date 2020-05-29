@@ -22,13 +22,13 @@
   <!--  Doctor Id column  -->
   <ng-container matColumnDef="doctorId">
     <mat-header-cell *matHeaderCellDef> Doctor Id </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.doctor.doctorId}} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.doctorId}} </mat-cell>
   </ng-container>
 
   <!--  Doctor Name column  -->
   <ng-container matColumnDef="doctorName">
     <mat-header-cell *matHeaderCellDef> Doctor Name </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.doctor.doctorName}} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.doctorName}} </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
