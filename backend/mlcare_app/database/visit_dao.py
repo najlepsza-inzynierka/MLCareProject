@@ -12,7 +12,7 @@ class VisitDAO:
 
     # Create
     def insert_one(self, visit):
-        self.coll.insert_one(visit.data)
+        return self.coll.insert_one(visit.data).inserted_id
 
     # Update
     def update_one_by_id(self, old_id, new_visit_data):
@@ -32,7 +32,7 @@ class VisitDAO:
     # Read
     def find(self, query):
         all_data = self.coll.find(query)
-        return [Patient(data)
+        return [Visit(data)
                 for data
                 in all_data]
 
@@ -43,7 +43,7 @@ class VisitDAO:
     def find_one(self, query):
         data = self.coll.find_one(query)
         if data:
-            return Patient(data)
+            return Visit(data)
         else:
             return None
 
