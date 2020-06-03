@@ -1,0 +1,3 @@
+class PredictionException(Exception):
+    pass
+

@@ -6,6 +6,7 @@ from flask import jsonify, Blueprint, g
 
 from .. import app
 from ..database.exam_dao import ExamDAO
+from ..database.patient_dao import PatientDAO
 from ..database.visit_dao import VisitDAO
 from ..model.exam import Exam
 from ..model.visit import Visit
@@ -17,11 +18,16 @@ visit_bp = Blueprint('visits', __name__)
 # everywhere patient.id not patient.patientId
 @app.route("/api/visits/<patient_id>", methods=["GET"])
 def get_all_visits_by_patient_id(patient_id):
+    dao = PatientDAO()
+    patient = dao.find_one_by_id(patient_id)
+    if not patient:
+        return mk_error('Patient not in database', 404)
+
     dao = VisitDAO()
-    patients = dao.find_all_visits_by_patient_id(patient_id)
+    visits = dao.find_all_visits_by_patient_id(patient_id)
     result = []
-    for patient in patients:
-        result.append(patient.data)
+    for visit in visits:
+        result.append(visit.data)
     return jsonify(result)
 
 
