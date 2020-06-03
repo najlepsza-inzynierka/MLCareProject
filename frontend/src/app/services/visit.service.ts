@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 
 const baseUrl = 'api/visits';
 const visitUrl = 'api/visit';
-const addUrl = '/api/patient';
+const addUrl = 'api/patient';
 
 @Injectable({
   providedIn: 'root'

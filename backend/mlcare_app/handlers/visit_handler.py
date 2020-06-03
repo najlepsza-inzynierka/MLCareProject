@@ -66,11 +66,11 @@ def add_visit(patient_id):
         exam_dao = ExamDAO()
         for exam in exams:
             exam_db = Exam(exam)
-            exam_db.visit_id = visit_id
+            exam_db.visit_id = ObjectId(visit_id)
             exam_dao.insert_one(exam_db)
 
     return jsonify({"confirmation": "OK",
-                    "new_id": visit_id})
+                    "new_id": ObjectId(visit_id)})
 
 
 @app.route('/api/visits/delete_visit/<visit_id>', methods=['DELETE'])
