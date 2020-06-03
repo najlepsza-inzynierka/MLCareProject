@@ -19,11 +19,11 @@ class Visit(ModelDocument):
         super().__init__(data)
 
     @property
-    def doctor_id(self):
+    def patient_id(self):
         return self._data['patientId']
 
-    @doctor_id.setter
-    def doctor_id(self, new_id):
+    @patient_id.setter
+    def patient_id(self, new_id):
         self._data['patientId'] = ObjectId(new_id)
 
     @property

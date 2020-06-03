@@ -2,11 +2,13 @@ from .model_document import ModelDocument
 from .visit import Visit
 
 
-class Patient(ModelDocument):
+class Exam(ModelDocument):
     """
     JSON format:
     {
       _id: ObjectId,
+      name: string,
+      visitId: ObjectId,
       date: string,        # unique
       features: list[Feature]
     }
@@ -15,6 +17,15 @@ class Patient(ModelDocument):
     def __init__(self, data):
         super().__init__(data)
 
+
+    @property
+    def name(self):
+        return self._data['name']
+
+    @name.setter
+    def name(self, new_name):
+        self._data['name'] = new_name
+
     @property
     def date(self):
         return self._data['date']
@@ -22,6 +33,14 @@ class Patient(ModelDocument):
     @date.setter
     def date(self, new_date):
         self._data['date'] = new_date
+
+    @property
+    def visit_id(self):
+        return self._data['visitId']
+
+    @visit_id.setter
+    def visit_id(self, new_visit_id):
+        self._data['visitId'] = new_visit_id
 
     @property
     def features(self):

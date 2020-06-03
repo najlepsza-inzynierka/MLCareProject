@@ -5,7 +5,9 @@ from bson import ObjectId
 from flask import jsonify, Blueprint, g
 
 from .. import app
+from ..database.exam_dao import ExamDAO
 from ..database.visit_dao import VisitDAO
+from ..model.exam import Exam
 from ..model.visit import Visit
 from ..validate import expect_mime, json_body, Validator, mk_error
 
@@ -36,21 +38,29 @@ def get_visit(visit_id):
 @expect_mime('application/json')
 @json_body
 def add_visit(patient_id):
-    print('AHA')
     body = g.body
 
     visit_data = {
         'patientId': ObjectId(patient_id),
         'doctorId': ObjectId(body.get('doctorId', '')),
         'doctorName': body.get('doctorName', None),
-        'date': datetime.utcnow(),
+        'date': datetime.utcnow()
     }
 
     visit = Visit(visit_data)
     visit_dao = VisitDAO()
-    visit_dao.insert_one(visit)
+    visit_id = visit_dao.insert_one(visit)
 
-    return jsonify({"confirmation": "OK"})
+    exams = body.get('exams', None)
+    if exams:
+        exam_dao = ExamDAO()
+        for exam in exams:
+            exam_db = Exam(exam)
+            exam_db.visit_id = visit_id
+            exam_dao.insert_one(exam_db)
+
+    return jsonify({"confirmation": "OK",
+                    "new_id": visit_id})
 
 
 @app.route('/api/visits/delete_visit/<visit_id>', methods=['DELETE'])
