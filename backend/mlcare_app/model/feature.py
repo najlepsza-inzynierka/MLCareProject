@@ -2,7 +2,7 @@ from .model_document import ModelDocument
 from .visit import Visit
 
 
-class Patient:
+class Feature:
     """
     JSON format:
     {
