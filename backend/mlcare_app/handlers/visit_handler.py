@@ -31,6 +31,10 @@ def get_visit(visit_id):
     visit = dao.find_one_by_id(visit_id)
     if not visit:
         return mk_error('Visit not in database', 404)
+    examDAO = ExamDAO()
+    exams = examDAO.find_all_exams_by_visit_id(visit_id)
+    exams_data = [exam.data for exam in exams]
+    visit.exams = exams_data
     return jsonify(visit.data)
 
 
