@@ -61,9 +61,9 @@ import { AddVisitComponent } from './components/add-visit/add-visit.component';
         HttpClientModule,
         AppRoutingModule,
         HttpClientModule,
-        HttpClientInMemoryWebApiModule.forRoot(
-            InMemoryDataService, {dataEncapsulation: false}
-        ),
+        // HttpClientInMemoryWebApiModule.forRoot(
+        //     InMemoryDataService, {dataEncapsulation: false}
+        // ),
         MatTableModule,
         MatSnackBarModule,
         MatDialogModule,

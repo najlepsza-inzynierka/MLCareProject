@@ -1,1 +1,41 @@
-<p>add-visit works!</p>
+<div class="example-container">
+    <div>
+        <form class="add-patient-form" #addPatient="ngForm">
+            <mat-form-field appearance="fill">
+                <mat-label>Birth Place</mat-label>
+                <input matInput
+                       placeholder="Birth Place"
+                       type="text"
+                       required
+                       name="birthPlace">
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="fill">
+                <mat-label>Phone number</mat-label>
+                <input matInput
+                       placeholder="Phone number"
+                       type="text"
+                       name="phoneNumber">
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput
+                       placeholder="Email"
+                       type="email"
+                       email
+                       name="email">
+            </mat-form-field>
+            <br>
+
+
+            <button mat-raised-button
+                    class="btn btn-success"
+                    color="primary">Submit</button>
+        </form>
+    </div>
+
+
+
+</div>
+

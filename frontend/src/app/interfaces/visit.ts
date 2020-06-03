@@ -1,14 +1,11 @@
 import {Exam} from './exam';
+import {Prediction} from './prediction';
 
 export interface Visit {
-  id: number;
+  _id: string;
   date: string;
   doctorId: string;
   doctorName: string;
-    exams: Exam[];
-    predictions: [{
-      date: string,
-      disease: string,
-      description: string,
-    }];
+  exams: Exam[];
+  predictions: Prediction[];
 }
