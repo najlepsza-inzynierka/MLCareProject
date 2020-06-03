@@ -47,9 +47,9 @@ export class VisitDetailsComponent implements OnInit {
 
   loadVisit(){
     const visitId = this.route.snapshot.paramMap.get('visitId');
-    const patientId = this.route.snapshot.paramMap.get('id');
-    this.visitService.getAllPatientVisits(patientId).subscribe(v => { this.visit = v.filter(visit => visit._id === visitId)[0];
-                                                                      this.dataSource.data = this.visit.exams;
+    this.visitService.getVisit(visitId).subscribe(v => { this.visit = v;
+                                                         console.log(v.exams);
+                                                         this.dataSource.data = this.visit.exams;
       });
 
   }
