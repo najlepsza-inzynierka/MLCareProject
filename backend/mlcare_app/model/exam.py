@@ -17,7 +17,6 @@ class Exam(ModelDocument):
     def __init__(self, data):
         super().__init__(data)
 
-
     @property
     def name(self):
         return self._data['name']
