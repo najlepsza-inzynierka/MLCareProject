@@ -1,7 +1,7 @@
 import {Feature} from './feature';
 
 export interface Exam {
-  id: number;
+  _id: number;
   name: string;
   date: string;
   features: Feature[];

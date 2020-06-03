@@ -13,7 +13,7 @@ export class AddVisitComponent implements OnInit {
   visit: Visit;
   added = false;
 
-  constructor(private patientService: PatientService, private snaackBar: MatSnackBar) {
+  constructor(private snaackBar: MatSnackBar) {
     this.clearVisitData();
   }
 

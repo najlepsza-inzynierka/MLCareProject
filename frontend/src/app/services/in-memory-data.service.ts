@@ -18,11 +18,11 @@ export class InMemoryDataService implements InMemoryDbService {
       {name: 'parametr2', value: 20, unit: 'g'},
       {name: 'parametr3', value: 30, unit: 'g'}];
     const localExams: Exam[] = [
-      {id: 1, name: 'krwi', date: '10.10.2019',
+      {_id: 1, name: 'krwi', date: '10.10.2019',
         features: localFeatures.slice(0, 2)},
-      {id: 2, name: 'USG', date: '12.10.2019',
+      {_id: 2, name: 'USG', date: '12.10.2019',
         features: localFeatures.slice(1, 3)},
-      {id: 3, name: 'EKG', date: '13.10.2019',
+      {_id: 3, name: 'EKG', date: '13.10.2019',
         features: localFeatures.slice(0, 3)}
     ];
     const localPrediction = [{date: '11.10.2019', disease: 'choroba',
@@ -55,9 +55,9 @@ export class InMemoryDataService implements InMemoryDbService {
     const predictions = [];
 
     // diseases part
-    const diseases: Disease[] = [{id: 1, name: 'Hemophilia', neededFeatures: localFeatures.slice(0, 1)},
-      {id: 2, name: 'Cholera', neededFeatures: localFeatures.slice(1, 2)},
-      {id: 3, name: 'Anemia', neededFeatures: localFeatures.slice(0, 2)}];
+    const diseases: Disease[] = [{_id: 1, name: 'Hemophilia', neededFeatures: localFeatures.slice(0, 1)},
+      {_id: 2, name: 'Cholera', neededFeatures: localFeatures.slice(1, 2)},
+      {_id: 3, name: 'Anemia', neededFeatures: localFeatures.slice(0, 2)}];
     return {patients, predictions, diseases};
   }
 

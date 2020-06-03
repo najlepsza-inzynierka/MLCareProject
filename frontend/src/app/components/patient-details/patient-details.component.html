@@ -1,5 +1,6 @@
 <h1>{{patient.firstName}}</h1>
 <button mat-raised-button color="accent" (click)="goBack()">Go back</button>
+<button mat-raised-button color="accent" routerLink="/add_visit/{{patient._id}}">Add visit</button>
 <br>
 
 <!-- Visits table -->
