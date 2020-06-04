@@ -32,7 +32,13 @@ def predict(prediction: Prediction):
     model = xgb.XGBClassifier()
     model.load_model(model_dir + model_name + '.model')
     data = create_dataframe(prediction.features)
-    ypred = model.predict(data.values)
-    prediction.predicted_class = result_map[model_name][ypred[0]]
+    # dtest = xgb.DMatrix(data.values)
+    res = model.predict_proba(data)
+    classes_names = [str(class_name) for class_name in model.classes_]
+    probabilities = [float(prob) for prob in res[0]]
+    prediction.probability_map = (dict(zip(classes_names, probabilities)))
+    # prediction.classes_map = result_map[model_name]
+    index = list(res[0]).index(max(res[0]))
+    prediction.predicted_class = str(model.classes_[index])
     prediction.model = model_name
     return prediction
