@@ -33,13 +33,11 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Gender</mat-label>
-<!--todo why da hell gender is not required.-->
       <mat-select disableRipple
                   required
                   [(ngModel)]="this.patient.gender"
                   ngDefaultControl
-                  name="gender"
-      >
+                  name="gender">
         <mat-option [value]=0>Male</mat-option>
         <mat-option [value]=1>Female</mat-option>
       </mat-select>
@@ -66,10 +64,53 @@
     </mat-form-field>
     <br>
 
-    <button mat-raised-button
+    <mat-form-field appearance="fill">
+      <mat-label>Birth Date</mat-label>
+      <input matInput
+             [matDatepicker]="picker"
+             [(ngModel)]="patient.birthDate"
+             ngDefaultControl
+             required
+             name="birthDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Birth Place</mat-label>
+      <input matInput
+             placeholder="Birth Place"
+             type="text"
+             required
+             name="birthPlace"
+             [(ngModel)]="patient.birthPlace">
+    </mat-form-field>
+    <br>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Phone number</mat-label>
+      <input matInput
+             placeholder="Phone number"
+             type="text"
+             name="phoneNumber"
+             [(ngModel)]="patient.phoneNumber">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput
+             placeholder="Email"
+             type="email"
+             email
+             name="email"
+             [(ngModel)]="patient.email">
+    </mat-form-field>
+    <br>
+
+
+      <button mat-raised-button
             (click)="savePatient()"
             class="btn btn-success"
-            [disabled]="!addPatient.valid"
+            [disabled]="!addPatient.valid || this.patient.gender == -1"
             color="primary">Submit</button>
     </form>
   </div>

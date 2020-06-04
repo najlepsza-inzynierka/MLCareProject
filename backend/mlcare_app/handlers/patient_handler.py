@@ -46,8 +46,7 @@ def add_patient():
         'phoneNumber': body.get('phoneNumber', None),
         'email': body.get('email', None),
         'birthDate': body.get('birthDate', None),
-        'birthPlace': body.get('birthPlace', None),
-        'visits': []
+        'birthPlace': body.get('birthPlace', None)
     }
 
     patient = Patient(patient_data)
@@ -57,7 +56,7 @@ def add_patient():
     return jsonify({"confirmation": "OK"})
 
 
-@app.route('/api/patients/update/<patient_id>', methods=['POST'])
+@app.route('/api/patients/update/<patient_id>', methods=['PUT'])
 @expect_mime('application/json')
 @json_body
 def update_patient(patient_id):
@@ -73,12 +72,11 @@ def update_patient(patient_id):
         'phoneNumber': body.get('phoneNumber', None),
         'email': body.get('email', None),
         'birthDate': body.get('birthDate', None),
-        'birthPlace': body.get('birthPlace', None),
-        'visits': []
+        'birthPlace': body.get('birthPlace', None)
     }
 
     patient_dao = PatientDAO()
-    patient_dao.update_one_by_patient_id(patient_id, patient_data)
+    patient_dao.update_one_by_id(patient_id, patient_data)
 
     return jsonify({"confirmation": "OK"})
 

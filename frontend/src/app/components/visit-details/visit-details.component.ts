@@ -9,6 +9,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatDialog} from '@angular/material/dialog';
 import {PickDiseaseDialogComponent} from '../pick-disease-dialog/pick-disease-dialog.component';
 import {Disease} from '../../interfaces/disease';
+import {VisitService} from '../../services/visit.service';
 
 @Component({
   selector: 'app-visit-details',
@@ -32,6 +33,7 @@ export class VisitDetailsComponent implements OnInit {
 
 
   constructor(private patientService: PatientService,
+              private visitService: VisitService,
               private route: ActivatedRoute,
               private location: Location,
               public dialog: MatDialog) {
@@ -44,18 +46,12 @@ export class VisitDetailsComponent implements OnInit {
   }
 
   loadVisit(){
-    const visitId = +this.route.snapshot.paramMap.get('visitId');
-    if (this.patientService.patient != null){
-      this.visit = this.patientService.patient.visits.filter(visit => visit.id === visitId)[0];
-      this.dataSource.data = this.visit.exams;
-    } else {
-      const patientId = +this.route.snapshot.paramMap.get('id');
-      this.patientService.getPatient(patientId).subscribe(patient => { this.patientService.patient = patient;
-                                                                       this.visit = patient.visits.filter(visit => visit.id === visitId)[0];
-                                                                       this.dataSource.data = this.visit.exams;
+    const visitId = this.route.snapshot.paramMap.get('visitId');
+    this.visitService.getVisit(visitId).subscribe(v => { this.visit = v;
+                                                         console.log(v.exams);
+                                                         this.dataSource.data = this.visit.exams;
       });
 
-    }
   }
 
   loadDiseases(){

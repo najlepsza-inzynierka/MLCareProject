@@ -102,30 +102,7 @@ class Patient(ModelDocument):
 
     @birth_place.setter
     def birth_place(self, new_place):
-        self._data = new_place
-
-    @property
-    def visits(self):
-        return self._data['visits']
-
-    @visits.setter
-    def visits(self, new_visits):
-        self._data['visits'] = new_visits
-
-    def add_visit(self, visit):
-        if visit not in self._data['visits']:
-            self._data['visits'].append(visit)
-
-    def remove_visit(self, visit_id):
-        visits = [visit for visit in self._data['visits'] if visit.id !=
-                  visit_id]
-        self._data['visits'] = visits
-
-    def edit_visit(self, old_id, new_visit):
-        visits = [visit for visit in self._data['visits'] if visit.id != old_id]
-        new_visit.id = old_id
-        visits.append(new_visit)
-        self._data['visits'] = visits
+        self._data['birthPlace'] = new_place
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:

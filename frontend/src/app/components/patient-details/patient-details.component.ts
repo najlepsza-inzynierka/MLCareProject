@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
 import {MatTableDataSource} from '@angular/material/table';
 import { Visit } from 'src/app/interfaces/visit';
+import {VisitService} from '../../services/visit.service';
 
 @Component({
   selector: 'app-patient-details',
@@ -17,6 +18,7 @@ export class PatientDetailsComponent implements OnInit {
   @Input() patient: Patient;
   displayedColumns: string[] = ['id', 'visitDate', 'doctorId', 'doctorName'];
   constructor(private patientService: PatientService,
+              private visitService: VisitService,
               private route: ActivatedRoute,
               private location: Location) {
     this.dataSource = new MatTableDataSource(this.patientVisit);
@@ -24,19 +26,28 @@ export class PatientDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPatient();
+    this.loadVisits();
+  }
+
+  loadVisits(){
+    const id = this.route.snapshot.paramMap.get('id');
+    this.visitService.getAllPatientVisits(id).subscribe(
+        visits => {
+          this.dataSource.data = visits;
+          this.patientVisit = visits;
+        }
+    );
   }
 
   getPatient(){
     if (this.patientService.wentBack) {
       this.patient = this.patientService.patient;
-      this.dataSource.data = this.patient.visits;
     }
     else {
       const id = this.route.snapshot.paramMap.get('id');
       console.log(id);
       this.patientService.getPatient(id).subscribe(patient => {
         this.patient = patient;
-        this.dataSource.data = patient.visits;
         this.patientService.patient = patient;
       });
     }

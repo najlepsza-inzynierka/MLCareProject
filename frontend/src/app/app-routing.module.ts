@@ -4,6 +4,7 @@ import {PatientsComponent} from './components/patients/patients.component';
 import {PatientDetailsComponent} from './components/patient-details/patient-details.component';
 import {AddPatientComponent} from './components/add-patient/add-patient.component';
 import {VisitDetailsComponent} from './components/visit-details/visit-details.component';
+import {AddVisitComponent} from './components/add-visit/add-visit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'patient/:id', component: PatientDetailsComponent },
   { path: 'add-patient', component: AddPatientComponent },
   { path: 'patient/:id/:visitId', component: VisitDetailsComponent },
+  { path: 'add_visit/:id', component: AddVisitComponent },
 ];
 
 

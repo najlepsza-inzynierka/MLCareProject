@@ -27,7 +27,6 @@ export class PatientService {
   }
 
   getPatient(id): Observable<Patient>{
-    console.log(`${patientURL}/${id}`);
     return this.http.get<Patient>(`${patientURL}/${id}`);
   }
 

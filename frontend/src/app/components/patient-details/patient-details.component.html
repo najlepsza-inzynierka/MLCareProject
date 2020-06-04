@@ -1,5 +1,6 @@
 <h1>{{patient.firstName}}</h1>
 <button mat-raised-button color="accent" (click)="goBack()">Go back</button>
+<button mat-raised-button color="accent" routerLink="/add_visit/{{patient._id}}">Add visit</button>
 <br>
 
 <!-- Visits table -->
@@ -22,15 +23,15 @@
   <!--  Doctor Id column  -->
   <ng-container matColumnDef="doctorId">
     <mat-header-cell *matHeaderCellDef> Doctor Id </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.doctor.doctorId}} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.doctorId}} </mat-cell>
   </ng-container>
 
   <!--  Doctor Name column  -->
   <ng-container matColumnDef="doctorName">
     <mat-header-cell *matHeaderCellDef> Doctor Name </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.doctor.doctorName}} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.doctorName}} </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/patient/{{patient._id}}/{{row.id}}" class="row-link"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/patient/{{patient._id}}/{{row._id}}" class="row-link"></mat-row>
 </table>

@@ -4,3 +4,6 @@ flask_pymongo
 flask_cors
 python-dotenv
 dnspython
+cmake
+xgboost
+pandas
