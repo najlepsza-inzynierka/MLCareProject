@@ -71,4 +71,3 @@ def get_prediction(prediction_id):
     if not prediction:
         return mk_error('Prediction not in database', 404)
     return jsonify(prediction.data)
-
