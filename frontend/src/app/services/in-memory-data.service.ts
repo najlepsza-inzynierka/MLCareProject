@@ -18,11 +18,11 @@ export class InMemoryDataService implements InMemoryDbService {
       {name: 'parametr2', value: 20, unit: 'g'},
       {name: 'parametr3', value: 30, unit: 'g'}];
     const localExams: Exam[] = [
-      {_id: 1, name: 'krwi', date: '10.10.2019',
+      {name: 'krwi', date: '10.10.2019',
         features: localFeatures.slice(0, 2)},
-      {_id: 2, name: 'USG', date: '12.10.2019',
+      {name: 'USG', date: '12.10.2019',
         features: localFeatures.slice(1, 3)},
-      {_id: 3, name: 'EKG', date: '13.10.2019',
+      {name: 'EKG', date: '13.10.2019',
         features: localFeatures.slice(0, 3)}
     ];
     const localPrediction = [{date: '11.10.2019', disease: 'choroba',

@@ -65,7 +65,7 @@ export class AddVisitComponent implements OnInit {
     this.exam.features.push(this.feature);
     this.feature = {
       name: '',
-      value: -1,
+      value: 0,
       unit: ''
     };
   }
@@ -91,7 +91,8 @@ export class AddVisitComponent implements OnInit {
           this.openSnackBar('Visit added successfully', 'Close');
         },
         error => {
-          console.log(error);
+            this.openSnackBar('Something went wrong :(', 'Close');
+            console.log(error);
         }
     );
   }
