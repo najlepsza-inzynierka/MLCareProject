@@ -63,7 +63,17 @@
                     (click)="saveVisit()"
                     color="primary">Submit</button>
     </div>
-
+<div>
+    <ul *ngFor="let ff of exam.features">
+        {{ff.name}}  {{ff.value}} {{ff.unit}}
+    </ul>
+    <ul *ngFor="let e of visit.exams">
+    {{e.name}}
+    <ul *ngFor="let f of e.features">
+        <li>{{f.name}}  {{f.value}} {{f.unit}}</li>
+    </ul>
+    </ul>
+</div>
 
 
 </div>
