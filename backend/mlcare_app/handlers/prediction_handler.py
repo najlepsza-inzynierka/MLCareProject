@@ -6,7 +6,7 @@ from flask import jsonify, Blueprint, g
 from .. import app
 from ..database.prediction_dao import PredictionDAO
 from ..database.visit_dao import VisitDAO
-from ..machine_learning.predict import predict
+from ..machine_learning.predict import predict, result_map
 from ..model.exceptions import PredictionException
 from ..model.prediction import Prediction
 from ..validate import expect_mime, json_body, mk_error
@@ -25,12 +25,9 @@ def add_prediction(visit_id):
     if not visit:
         return mk_error('Visit not in database', 404)
 
-    prediction_data = {
-        'visitId': ObjectId(visit_id),
-        'disease': body.get('disease', None),
-        'date': datetime.utcnow(),
-        'features': body.get('features')
-    }
+    prediction_data = {'visitId': ObjectId(visit_id),
+        'disease': body.get('disease', None), 'date': datetime.utcnow(),
+        'features': body.get('features')}
 
     if not prediction_data.get('disease'):
         return mk_error('Cannot make prediction without disease name', 500)
@@ -43,10 +40,18 @@ def add_prediction(visit_id):
 
     prediction_dao = PredictionDAO()
     prediction_id = prediction_dao.insert_one(prediction)
-
     prediction_db = prediction_dao.find_one_by_id(prediction_id)
 
-    return jsonify(prediction_db.data)
+    # front end should get readable data
+    prediction_front = Prediction(prediction_db.data)
+    class_map = result_map[prediction_front.model]
+    new_pred = {class_map[int(class_num)]: prob for (class_num, prob) in
+                prediction_front.probability_map.items()}
+    prediction_front.probability_map = new_pred
+    prediction_front.predicted_class = class_map[
+        int(prediction_front.predicted_class)]
+
+    return jsonify(prediction_front.data)
 
 
 @app.route("/api/predictions/<visit_id>", methods=["GET"])
