@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 const baseUrl = 'api/visit';
+const predictionUrl = 'api/prediction';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,10 @@ export class PredictionService {
   prediction;
 
   constructor(private http: HttpClient) { }
+
+  getPrediction(predictionId){
+    return this.http.get(`${predictionUrl}/${predictionId}`);
+  }
 
   createVisitPrediction(visitId){
     return this.http.post(`${baseUrl}/${visitId}/make_prediction`, {

@@ -7,3 +7,8 @@
 <p>
     Result: {{prediction.predicted_class}}
 </p>
+<p>
+    Healthy probability: {{prediction.probability_map.Healthy | percent}}
+    <br>
+    Unhealthy probability: {{prediction.probability_map.Unhealthy | percent}}
+</p>
