@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {PatientService} from '../../services/patient.service';
+import {PatientService} from '../../../services/patient.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Patient} from '../../interfaces/patient';
+import {Patient} from '../../../interfaces/patient';
 
 @Component({
   selector: 'app-add-patient',

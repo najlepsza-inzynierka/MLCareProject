@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {PredictionService} from '../../services/prediction.service';
+import {PredictionService} from '../../../services/prediction.service';
 import {ActivatedRoute} from '@angular/router';
-import * as CanvasJS from '../../../canvasjs.min';
+import * as CanvasJS from '../../../../canvasjs.min';
 
 @Component({
   selector: 'app-prediction-details',

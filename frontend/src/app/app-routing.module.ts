@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {PatientsComponent} from './components/patients/patients.component';
-import {PatientDetailsComponent} from './components/patient-details/patient-details.component';
-import {AddPatientComponent} from './components/add-patient/add-patient.component';
-import {VisitDetailsComponent} from './components/visit-details/visit-details.component';
-import {AddVisitComponent} from './components/add-visit/add-visit.component';
-import {PredictionDetailsComponent} from './components/prediction-details/prediction-details.component';
+import {PatientsComponent} from './components/patient/patients/patients.component';
+import {PatientDetailsComponent} from './components/patient/patient-details/patient-details.component';
+import {AddPatientComponent} from './components/patient/add-patient/add-patient.component';
+import {VisitDetailsComponent} from './components/visit/visit-details/visit-details.component';
+import {AddVisitComponent} from './components/visit/add-visit/add-visit.component';
+import {PredictionDetailsComponent} from './components/prediction/prediction-details/prediction-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tutorials', pathMatch: 'full' },

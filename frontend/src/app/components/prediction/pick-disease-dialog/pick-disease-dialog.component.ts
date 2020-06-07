@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Disease} from '../../interfaces/disease';
-import {PredictionService} from '../../services/prediction.service';
+import {Disease} from '../../../interfaces/disease';
+import {PredictionService} from '../../../services/prediction.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({

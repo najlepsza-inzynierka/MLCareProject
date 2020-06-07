@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {PatientService} from '../../services/patient.service';
-import {Visit} from '../../interfaces/visit';
+import {PatientService} from '../../../services/patient.service';
+import {Visit} from '../../../interfaces/visit';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {MatTableDataSource} from '@angular/material/table';
-import {Exam} from '../../interfaces/exam';
+import {Exam} from '../../../interfaces/exam';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatDialog} from '@angular/material/dialog';
-import {PickDiseaseDialogComponent} from '../pick-disease-dialog/pick-disease-dialog.component';
-import {Disease} from '../../interfaces/disease';
-import {VisitService} from '../../services/visit.service';
+import {PickDiseaseDialogComponent} from '../../prediction/pick-disease-dialog/pick-disease-dialog.component';
+import {Disease} from '../../../interfaces/disease';
+import {VisitService} from '../../../services/visit.service';
+import {ConfirmDialogComponent, ConfirmDialogModel} from "../../confirm-dialog/confirm-dialog.component";
 
 @Component({
   selector: 'app-visit-details',
@@ -75,6 +76,24 @@ export class VisitDetailsComponent implements OnInit {
   goBack(): void {
     this.patientService.wentBack = true;
     this.location.back();
+  }
+
+  confirmDialog(): void {
+    const message = `Are you sure you want to delete visit?`;
+
+    const dialogData = new ConfirmDialogModel('Confirm Delete', message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '400px',
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult){
+        this.visitService.deleteVisit(this.visit._id).subscribe(result => console.log(result),
+            err => console.error(err));
+      }
+    });
   }
 
 }

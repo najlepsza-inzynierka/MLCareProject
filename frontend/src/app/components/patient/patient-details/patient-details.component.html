@@ -1,6 +1,7 @@
 <h1>{{patient.firstName}}
 <span *ngIf="patient.middleName"> {{patient.middleName}}</span>
   {{patient.lastName}}
+  <button mat-raised-button color="warn" (click)="confirmDialog()">Delete patient</button>
 </h1>
 <p>Gender: {{genderMap[patient.gender]}}</p>
 <p>Birth Date: {{patient.birthDate | date: 'shortDate'}}</p>

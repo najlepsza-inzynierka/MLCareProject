@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Patient} from '../../interfaces/patient';
-import {PatientService} from '../../services/patient.service';
+import {Patient} from '../../../interfaces/patient';
+import {PatientService} from '../../../services/patient.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
 

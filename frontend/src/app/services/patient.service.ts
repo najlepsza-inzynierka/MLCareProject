@@ -39,7 +39,7 @@ export class PatientService {
   }
 
   deletePatient(id) {
-    return this.http.delete(`${baseURL}/${id}`);
+    return this.http.delete(`${baseURL}/delete_patient/${id}`);
   }
 
   deleteAllPatients() {

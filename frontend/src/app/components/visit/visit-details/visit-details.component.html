@@ -1,4 +1,6 @@
-<p>Visit id: {{visit._id}}</p>
+<p>Visit id: {{visit._id}}
+<button mat-raised-button color="warn" (click)="confirmDialog()">Delete visit</button>
+</p>
 <p>Doctor: {{visit.doctorName}}</p>
 <button mat-raised-button (click)="goBack()">Go back</button>
 <br>
