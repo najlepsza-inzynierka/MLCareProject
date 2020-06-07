@@ -1,4 +1,5 @@
-<p>{{visit._id}}</p>
+<p>Visit id: {{visit._id}}</p>
+<p>Doctor: {{visit.doctorName}}</p>
 <button mat-raised-button (click)="goBack()">Go back</button>
 <br>
 <button mat-raised-button color="accent" [disabled]="this.diseases == null" (click)="openPickDiseases()">Predict disease</button>

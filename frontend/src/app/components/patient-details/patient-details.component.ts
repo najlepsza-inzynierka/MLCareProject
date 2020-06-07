@@ -15,6 +15,7 @@ import {VisitService} from '../../services/visit.service';
 export class PatientDetailsComponent implements OnInit {
   patientVisit: Visit[];
   dataSource: MatTableDataSource<Visit>;
+  genderMap = {0: 'Male', 1: 'Female'};
   @Input() patient: Patient;
   displayedColumns: string[] = ['id', 'visitDate', 'doctorId', 'doctorName'];
   constructor(private patientService: PatientService,
@@ -40,7 +41,7 @@ export class PatientDetailsComponent implements OnInit {
   }
 
   getPatient(){
-    if (this.patientService.wentBack) {
+    if (this.patientService.wentBack && this.patientService.patient) {
       this.patient = this.patientService.patient;
     }
     else {
