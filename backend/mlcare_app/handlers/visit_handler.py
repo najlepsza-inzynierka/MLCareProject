@@ -76,7 +76,7 @@ def add_visit(patient_id):
 @app.route('/api/visits/delete_visit/<visit_id>', methods=['DELETE'])
 def delete_visit(visit_id):
     visit_dao = VisitDAO()
-    visit_dao.delete_one(visit_id)
+    visit_dao.delete_one_by_id(visit_id)
     return jsonify({"confirmation": "OK"})
 
 
