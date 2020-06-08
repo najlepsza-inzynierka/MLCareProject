@@ -1,5 +1,14 @@
 <div class="example-container">
     <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Exam name</mat-label>
+            <input matInput
+                   placeholder="Exam name"
+                   type="text"
+                   required
+                   name="examName"
+                   [(ngModel)]="exam.name">
+        </mat-form-field>
 <mat-form-field appearance="fill">
            <mat-label>Exam Date</mat-label>
            <input matInput
@@ -11,15 +20,6 @@
            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
            <mat-datepicker #picker></mat-datepicker>
        </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>Exam name</mat-label>
-            <input matInput
-                   placeholder="Exam name"
-                   type="text"
-                   required
-                   name="examName"
-                   [(ngModel)]="exam.name">
-        </mat-form-field>
         <br>
         <mat-form-field appearance="fill">
             <mat-label>Feature name</mat-label>
@@ -63,7 +63,17 @@
                     (click)="saveVisit()"
                     color="primary">Submit</button>
     </div>
-
+<div>
+    <ul *ngFor="let ff of exam.features">
+        {{ff.name}}  {{ff.value}} {{ff.unit}}
+    </ul>
+    <ul *ngFor="let e of visit.exams">
+    {{e.name}}
+    <ul *ngFor="let f of e.features">
+        <li>{{f.name}}  {{f.value}} {{f.unit}}</li>
+    </ul>
+    </ul>
+</div>
 
 
 </div>

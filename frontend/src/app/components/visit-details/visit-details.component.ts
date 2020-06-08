@@ -60,9 +60,11 @@ export class VisitDetailsComponent implements OnInit {
 
   openPickDiseases(){
     const dis = this.diseases;
+    const visitId = this.route.snapshot.paramMap.get('visitId');
+    const patientId = this.route.snapshot.paramMap.get('id');
     console.log(dis);
     this.dialog.open(PickDiseaseDialogComponent, {
-      data: {dis}
+      data: {dis, visitId, patientId}
     });
   }
 

@@ -32,6 +32,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { AddVisitComponent } from './components/add-visit/add-visit.component';
+import { PredictionDetailsComponent } from './components/prediction-details/prediction-details.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AddVisitComponent } from './components/add-visit/add-visit.component';
     PickDiseasePredictionComponent,
     PickDiseaseDialogComponent,
     AddVisitComponent,
+    PredictionDetailsComponent,
   ],
     imports: [
         BrowserModule,

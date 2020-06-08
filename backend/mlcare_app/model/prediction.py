@@ -13,7 +13,9 @@ class Prediction(ModelDocument):
       model: string,
       predicted_class: string,
       accuracy: double,
-      features: list[Feature]
+      features: list[Feature],
+      probability_map: map,
+      classes_map: map,
     }
     """
 
@@ -75,6 +77,22 @@ class Prediction(ModelDocument):
     @features.setter
     def features(self, new_features):
         self._data['features'] = new_features
+
+    @property
+    def probability_map(self):
+        return self._data['probability_map']
+
+    @probability_map.setter
+    def probability_map(self, new_map):
+        self._data['probability_map'] = new_map
+
+    @property
+    def classes_map(self):
+        return self._data['classes_map']
+
+    @classes_map.setter
+    def classes_map(self, new_map):
+        self._data['classes_map'] = new_map
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:
