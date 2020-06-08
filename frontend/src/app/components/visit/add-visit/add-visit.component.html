@@ -58,7 +58,8 @@
                 (click)="pushAndClearExamData()"
                 color="accent">Add exam</button>
         <br>
-            <button mat-raised-button
+        <button mat-raised-button (click)="goBack()">Go back</button>
+        <button mat-raised-button
                     class="btn btn-success"
                     (click)="saveVisit()"
                     color="primary">Submit</button>

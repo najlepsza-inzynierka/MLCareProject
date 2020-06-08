@@ -33,6 +33,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { AddVisitComponent } from './components/visit/add-visit/add-visit.component';
 import { PredictionDetailsComponent } from './components/prediction/prediction-details/prediction-details.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { EditPatientComponent } from './components/patient/edit-patient/edit-patient.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
     AddVisitComponent,
     PredictionDetailsComponent,
     ConfirmDialogComponent,
+    EditPatientComponent,
   ],
     imports: [
         BrowserModule,

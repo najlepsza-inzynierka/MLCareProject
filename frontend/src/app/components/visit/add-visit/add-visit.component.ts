@@ -5,6 +5,7 @@ import {Exam} from '../../../interfaces/exam';
 import {VisitService} from '../../../services/visit.service';
 import {ActivatedRoute} from '@angular/router';
 import {Feature} from '../../../interfaces/feature';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-add-visit',
@@ -19,6 +20,7 @@ export class AddVisitComponent implements OnInit {
 
   constructor(private visitService: VisitService,
               private route: ActivatedRoute,
+              private location: Location,
               private snaackBar: MatSnackBar) {
     this.clearVisitData();
   }
@@ -101,6 +103,10 @@ export class AddVisitComponent implements OnInit {
     this.snaackBar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  goBack(){
+    this.location.back();
   }
 
 }

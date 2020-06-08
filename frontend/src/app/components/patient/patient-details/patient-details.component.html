@@ -1,13 +1,14 @@
 <h1>{{patient.firstName}}
 <span *ngIf="patient.middleName"> {{patient.middleName}}</span>
   {{patient.lastName}}
+  <button mat-raised-button color="accent" routerLink="/patient/edit/{{patient._id}}">Edit patient</button>
   <button mat-raised-button color="warn" (click)="confirmDialog()">Delete patient</button>
 </h1>
 <p>Gender: {{genderMap[patient.gender]}}</p>
 <p>Birth Date: {{patient.birthDate | date: 'shortDate'}}</p>
 <p>Birth Place: {{patient.birthPlace}}</p>
 <p>Address: {{patient.address}}</p>
-<button mat-raised-button color="accent" (click)="goBack()">Go back</button>
+<button mat-raised-button (click)="goBack()">Go back</button>
 <button mat-raised-button color="accent" routerLink="/add_visit/{{patient._id}}">Add visit</button>
 <br>
 
