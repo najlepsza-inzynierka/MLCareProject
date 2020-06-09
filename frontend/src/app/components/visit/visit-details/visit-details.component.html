@@ -1,6 +1,6 @@
 <p>Visit id: {{visit._id}}
 <button mat-raised-button color="accent" routerLink="/patient/{{this.patientId}}/visit/edit/{{this.visitId}}">Edit visit</button>
-<button mat-raised-button color="warn" (click)="confirmDialog()">Delete visit</button>
+<button mat-raised-button color="warn" (click)="confirmDeleteVisitDialog()">Delete visit</button>
 </p>
 <p>Doctor: {{visit.doctorName}}</p>
 <button mat-raised-button (click)="goBack()">Go back</button>
@@ -26,7 +26,7 @@
     <th mat-header-cell *matHeaderCellDef> Action </th>
     <td mat-cell *matCellDef="let element" class="action-link">
       <a (click)="openDialog('Update',element)">Edit</a> |
-      <a (click)="openDialog('Delete',element)">Delete</a>
+      <a (click)="confirmDeleteExamDialog(element._id)">Delete</a>
     </td>
   </ng-container>
 
@@ -63,3 +63,5 @@
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
+
+<button mat-raised-button color="accent" routerLink="/patient/{{this.patientId}}/add-exam/{{this.visitId}}">Add exam</button>

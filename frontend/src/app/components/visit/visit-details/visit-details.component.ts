@@ -11,6 +11,7 @@ import {PickDiseaseDialogComponent} from '../../prediction/pick-disease-dialog/p
 import {Disease} from '../../../interfaces/disease';
 import {VisitService} from '../../../services/visit.service';
 import {ConfirmDialogComponent, ConfirmDialogModel} from '../../confirm-dialog/confirm-dialog.component';
+import {ExamService} from "../../../services/exam.service";
 
 @Component({
   selector: 'app-visit-details',
@@ -37,6 +38,7 @@ export class VisitDetailsComponent implements OnInit {
 
   constructor(private patientService: PatientService,
               private visitService: VisitService,
+              private examService: ExamService,
               private route: ActivatedRoute,
               private location: Location,
               public dialog: MatDialog) {
@@ -82,7 +84,7 @@ export class VisitDetailsComponent implements OnInit {
     this.location.back();
   }
 
-  confirmDialog(): void {
+  confirmDeleteVisitDialog(): void {
     const message = `Are you sure you want to delete visit?`;
 
     const dialogData = new ConfirmDialogModel('Confirm Delete', message);
@@ -95,6 +97,24 @@ export class VisitDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult){
         this.visitService.deleteVisit(this.visit._id).subscribe(result => console.log(result),
+            err => console.error(err));
+      }
+    });
+  }
+
+  confirmDeleteExamDialog(id): void {
+    const message = `Are you sure you want to delete exam?`;
+
+    const dialogData = new ConfirmDialogModel('Confirm Delete', message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '400px',
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult){
+        this.examService.deleteExam(id).subscribe(result => console.log(result),
             err => console.error(err));
       }
     });
