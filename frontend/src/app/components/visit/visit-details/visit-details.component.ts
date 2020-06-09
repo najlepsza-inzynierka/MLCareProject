@@ -10,7 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {PickDiseaseDialogComponent} from '../../prediction/pick-disease-dialog/pick-disease-dialog.component';
 import {Disease} from '../../../interfaces/disease';
 import {VisitService} from '../../../services/visit.service';
-import {ConfirmDialogComponent, ConfirmDialogModel} from "../../confirm-dialog/confirm-dialog.component";
+import {ConfirmDialogComponent, ConfirmDialogModel} from '../../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-visit-details',
@@ -27,10 +27,12 @@ import {ConfirmDialogComponent, ConfirmDialogModel} from "../../confirm-dialog/c
 export class VisitDetailsComponent implements OnInit {
   visit: Visit;
   dataSource: MatTableDataSource<Exam>;
-  columnsToDisplay = ['Id', 'Name', 'Date'];
+  columnsToDisplay = ['Id', 'Name', 'Date', 'Action'];
   featuresColumnsToDisplay = ['featureName', 'featureValue'];
   expandedElement: Exam | null;
   diseases: Disease[];
+  visitId;
+  patientId;
 
 
   constructor(private patientService: PatientService,
@@ -39,6 +41,8 @@ export class VisitDetailsComponent implements OnInit {
               private location: Location,
               public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<Exam>();
+    this.visitId = this.route.snapshot.paramMap.get('visitId');
+    this.patientId = this.route.snapshot.paramMap.get('id');
     this.loadVisit();
     this.loadDiseases();
   }
@@ -47,10 +51,9 @@ export class VisitDetailsComponent implements OnInit {
   }
 
   loadVisit(){
-    const visitId = this.route.snapshot.paramMap.get('visitId');
-    this.visitService.getVisit(visitId).subscribe(v => { this.visit = v;
-                                                         console.log(v.exams);
-                                                         this.dataSource.data = this.visit.exams;
+    this.visitService.getVisit(this.visitId).subscribe(v => { this.visit = v;
+                                                              console.log(v.exams);
+                                                              this.dataSource.data = this.visit.exams;
       });
 
   }
@@ -61,8 +64,9 @@ export class VisitDetailsComponent implements OnInit {
 
   openPickDiseases(){
     const dis = this.diseases;
-    const visitId = this.route.snapshot.paramMap.get('visitId');
-    const patientId = this.route.snapshot.paramMap.get('id');
+    const visitId = this.visitId;
+    const patientId = this.patientId;
+
     console.log(dis);
     this.dialog.open(PickDiseaseDialogComponent, {
       data: {dis, visitId, patientId}
@@ -94,6 +98,10 @@ export class VisitDetailsComponent implements OnInit {
             err => console.error(err));
       }
     });
+  }
+
+  openDialog(message, message1){
+    console.log(message);
   }
 
 }

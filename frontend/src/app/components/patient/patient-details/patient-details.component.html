@@ -17,6 +17,7 @@
   <mat-label>Search</mat-label>
   <input matInput (keyup)="filterName($event)" placeholder="Visit">
 </mat-form-field>
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!--  ID column  -->
   <ng-container matColumnDef="id">

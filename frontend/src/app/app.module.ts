@@ -34,6 +34,7 @@ import { AddVisitComponent } from './components/visit/add-visit/add-visit.compon
 import { PredictionDetailsComponent } from './components/prediction/prediction-details/prediction-details.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { EditPatientComponent } from './components/patient/edit-patient/edit-patient.component';
+import { EditVisitComponent } from './components/visit/edit-visit/edit-visit.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { EditPatientComponent } from './components/patient/edit-patient/edit-pat
     PredictionDetailsComponent,
     ConfirmDialogComponent,
     EditPatientComponent,
+    EditVisitComponent,
   ],
     imports: [
         BrowserModule,

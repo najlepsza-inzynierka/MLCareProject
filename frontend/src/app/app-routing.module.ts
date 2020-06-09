@@ -7,6 +7,7 @@ import {VisitDetailsComponent} from './components/visit/visit-details/visit-deta
 import {AddVisitComponent} from './components/visit/add-visit/add-visit.component';
 import {PredictionDetailsComponent} from './components/prediction/prediction-details/prediction-details.component';
 import {EditPatientComponent} from './components/patient/edit-patient/edit-patient.component';
+import {EditVisitComponent} from './components/visit/edit-visit/edit-visit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'patient/edit/:id', component: EditPatientComponent },
   { path: 'patient/:id/prediction/:predictionId', component: PredictionDetailsComponent },
   { path: 'patient/:id/:visitId', component: VisitDetailsComponent },
+  { path: 'patient/:id/visit/edit/:visitId', component: EditVisitComponent },
   { path: 'add-patient', component: AddPatientComponent },
   { path: 'add_visit/:id', component: AddVisitComponent },
 ];

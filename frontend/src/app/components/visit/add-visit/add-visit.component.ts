@@ -5,7 +5,7 @@ import {Exam} from '../../../interfaces/exam';
 import {VisitService} from '../../../services/visit.service';
 import {ActivatedRoute} from '@angular/router';
 import {Feature} from '../../../interfaces/feature';
-import {Location} from "@angular/common";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-add-visit',
