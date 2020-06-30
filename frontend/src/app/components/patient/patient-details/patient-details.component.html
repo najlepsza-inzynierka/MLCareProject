@@ -5,7 +5,7 @@
   <button mat-raised-button color="warn" (click)="confirmDialog()">Delete patient</button>
 </h1>
 <p>Gender: {{genderMap[patient.gender]}}</p>
-<p>Birth Date: {{patient.birthDate | date: 'shortDate'}}</p>
+<p>Birth Date: {{patient.birthDate | date: 'longDate'}}</p>
 <p>Birth Place: {{patient.birthPlace}}</p>
 <p>Address: {{patient.address}}</p>
 <button mat-raised-button (click)="goBack()">Go back</button>

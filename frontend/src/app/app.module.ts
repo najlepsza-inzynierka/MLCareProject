@@ -19,10 +19,8 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AddPatientComponent } from './components/patient/add-patient/add-patient.component';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './services/in-memory-data.service';
 import {MatTableModule} from '@angular/material/table';
-import {MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { VisitDetailsComponent } from './components/visit/visit-details/visit-details.component';
 import { PickDiseaseDialogComponent } from './components/prediction/pick-disease-dialog/pick-disease-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -69,9 +67,6 @@ import { AddExamComponent } from './components/visit/add-exam/add-exam.component
         HttpClientModule,
         AppRoutingModule,
         HttpClientModule,
-        // HttpClientInMemoryWebApiModule.forRoot(
-        //     InMemoryDataService, {dataEncapsulation: false}
-        // ),
         MatTableModule,
         MatSnackBarModule,
         MatDialogModule,

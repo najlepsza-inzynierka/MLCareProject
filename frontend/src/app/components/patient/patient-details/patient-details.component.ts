@@ -1,13 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PatientService} from '../../../services/patient.service';
 import {Patient} from '../../../interfaces/patient';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
 import {MatTableDataSource} from '@angular/material/table';
 import { Visit } from 'src/app/interfaces/visit';
 import {VisitService} from '../../../services/visit.service';
 import {ConfirmDialogComponent, ConfirmDialogModel} from '../../confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-patient-details',
@@ -24,8 +25,10 @@ export class PatientDetailsComponent implements OnInit {
   constructor(private patientService: PatientService,
               private visitService: VisitService,
               private route: ActivatedRoute,
+              private router: Router,
               private location: Location,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private snaackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource(this.patientVisit);
   }
 
@@ -81,9 +84,23 @@ export class PatientDetailsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       this.result = dialogResult;
       if (dialogResult){
-        this.patientService.deletePatient(this.patient._id).subscribe(result => console.log(result),
-            err => console.error(err));
+        this.patientService.deletePatient(this.patient._id).subscribe(response => {
+              console.log(response);
+              this.openSnackBar('Patient deleted successfully', 'Close');
+              this.router.navigateByUrl(`patients`);
+            },
+            error => {
+              this.openSnackBar('Something went wrong :(', 'Close');
+              console.log(error);
+            }
+        );
       }
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snaackBar.open(message, action, {
+      duration: 3000,
     });
   }
 
