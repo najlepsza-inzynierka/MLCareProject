@@ -27,4 +27,8 @@ export class VisitService {
   createVisit(patientId, visit){
     return this.http.post(`${addUrl}/${patientId}/add_visit`, visit);
   }
+
+  deleteVisit(id) {
+    return this.http.delete(`${baseUrl}/delete_visit/${id}`);
+  }
 }

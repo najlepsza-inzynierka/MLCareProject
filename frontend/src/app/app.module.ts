@@ -13,26 +13,27 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
-import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
-import { PatientsComponent } from './components/patients/patients.component';
+import { PatientDetailsComponent } from './components/patient/patient-details/patient-details.component';
+import { PatientsComponent } from './components/patient/patients/patients.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { AddPatientComponent } from './components/add-patient/add-patient.component';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './services/in-memory-data.service';
+import { AddPatientComponent } from './components/patient/add-patient/add-patient.component';
 import {MatTableModule} from '@angular/material/table';
-import {MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar';
-import { VisitDetailsComponent } from './components/visit-details/visit-details.component';
-import { PickDiseasePredictionComponent } from './components/pick-disease-prediction/pick-disease-prediction.component';
-import { PickDiseaseDialogComponent } from './components/pick-disease-dialog/pick-disease-dialog.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { VisitDetailsComponent } from './components/visit/visit-details/visit-details.component';
+import { PickDiseaseDialogComponent } from './components/prediction/pick-disease-dialog/pick-disease-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import { AddVisitComponent } from './components/add-visit/add-visit.component';
-import { PredictionDetailsComponent } from './components/prediction-details/prediction-details.component';
+import { AddVisitComponent } from './components/visit/add-visit/add-visit.component';
+import { PredictionDetailsComponent } from './components/prediction/prediction-details/prediction-details.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { EditPatientComponent } from './components/patient/edit-patient/edit-patient.component';
+import { EditVisitComponent } from './components/visit/edit-visit/edit-visit.component';
+import { AddExamComponent } from './components/visit/add-exam/add-exam.component';
 
 @NgModule({
   declarations: [
@@ -42,10 +43,13 @@ import { PredictionDetailsComponent } from './components/prediction-details/pred
     PatientsComponent,
     AddPatientComponent,
     VisitDetailsComponent,
-    PickDiseasePredictionComponent,
     PickDiseaseDialogComponent,
     AddVisitComponent,
     PredictionDetailsComponent,
+    ConfirmDialogComponent,
+    EditPatientComponent,
+    EditVisitComponent,
+    AddExamComponent,
   ],
     imports: [
         BrowserModule,
@@ -63,9 +67,6 @@ import { PredictionDetailsComponent } from './components/prediction-details/pred
         HttpClientModule,
         AppRoutingModule,
         HttpClientModule,
-        // HttpClientInMemoryWebApiModule.forRoot(
-        //     InMemoryDataService, {dataEncapsulation: false}
-        // ),
         MatTableModule,
         MatSnackBarModule,
         MatDialogModule,

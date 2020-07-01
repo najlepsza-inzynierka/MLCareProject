@@ -4,7 +4,6 @@ import {Patient} from '../interfaces/patient';
 import {Observable} from 'rxjs';
 import {Disease} from '../interfaces/disease';
 
-// const baseURL = 'localhost:8080/api/';
 const baseURL = 'api/patients';
 const patientURL = 'api/patient';
 const diseaseURL = 'api/diseases';
@@ -35,11 +34,11 @@ export class PatientService {
   }
 
   updatePatient(patient, id){
-    return this.http.put(`${baseURL}/${id}`, patient);
+    return this.http.put(`${baseURL}/update/${id}`, patient);
   }
 
   deletePatient(id) {
-    return this.http.delete(`${baseURL}/${id}`);
+    return this.http.delete(`${baseURL}/delete_patient/${id}`);
   }
 
   deleteAllPatients() {
