@@ -84,5 +84,5 @@ def update_patient(patient_id):
 @app.route("/api/patients/delete_patient/<patient_id>", methods=["DELETE"])
 def delete_patient(patient_id):
     dao = PatientDAO()
-    dao.delete_one_by_id(patient_id) #todo -> delete visits connected to this patient
+    dao.delete_one_by_id(patient_id)
     return jsonify({"confirmation": "OK"})

@@ -27,6 +27,10 @@ class PredictionDAO:
         query = {'_id': ObjectId(_id)}
         self.coll.delete_one(query)
 
+    def delete_all_by_visit_id(self, visit_id):
+        query = {'visitId': ObjectId(visit_id)}
+        self.coll.delete_many(query)
+
     # Read
     def find(self, query):
         all_data = self.coll.find(query)

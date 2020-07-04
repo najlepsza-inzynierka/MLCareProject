@@ -84,6 +84,13 @@ def delete_visit(visit_id):
 @expect_mime('application/json')
 @json_body
 def update_visit(visit_id):
+    """
+    { "patientId": patient_id,
+      "doctorId": doctor_id,
+      "doctorName: doctor's name,
+      "date": date of the visit
+    }
+    """
     body = g.body
 
     visit_data = {

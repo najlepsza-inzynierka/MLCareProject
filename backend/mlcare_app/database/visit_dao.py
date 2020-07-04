@@ -1,6 +1,8 @@
 from bson import ObjectId
 
 from . import db
+from .exam_dao import ExamDAO
+from .prediction_dao import PredictionDAO
 from ..model.patient import Patient
 from ..model.visit import Visit
 from .patient_dao import PatientDAO
@@ -9,6 +11,8 @@ from .patient_dao import PatientDAO
 class VisitDAO:
     def __init__(self):
         self.coll = db['visits']
+        self.exam_dao = ExamDAO()
+        self.prediction_dao = PredictionDAO()
 
     # Create
     def insert_one(self, visit):
@@ -27,6 +31,8 @@ class VisitDAO:
 
     def delete_one_by_id(self, _id):
         query = {'_id': ObjectId(_id)}
+        self.exam_dao.delete_all_by_visit_id(_id)
+        self.prediction_dao.delete_all_by_visit_id(_id)
         self.coll.delete_one(query)
 
     # Read
