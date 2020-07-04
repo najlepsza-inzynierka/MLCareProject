@@ -75,4 +75,12 @@ def get_prediction(prediction_id):
     prediction = dao.find_one_by_id(prediction_id)
     if not prediction:
         return mk_error('Prediction not in database', 404)
-    return jsonify(prediction.data)
+    # front end should get readable data
+    prediction_front = Prediction(prediction.data)
+    class_map = result_map[prediction_front.model]
+    new_pred = {class_map[int(class_num)]: prob for (class_num, prob) in
+                prediction_front.probability_map.items()}
+    prediction_front.probability_map = new_pred
+    prediction_front.predicted_class = class_map[
+        int(prediction_front.predicted_class)]
+    return jsonify(prediction_front.data)
