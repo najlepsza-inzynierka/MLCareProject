@@ -3,9 +3,7 @@ from bson import ObjectId
 from . import db
 from .exam_dao import ExamDAO
 from .prediction_dao import PredictionDAO
-from ..model.patient import Patient
 from ..model.visit import Visit
-from .patient_dao import PatientDAO
 
 
 class VisitDAO:
@@ -38,9 +36,10 @@ class VisitDAO:
     # Read
     def find(self, query):
         all_data = self.coll.find(query)
-        return [Visit(data)
-                for data
-                in all_data]
+        visits = [Visit(data) for data in all_data]
+        for visit in visits:
+            visit.date = visit.date
+        return visits
 
     def find_all_visits_by_patient_id(self, patient_id):
         query = {'patientId': ObjectId(patient_id)}
@@ -49,11 +48,12 @@ class VisitDAO:
     def find_one(self, query):
         data = self.coll.find_one(query)
         if data:
-            return Visit(data)
+            visit = Visit(data)
+            visit.date = visit.date
+            return visit
         else:
             return None
 
     def find_one_by_id(self, _id):
         query = {'_id': ObjectId(_id)}
         return self.find_one(query)
-

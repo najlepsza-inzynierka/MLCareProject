@@ -40,7 +40,7 @@ def add_exam(visit_id):
     return jsonify({"confirmation": "OK", "new_id": ObjectId(exam_id)})
 
 
-@app.route('api/exams/edit_exam/<exam_id>', methods=["PUT"])
+@app.route('/api/exams/edit_exam/<exam_id>', methods=["PUT"])
 def update_exam(exam_id):
     """
         { "name": exam_name,
@@ -56,6 +56,9 @@ def update_exam(exam_id):
 
     exam_dao = ExamDAO()
     old_exam = exam_dao.find_one_by_id(exam_id)
+    if not old_exam:
+        return mk_error('Exam not in database', 404)
+
     new_exam = Exam(exam_data)
     new_exam.visit_id = old_exam.visit_id
     exam_id = exam_dao.update_one_by_id(exam_id, new_exam)

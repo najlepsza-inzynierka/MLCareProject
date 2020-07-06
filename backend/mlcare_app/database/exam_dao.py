@@ -12,6 +12,9 @@ class ExamDAO:
     def insert_one(self, exam):
         self.coll.insert_one(exam.data)
 
+    def insert_many(self, exams):
+        self.coll.insert_many([exam.data for exam in exams])
+
     # Update
     def update_one_by_id(self, old_id, new_exam):
         new_exam.id = ObjectId(old_id)

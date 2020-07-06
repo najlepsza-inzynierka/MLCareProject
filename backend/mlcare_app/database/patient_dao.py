@@ -45,8 +45,7 @@ class PatientDAO:
         return self.find(query)
 
     # Update
-    def update_one_by_id(self, _id, new_patient_data):
-        new_patient = Patient(new_patient_data)
+    def update_one_by_id(self, _id, new_patient):
         new_patient.id = ObjectId(_id)
         query = {"_id": ObjectId(_id)}
         self.coll.replace_one(query, new_patient.data)

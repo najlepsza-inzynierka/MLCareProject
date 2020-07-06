@@ -1,3 +1,5 @@
+from bson import ObjectId
+
 from .model_document import ModelDocument
 from .visit import Visit
 
@@ -21,6 +23,7 @@ class Prediction(ModelDocument):
 
     def __init__(self, data):
         super().__init__(data)
+        self.visit_id = self.visit_id
 
     @property
     def disease(self):
@@ -36,7 +39,7 @@ class Prediction(ModelDocument):
 
     @visit_id.setter
     def visit_id(self, new_visit_id):
-        self._data['visitId'] = new_visit_id
+        self._data['visitId'] = ObjectId(new_visit_id)
 
     @property
     def date(self):
@@ -44,7 +47,7 @@ class Prediction(ModelDocument):
 
     @date.setter
     def date(self, new_date):
-        self._data['date'] = new_date
+        self._data['date'] = str(new_date)
 
     @property
     def model(self):

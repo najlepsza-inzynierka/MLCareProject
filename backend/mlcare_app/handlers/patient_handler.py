@@ -51,6 +51,9 @@ def add_patient():
 
     patient = Patient(patient_data)
     patient_dao = PatientDAO()
+    patient_old = patient_dao.find_one_by_patient_id(patient.patient_id)
+    if patient_old:
+        return mk_error('Patient with given id already found in database', 409)
     patient_dao.insert_one(patient)
 
     return jsonify({"confirmation": "OK"})
@@ -76,7 +79,11 @@ def update_patient(patient_id):
     }
 
     patient_dao = PatientDAO()
-    patient_dao.update_one_by_id(patient_id, patient_data)
+    patient_old = patient_dao.find_one_by_id(patient_id)
+    if not patient_old:
+        return mk_error('Patient not in database', 404)
+    patient_new = Patient(patient_data)
+    patient_dao.update_one_by_id(patient_id, patient_new)
 
     return jsonify({"confirmation": "OK"})
 

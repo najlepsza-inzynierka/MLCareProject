@@ -34,7 +34,10 @@ class PredictionDAO:
     # Read
     def find(self, query):
         all_data = self.coll.find(query)
-        return [Prediction(data) for data in all_data]
+        predictions = [Prediction(data) for data in all_data]
+        for prediction in predictions:
+            prediction.date = prediction.date
+        return predictions
 
     def find_all_predictions_by_visit_id(self, visit_id):
         query = {'visitId': ObjectId(visit_id)}

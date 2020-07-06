@@ -25,8 +25,10 @@ def add_prediction(visit_id):
     if not visit:
         return mk_error('Visit not in database', 404)
 
-    prediction_data = {'visitId': ObjectId(visit_id),
-        'disease': body.get('disease', None), 'date': datetime.utcnow(),
+    prediction_data = {
+        'visitId': visit_id,
+        'disease': body.get('disease', None),
+        'date': datetime.utcnow(),
         'features': body.get('features')}
 
     if not prediction_data.get('disease'):
