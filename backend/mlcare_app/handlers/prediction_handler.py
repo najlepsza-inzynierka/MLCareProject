@@ -25,8 +25,10 @@ def add_prediction(visit_id):
     if not visit:
         return mk_error('Visit not in database', 404)
 
-    prediction_data = {'visitId': ObjectId(visit_id),
-        'disease': body.get('disease', None), 'date': datetime.utcnow(),
+    prediction_data = {
+        'visitId': visit_id,
+        'disease': body.get('disease', None),
+        'date': datetime.utcnow(),
         'features': body.get('features')}
 
     if not prediction_data.get('disease'):
@@ -84,3 +86,11 @@ def get_prediction(prediction_id):
     prediction_front.predicted_class = class_map[
         int(prediction_front.predicted_class)]
     return jsonify(prediction_front.data)
+
+
+@app.route('/api/predictions/delete_prediction/<prediction_id>', methods=[
+    'DELETE'])
+def delete_prediction(prediction_id):
+    prediction_dao = PredictionDAO()
+    prediction_dao.delete_one_by_id(prediction_id)
+    return jsonify({"confirmation": "OK"})

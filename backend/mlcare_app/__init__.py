@@ -33,7 +33,6 @@ app = Flask(__name__)
 CORS(app)
 app.json_encoder = MongoJSONEncoder
 
-#todo -> dodalam blueprint examu
 
 # Blueprints import
 from .handlers.patient_handler import patient_bp

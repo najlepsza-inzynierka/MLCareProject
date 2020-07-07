@@ -12,9 +12,11 @@ class ExamDAO:
     def insert_one(self, exam):
         self.coll.insert_one(exam.data)
 
+    def insert_many(self, exams):
+        self.coll.insert_many([exam.data for exam in exams])
+
     # Update
-    def update_one_by_id(self, old_id, new_exam_data):
-        new_exam = Exam(new_exam_data)
+    def update_one_by_id(self, old_id, new_exam):
         new_exam.id = ObjectId(old_id)
         query = {"_id": ObjectId(old_id)}
         self.coll.replace_one(query, new_exam.data)
@@ -26,6 +28,10 @@ class ExamDAO:
     def delete_one_by_id(self, _id):
         query = {'_id': ObjectId(_id)}
         self.coll.delete_one(query)
+
+    def delete_all_by_visit_id(self, visit_id):
+        query = {'visitId': ObjectId(visit_id)}
+        self.coll.delete_many(query)
 
     # Read
     def find(self, query):

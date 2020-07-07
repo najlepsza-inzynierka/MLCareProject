@@ -7,6 +7,7 @@ from flask import jsonify, Blueprint, g
 from .. import app
 from ..database.exam_dao import ExamDAO
 from ..database.patient_dao import PatientDAO
+from ..database.prediction_dao import PredictionDAO
 from ..database.visit_dao import VisitDAO
 from ..model.exam import Exam
 from ..model.visit import Visit
@@ -37,10 +38,19 @@ def get_visit(visit_id):
     visit = dao.find_one_by_id(visit_id)
     if not visit:
         return mk_error('Visit not in database', 404)
+
+    visit.date = str(visit.date)
+    print(visit.data)
+
     examDAO = ExamDAO()
     exams = examDAO.find_all_exams_by_visit_id(visit_id)
     exams_data = [exam.data for exam in exams]
     visit.exams = exams_data
+
+    predictionDAO = PredictionDAO()
+    predictions = predictionDAO.find_all_predictions_by_visit_id(visit_id)
+    predictions_data = [prediction.data for prediction in predictions]
+    visit.predictions = predictions_data
     return jsonify(visit.data)
 
 
@@ -51,8 +61,8 @@ def add_visit(patient_id):
     body = g.body
 
     visit_data = {
-        'patientId': ObjectId(patient_id),
-        'doctorId': ObjectId(body.get('doctorId', '')),
+        'patientId': patient_id,
+        'doctorId': body.get('doctorId', ''),
         'doctorName': body.get('doctorName', None),
         'date': datetime.utcnow()
     }
@@ -62,12 +72,14 @@ def add_visit(patient_id):
     visit_id = visit_dao.insert_one(visit)
 
     exams = body.get('exams', None)
+    exams_db = []
     if exams:
         exam_dao = ExamDAO()
         for exam in exams:
             exam_db = Exam(exam)
-            exam_db.visit_id = ObjectId(visit_id)
-            exam_dao.insert_one(exam_db)
+            exam_db.visit_id = visit_id
+            exams_db.append(exam_db)
+        exam_dao.insert_many(exams_db)
 
     return jsonify({"confirmation": "OK",
                     "new_id": ObjectId(visit_id)})
@@ -84,16 +96,26 @@ def delete_visit(visit_id):
 @expect_mime('application/json')
 @json_body
 def update_visit(visit_id):
+    """
+    { "patientId": patient_id,
+      "doctorId": doctor_id,
+      "doctorName: doctor's name,
+      "date": date of the visit
+    }
+    """
     body = g.body
 
     visit_data = {
-        'patientId': ObjectId(body['patientId']),
-        'doctorId': ObjectId(body['doctorId']),
+        'patientId': body['patientId'],
+        'doctorId': body['doctorId'],
         'doctorName': body.get('doctorName', None),
         'date': body.get('date', None)
     }
 
     visit_dao = VisitDAO()
+    visit = visit_dao.find_one_by_id(visit_id)
+    if not visit:
+        return mk_error('Visit not in database', 404)
     visit_dao.update_one_by_id(visit_id, visit_data)
 
     return jsonify({"confirmation": "OK"})

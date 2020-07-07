@@ -17,6 +17,8 @@ class Visit(ModelDocument):
 
     def __init__(self, data):
         super().__init__(data)
+        self.patient_id = self.patient_id
+        self.doctor_id = self.doctor_id
 
     @property
     def patient_id(self):
@@ -48,7 +50,7 @@ class Visit(ModelDocument):
 
     @date.setter
     def date(self, new_date):
-        self._data['date'] = new_date
+        self._data['date'] = str(new_date)
 
     @property
     def exams(self):

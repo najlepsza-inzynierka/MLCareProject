@@ -1,12 +1,14 @@
 from bson import ObjectId
 
 from . import db
+from .visit_dao import VisitDAO
 from ..model.patient import Patient
 
 
 class PatientDAO:
     def __init__(self):
         self.coll = db['patients']
+        self.visit_dao = VisitDAO()
 
     # Create
     def insert_one(self, patient):
@@ -43,49 +45,21 @@ class PatientDAO:
         return self.find(query)
 
     # Update
-    def update_one_by_id(self, _id, new_patient_data):
-        new_patient = Patient(new_patient_data)
+    def update_one_by_id(self, _id, new_patient):
         new_patient.id = ObjectId(_id)
         query = {"_id": ObjectId(_id)}
         self.coll.replace_one(query, new_patient.data)
-
-    def add_visit(self, patient_id, visit):
-        if not visit:
-            raise ValueError('Visit cannot be an empty value')
-
-        query = {'_id': ObjectId(patient_id)}
-
-        update = {
-            "$push": {'visits': visit.data}
-        }
-        self.coll.find_one_and_update(query, update)
-
-    def update_visit(self, patient_id, old_id, new_visit_data):
-        if not new_visit_data:
-            raise ValueError('Visit cannot be an empty value')
-
-        query = {'_id': ObjectId(patient_id)}
-        update = {
-            '$pull': {'visits': {'id': ObjectId(old_id)}},
-            '$push': {'visits': new_visit_data}
-        }
-        self.coll.find_one_and_update(query, update)
-
-    def delete_visit(self, patient_id, visit_id):
-        if not visit_id:
-            raise ValueError('Visit cannot be an empty value')
-
-        query = {'_id': ObjectId(patient_id)}
-        update = {
-            '$pull': {'visits': {'id': ObjectId(visit_id)}}
-        }
-        self.coll.find_one_and_update(query, update)
 
     # Delete
     def delete_one(self, query):
         self.coll.delete_one(query)
 
     def delete_one_by_id(self, _id):
+        visits = [visit.id for
+                  visit in self.visit_dao.find_all_visits_by_patient_id(
+                    _id)]
+        for visit_id in visits:
+            self.visit_dao.delete_one_by_id(visit_id)
         query = {"_id": ObjectId(_id)}
         self.coll.delete_one(query)
 

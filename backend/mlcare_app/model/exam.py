@@ -1,3 +1,5 @@
+from bson import ObjectId
+
 from .model_document import ModelDocument
 from .visit import Visit
 
@@ -16,6 +18,7 @@ class Exam(ModelDocument):
 
     def __init__(self, data):
         super().__init__(data)
+        self.visit_id = self.visit_id if self.visit_id else None
 
     @property
     def name(self):
@@ -35,11 +38,11 @@ class Exam(ModelDocument):
 
     @property
     def visit_id(self):
-        return self._data['visitId']
+        return self._data.get('visitId', '')
 
     @visit_id.setter
     def visit_id(self, new_visit_id):
-        self._data['visitId'] = new_visit_id
+        self._data['visitId'] = ObjectId(new_visit_id)
 
     @property
     def features(self):
