@@ -9,9 +9,10 @@ import {PredictionDetailsComponent} from './components/prediction/prediction-det
 import {EditPatientComponent} from './components/patient/edit-patient/edit-patient.component';
 import {EditVisitComponent} from './components/visit/edit-visit/edit-visit.component';
 import {AddExamComponent} from './components/visit/add-exam/add-exam.component';
+import {AuthComponent} from './components/authentication/auth/auth.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, // todo -> tutorial medium
   { path: 'patients', component: PatientsComponent },
   { path: 'patient/:id', component: PatientDetailsComponent },
   { path: 'patient/edit/:id', component: EditPatientComponent },

@@ -34,6 +34,8 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { EditPatientComponent } from './components/patient/edit-patient/edit-patient.component';
 import { EditVisitComponent } from './components/visit/edit-visit/edit-visit.component';
 import { AddExamComponent } from './components/visit/add-exam/add-exam.component';
+import { AdminComponent } from './components/authentication/admin/admin.component';
+import { AuthComponent } from './components/authentication/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { AddExamComponent } from './components/visit/add-exam/add-exam.component
     EditPatientComponent,
     EditVisitComponent,
     AddExamComponent,
+    AdminComponent,
+    AuthComponent,
   ],
     imports: [
         BrowserModule,
