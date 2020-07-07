@@ -28,7 +28,7 @@ export class AddPatientComponent implements OnInit {
           this.openSnackBar('Patient added successfully', 'Close');
         },
         error => {
-          this.openSnackBar('Something went wrong :(', 'Close');
+          this.openSnackBar(error.error.message, 'Close');
           console.log(error);
         }
     );
