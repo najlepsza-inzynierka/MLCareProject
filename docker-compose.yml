@@ -1,0 +1,28 @@
+version: '3.4'
+services:
+  api:
+    build:
+      context: ./backend
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend/mlcare_app:/app/mlcare_app
+    env_file:
+      - ./backend/.flaskenv
+    networks:
+      - backend-net
+  client:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 4200:4200
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - backend-net
+
+networks:
+  backend-net:
+    driver: bridge
