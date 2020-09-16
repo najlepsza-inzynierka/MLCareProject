@@ -4,6 +4,7 @@ from bson import ObjectId
 from flask import Flask
 from flask.json import JSONEncoder, JSONDecoder
 from flask_cors import CORS
+from flask_bcrypt import Bcrypt
 
 
 class MongoJSONEncoder(JSONEncoder):
@@ -30,6 +31,7 @@ class MongoJSONDecoder(JSONDecoder):
 
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 CORS(app)
 app.json_encoder = MongoJSONEncoder
 
@@ -40,6 +42,7 @@ from .handlers.visit_handler import visit_bp
 from .handlers.prediction_handler import prediction_bp
 from .handlers.diseases_handler import diseases_bp
 from .handlers.exam_handler import exam_bp
+from .handlers.user_handler import user_bp
 
 # Blueprints registration
 app.register_blueprint(patient_bp)
@@ -47,3 +50,4 @@ app.register_blueprint(visit_bp)
 app.register_blueprint(prediction_bp)
 app.register_blueprint(diseases_bp)
 app.register_blueprint(exam_bp)
+app.register_blueprint(user_bp)

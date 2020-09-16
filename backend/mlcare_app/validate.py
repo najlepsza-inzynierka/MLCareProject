@@ -16,54 +16,6 @@ def if_unlocked(decorated):
     return func
 
 
-class Validator(object):
-    def __init__(self, json_body):
-        self._body = json_body
-        self._response = None
-        self._locked = False
-
-    @property
-    def locked(self):
-        return self._locked
-
-    def error(self):
-        if self._response is None or not self._locked:
-            return None
-        return self._response
-
-    @if_unlocked
-    def field_present(self, key, err=None):
-        if key in self._body:
-            return True
-
-        if err is None:
-            msg = "Required field '%s' is not present." % key
-            err = mk_error(msg, 400)
-
-        self._response = err
-        self._locked = True
-
-        return False
-
-    @if_unlocked
-    def field_predicate(self, key, predicate, err=None):
-        if key not in self._body:
-            return True
-
-        value = self._body[key]
-        if predicate(value):
-            return True
-
-        if err is None:
-            msg = "Field '%s' does not match predicate." % key
-            err = mk_error(msg, 400)
-
-        self._response = err
-        self._locked = True
-
-        return False
-
-
 def expect_mime(types):
     """
     Handler decorator.

@@ -5,7 +5,7 @@ from flask import jsonify, Blueprint, g
 from .. import app
 from ..database.patient_dao import PatientDAO
 from ..model.patient import Patient
-from ..validate import expect_mime, json_body, Validator, mk_error
+from ..validate import expect_mime, json_body, mk_error
 
 patient_bp = Blueprint('patients', __name__)
 

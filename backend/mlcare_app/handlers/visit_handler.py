@@ -11,7 +11,7 @@ from ..database.prediction_dao import PredictionDAO
 from ..database.visit_dao import VisitDAO
 from ..model.exam import Exam
 from ..model.visit import Visit
-from ..validate import expect_mime, json_body, Validator, mk_error
+from ..validate import expect_mime, json_body, mk_error
 
 visit_bp = Blueprint('visits', __name__)
 

@@ -2,6 +2,7 @@ flask
 pyMongo
 flask_pymongo
 flask_cors
+flask_bcrypt
 python-dotenv
 dnspython
 cmake
