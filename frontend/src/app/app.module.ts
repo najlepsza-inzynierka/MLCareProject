@@ -29,6 +29,7 @@ import { PickDiseaseDialogComponent } from './components/pick-disease-dialog/pic
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import { LoginScreenComponent } from './components/login-screen/login-screen.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {MatSelectModule} from '@angular/material/select';
     VisitDetailsComponent,
     PickDiseasePredictionComponent,
     PickDiseaseDialogComponent,
+    LoginScreenComponent,
   ],
     imports: [
         BrowserModule,
