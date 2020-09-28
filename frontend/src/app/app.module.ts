@@ -34,6 +34,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { EditPatientComponent } from './components/patient/edit-patient/edit-patient.component';
 import { EditVisitComponent } from './components/visit/edit-visit/edit-visit.component';
 import { AddExamComponent } from './components/visit/add-exam/add-exam.component';
+import { LoginScreenComponent } from './components/login-screen/login-screen.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { AddExamComponent } from './components/visit/add-exam/add-exam.component
     EditPatientComponent,
     EditVisitComponent,
     AddExamComponent,
+    LoginScreenComponent,
   ],
     imports: [
         BrowserModule,
