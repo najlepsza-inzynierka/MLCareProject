@@ -37,6 +37,9 @@ import { AddExamComponent } from './components/visit/add-exam/add-exam.component
 import { LoginScreenComponent } from './components/login-screen/login-screen.component';
 import { AuthComponent } from './components/authentication/auth/auth.component';
 import { AdminComponent } from './components/authentication/admin/admin.component';
+import { AdminLoginScreenComponent } from './components/admin/admin-login-screen/admin-login-screen.component';
+import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
+import { AddMedicalStaffComponent } from './components/admin/add-medical-staff/add-medical-staff.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { AdminComponent } from './components/authentication/admin/admin.componen
     LoginScreenComponent,
     AuthComponent,
     AdminComponent,
+    AdminLoginScreenComponent,
+    AdminPanelComponent,
+    AddMedicalStaffComponent,
   ],
     imports: [
         BrowserModule,
@@ -82,7 +88,7 @@ import { AdminComponent } from './components/authentication/admin/admin.componen
         MatNativeDateModule,
         ReactiveFormsModule
     ],
-  entryComponents: [PickDiseaseDialogComponent],
+  entryComponents: [PickDiseaseDialogComponent, ConfirmDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

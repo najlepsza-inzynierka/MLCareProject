@@ -10,11 +10,16 @@ import {EditPatientComponent} from './components/patient/edit-patient/edit-patie
 import {EditVisitComponent} from './components/visit/edit-visit/edit-visit.component';
 import {AddExamComponent} from './components/visit/add-exam/add-exam.component';
 import {AuthGuard} from './auth.guard';
-import {LoginScreenComponent} from "./components/login-screen/login-screen.component";
+import {LoginScreenComponent} from './components/login-screen/login-screen.component';
+import {AdminLoginScreenComponent} from './components/admin/admin-login-screen/admin-login-screen.component';
+import {AdminPanelComponent} from './components/admin/admin-panel/admin-panel.component';
+import {AddMedicalStaffComponent} from './components/admin/add-medical-staff/add-medical-staff.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {path: 'login', component: LoginScreenComponent},
+  {path: 'admin-login', component: AdminLoginScreenComponent},
+  {path: 'admin-panel/:id', component: AdminPanelComponent, canActivate: [AuthGuard]},
   { path: 'patients', component: PatientsComponent, canActivate: [AuthGuard] },
   { path: 'patient/:id', component: PatientDetailsComponent, canActivate: [AuthGuard] },
   { path: 'patient/edit/:id', component: EditPatientComponent, canActivate: [AuthGuard]  },
@@ -23,6 +28,7 @@ const routes: Routes = [
   { path: 'patient/:id/visit/edit/:visitId', component: EditVisitComponent, canActivate: [AuthGuard]  },
   { path: 'patient/:id/add-exam/:visitId', component: AddExamComponent, canActivate: [AuthGuard]  },
   { path: 'add-patient', component: AddPatientComponent, canActivate: [AuthGuard]  },
+  { path: 'add-medical', component: AddMedicalStaffComponent, canActivate: [AuthGuard]  },
   { path: 'add_visit/:id', component: AddVisitComponent, canActivate: [AuthGuard]  },
 ];
 

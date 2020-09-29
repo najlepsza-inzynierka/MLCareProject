@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {AdminService} from '../../../services/admin.service';
 import {Admin} from '../../../interfaces/admin';
+import {AdminService} from '../../../services/admin.service';
+import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  selector: 'app-admin-panel',
+  templateUrl: './admin-panel.component.html',
+  styleUrls: ['./admin-panel.component.css']
 })
-export class AdminComponent implements OnInit {
+export class AdminPanelComponent implements OnInit {
   admin: Admin;
 
   constructor(private adminService: AdminService,
@@ -37,10 +37,6 @@ export class AdminComponent implements OnInit {
       email: 'mail@mail.com',
       password: 'supertajnehaslo'
     };
-  }
-
-  goBack(): void {
-    this.location.back();
   }
 
 }
