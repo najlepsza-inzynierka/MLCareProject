@@ -1,7 +1,7 @@
 import {Feature} from './feature';
 
 export interface Disease {
-  id: number;
+  _id: number;
   name: string;
   neededFeatures: Feature[];
 }

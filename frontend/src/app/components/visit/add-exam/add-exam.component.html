@@ -1,0 +1,70 @@
+<div class="example-container">
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Exam name</mat-label>
+            <input matInput
+                   placeholder="Exam name"
+                   type="text"
+                   required
+                   name="examName"
+                   [(ngModel)]="exam.name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Exam Date</mat-label>
+            <input matInput
+                   [matDatepicker]="picker"
+                   [(ngModel)]="exam.date"
+                   ngDefaultControl
+                   required
+                   name="birthDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill">
+            <mat-label>Feature name</mat-label>
+            <input matInput
+                   placeholder="Feature name"
+                   type="text"
+                   required
+                   name="featureName"
+                   [(ngModel)]="feature.name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Feature value</mat-label>
+            <input matInput
+                   placeholder="Feature value"
+                   type="number"
+                   required
+                   name="featureValue"
+                   [(ngModel)]="feature.value">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Feature unit</mat-label>
+            <input matInput
+                   placeholder="Feature unit"
+                   type="text"
+                   required
+                   name="featureUnit"
+                   [(ngModel)]="feature.unit">
+        </mat-form-field>
+        <br>
+        <button mat-raised-button
+                class="btn btn-success"
+                (click)="pushAndClearFeatureData()"
+                color="accent">Add feature</button>
+
+        <br>
+        <button mat-raised-button (click)="goBack()">Go back</button>
+        <button mat-raised-button
+                class="btn btn-success"
+                (click)="saveExam()"
+                color="primary">Submit</button>
+    </div>
+
+
+
+</div>
+
+
+

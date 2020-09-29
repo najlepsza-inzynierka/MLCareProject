@@ -3,7 +3,7 @@ from functools import wraps
 
 
 def mk_error(message, code=400):
-    response = jsonify({"error": message})
+    response = jsonify({"message": message})
     response.status_code = code
     return response
 
