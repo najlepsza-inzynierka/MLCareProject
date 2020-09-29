@@ -9,18 +9,21 @@ import {PredictionDetailsComponent} from './components/prediction/prediction-det
 import {EditPatientComponent} from './components/patient/edit-patient/edit-patient.component';
 import {EditVisitComponent} from './components/visit/edit-visit/edit-visit.component';
 import {AddExamComponent} from './components/visit/add-exam/add-exam.component';
+import {AuthGuard} from './auth.guard';
+import {LoginScreenComponent} from "./components/login-screen/login-screen.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
-  { path: 'patients', component: PatientsComponent },
-  { path: 'patient/:id', component: PatientDetailsComponent },
-  { path: 'patient/edit/:id', component: EditPatientComponent },
-  { path: 'patient/:id/prediction/:predictionId', component: PredictionDetailsComponent },
-  { path: 'patient/:id/:visitId', component: VisitDetailsComponent },
-  { path: 'patient/:id/visit/edit/:visitId', component: EditVisitComponent },
-  { path: 'patient/:id/add-exam/:visitId', component: AddExamComponent },
-  { path: 'add-patient', component: AddPatientComponent },
-  { path: 'add_visit/:id', component: AddVisitComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  {path: 'login', component: LoginScreenComponent},
+  { path: 'patients', component: PatientsComponent, canActivate: [AuthGuard] },
+  { path: 'patient/:id', component: PatientDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'patient/edit/:id', component: EditPatientComponent, canActivate: [AuthGuard]  },
+  { path: 'patient/:id/prediction/:predictionId', component: PredictionDetailsComponent, canActivate: [AuthGuard]  },
+  { path: 'patient/:id/:visitId', component: VisitDetailsComponent, canActivate: [AuthGuard]  },
+  { path: 'patient/:id/visit/edit/:visitId', component: EditVisitComponent, canActivate: [AuthGuard]  },
+  { path: 'patient/:id/add-exam/:visitId', component: AddExamComponent, canActivate: [AuthGuard]  },
+  { path: 'add-patient', component: AddPatientComponent, canActivate: [AuthGuard]  },
+  { path: 'add_visit/:id', component: AddVisitComponent, canActivate: [AuthGuard]  },
 ];
 
 

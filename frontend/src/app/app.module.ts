@@ -15,7 +15,7 @@ import { MatListModule } from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import { PatientDetailsComponent } from './components/patient/patient-details/patient-details.component';
 import { PatientsComponent } from './components/patient/patients/patients.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AddPatientComponent } from './components/patient/add-patient/add-patient.component';
@@ -35,6 +35,8 @@ import { EditPatientComponent } from './components/patient/edit-patient/edit-pat
 import { EditVisitComponent } from './components/visit/edit-visit/edit-visit.component';
 import { AddExamComponent } from './components/visit/add-exam/add-exam.component';
 import { LoginScreenComponent } from './components/login-screen/login-screen.component';
+import { AuthComponent } from './components/authentication/auth/auth.component';
+import { AdminComponent } from './components/authentication/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { LoginScreenComponent } from './components/login-screen/login-screen.com
     EditVisitComponent,
     AddExamComponent,
     LoginScreenComponent,
+    AuthComponent,
+    AdminComponent,
   ],
     imports: [
         BrowserModule,
@@ -75,7 +79,8 @@ import { LoginScreenComponent } from './components/login-screen/login-screen.com
         MatCheckboxModule,
         MatSelectModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        ReactiveFormsModule
     ],
   entryComponents: [PickDiseaseDialogComponent],
   providers: [],

@@ -1,1 +1,21 @@
-<p>login-screen works!</p>
+<h1>MLCare</h1>
+<div>
+    <h2>Log in</h2>
+    <form class="add-patient-form" #login="ngForm">
+    <mat-form-field appearance="fill" class="login">
+        <mat-label>Doctor Login</mat-label>
+        <input matInput required type="email" name="email" [(ngModel)]="user.email">
+    </mat-form-field>
+        <br>
+        <mat-form-field appearance="fill" class="login">
+            <mat-label>Password</mat-label>
+            <input matInput required type="password" name="password" [(ngModel)]="user.password">
+        </mat-form-field>
+        <br>
+        <button mat-raised-button
+            [disabled]="!login.valid"
+            class="btn btn-success"
+            (click)="signIn()"
+            color="primary">Login</button>
+    </form>
+</div>
