@@ -1,72 +1,65 @@
 import datetime
-import os
 
 from flask import jsonify, Blueprint, g
 
 from .. import app, bcrypt
+from ..database.admin_dao import AdminDAO
 from ..database.token_dao import TokenDAO
-from ..database.user_dao import UserDAO
+from ..model.admin import Admin
 from ..model.blacklisted_token import BlacklistedToken
-from ..model.user import User
-from ..validate import (
-    expect_mime, json_body, mk_error, check_admin_token, check_token)
+from ..validate import expect_mime, json_body, mk_error, check_admin_token
 
-user_bp = Blueprint('users', __name__)
+admin_bp = Blueprint('admins', __name__)
 
 
-@app.route('/api/users/register', methods=['POST'])
+@app.route('/api/institutions/<institution_id>/admin', methods=['POST'])
 @expect_mime('application/json')
 @json_body
-@check_admin_token
-def add_user():
+def register_admin(institution_id):
     body = g.body
-    admin_user = g.admin
 
-    user_data = {
-        'userId': body['userId'],
+    admin_data = {
         'firstName': body.get('firstName', None),
         'middleName': body.get('middleName', None),
         'lastName': body.get('lastName', None),
-        'title': body.get('title', None),
         'address': body.get('address', None),
         'phoneNumber': body.get('phoneNumber', None),
         'email': body.get('email', None),
-        'institutions': [admin_user.institution_id],
+        'institutionId': institution_id,
         'active': True,
         'password': body.get('password', None),
-        'registeredOn': datetime.datetime.now(),
-        'registeredBy': g.admin.id
+        'registeredOn': datetime.datetime.now()
     }
 
-    user = User(user_data)
-    user.password = user.password
-    user_dao = UserDAO()
-    user_old = user_dao.find_one_by_email(user.email)
-    if user_old:
+    admin = Admin(admin_data)
+    admin.password = admin.password
+    admin_dao = AdminDAO()
+    admin_old = admin_dao.find_one_by_email(admin.email)
+    if admin_old:
         return mk_error('Email already taken', 409)
-    user_id = user_dao.insert_one(user)
-    auth_token = user.encode_auth_token().decode()
+    admin_id = admin_dao.insert_one(admin)
 
-    return jsonify({"confirmation": "OK", "new_id": user_id})
+    return jsonify({"confirmation": "OK",
+                    "new_id": admin_id})
 
 
-@app.route('/api/users/login', methods=['POST'])
+@app.route('/api/admins/login', methods=['POST'])
 @expect_mime('application/json')
 @json_body
-def login_user():
+def login_admin():
     body = g.body
-    user_data = {
+    admin_data = {
         'email': body['email'],
         'password': body['password']
     }
 
-    user_dao = UserDAO()
+    admin_dao = AdminDAO()
 
     try:
-        user = user_dao.find_one_by_email(user_data['email'])
-        if user and bcrypt.check_password_hash(
-                user.password, user_data['password']):
-            auth_token = user.encode_auth_token()
+        admin = admin_dao.find_one_by_email(admin_data['email'])
+        if admin and bcrypt.check_password_hash(
+                admin.password, admin_data['password']):
+            auth_token = admin.encode_auth_token()
             if auth_token:
                 response_object = {
                     'status': 'success',
@@ -81,11 +74,9 @@ def login_user():
         return mk_error('Something went wrong, try again', 500)
 
 
-@app.route('/api/users/logout', methods=['POST'])
-@expect_mime('application/json')
-@json_body
-@check_token
-def logout_user():
+@app.route('/api/admins/logout', methods=['POST'])
+@check_admin_token
+def logout_admin():
     blacklist_token = BlacklistedToken({})
     blacklist_token.token = g.token
     blacklist_token.blacklisted_on = datetime.datetime.now()
@@ -94,7 +85,7 @@ def logout_user():
         token_dao.insert_one(blacklist_token)
         response = {
             'status': 'success',
-            'message': 'Successfully logged out.'
+            'message': 'Successfully logged out from administration panel.'
         }
         return jsonify(response)
     except Exception:

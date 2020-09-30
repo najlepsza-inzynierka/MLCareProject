@@ -9,3 +9,4 @@ cmake
 xgboost
 pandas
 sklearn
+pyjwt

@@ -9,5 +9,6 @@ _db_conn_string = "mongodb+srv://%s:%s@%s" % (
     os.environ["DB_HOSTNAME"]
 )
 app.config['MONGO_URI'] = _db_conn_string
+app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 connection = MongoClient(_db_conn_string)
 db = connection[os.environ["DB_NAME"]]

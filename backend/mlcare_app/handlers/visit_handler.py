@@ -11,13 +11,14 @@ from ..database.prediction_dao import PredictionDAO
 from ..database.visit_dao import VisitDAO
 from ..model.exam import Exam
 from ..model.visit import Visit
-from ..validate import expect_mime, json_body, mk_error
+from ..validate import expect_mime, json_body, mk_error, check_token
 
 visit_bp = Blueprint('visits', __name__)
 
 
 # everywhere patient.id not patient.patientId
 @app.route("/api/visits/<patient_id>", methods=["GET"])
+@check_token
 def get_all_visits_by_patient_id(patient_id):
     dao = PatientDAO()
     patient = dao.find_one_by_id(patient_id)
@@ -33,6 +34,7 @@ def get_all_visits_by_patient_id(patient_id):
 
 
 @app.route("/api/visit/<visit_id>", methods=["GET"])
+@check_token
 def get_visit(visit_id):
     dao = VisitDAO()
     visit = dao.find_one_by_id(visit_id)
@@ -40,7 +42,6 @@ def get_visit(visit_id):
         return mk_error('Visit not in database', 404)
 
     visit.date = str(visit.date)
-    print(visit.data)
 
     examDAO = ExamDAO()
     exams = examDAO.find_all_exams_by_visit_id(visit_id)
@@ -57,6 +58,7 @@ def get_visit(visit_id):
 @app.route("/api/patient/<patient_id>/add_visit", methods=["POST"])
 @expect_mime('application/json')
 @json_body
+@check_token
 def add_visit(patient_id):
     body = g.body
 
@@ -86,6 +88,7 @@ def add_visit(patient_id):
 
 
 @app.route('/api/visits/delete_visit/<visit_id>', methods=['DELETE'])
+@check_token
 def delete_visit(visit_id):
     visit_dao = VisitDAO()
     visit_dao.delete_one_by_id(visit_id)
@@ -95,6 +98,7 @@ def delete_visit(visit_id):
 @app.route('/api/visits/update_visit/<visit_id>', methods=['PUT'])
 @expect_mime('application/json')
 @json_body
+@check_token
 def update_visit(visit_id):
     """
     { "patientId": patient_id,

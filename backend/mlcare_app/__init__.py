@@ -43,6 +43,8 @@ from .handlers.prediction_handler import prediction_bp
 from .handlers.diseases_handler import diseases_bp
 from .handlers.exam_handler import exam_bp
 from .handlers.user_handler import user_bp
+from .handlers.institution_handler import institution_bp
+from .handlers.admin_handler import admin_bp
 
 # Blueprints registration
 app.register_blueprint(patient_bp)
@@ -51,3 +53,6 @@ app.register_blueprint(prediction_bp)
 app.register_blueprint(diseases_bp)
 app.register_blueprint(exam_bp)
 app.register_blueprint(user_bp)
+app.register_blueprint(institution_bp)
+app.register_blueprint(admin_bp)
+
