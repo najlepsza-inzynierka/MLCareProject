@@ -26,6 +26,7 @@ import { PickDiseaseDialogComponent } from './components/prediction/pick-disease
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import { LoginScreenComponent } from './components/login-screen/login-screen.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { AddVisitComponent } from './components/visit/add-visit/add-visit.component';
@@ -44,6 +45,7 @@ import { AddExamComponent } from './components/visit/add-exam/add-exam.component
     AddPatientComponent,
     VisitDetailsComponent,
     PickDiseaseDialogComponent,
+    LoginScreenComponent,
     AddVisitComponent,
     PredictionDetailsComponent,
     ConfirmDialogComponent,
