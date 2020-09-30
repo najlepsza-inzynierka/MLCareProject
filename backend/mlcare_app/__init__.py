@@ -35,7 +35,15 @@ app.json_encoder = MongoJSONEncoder
 
 
 # Blueprints import
+from .handlers.diseases_handler import diseases_bp
+from .handlers.exam_handler import exam_bp
 from .handlers.patient_handler import patient_bp
+from .handlers.prediction_handler import prediction_bp
+from .handlers.visit_handler import visit_bp
 
 # Blueprints registration
+app.register_blueprint(diseases_bp)
+app.register_blueprint(exam_bp)
 app.register_blueprint(patient_bp)
+app.register_blueprint(prediction_bp)
+app.register_blueprint(visit_bp)

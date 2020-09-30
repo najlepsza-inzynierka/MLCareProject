@@ -1,3 +1,5 @@
+from bson import ObjectId
+
 from .model_document import ModelDocument
 
 
@@ -6,16 +8,28 @@ class Visit(ModelDocument):
     JSON format:
     {
       _id: ObjectId,
-      doctorId: string,        # doctor id
+      patient_id: ObjectId     # id of patient in database
+      doctorId: ObjectId,      # id of doctor who adds a visit
       doctorName: string,      # doctor first and last name
-      date: string,
-      exams: list[Exam],
-      predictions: list[Prediction]
+      date: Date
     }
     """
 
     def __init__(self, data):
         super().__init__(data)
+
+        # uses specified setters
+        self.patient_id = self.patient_id
+        self.doctor_id = self.doctor_id
+        self.date = self.date
+
+    @property
+    def patient_id(self):
+        return self._data['patientId']
+
+    @patient_id.setter
+    def patient_id(self, new_id):
+        self._data['patientId'] = ObjectId(new_id)
 
     @property
     def doctor_id(self):
@@ -23,7 +37,7 @@ class Visit(ModelDocument):
 
     @doctor_id.setter
     def doctor_id(self, new_id):
-        self._data['doctorId'] = new_id
+        self._data['doctorId'] = ObjectId(new_id)
 
     @property
     def doctor_name(self):
@@ -39,7 +53,7 @@ class Visit(ModelDocument):
 
     @date.setter
     def date(self, new_date):
-        self._data['date'] = new_date
+        self._data['date'] = str(new_date)
 
     @property
     def exams(self):
