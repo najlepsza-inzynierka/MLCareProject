@@ -16,9 +16,12 @@ class Exam(ModelDocument):
     }
     """
 
-    def __init__(self, data):
+    def __init__(self, data, visit_id=None):
         super().__init__(data)
-        self.visit_id = self.visit_id if self.visit_id else None
+        if visit_id:
+            self.visit_id = visit_id
+        else:
+            self.visit_id = self.visit_id if self.visit_id else None
 
     @property
     def name(self):

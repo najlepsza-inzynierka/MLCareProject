@@ -17,8 +17,11 @@ class Visit(ModelDocument):
 
     def __init__(self, data):
         super().__init__(data)
+
+        # uses specified setters
         self.patient_id = self.patient_id
         self.doctor_id = self.doctor_id
+        self.date = self.date
 
     @property
     def patient_id(self):

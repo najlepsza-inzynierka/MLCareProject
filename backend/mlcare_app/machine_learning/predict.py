@@ -18,10 +18,8 @@ def choose_model(disease):
 
 
 def create_dataframe(features):
-    feature_dict = {}
-    for feature in features:
-        feature = Feature(feature)
-        feature_dict[feature.name] = [feature.value]
+    features_list = [Feature(feature) for feature in features]
+    feature_dict = {feature.name: feature.value for feature in features_list}
     return pd.DataFrame(data=feature_dict)
 
 

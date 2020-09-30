@@ -11,7 +11,7 @@ patient_bp = Blueprint('patients', __name__)
 
 
 # everywhere patient.id not patient.patientId
-@app.route("/api/patients", methods=["GET"])
+@app.route('/api/patients', methods=['GET'])
 def get_all_patients():
     dao = PatientDAO()
     patients = dao.find_all_patients()
@@ -21,7 +21,7 @@ def get_all_patients():
     return jsonify(result)
 
 
-@app.route("/api/patient/<patient_id>", methods=["GET"])
+@app.route('/api/patient/<patient_id>', methods=['GET'])
 def get_patient(patient_id):
     dao = PatientDAO()
     patient = dao.find_one_by_id(patient_id)
@@ -56,7 +56,7 @@ def add_patient():
         return mk_error('Patient with given id already found in database', 409)
     patient_dao.insert_one(patient)
 
-    return jsonify({"confirmation": "OK"})
+    return jsonify({'confirmation': 'OK'})
 
 
 @app.route('/api/patients/update/<patient_id>', methods=['PUT'])
@@ -85,11 +85,11 @@ def update_patient(patient_id):
     patient_new = Patient(patient_data)
     patient_dao.update_one_by_id(patient_id, patient_new)
 
-    return jsonify({"confirmation": "OK"})
+    return jsonify({'confirmation': 'OK'})
 
 
-@app.route("/api/patients/delete_patient/<patient_id>", methods=["DELETE"])
+@app.route('/api/patients/delete_patient/<patient_id>', methods=['DELETE'])
 def delete_patient(patient_id):
     dao = PatientDAO()
     dao.delete_one_by_id(patient_id)
-    return jsonify({"confirmation": "OK"})
+    return jsonify({'confirmation': 'OK'})
