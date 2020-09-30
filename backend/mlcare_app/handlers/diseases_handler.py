@@ -16,7 +16,7 @@ from ..validate import expect_mime, json_body, mk_error
 diseases_bp = Blueprint('diseases', __name__)
 
 
-@app.route("/api/diseases", methods=["GET"])
+@app.route('/api/diseases', methods=['GET'])
 def get_diseases():
     dao = DiseaseDAO()
     result = dao.find_diseases()
@@ -24,20 +24,24 @@ def get_diseases():
     return jsonify(result)
 
 
-# to make new latest disease database (e.g. changed api version)
-@app.route("/api/diseases/new_latest", methods=["POST"])
+@app.route('/api/diseases/new_latest', methods=['POST'])
 def add_latest():
+    """
+    makes new latest disease database (e.g. for changed api version)
+    """
     dao = DiseaseDAO()
     dao.add_disease_db()
 
     return jsonify({"confirmation": "OK"})
 
 
-# to add disease to latest diseases database
 @app.route('/api/diseases/add_disease', methods=['PUT'])
 @expect_mime('application/json')
 @json_body
 def add_disease():
+    """
+    adds disease to latest diseases database
+    """
     body = g.body
 
     disease = body.get('name')
@@ -45,4 +49,4 @@ def add_disease():
     dao = DiseaseDAO()
     dao.add_disease('latest', disease)
 
-    return jsonify({"confirmation": "OK"})
+    return jsonify({'confirmation': 'OK'})

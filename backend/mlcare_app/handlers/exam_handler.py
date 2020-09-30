@@ -14,7 +14,7 @@ from ..validate import expect_mime, json_body, Validator, mk_error
 exam_bp = Blueprint('exams', __name__)
 
 
-@app.route('/api/visit/<visit_id>/add_exam', methods=["POST"])
+@app.route('/api/visit/<visit_id>/add_exam', methods=['POST'])
 @expect_mime('application/json')
 @json_body
 def add_exam(visit_id):
@@ -37,10 +37,10 @@ def add_exam(visit_id):
     exam_dao = ExamDAO()
     exam_id = exam_dao.insert_one(exam)
 
-    return jsonify({"confirmation": "OK", "new_id": ObjectId(exam_id)})
+    return jsonify({'confirmation': 'OK', 'new_id': ObjectId(exam_id)})
 
 
-@app.route('/api/exams/edit_exam/<exam_id>', methods=["PUT"])
+@app.route('/api/exams/edit_exam/<exam_id>', methods=['PUT'])
 def update_exam(exam_id):
     """
         { "name": exam_name,
@@ -63,11 +63,11 @@ def update_exam(exam_id):
     new_exam.visit_id = old_exam.visit_id
     exam_id = exam_dao.update_one_by_id(exam_id, new_exam)
 
-    return jsonify({"confirmation": "OK", "new_id": ObjectId(exam_id)})
+    return jsonify({'confirmation': 'OK', 'new_id': ObjectId(exam_id)})
 
 
 @app.route('/api/exams/delete_exam/<exam_id>', methods=['DELETE'])
 def delete_exam(exam_id):
     exam_dao = ExamDAO()
     exam_dao.delete_one_by_id(exam_id)
-    return jsonify({"confirmation": "OK"})
+    return jsonify({'confirmation': 'OK'})
