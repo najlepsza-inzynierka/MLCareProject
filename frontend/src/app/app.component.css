@@ -10,3 +10,8 @@
 .sidenav {
   width: 170px;
 }
+
+.mat-raised-button{
+  width: 80%;
+  margin: 5px;
+}

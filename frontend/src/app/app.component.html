@@ -10,6 +10,8 @@
       <a mat-list-item routerLink="/">Home Page</a>
       <a mat-list-item routerLink="patients">Patient Data</a>
       <a mat-list-item routerLink="add-patient">Add patient</a>
+      <button mat-raised-button (click)="signOutAdmin()">Admin sign out</button>
+      <button mat-raised-button (click)="signOutUser()">User sign out</button>
     </mat-nav-list>
   </mat-sidenav>
   <div class="container mt-3">
