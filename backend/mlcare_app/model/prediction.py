@@ -1,3 +1,5 @@
+import datetime
+
 from bson import ObjectId
 
 from .model_document import ModelDocument
@@ -23,7 +25,10 @@ class Prediction(ModelDocument):
 
     def __init__(self, data):
         super().__init__(data)
+
+        # uses specified setters
         self.visit_id = self.visit_id
+        self.date = self.date if self.date else datetime.datetime.utcnow()
 
     @property
     def disease(self):

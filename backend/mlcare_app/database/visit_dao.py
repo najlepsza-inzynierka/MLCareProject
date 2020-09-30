@@ -16,6 +16,24 @@ class VisitDAO:
     def insert_one(self, visit):
         return self.coll.insert_one(visit.data).inserted_id
 
+    # Read
+    def find(self, query):
+        all_data = self.coll.find(query)
+        visits = [Visit(data) for data in all_data]
+        return visits
+
+    def find_all_visits_by_patient_id(self, patient_id):
+        query = {'patientId': ObjectId(patient_id)}
+        return self.find(query)
+
+    def find_one(self, query):
+        data = self.coll.find_one(query)
+        return Visit(data) if data else None
+
+    def find_one_by_id(self, _id):
+        query = {'_id': ObjectId(_id)}
+        return self.find_one(query)
+
     # Update
     def update_one_by_id(self, old_id, new_visit_data):
         new_visit = Visit(new_visit_data)
@@ -32,28 +50,3 @@ class VisitDAO:
         self.exam_dao.delete_all_by_visit_id(_id)
         self.prediction_dao.delete_all_by_visit_id(_id)
         self.coll.delete_one(query)
-
-    # Read
-    def find(self, query):
-        all_data = self.coll.find(query)
-        visits = [Visit(data) for data in all_data]
-        for visit in visits:
-            visit.date = visit.date
-        return visits
-
-    def find_all_visits_by_patient_id(self, patient_id):
-        query = {'patientId': ObjectId(patient_id)}
-        return self.find(query)
-
-    def find_one(self, query):
-        data = self.coll.find_one(query)
-        if data:
-            visit = Visit(data)
-            visit.date = visit.date
-            return visit
-        else:
-            return None
-
-    def find_one_by_id(self, _id):
-        query = {'_id': ObjectId(_id)}
-        return self.find_one(query)
