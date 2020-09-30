@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from "../../../interfaces/user";
-import {AuthService} from "../../../services/auth.service";
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {AdminAuthService} from '../../../services/admin-auth.service';
+import {Admin} from '../../../interfaces/admin';
 
 @Component({
   selector: 'app-admin-login-screen',
@@ -10,10 +10,10 @@ import {Router} from "@angular/router";
 })
 export class AdminLoginScreenComponent implements OnInit {
   id: number;
-  user: User;
+  admin: Admin;
   isSubmitted  =  false;
 
-  constructor(private authService: AuthService,
+  constructor(private adminAuthService: AdminAuthService,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -23,12 +23,17 @@ export class AdminLoginScreenComponent implements OnInit {
   signIn(){
     this.isSubmitted = true;
     this.id = 1;
-    this.authService.signIn(this.user);
+    this.adminAuthService.signIn(this.admin);
     this.router.navigateByUrl(`/admin-panel/${this.id}`);
   }
 
   clearData(): void{
-    this.user = {
+    this.admin = {
+      id: '',
+      firstName: '',
+      lastName: '',
+      address: '',
+      phoneNumber: '',
       email: '',
       password: ''
     };

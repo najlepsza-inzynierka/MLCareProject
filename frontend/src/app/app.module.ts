@@ -40,6 +40,8 @@ import { AdminComponent } from './components/authentication/admin/admin.componen
 import { AdminLoginScreenComponent } from './components/admin/admin-login-screen/admin-login-screen.component';
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
 import { AddMedicalStaffComponent } from './components/admin/add-medical-staff/add-medical-staff.component';
+import { MedicalStaffListComponent } from './components/admin/medical-staff-list/medical-staff-list.component';
+import { EditAdminComponent } from './components/admin/edit-admin/edit-admin.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +64,8 @@ import { AddMedicalStaffComponent } from './components/admin/add-medical-staff/a
     AdminLoginScreenComponent,
     AdminPanelComponent,
     AddMedicalStaffComponent,
+    MedicalStaffListComponent,
+    EditAdminComponent,
   ],
     imports: [
         BrowserModule,

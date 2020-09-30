@@ -29,7 +29,7 @@ export class AddMedicalStaffComponent implements OnInit {
           this.openSnackBar('Medical staff added successfully', 'Close');
         },
         error => {
-          this.openSnackBar(error.error.message, 'Close');
+          this.openSnackBar('Something went wrong :(', 'Close');
           console.log(error);
         }
     );
@@ -44,19 +44,15 @@ export class AddMedicalStaffComponent implements OnInit {
   clearMedicalData(){
     this.added = false;
     this.medical = {
-      _id: '-1',
-      patientId: '',
-      gender: -1,
+      userId: '',
       firstName: '',
       middleName: '',
       lastName: '',
+      title: '',
       address: '',
-      birthDate: '',
-      birthPlace: '',
       phoneNumber: '',
       email: '',
-      visits: [],
-      predictions: []
+      password: '',
     };
   }
 

@@ -4,12 +4,12 @@
     <form class="add-patient-form" #login="ngForm">
         <mat-form-field appearance="fill" class="login">
             <mat-label>Administrator Login</mat-label>
-            <input matInput required type="email" name="email" [(ngModel)]="user.email">
+            <input matInput required type="email" name="email" [(ngModel)]="admin.email">
         </mat-form-field>
         <br>
         <mat-form-field appearance="fill" class="login">
             <mat-label>Password</mat-label>
-            <input matInput required type="password" name="password" [(ngModel)]="user.password">
+            <input matInput required type="password" name="password" [(ngModel)]="admin.password">
         </mat-form-field>
         <br>
         <button mat-raised-button

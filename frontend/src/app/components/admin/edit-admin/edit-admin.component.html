@@ -1,6 +1,6 @@
 <div class="example-container">
     <div>
-        <form class="add-patient-form" #addMedical="ngForm">
+        <form class="add-patient-form" #addAdmin="ngForm">
             <mat-form-field appearance="fill">
                 <mat-label>First name</mat-label>
                 <label>
@@ -9,19 +9,9 @@
                            type="text"
                            required
                            name="firstName"
-                           [(ngModel)]="medical.firstName">
+                           [(ngModel)]="admin.firstName">
                 </label>
             </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Middle name</mat-label>
-                <input matInput
-                       placeholder="Middle Name"
-                       type="text"
-                       name="middleName"
-                       [(ngModel)]="medical.middleName">
-            </mat-form-field>
-            <br>
-
             <mat-form-field appearance="fill">
                 <mat-label>Last name</mat-label>
                 <input matInput
@@ -29,16 +19,7 @@
                        type="text"
                        required
                        name="lastName"
-                       [(ngModel)]="medical.lastName">
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Title</mat-label>
-                <input matInput
-                       placeholder="Title"
-                       type="text"
-                       required
-                       name="title"
-                       [(ngModel)]="medical.title">
+                       [(ngModel)]="admin.lastName">
             </mat-form-field>
             <br>
 
@@ -49,30 +30,17 @@
                        type="text"
                        required
                        name="address"
-                       [(ngModel)]="medical.address">
+                       [(ngModel)]="admin.address">
             </mat-form-field>
-
             <mat-form-field appearance="fill">
                 <mat-label>Phone number</mat-label>
                 <input matInput
                        placeholder="Phone number"
                        type="text"
-                       required
                        name="phoneNumber"
-                       [(ngModel)]="medical.phoneNumber">
+                       [(ngModel)]="admin.phoneNumber">
             </mat-form-field>
             <br>
-
-            <mat-form-field appearance="fill">
-                <mat-label>Medical staff Id</mat-label>
-                <input matInput
-                       placeholder="Medical staff Id"
-                       type="text"
-                       required
-                       name="medicalID"
-                       [(ngModel)]="medical.userId">
-            </mat-form-field>
-
 
             <mat-form-field appearance="fill">
                 <mat-label>Email</mat-label>
@@ -80,31 +48,26 @@
                        placeholder="Email"
                        type="email"
                        email
-                       required
                        name="email"
-                       [(ngModel)]="medical.email">
+                       [(ngModel)]="admin.email">
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Password</mat-label>
                 <input matInput
                        placeholder="Password"
-                       required
-                       type="text"
+                       type="password"
                        name="password"
-                       [(ngModel)]="medical.password">
+                       [(ngModel)]="admin.password">
             </mat-form-field>
             <br>
-
-
             <button mat-raised-button
-                    (click)="saveMedical()"
+                    (click)="goBack()"
+                    class="btn btn-success">Go back</button>
+            <button mat-raised-button
+                    (click)="saveAdmin()"
                     class="btn btn-success"
-                    [disabled]="!addMedical.valid"
-                    color="primary">Submit</button>
+                    [disabled]="!addAdmin.valid"
+                    color="accent">Edit your data</button>
         </form>
     </div>
-
-
-
 </div>
-
