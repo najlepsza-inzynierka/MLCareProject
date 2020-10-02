@@ -16,7 +16,7 @@ import {MatInputModule} from '@angular/material/input';
 import { PatientDetailsComponent } from './components/patient/patient-details/patient-details.component';
 import { PatientsComponent } from './components/patient/patients/patients.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AddPatientComponent } from './components/patient/add-patient/add-patient.component';
 import {MatTableModule} from '@angular/material/table';
@@ -42,6 +42,7 @@ import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.
 import { AddMedicalStaffComponent } from './components/admin/add-medical-staff/add-medical-staff.component';
 import { MedicalStaffListComponent } from './components/admin/medical-staff-list/medical-staff-list.component';
 import { EditAdminComponent } from './components/admin/edit-admin/edit-admin.component';
+import {AuthInterceptor} from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,7 @@ import { EditAdminComponent } from './components/admin/edit-admin/edit-admin.com
         ReactiveFormsModule
     ],
   entryComponents: [PickDiseaseDialogComponent, ConfirmDialogComponent],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

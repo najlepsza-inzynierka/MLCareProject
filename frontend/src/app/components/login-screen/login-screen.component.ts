@@ -12,8 +12,7 @@ export class LoginScreenComponent implements OnInit {
   user: User;
   isSubmitted  =  false;
 
-  constructor(private authService: AuthService,
-              private router: Router) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.clearData();
@@ -22,7 +21,6 @@ export class LoginScreenComponent implements OnInit {
   signIn(){
     this.isSubmitted = true;
     this.authService.signIn(this.user);
-    this.router.navigateByUrl('/patients');
   }
 
   clearData(): void{

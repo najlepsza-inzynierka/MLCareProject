@@ -9,12 +9,12 @@ import {PredictionDetailsComponent} from './components/prediction/prediction-det
 import {EditPatientComponent} from './components/patient/edit-patient/edit-patient.component';
 import {EditVisitComponent} from './components/visit/edit-visit/edit-visit.component';
 import {AddExamComponent} from './components/visit/add-exam/add-exam.component';
-import {AuthGuard} from './auth.guard';
+import {AuthGuard} from './guards/auth.guard';
 import {LoginScreenComponent} from './components/login-screen/login-screen.component';
 import {AdminLoginScreenComponent} from './components/admin/admin-login-screen/admin-login-screen.component';
 import {AdminPanelComponent} from './components/admin/admin-panel/admin-panel.component';
 import {AddMedicalStaffComponent} from './components/admin/add-medical-staff/add-medical-staff.component';
-import {AdminGuard} from './admin.guard';
+import {AdminGuard} from './guards/admin.guard';
 import {EditAdminComponent} from './components/admin/edit-admin/edit-admin.component';
 
 const routes: Routes = [

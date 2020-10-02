@@ -13,8 +13,7 @@ export class AdminLoginScreenComponent implements OnInit {
   admin: Admin;
   isSubmitted  =  false;
 
-  constructor(private adminAuthService: AdminAuthService,
-              private router: Router) { }
+  constructor(private adminAuthService: AdminAuthService) { }
 
   ngOnInit(): void {
     this.clearData();
@@ -23,8 +22,7 @@ export class AdminLoginScreenComponent implements OnInit {
   signIn(){
     this.isSubmitted = true;
     this.id = 1;
-    this.adminAuthService.signIn(this.admin);
-    this.router.navigateByUrl(`/admin-panel/${this.id}`);
+    this.adminAuthService.signIn(this.admin, this.id);
   }
 
   clearData(): void{

@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Medical} from '../interfaces/medical';
 import {Admin} from '../interfaces/admin';
 
-const baseURL = 'api/medical';
+const registerURL = '/api/users/register';
 const medicalURL = 'api/medicals';
 const adminURL = 'api/admin';
 
@@ -17,7 +17,8 @@ export class AdminService {
 
   // medical part
   createMedical(medical){
-    return this.http.post(baseURL, medical);
+    console.log();
+    return this.http.post(registerURL, medical);
   }
 
   getAllMedicals(){
