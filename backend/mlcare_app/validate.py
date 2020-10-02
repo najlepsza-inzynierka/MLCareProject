@@ -1,67 +1,16 @@
 from flask import g, request, jsonify
 from functools import wraps
 
+from mlcare_app.database.admin_dao import AdminDAO
+from mlcare_app.database.user_dao import UserDAO
+from mlcare_app.model.auth_user import AuthUser
+from mlcare_app.model.exceptions import BlacklistedTokenException
+
 
 def mk_error(message, code=400):
     response = jsonify({"message": message})
     response.status_code = code
     return response
-
-
-def if_unlocked(decorated):
-    def func(self, *args, **kwargs):
-        if not self.locked:
-            return decorated(self, *args, **kwargs)
-        return None
-    return func
-
-
-class Validator(object):
-    def __init__(self, json_body):
-        self._body = json_body
-        self._response = None
-        self._locked = False
-
-    @property
-    def locked(self):
-        return self._locked
-
-    def error(self):
-        if self._response is None or not self._locked:
-            return None
-        return self._response
-
-    @if_unlocked
-    def field_present(self, key, err=None):
-        if key in self._body:
-            return True
-
-        if err is None:
-            msg = "Required field '%s' is not present." % key
-            err = mk_error(msg, 400)
-
-        self._response = err
-        self._locked = True
-
-        return False
-
-    @if_unlocked
-    def field_predicate(self, key, predicate, err=None):
-        if key not in self._body:
-            return True
-
-        value = self._body[key]
-        if predicate(value):
-            return True
-
-        if err is None:
-            msg = "Field '%s' does not match predicate." % key
-            err = mk_error(msg, 400)
-
-        self._response = err
-        self._locked = True
-
-        return False
 
 
 def expect_mime(types):
@@ -96,9 +45,71 @@ def json_body(f):
     def decorated(*args, **kwargs):
         try:
             json_body = request.get_json(silent=False)
+            headers = request.headers
             g.body = json_body
+            g.headers = headers
         except Exception:
             return mk_error("Malformed JSON body.", code=400)
         return f(*args, **kwargs)
 
+    return decorated
+
+
+def check_token(f):
+    """
+    Handler decorator.
+    Performs token check
+    """
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth_header = request.headers.get('Authorization')
+        if auth_header:
+            try:
+                auth_token = auth_header.split(" ")[1]
+                g.token = auth_token
+                user_id = AuthUser.decode_auth_token(auth_token)
+
+                user_dao = UserDAO()
+                user = user_dao.find_one_by_id(user_id)
+                if user:
+                    g.user = user
+                else:
+                    return mk_error('User does not exist', 404)
+            except IndexError:
+                return mk_error('Bearer token malformed', 401)
+            except BlacklistedTokenException as e:
+                return mk_error(e.args, 401)
+        else:
+            return mk_error('Provide a valid token', 401)
+        return f(*args, **kwargs)
+    return decorated
+
+
+def check_admin_token(f):
+    """
+    Handler decorator.
+    Performs admin token check
+    """
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth_header = request.headers.get('Authorization')
+        if auth_header:
+            try:
+                auth_token = auth_header.split(" ")[1]
+                g.token = auth_token
+                user_id = AuthUser.decode_auth_token(auth_token)
+
+                admin_dao = AdminDAO()
+                user = admin_dao.find_one_by_id(user_id)
+                if user:
+                    g.admin = user
+                else:
+                    return mk_error('User does not exist', 404)
+            except IndexError:
+                return mk_error('Bearer token malformed', 401)
+            except BlacklistedTokenException as e:
+                return mk_error(e.args, 401)
+        else:
+            return mk_error('Provide a valid token', 401)
+        return f(*args, **kwargs)
     return decorated

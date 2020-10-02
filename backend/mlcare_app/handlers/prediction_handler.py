@@ -9,7 +9,7 @@ from ..database.visit_dao import VisitDAO
 from ..machine_learning.predict import predict, result_map
 from ..model.exceptions import PredictionException
 from ..model.prediction import Prediction
-from ..validate import expect_mime, json_body, mk_error
+from ..validate import expect_mime, json_body, mk_error, check_token
 
 prediction_bp = Blueprint('predictions', __name__)
 
@@ -17,6 +17,7 @@ prediction_bp = Blueprint('predictions', __name__)
 @app.route('/api/visit/<visit_id>/make_prediction', methods=['POST'])
 @expect_mime('application/json')
 @json_body
+@check_token
 def add_prediction(visit_id):
     body = g.body
 
@@ -57,6 +58,7 @@ def add_prediction(visit_id):
 
 
 @app.route('/api/predictions/<visit_id>', methods=['GET'])
+@check_token
 def get_all_predictions_by_visit_id(visit_id):
     dao = VisitDAO()
     visit = dao.find_one_by_id(visit_id)
@@ -70,6 +72,7 @@ def get_all_predictions_by_visit_id(visit_id):
 
 
 @app.route('/api/prediction/<prediction_id>', methods=['GET'])
+@check_token
 def get_prediction(prediction_id):
     dao = PredictionDAO()
     prediction = dao.find_one_by_id(prediction_id)
@@ -88,6 +91,7 @@ def get_prediction(prediction_id):
 
 @app.route('/api/predictions/delete_prediction/<prediction_id>', methods=[
     'DELETE'])
+@check_token
 def delete_prediction(prediction_id):
     prediction_dao = PredictionDAO()
     prediction_dao.delete_one_by_id(prediction_id)

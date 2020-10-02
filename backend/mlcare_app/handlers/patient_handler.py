@@ -5,13 +5,14 @@ from flask import jsonify, Blueprint, g
 from .. import app
 from ..database.patient_dao import PatientDAO
 from ..model.patient import Patient
-from ..validate import expect_mime, json_body, Validator, mk_error
+from ..validate import expect_mime, json_body, mk_error, check_token
 
 patient_bp = Blueprint('patients', __name__)
 
 
 # everywhere patient.id not patient.patientId
 @app.route('/api/patients', methods=['GET'])
+@check_token
 def get_all_patients():
     dao = PatientDAO()
     patients = dao.find_all_patients()
@@ -22,6 +23,7 @@ def get_all_patients():
 
 
 @app.route('/api/patient/<patient_id>', methods=['GET'])
+@check_token
 def get_patient(patient_id):
     dao = PatientDAO()
     patient = dao.find_one_by_id(patient_id)
@@ -33,6 +35,7 @@ def get_patient(patient_id):
 @app.route('/api/patients', methods=['POST'])
 @expect_mime('application/json')
 @json_body
+@check_token
 def add_patient():
     body = g.body
 
@@ -62,6 +65,7 @@ def add_patient():
 @app.route('/api/patients/update/<patient_id>', methods=['PUT'])
 @expect_mime('application/json')
 @json_body
+@check_token
 def update_patient(patient_id):
     body = g.body
 
@@ -89,6 +93,7 @@ def update_patient(patient_id):
 
 
 @app.route('/api/patients/delete_patient/<patient_id>', methods=['DELETE'])
+@check_token
 def delete_patient(patient_id):
     dao = PatientDAO()
     dao.delete_one_by_id(patient_id)

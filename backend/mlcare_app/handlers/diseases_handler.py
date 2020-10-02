@@ -11,12 +11,13 @@ from ..database.visit_dao import VisitDAO
 from ..machine_learning.predict import predict
 from ..model.exceptions import PredictionException
 from ..model.prediction import Prediction
-from ..validate import expect_mime, json_body, mk_error
+from ..validate import expect_mime, json_body, mk_error, check_token
 
 diseases_bp = Blueprint('diseases', __name__)
 
 
 @app.route('/api/diseases', methods=['GET'])
+@check_token
 def get_diseases():
     dao = DiseaseDAO()
     result = dao.find_diseases()
@@ -24,7 +25,9 @@ def get_diseases():
     return jsonify(result)
 
 
+# to make new latest disease database (e.g. changed api version)
 @app.route('/api/diseases/new_latest', methods=['POST'])
+@check_token
 def add_latest():
     """
     makes new latest disease database (e.g. for changed api version)
@@ -35,9 +38,11 @@ def add_latest():
     return jsonify({"confirmation": "OK"})
 
 
+# to add disease to latest diseases database
 @app.route('/api/diseases/add_disease', methods=['PUT'])
 @expect_mime('application/json')
 @json_body
+@check_token
 def add_disease():
     """
     adds disease to latest diseases database
