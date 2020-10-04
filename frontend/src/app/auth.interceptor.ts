@@ -21,7 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // Clone the request and set the new header in one step.
     if (authAdminToken !== ''){
-      this.authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + authToken } });
+      this.authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + authAdminToken } });
     }
     else if (authToken !== ''){
       this.authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + authToken } });

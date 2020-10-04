@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  result;
+  private result;
   token = '';
   constructor(private http: HttpClient,
               private router: Router) { }
@@ -28,9 +28,16 @@ export class AuthService {
     return localStorage.getItem('ACCESS_TOKEN_USER') !== null;
   }
 
-    public logout(){
+  public logout(){
+    this.http.post('/api/users/logout', this.result).subscribe(r => {
+      this.result = r;
+      console.log(r);
+      if (this.result.status === 'success'){
+        this.router.navigateByUrl('/login');
+      }
+    });
     localStorage.removeItem('ACCESS_TOKEN_USER');
-  }
+    }
 
   public getAuthorizationToken(){
     return this.token;

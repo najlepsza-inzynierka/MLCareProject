@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Admin} from '../interfaces/admin';
-import {HttpClient, HttpResponse, HttpHeaders, HttpInterceptor} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class AdminAuthService {
               private router: Router) { }
 
   public signIn(adminData: Admin, id){
-    this.http.post('api/admins/login', adminData).subscribe(r => {
+    this.http.post('/api/admins/login', adminData).subscribe(r => {
       this.result = r;
       console.log(r);
       if (this.result.status === 'success'){
@@ -29,6 +29,13 @@ export class AdminAuthService {
   }
 
   public logout(){
+    this.http.post('/api/admins/logout', this.result).subscribe(r => {
+      this.result = r;
+      console.log(r);
+      if (this.result.status === 'success'){
+        this.router.navigateByUrl(`/admin-login`);
+      }
+    });
     localStorage.removeItem('ACCESS_TOKEN_ADMIN');
   }
 
