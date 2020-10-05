@@ -63,6 +63,7 @@ def check_token(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         auth_header = request.headers.get('Authorization')
+        print(request.headers)
         if auth_header:
             try:
                 auth_token = auth_header.split(" ")[1]

@@ -4,6 +4,7 @@ import os
 from flask import jsonify, Blueprint, g
 
 from .. import app, bcrypt
+from ..database.institution_dao import InstitutionDAO
 from ..database.token_dao import TokenDAO
 from ..database.user_dao import UserDAO
 from ..model.blacklisted_token import BlacklistedToken
@@ -31,6 +32,7 @@ def add_user():
         'address': body.get('address', None),
         'phoneNumber': body.get('phoneNumber', None),
         'email': body.get('email', None),
+        'emails': [body.get('email', None)],
         'institutions': [admin_user.institution_id],
         'active': True,
         'password': body.get('password', None),
@@ -38,16 +40,93 @@ def add_user():
         'registeredBy': g.admin.id
     }
 
+    institution_dao = InstitutionDAO()
+    institution = institution_dao.find_one_by_id(admin_user.institution_id)
+    if institution.user_no >= institution.user_limit:
+        mk_error('Institution achieved maximum medical staff number', 409)
+
     user = User(user_data)
+
+    # encrypting password hash
     user.password = user.password
     user_dao = UserDAO()
+    user_by_user_id = user_dao.find_one_by_user_id(user.user_id)
+    if user_by_user_id:
+        if admin_user.institution_id in user_by_user_id.institutions:
+            return mk_error('There already is staff with given userId '
+                            'assigned to your institution', 409)
+        else:
+            institutions_list = institution_dao.find_all_from_list_by_id(
+                user_by_user_id.institutions)
+            return mk_error('There already is staff with given user id '
+                            'identifying themselves with email'
+                            f'{user_by_user_id.email} in the '
+                            'system assigned to following institutions: '
+                            f'{institutions_list}. You can add them also to '
+                            f'your institution with force request but this '
+                            f'will not change user\'s login credentials', 409)
+
     user_old = user_dao.find_one_by_email(user.email)
     if user_old:
         return mk_error('Email already taken', 409)
     user_id = user_dao.insert_one(user)
-    auth_token = user.encode_auth_token().decode()
+
+    # add user to institution
+    institution.users = institution.users.append(user_id)
+    institution_dao.update_one_by_id(institution.id, institution)
 
     return jsonify({"confirmation": "OK", "new_id": user_id})
+
+
+@app.route('/api/users/register/force', methods=['POST'])
+@expect_mime('application/json')
+@json_body
+@check_admin_token
+def add_user_force():
+    body = g.body
+    admin_user = g.admin
+
+    user_data = {
+        'userId': body['userId'],
+        'firstName': body.get('firstName', None),
+        'middleName': body.get('middleName', None),
+        'lastName': body.get('lastName', None),
+        'title': body.get('title', None),
+        'address': body.get('address', None),
+        'phoneNumber': body.get('phoneNumber', None),
+        'active': True,
+        'registeredOn': datetime.datetime.now(),
+        'registeredBy': g.admin.id
+    }
+
+    user = User(user_data)
+
+    # encrypting password hash
+    user.password = user.password
+    user_dao = UserDAO()
+    user_by_user_id = user_dao.find_one_by_user_id(user.user_id)
+    if user_by_user_id:
+        if admin_user.institution_id in user_by_user_id.institutions:
+            return mk_error('There already is doctor with given userId '
+                            'assigned to your institution', 409)
+    else:
+        mk_error('User not in database', 404)
+    user_by_user_id.institutions = user_by_user_id.institutions.append(
+        admin_user.institution_id)
+    new_email = user_data.get('email', None)
+    if new_email:
+        if new_email not in user_by_user_id.emails:
+            user_by_user_id.emails = user_by_user_id.emails.append(new_email)
+
+    user_id = user_dao.update_one_by_id(user_by_user_id.id, user_by_user_id)
+
+    # add user to institution
+    institution_dao = InstitutionDAO()
+    institution = institution_dao.find_one_by_id(admin_user.institution_id)
+    institution.users = institution.users.append(user_id)
+    institution_dao.update_one_by_id(institution.id, institution)
+
+    return jsonify({"confirmation": "OK", "user_id": user_id})
 
 
 @app.route('/api/users/login', methods=['POST'])
@@ -67,16 +146,17 @@ def login_user():
         if user and bcrypt.check_password_hash(
                 user.password, user_data['password']):
             auth_token = user.encode_auth_token()
+            _prepare_to_send(user)
             if auth_token:
                 response_object = {
                     'status': 'success',
                     'message': 'Successfully logged in.',
-                    'auth_token': auth_token.decode()
+                    'auth_token': auth_token.decode(),
+                    'user': user
                 }
                 return jsonify(response_object), 200
-
         else:
-            return mk_error('Email or password incorrect', 404)
+            return mk_error('Email or password incorrect', 401)
     except Exception:
         return mk_error('Something went wrong, try again', 500)
 
@@ -99,3 +179,15 @@ def logout_user():
         return jsonify(response)
     except Exception:
         return mk_error('failed: try again', 200)
+
+
+@app.route('/api/users/user', methods=['GET'])
+@check_token
+def get_user():
+    user = g.user
+    user.prepare_to_send()
+
+    return jsonify({'confirmation': 'OK',
+                    'user': user})
+
+

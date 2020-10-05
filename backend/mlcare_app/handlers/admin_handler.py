@@ -4,7 +4,9 @@ from flask import jsonify, Blueprint, g
 
 from .. import app, bcrypt
 from ..database.admin_dao import AdminDAO
+from ..database.institution_dao import InstitutionDAO
 from ..database.token_dao import TokenDAO
+from ..database.user_dao import UserDAO
 from ..model.admin import Admin
 from ..model.blacklisted_token import BlacklistedToken
 from ..validate import expect_mime, json_body, mk_error, check_admin_token
@@ -39,6 +41,12 @@ def register_admin(institution_id):
         return mk_error('Email already taken', 409)
     admin_id = admin_dao.insert_one(admin)
 
+    # add user to institution
+    institution_dao = InstitutionDAO()
+    institution = institution_dao.find_one_by_id(institution_id)
+    institution.admins = institution.admins.append(admin_id)
+    institution_dao.update_one_by_id(institution_id, institution)
+
     return jsonify({"confirmation": "OK",
                     "new_id": admin_id})
 
@@ -57,6 +65,7 @@ def login_admin():
 
     try:
         admin = admin_dao.find_one_by_email(admin_data['email'])
+        _prepare_to_send(admin)
         if admin and bcrypt.check_password_hash(
                 admin.password, admin_data['password']):
             auth_token = admin.encode_auth_token()
@@ -64,12 +73,12 @@ def login_admin():
                 response_object = {
                     'status': 'success',
                     'message': 'Successfully logged in.',
-                    'auth_token': auth_token.decode()
+                    'auth_token': auth_token.decode(),
+                    'admin': admin
                 }
                 return jsonify(response_object), 200
-
         else:
-            return mk_error('Email or password incorrect', 404)
+            return mk_error('Email or password incorrect', 401)
     except Exception:
         return mk_error('Something went wrong, try again', 500)
 
@@ -90,3 +99,53 @@ def logout_admin():
         return jsonify(response)
     except Exception:
         return mk_error('failed: try again', 200)
+
+
+@app.route('/api/admins/institution', methods=['GET'])
+@check_admin_token
+def get_institution():
+    admin = g.admin
+    institution_id = admin.institution_id
+
+    institution_dao = InstitutionDAO()
+    user_dao = UserDAO()
+
+    institution = institution_dao.find_one_by_id(institution_id)
+    if institution:
+        institution.users = user_dao.find_users_of_institution(institution.users)
+    else:
+        mk_error('Institution not in database', 404)
+
+    return jsonify({'confirmation': 'OK',
+                    'institution': institution})
+
+
+@app.route('/api/admins/admin', methods=['GET'])
+@check_admin_token
+def get_admin():
+    admin = g.admin
+    admin.prepare_to_send()
+
+    return jsonify({'confirmation': 'OK',
+                    'admin': admin})
+
+
+@app.route('/api/admins/user/<user_id>', methods=['GET'])
+@check_admin_token
+def get_user_as_admin(user_id):
+    admin = g.admin
+
+    user_dao = UserDAO()
+    user = user_dao.find_one_by_id(user_id)
+
+    if admin.institution_id not in user.institutions:
+        mk_error('This user does not belong to your institution', 409)
+
+    user.prepare_to_send()
+    return jsonify({'confirmation': 'OK',
+                    'user': user})
+
+
+
+
+

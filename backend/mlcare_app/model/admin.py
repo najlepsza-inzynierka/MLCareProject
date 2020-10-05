@@ -1,3 +1,4 @@
+from mlcare_app.database.institution_dao import InstitutionDAO
 from mlcare_app.model.auth_user import AuthUser
 
 
@@ -13,8 +14,8 @@ class Admin(AuthUser):
       phoneNumber: string,
       email: string,
       institutionId: ObjectId,
-      active: boolean
-      password: encrypted string    # max 72B
+      active: boolean,
+      password: encrypted string,    # max 72B
       registeredOn: DateTime
     }
     """
@@ -30,3 +31,15 @@ class Admin(AuthUser):
     def institution_id(self, new_id):
         self._data['institutionId'] = new_id
 
+    @property
+    def institution(self):
+        return self._data['institution']
+
+    @institution.setter
+    def institution(self, new_institution):
+        self._data['institution'] = new_institution
+
+    def prepare_to_send(self):
+        institution_dao = InstitutionDAO()
+        self.institution = institution_dao.find_one_by_id(self.institution_id)
+        self.remove_password()

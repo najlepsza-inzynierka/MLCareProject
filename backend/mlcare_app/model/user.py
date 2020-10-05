@@ -1,5 +1,6 @@
 import datetime
 
+from mlcare_app.database.institution_dao import InstitutionDAO
 from mlcare_app.model.auth_user import AuthUser
 
 
@@ -15,10 +16,11 @@ class User(AuthUser):
       title: string,
       address: string,
       phoneNumber: string,
-      email: string,
-      institutions: list[Institution],
-      active: boolean
-      password: encrypted string    # max 72B
+      email: string,          # email to login
+      institutions: list[institution_id],
+      emails: list[string],
+      active: boolean,
+      password: encrypted string,    # max 72B
       registeredOn: DateTime,
       registeredBy: ObjectId (admin id)
     }
@@ -50,3 +52,26 @@ class User(AuthUser):
     @registered_by.setter
     def registered_by(self, new_admin):
         self._data['registeredBy'] = str(new_admin)
+
+    @property
+    def institutions(self):
+        return self._data['institutions']
+
+    @institutions.setter
+    def institutions(self, new_institutions):
+        self._data['institutions'] = str(new_institutions)
+
+    @property
+    def emails(self):
+        return self._data['emails']
+
+    @emails.setter
+    def emails(self, new_emails):
+        self._data['emails'] = str(new_emails)
+
+    def prepare_to_send(self):
+        institution_dao = InstitutionDAO()
+        self.institutions = institution_dao.find_all_from_list_by_id(
+            self.institutions)
+        self.remove_password()
+

@@ -13,7 +13,8 @@ class Institution(ModelDocument):
       admins: list[Admin],
       usersLimit: int,
       usersNo: int,
-      registeredOn: datetime
+      registeredOn: datetime,
+      users: list[user.id]
     }
     """
 
@@ -67,6 +68,22 @@ class Institution(ModelDocument):
     @user_limit.setter
     def user_limit(self, new_limit):
         self._data['usersLimit'] = new_limit
+
+    @property
+    def admins(self):
+        return self._data['admins']
+
+    @admins.setter
+    def admins(self, admins):
+        self._data['admins'] = admins
+
+    @property
+    def users(self):
+        return self._data['users']
+
+    @users.setter
+    def users(self, users):
+        self._data['users'] = users
 
     @property
     def registered_on(self):

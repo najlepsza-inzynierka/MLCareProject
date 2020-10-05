@@ -102,6 +102,9 @@ class AuthUser(ModelDocument):
     def registered_on(self, new_date):
         self._data['registeredOn'] = str(new_date)
 
+    def remove_password(self):
+        self._data.pop('password')
+
     def encode_auth_token(self):
         """
         Generates the Auth Token

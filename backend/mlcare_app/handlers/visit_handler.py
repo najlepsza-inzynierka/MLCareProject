@@ -59,11 +59,12 @@ def get_visit(visit_id):
 @check_token
 def add_visit(patient_id):
     body = g.body
+    user = g.user
 
     visit_data = {
         'patientId': patient_id,
-        'doctorId': body.get('doctorId', ''),
-        'doctorName': body.get('doctorName', None),
+        'doctorId': user.id,
+        'doctorName': f'{user.first_name} {user.last_name}, {user.title}',
         'date': datetime.utcnow()
     }
 
@@ -96,8 +97,6 @@ def delete_visit(visit_id):
 def update_visit(visit_id):
     """
     { "patientId": patient_id,
-      "doctorId": doctor_id,
-      "doctorName: doctor's name,
       "date": date of the visit
     }
     """
@@ -105,8 +104,6 @@ def update_visit(visit_id):
 
     visit_data = {
         'patientId': body['patientId'],
-        'doctorId': body['doctorId'],
-        'doctorName': body.get('doctorName', None),
         'date': body.get('date', None)
     }
 

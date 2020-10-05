@@ -15,10 +15,7 @@ class InstitutionDAO:
     # Read
     def find_one(self, query):
         data = self.coll.find_one(query)
-        if data:
-            return Institution(data)
-        else:
-            return None
+        return Institution(data) if data else None
 
     def find_one_by_id(self, _id):
         query = {"_id": ObjectId(_id)}
@@ -35,6 +32,10 @@ class InstitutionDAO:
     def find_one_by_institution_id(self, institution_id):
         query = {"institutionId": institution_id}
         return self.find_one(query)
+
+    def find_all_from_list_by_id(self, institution_ids):
+        return [self.find_one_by_id(institution_id) for institution_id
+                in institution_ids]
 
     def find(self, query):
         all_data = self.coll.find(query)
