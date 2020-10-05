@@ -1,5 +1,4 @@
 import datetime
-import os
 
 from flask import jsonify, Blueprint, g
 
@@ -72,7 +71,7 @@ def add_user():
     user_id = user_dao.insert_one(user)
 
     # add user to institution
-    institution.users = institution.users.append(user_id)
+    institution.add_user(user_id)
     institution_dao.update_one_by_id(institution.id, institution)
 
     return jsonify({"confirmation": "OK", "new_id": user_id})
@@ -123,7 +122,7 @@ def add_user_force():
     # add user to institution
     institution_dao = InstitutionDAO()
     institution = institution_dao.find_one_by_id(admin_user.institution_id)
-    institution.users = institution.users.append(user_id)
+    institution.add_user(user_id)
     institution_dao.update_one_by_id(institution.id, institution)
 
     return jsonify({"confirmation": "OK", "user_id": user_id})
@@ -146,7 +145,7 @@ def login_user():
         if user and bcrypt.check_password_hash(
                 user.password, user_data['password']):
             auth_token = user.encode_auth_token()
-            _prepare_to_send(user)
+            user.prepare_to_send()
             if auth_token:
                 response_object = {
                     'status': 'success',

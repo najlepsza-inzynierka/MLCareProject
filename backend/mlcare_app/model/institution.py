@@ -93,6 +93,10 @@ class Institution(ModelDocument):
     def registered_on(self, new_date):
         self._data['registeredOn'] = str(new_date)
 
+    def add_user(self, user_id):
+        self.users.append(user_id)
+        self.user_no += 1
+
     def __eq__(self, other):
         if self.__class__ != other.__class__:
             return False

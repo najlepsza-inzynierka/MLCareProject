@@ -65,7 +65,7 @@ def login_admin():
 
     try:
         admin = admin_dao.find_one_by_email(admin_data['email'])
-        _prepare_to_send(admin)
+        admin.prepare_to_send()
         if admin and bcrypt.check_password_hash(
                 admin.password, admin_data['password']):
             auth_token = admin.encode_auth_token()
