@@ -144,13 +144,13 @@ def login_user():
         user = user_dao.find_one_by_email(user_data['email'])
         if user and bcrypt.check_password_hash(
                 user.password, user_data['password']):
-            auth_token = user.encode_auth_token()
+            auth_token = user.encode_auth_token().decode()
             user.prepare_to_send()
             if auth_token:
                 response_object = {
                     'status': 'success',
                     'message': 'Successfully logged in.',
-                    'auth_token': auth_token.decode(),
+                    'auth_token': auth_token,
                     'user': user
                 }
                 return jsonify(response_object), 200

@@ -34,7 +34,7 @@ class InstitutionDAO:
         return self.find_one(query)
 
     def find_all_from_list_by_id(self, institution_ids):
-        return [self.find_one_by_id(institution_id) for institution_id
+        return [self.find_one_by_id(institution_id).data for institution_id
                 in institution_ids]
 
     def find(self, query):

@@ -41,5 +41,6 @@ class Admin(AuthUser):
 
     def prepare_to_send(self):
         institution_dao = InstitutionDAO()
-        self.institution = institution_dao.find_one_by_id(self.institution_id)
+        self.institution = institution_dao.find_one_by_id(
+            self.institution_id).data
         self.remove_password()

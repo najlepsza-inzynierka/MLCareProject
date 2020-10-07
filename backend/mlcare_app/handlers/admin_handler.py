@@ -65,21 +65,22 @@ def login_admin():
 
     try:
         admin = admin_dao.find_one_by_email(admin_data['email'])
-        admin.prepare_to_send()
         if admin and bcrypt.check_password_hash(
                 admin.password, admin_data['password']):
-            auth_token = admin.encode_auth_token()
+            auth_token = admin.encode_auth_token().decode()
+            admin.prepare_to_send()
             if auth_token:
                 response_object = {
                     'status': 'success',
                     'message': 'Successfully logged in.',
-                    'auth_token': auth_token.decode(),
-                    'admin': admin
+                    'auth_token': auth_token,
+                    'admin': admin.data
                 }
                 return jsonify(response_object), 200
         else:
             return mk_error('Email or password incorrect', 401)
-    except Exception:
+    except Exception as e:
+        print(e)
         return mk_error('Something went wrong, try again', 500)
 
 
