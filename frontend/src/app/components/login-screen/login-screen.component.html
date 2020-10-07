@@ -1,26 +1,41 @@
-<h1>MLCare</h1>
-<div>
-    <h2>Log in</h2>
-    <form class="add-patient-form" #login="ngForm">
-    <mat-form-field appearance="fill" class="login">
-        <mat-label>Doctor Login</mat-label>
-        <input matInput required type="email" name="email" [(ngModel)]="user.email">
-    </mat-form-field>
-        <br>
+<div class="page">
+    <div class="left">
+        <div id="title">MLCare</div>
+        <div id="line"></div>
+        <div id="app-descr">
+            Professional illness prediction system for doctors from IT,  blablabla doctors blabla machine learning blabla
+        </div>
+            <div class="icon">
+                <mat-icon id="brain" [inline]="true">
+                    hot_tub
+                </mat-icon>
+            </div>
+
+    </div>
+    <div class="right">
+        <h2>Log in</h2>
+        <button mat-stroked-button
+                class="btn btn-success"
+                routerLink="/admin-login"
+                color="primary">Administrator Panel</button>
+        <form class="add-patient-form" #login="ngForm">
         <mat-form-field appearance="fill" class="login">
-            <mat-label>Password</mat-label>
-            <input matInput required type="password" name="password" [(ngModel)]="user.password">
+            <mat-label>Doctor Login</mat-label>
+            <input matInput required type="email" name="email" [(ngModel)]="user.email">
         </mat-form-field>
-        <br>
-        <button mat-raised-button
-            [disabled]="!login.valid"
-            class="btn btn-success"
-            (click)="signIn()"
-            color="primary">Login</button>
-        <br>
-    </form>
-    <button mat-button
-            class="btn btn-success"
-            routerLink="/admin-login"
-            color="primary">Administrator Panel</button>
+            <br>
+            <mat-form-field appearance="fill" class="login">
+                <mat-label>Password</mat-label>
+                <input matInput required type="password" name="password" [(ngModel)]="user.password">
+            </mat-form-field>
+            <br>
+            <button mat-raised-button
+                [disabled]="!login.valid"
+                class="btn btn-success"
+                (click)="signIn()"
+                color="primary">Login</button>
+            <br>
+        </form>
+
+    </div>
 </div>

@@ -3,3 +3,64 @@
     background: none;
     text-align: center;
 }
+
+.icon{
+    font-size: 15em;
+    align-self: center;
+    text-align: center;
+    margin-top: 30%;
+}
+
+#brain{
+    color: white;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+}
+
+.mat-stroked-button{
+    margin: 10px;
+}
+
+#title, #line{
+    margin: 40px 20px 5px;
+    color: white;
+    font-weight: normal;
+    font-size: 42px;
+}
+
+#app-descr{
+    color: #E5FCEF;
+    margin: 40px 20px 20px;
+    width: 80%;
+    font-size: 1.1em;
+}
+
+#line{
+    background: linear-gradient(100deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0) 100%);
+    height: 2px;
+    margin: 16px 22px 20px;
+    width: 40%;
+}
+
+.page{
+    font-family: 'Lato', sans-serif;
+    width: 100%;
+    overflow:auto;
+    height: 100%;
+}
+
+.left{
+    float: left;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(160deg, #76C8D1 0%, #57BC90 55.26%);
+    /*background-size: 50% auto;*/
+    /* #62C0A6 36.25%, #61C0A6 36.26%, #61C0A5 36.27%,*/
+}
+
+.right{
+    float: right;
+    width: 50%;
+    height: 100%;
+}
