@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
 import {AdminAuthService} from '../../../services/admin-auth.service';
 import {Admin} from '../../../interfaces/admin';
 
@@ -9,7 +8,7 @@ import {Admin} from '../../../interfaces/admin';
   styleUrls: ['./admin-login-screen.component.css']
 })
 export class AdminLoginScreenComponent implements OnInit {
-  id: number;
+  id: string;
   admin: Admin;
   isSubmitted  =  false;
 
@@ -21,7 +20,7 @@ export class AdminLoginScreenComponent implements OnInit {
 
   signIn(){
     this.isSubmitted = true;
-    this.id = 1;
+    this.id = '5f6259ce961dd403a6e42d24';
     this.adminAuthService.signIn(this.admin, this.id);
   }
 

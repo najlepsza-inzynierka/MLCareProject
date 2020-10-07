@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User} from '../interfaces/user';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class AuthService {
   private result;
   token = '';
   constructor(private http: HttpClient,
-              private router: Router) { }
+              private router: Router,
+              private snaackBar: MatSnackBar) { }
 
   public signIn(userData: User){
     this.http.post('/api/users/login', userData).subscribe(r => {
@@ -19,8 +21,18 @@ export class AuthService {
       this.token = this.result.auth_token;
       if (this.result.status === 'success'){
         localStorage.setItem('ACCESS_TOKEN_USER', 'access_token');
+        this.openSnackBar('Successfully logged in', 'Close');
         this.router.navigateByUrl('/patients');
       }
+    },
+        error => {
+      this.openSnackBar(error.message, 'Close');
+        });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snaackBar.open(message, action, {
+      duration: 2000,
     });
   }
 

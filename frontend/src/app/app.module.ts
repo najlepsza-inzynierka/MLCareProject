@@ -7,7 +7,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSliderModule} from '@angular/material/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DoctorNavigationComponent } from './components/doctor-navigation/doctor-navigation.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -43,11 +42,12 @@ import { AddMedicalStaffComponent } from './components/admin/add-medical-staff/a
 import { MedicalStaffListComponent } from './components/admin/medical-staff-list/medical-staff-list.component';
 import { EditAdminComponent } from './components/admin/edit-admin/edit-admin.component';
 import {AuthInterceptor} from './auth.interceptor';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
+import { SideNavAdminComponent } from './components/admin/side-nav-admin/side-nav-admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DoctorNavigationComponent,
     PatientDetailsComponent,
     PatientsComponent,
     AddPatientComponent,
@@ -67,6 +67,8 @@ import {AuthInterceptor} from './auth.interceptor';
     AddMedicalStaffComponent,
     MedicalStaffListComponent,
     EditAdminComponent,
+    SideNavComponent,
+    SideNavAdminComponent,
   ],
     imports: [
         BrowserModule,

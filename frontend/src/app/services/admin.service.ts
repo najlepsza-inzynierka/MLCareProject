@@ -5,7 +5,7 @@ import {Admin} from '../interfaces/admin';
 
 const registerURL = '/api/users/register';
 const medicalURL = 'api/medicals';
-const adminURL = 'api/admin';
+const adminURL = 'api/admins';
 
 
 @Injectable({
@@ -26,8 +26,8 @@ export class AdminService {
   }
 
   // admin part
-  getAdmin(id){
-    return this.http.get<Admin>(`${adminURL}/${id}`);
+  getAdmin(){
+    return this.http.get<Admin>(`${adminURL}/admin`);
   }
 
   updateAdmin(admin, id){

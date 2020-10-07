@@ -3,6 +3,7 @@ import {Admin} from '../../../interfaces/admin';
 import {AdminService} from '../../../services/admin.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
+import {AdminAuthService} from '../../../services/admin-auth.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -14,7 +15,8 @@ export class AdminPanelComponent implements OnInit {
 
   constructor(private adminService: AdminService,
               private route: ActivatedRoute,
-              private location: Location) { }
+              private location: Location,
+              private adminAuthService: AdminAuthService) { }
 
   ngOnInit(): void {
     this.getAdmin();
@@ -24,10 +26,8 @@ export class AdminPanelComponent implements OnInit {
     // todo - dobre, odkomentowac potem, a to nizej usunac
     // const id = this.route.snapshot.paramMap.get('id');
     // console.log(id);
-    // this.adminService.getPatient(id).subscribe(admin => {
-    //   this.admin = admin;
-    //   this.adminService.admin = admin;
-    // });
+    // this.admin = this.adminAuthService.admin;
+    // this.adminService.getAdmin().subscribe(r => this.admin = r);
     this.admin = {
       id: '1',
       firstName: 'Jurek',

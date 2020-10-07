@@ -20,8 +20,7 @@ export class EditAdminComponent implements OnInit {
               private snaackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.adminService.getAdmin(this.id).subscribe(admin => this.admin = admin);
+    this.adminService.getAdmin().subscribe(admin => this.admin = admin);
   }
 
   saveAdmin(){

@@ -16,23 +16,37 @@ import {AdminPanelComponent} from './components/admin/admin-panel/admin-panel.co
 import {AddMedicalStaffComponent} from './components/admin/add-medical-staff/add-medical-staff.component';
 import {AdminGuard} from './guards/admin.guard';
 import {EditAdminComponent} from './components/admin/edit-admin/edit-admin.component';
+import {SideNavComponent} from './components/side-nav/side-nav.component';
+import {SideNavAdminComponent} from './components/admin/side-nav-admin/side-nav-admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginScreenComponent},
-  { path: 'patients', component: PatientsComponent, canActivate: [AuthGuard] },
-  { path: 'patient/:id', component: PatientDetailsComponent, canActivate: [AuthGuard] },
-  { path: 'patient/edit/:id', component: EditPatientComponent, canActivate: [AuthGuard]  },
-  { path: 'patient/:id/prediction/:predictionId', component: PredictionDetailsComponent, canActivate: [AuthGuard]  },
-  { path: 'patient/:id/:visitId', component: VisitDetailsComponent, canActivate: [AuthGuard]  },
-  { path: 'patient/:id/visit/edit/:visitId', component: EditVisitComponent, canActivate: [AuthGuard]  },
-  { path: 'patient/:id/add-exam/:visitId', component: AddExamComponent, canActivate: [AuthGuard]  },
-  { path: 'add-patient', component: AddPatientComponent, canActivate: [AuthGuard]  },
-  { path: 'add_visit/:id', component: AddVisitComponent, canActivate: [AuthGuard]  },
+  { path: 'patients', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+    path: '', component: PatientsComponent}] },
+  { path: 'patient/:id', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+      path: '', component: PatientDetailsComponent}]},
+  { path: 'patient/edit/:id', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+      path: '', component: EditPatientComponent}]  },
+  { path: 'patient/:id/prediction/:predictionId', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+      path: '', component: PredictionDetailsComponent}]  },
+  { path: 'patient/:id/:visitId', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+      path: '', component: VisitDetailsComponent}]  },
+  { path: 'patient/:id/visit/edit/:visitId', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+      path: '', component: EditVisitComponent}]  },
+  { path: 'patient/:id/add-exam/:visitId', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+      path: '', component: AddExamComponent}]  },
+  { path: 'add-patient', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+      path: '', component: AddPatientComponent}]  },
+  { path: 'add_visit/:id', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+      path: '', component: AddVisitComponent}]  },
   { path: 'admin-login', component: AdminLoginScreenComponent},
-  { path: 'admin-panel/:id', component: AdminPanelComponent, canActivate: [AdminGuard]},
-  { path: 'add-medical', component: AddMedicalStaffComponent, canActivate: [AdminGuard]  },
-  { path: 'edit-admin/:id', component: EditAdminComponent, canActivate: [AdminGuard]  },
+  { path: 'admin-panel/:id', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
+      path: '', component: AdminPanelComponent}]},
+  { path: 'add-medical', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
+      path: '', component: AddMedicalStaffComponent}]  },
+  { path: 'edit-admin/:id', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
+      path: '', component: EditAdminComponent}]  },
 ];
 
 
