@@ -9,8 +9,40 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$ml-app-primary: mat-palette($mat-green, 700);
-$ml-app-accent: mat-palette($mat-light-blue, A700);
+$my-green: (
+        50: #08a884,
+        100: #08a884,
+        200: #08a884,
+        300: #08a884,
+        400: #08a884,
+        500: #08a884,
+        600: #08a884,
+        700: #08a884,
+        800: #08a884,
+        900: #08a884,
+        A100: #08a884,
+        A200: #01524B,
+        A400: #08a884,
+        A700: #08a884,
+        contrast: (
+                50: white,
+                100: white,
+                200: white,
+                300: white,
+                400: white,
+                500: white,
+                600: white,
+                700: white,
+                800: white,
+                900: white,
+                A100: white,
+                A200: white,
+                A400: white,
+                A700: white,
+        )
+);
+$ml-app-primary: mat-palette($my-green);
+$ml-app-accent: mat-palette($my-green, A200);
 //$ml-app-accent: mat-palette($mat-green, 700);
 $ml-app-foreground-color: rgb(185, 238, 166);
 
@@ -27,3 +59,5 @@ $ml-app-theme: map_merge($ml-app-theme, (foreground: $foreground));
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($ml-app-theme);
+@include mat-form-field-theme($ml-app-theme); // Form-Field theme
+@include mat-input-theme($ml-app-theme);      // Input Theme

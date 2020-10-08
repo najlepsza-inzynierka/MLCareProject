@@ -3,28 +3,28 @@
         <div id="title">MLCare</div>
         <div id="line"></div>
         <div id="app-descr">
-            Professional illness prediction system for doctors from IT,  blablabla doctors blabla machine learning blabla
+            Professional illness prediction system for doctors from IT,  doctors machine learning lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
         </div>
             <div class="icon">
-                <mat-icon id="brain" [inline]="true">
-                    hot_tub
+                <mat-icon id="brain" svgIcon="brain">
                 </mat-icon>
             </div>
 
     </div>
     <div class="right">
-        <h2>Log in</h2>
+        <div class="login-form">
         <button mat-stroked-button
                 class="btn btn-success"
                 routerLink="/admin-login"
-                color="primary">Administrator Panel</button>
+                color="accent">Administrator Panel</button>
+        <div id="login-title">Log in</div>
         <form class="add-patient-form" #login="ngForm">
-        <mat-form-field appearance="fill" class="login">
+        <mat-form-field appearance="outline" class="login">
             <mat-label>Doctor Login</mat-label>
             <input matInput required type="email" name="email" [(ngModel)]="user.email">
         </mat-form-field>
             <br>
-            <mat-form-field appearance="fill" class="login">
+            <mat-form-field appearance="outline" class="login">
                 <mat-label>Password</mat-label>
                 <input matInput required type="password" name="password" [(ngModel)]="user.password">
             </mat-form-field>
@@ -36,6 +36,6 @@
                 color="primary">Login</button>
             <br>
         </form>
-
+        </div>
     </div>
 </div>
