@@ -110,12 +110,11 @@ def add_user_force():
                             'assigned to your institution', 409)
     else:
         mk_error('User not in database', 404)
-    user_by_user_id.institutions = user_by_user_id.institutions.append(
-        admin_user.institution_id)
+    user_by_user_id.institutions.append(admin_user.institution_id)
     new_email = user_data.get('email', None)
     if new_email:
         if new_email not in user_by_user_id.emails:
-            user_by_user_id.emails = user_by_user_id.emails.append(new_email)
+            user_by_user_id.emails.append(new_email)
 
     user_id = user_dao.update_one_by_id(user_by_user_id.id, user_by_user_id)
 
@@ -151,7 +150,7 @@ def login_user():
                     'status': 'success',
                     'message': 'Successfully logged in.',
                     'auth_token': auth_token,
-                    'user': user
+                    'user': user.data
                 }
                 return jsonify(response_object), 200
         else:
@@ -187,6 +186,6 @@ def get_user():
     user.prepare_to_send()
 
     return jsonify({'confirmation': 'OK',
-                    'user': user})
+                    'user': user.data})
 
 
