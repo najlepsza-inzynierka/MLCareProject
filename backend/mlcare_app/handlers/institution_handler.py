@@ -13,7 +13,6 @@ institution_bp = Blueprint('institutions', __name__)
 @app.route('/api/institutions', methods=['POST'])
 @expect_mime('application/json')
 @json_body
-@check_token
 def add_institution():
     body = g.body
 
@@ -23,6 +22,7 @@ def add_institution():
         'phoneNumber': body.get('phoneNumber', None),
         'email': body.get('email', None),
         'admins': [],
+        'users': [],
         'usersLimit': body.get('usersLimit', None),
         'usersNo': 0,
         'registeredOn': datetime.datetime.now()

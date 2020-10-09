@@ -44,7 +44,7 @@ def register_admin(institution_id):
     # add user to institution
     institution_dao = InstitutionDAO()
     institution = institution_dao.find_one_by_id(institution_id)
-    institution.admins = institution.admins.append(admin_id)
+    institution.admins.append(admin_id)
     institution_dao.update_one_by_id(institution_id, institution)
 
     return jsonify({"confirmation": "OK",
@@ -79,8 +79,7 @@ def login_admin():
                 return jsonify(response_object), 200
         else:
             return mk_error('Email or password incorrect', 401)
-    except Exception as e:
-        print(e)
+    except Exception:
         return mk_error('Something went wrong, try again', 500)
 
 
@@ -118,7 +117,7 @@ def get_institution():
         mk_error('Institution not in database', 404)
 
     return jsonify({'confirmation': 'OK',
-                    'institution': institution})
+                    'institution': institution.data})
 
 
 @app.route('/api/admins/admin', methods=['GET'])
@@ -128,7 +127,7 @@ def get_admin():
     admin.prepare_to_send()
 
     return jsonify({'confirmation': 'OK',
-                    'admin': admin})
+                    'admin': admin.data})
 
 
 @app.route('/api/admins/user/<user_id>', methods=['GET'])
@@ -144,7 +143,7 @@ def get_user_as_admin(user_id):
 
     user.prepare_to_send()
     return jsonify({'confirmation': 'OK',
-                    'user': user})
+                    'user': user.data})
 
 
 
