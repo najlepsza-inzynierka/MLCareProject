@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
-  HttpInterceptor
+  HttpInterceptor, HttpErrorResponse
 } from '@angular/common/http';
 import {AdminAuthService} from './services/admin-auth.service';
 import {AuthService} from './services/auth.service';
+import {Observable, of} from 'rxjs';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   private authReq;
-  constructor(private adminAuth: AdminAuthService, private auth: AuthService) {}
+  constructor(private adminAuth: AdminAuthService, private auth: AuthService, private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     // Get the auth token from the service.
@@ -30,5 +32,18 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // send cloned request with header to the next handler.
     return next.handle(this.authReq);
+  }
+
+  private handleAuthError(err: HttpErrorResponse): Observable<any> {
+    // handle your auth error or rethrow
+    if (err.status === 401) {
+      // navigate /delete cookies or whatever
+      console.log('handled error ' + err.status);
+      this.router.navigate([`/login`]);
+      // if you've caught / handled the error, you don't want to
+      // rethrow it unless you also want downstream consumers to have to handle it as well.
+      return of(err.message);
+    }
+    throw err;
   }
 }

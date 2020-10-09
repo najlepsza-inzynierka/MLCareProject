@@ -26,7 +26,7 @@ export class AuthService {
       }
     },
         error => {
-      this.openSnackBar(error.message, 'Close');
+      this.openSnackBar(error.error.message, 'Close');
         });
   }
 

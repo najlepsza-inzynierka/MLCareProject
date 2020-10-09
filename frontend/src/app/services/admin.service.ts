@@ -27,7 +27,7 @@ export class AdminService {
 
   // admin part
   getAdmin(){
-    return this.http.get<Admin>(`${adminURL}/admin`);
+    return this.http.get<any>(`${adminURL}/admin`);
   }
 
   updateAdmin(admin, id){

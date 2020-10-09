@@ -11,7 +11,7 @@ import {AdminAuthService} from '../../../services/admin-auth.service';
   styleUrls: ['./admin-panel.component.css']
 })
 export class AdminPanelComponent implements OnInit {
-  admin: Admin;
+  admin: any;
 
   constructor(private adminService: AdminService,
               private route: ActivatedRoute,
@@ -23,20 +23,13 @@ export class AdminPanelComponent implements OnInit {
   }
 
   getAdmin(){
-    // todo - dobre, odkomentowac potem, a to nizej usunac
-    // const id = this.route.snapshot.paramMap.get('id');
-    // console.log(id);
-    // this.admin = this.adminAuthService.admin;
-    // this.adminService.getAdmin().subscribe(r => this.admin = r);
-    this.admin = {
-      id: '1',
-      firstName: 'Jurek',
-      lastName: 'Ogórek',
-      address: 'unknown',
-      phoneNumber: '123123123',
-      email: 'mail@mail.com',
-      password: 'supertajnehaslo'
-    };
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log(id);
+    this.admin = this.adminAuthService.admin;
+    this.adminService.getAdmin().subscribe(r => {
+      this.admin = r.admin;
+      console.log(r);
+    });
   }
 
 }

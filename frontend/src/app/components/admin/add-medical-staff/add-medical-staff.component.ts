@@ -29,7 +29,7 @@ export class AddMedicalStaffComponent implements OnInit {
           this.openSnackBar('Medical staff added successfully', 'Close');
         },
         error => {
-          this.openSnackBar('Something went wrong :(', 'Close');
+          this.openSnackBar(error.error.message, 'Close');
           console.log(error);
         }
     );
@@ -37,7 +37,7 @@ export class AddMedicalStaffComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this.snaackBar.open(message, action, {
-      duration: 2000,
+      duration: 8000,
     });
   }
 
