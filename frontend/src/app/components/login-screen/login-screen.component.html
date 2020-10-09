@@ -13,13 +13,13 @@
     </div>
     <div class="right">
         <div class="login-form">
-        <button mat-stroked-button
-                class="btn btn-success"
-                routerLink="/admin-login"
-                color="accent">Administrator Panel</button>
-        <div id="login-title">Log in</div>
-        <form class="add-patient-form" #login="ngForm">
-        <mat-form-field appearance="outline" class="login">
+            <button mat-stroked-button
+                    class="btn btn-success"
+                    routerLink="/admin-login"
+                    color="accent">Administrator Panel</button>
+            <form class="add-patient-form" #login="ngForm">
+                <div id="login-title">Log in</div>
+                <mat-form-field appearance="outline" class="login">
             <mat-label>Doctor Login</mat-label>
             <input matInput required type="email" name="email" [(ngModel)]="user.email">
         </mat-form-field>
@@ -29,13 +29,14 @@
                 <input matInput required type="password" name="password" [(ngModel)]="user.password">
             </mat-form-field>
             <br>
-            <button mat-raised-button
-                [disabled]="!login.valid"
-                class="btn btn-success"
-                (click)="signIn()"
-                color="primary">Login</button>
-            <br>
         </form>
+            <button mat-raised-button
+                    id="login-button"
+                    [disabled]="!login.valid"
+                    class="btn btn-success"
+                    (click)="signIn()"
+                    color="primary">Login</button>
+            <br>
         </div>
     </div>
 </div>

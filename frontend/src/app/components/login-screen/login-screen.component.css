@@ -30,7 +30,7 @@
     color: #E5FCEF;
     margin: 40px 20px 20px;
     width: 80%;
-    font-size: 1.1em;
+    font-size: 18px;
 }
 
 #line{
@@ -63,21 +63,36 @@
     height: 100%;
 }
 .login-form{
+    margin-top: 3%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 .mat-form-field{
-    width: 80%;
+    width: 100%;
 }
 
 #login-title{
+    margin-top: 12%;
+    margin-bottom: 13%;
     left: 0;
+    font-size: 40px;
+}
+
+#login-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22%;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    padding-bottom: 5px;
 }
 
 .add-patient-form{
     width: 80%;
+    margin: 3% 0;
     align-self: center;
     align-items: center;
 }
@@ -124,6 +139,8 @@
     .mat-stroked-button.mat-accent,
     .mat-flat-button.mat-accent,
     .mat-button.mat-accent {
+        align-self: end;
+        margin-right: 10%;
         background-color: white;
         border: solid 2px;
     }
