@@ -24,9 +24,10 @@ export class MedicalStaffListComponent implements OnInit {
 
   getPatients(){
     this.adminService.getAllMedicals().
-    subscribe(medicals => {this.medicals = medicals;
+    subscribe(medicals => {this.medicals = medicals.institution.users;
                            console.log(medicals);
-                            }
+                           this.dataSource.data = this.medicals;
+    }
     );
   }
 

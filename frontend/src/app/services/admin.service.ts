@@ -26,7 +26,7 @@ export class AdminService {
   }
 
   getAllMedicals(){
-    return this.http.get(medicalURL);
+    return this.http.get<any>(medicalURL);
   }
 
   // admin part

@@ -20,8 +20,7 @@ export class AdminLoginScreenComponent implements OnInit {
 
   signIn(){
     this.isSubmitted = true;
-    this.id = '5f6259ce961dd403a6e42d24';
-    this.adminAuthService.signIn(this.admin, this.id);
+    this.adminAuthService.signIn(this.admin);
   }
 
   clearData(): void{

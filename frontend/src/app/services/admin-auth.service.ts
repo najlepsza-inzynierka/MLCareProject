@@ -16,7 +16,7 @@ export class AdminAuthService {
               private router: Router,
               private snaackBar: MatSnackBar) { }
 
-  public signIn(adminData: Admin, id){
+  public signIn(adminData: Admin){
     // this.adminToAdd = {
     //   firstName: 'Jakub',
     //   middleName: 'Darek',
@@ -40,7 +40,7 @@ export class AdminAuthService {
       console.log(r);
       if (this.admin.status === 'success'){
         localStorage.setItem('ACCESS_TOKEN_ADMIN', 'access_token');
-        this.router.navigateByUrl(`/admin-panel/${id}`);
+        this.router.navigateByUrl(`/admin-panel`);
         this.token = this.admin.auth_token;
         this.openSnackBar('Successfully logged in as admin', 'Close');
       }

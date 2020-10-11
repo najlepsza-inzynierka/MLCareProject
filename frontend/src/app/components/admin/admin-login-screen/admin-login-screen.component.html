@@ -1,22 +1,39 @@
-<h1>MLCare</h1>
-<div>
-    <h2>Log in - Administrator</h2>
-    <form class="add-patient-form" #login="ngForm">
-        <mat-form-field appearance="fill" class="login">
-            <mat-label>Administrator Login</mat-label>
-            <input matInput required type="email" name="email" [(ngModel)]="admin.email">
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="fill" class="login">
-            <mat-label>Password</mat-label>
-            <input matInput required type="password" name="password" [(ngModel)]="admin.password">
-        </mat-form-field>
-        <br>
-        <button mat-raised-button
-                [disabled]="!login.valid"
-                class="btn btn-success"
-                (click)="signIn()"
-                color="primary">Login</button>
-        <br>
-    </form>
+<div class="page">
+    <div class="left">
+        <div id="title">MLCare</div>
+        <div id="line"></div>
+        <div id="app-descr">
+            Professional illness prediction system for doctors from IT,  doctors machine learning lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+        </div>
+        <div class="icon">
+            <mat-icon id="brain" svgIcon="brain">
+            </mat-icon>
+        </div>
+
+    </div>
+    <div class="right">
+        <div class="login-form">
+            <form class="add-patient-form" #login="ngForm">
+                <div id="login-title">Log in - administrator</div>
+                <mat-form-field appearance="outline" class="login">
+                    <mat-label>Doctor Login</mat-label>
+                    <input matInput required type="email" name="email" [(ngModel)]="admin.email">
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="outline" class="login">
+                    <mat-label>Password</mat-label>
+                    <input matInput required type="password" name="password" [(ngModel)]="admin.password">
+                </mat-form-field>
+                <br>
+            </form>
+            <button mat-raised-button
+                    id="login-button"
+                    [disabled]="!login.valid"
+                    class="btn btn-success"
+                    (click)="signIn()"
+                    color="primary">Login</button>
+            <br>
+        </div>
+    </div>
 </div>
+

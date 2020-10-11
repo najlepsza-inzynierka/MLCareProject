@@ -23,8 +23,6 @@ export class AdminPanelComponent implements OnInit {
   }
 
   getAdmin(){
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
     this.admin = this.adminAuthService.admin;
     this.adminService.getAdmin().subscribe(r => {
       this.admin = r.admin;

@@ -44,6 +44,7 @@ import { EditAdminComponent } from './components/admin/edit-admin/edit-admin.com
 import {AuthInterceptor} from './auth.interceptor';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { SideNavAdminComponent } from './components/admin/side-nav-admin/side-nav-admin.component';
+import { MedicalStaffDetailsComponent } from './components/admin/medical-staff-details/medical-staff-details.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { SideNavAdminComponent } from './components/admin/side-nav-admin/side-na
     EditAdminComponent,
     SideNavComponent,
     SideNavAdminComponent,
+    MedicalStaffDetailsComponent,
   ],
     imports: [
         BrowserModule,
