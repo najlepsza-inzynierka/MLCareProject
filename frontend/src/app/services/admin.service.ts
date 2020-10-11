@@ -4,7 +4,8 @@ import {Medical} from '../interfaces/medical';
 import {Admin} from '../interfaces/admin';
 
 const registerURL = '/api/users/register';
-const medicalURL = 'api/medicals';
+const registerForceURL = '/api/users/register/force';
+const medicalURL = '/api/admins/institution';
 const adminURL = 'api/admins';
 
 
@@ -17,12 +18,15 @@ export class AdminService {
 
   // medical part
   createMedical(medical){
-    console.log();
     return this.http.post(registerURL, medical);
   }
 
+  createMedicalForce(medical){
+    return this.http.post(registerForceURL, medical);
+  }
+
   getAllMedicals(){
-    return this.http.get<Medical[]>(medicalURL);
+    return this.http.get(medicalURL);
   }
 
   // admin part

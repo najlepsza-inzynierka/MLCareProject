@@ -18,6 +18,7 @@ import {AdminGuard} from './guards/admin.guard';
 import {EditAdminComponent} from './components/admin/edit-admin/edit-admin.component';
 import {SideNavComponent} from './components/side-nav/side-nav.component';
 import {SideNavAdminComponent} from './components/admin/side-nav-admin/side-nav-admin.component';
+import {MedicalStaffListComponent} from './components/admin/medical-staff-list/medical-staff-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -43,6 +44,8 @@ const routes: Routes = [
   { path: 'admin-login', component: AdminLoginScreenComponent},
   { path: 'admin-panel/:id', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
       path: '', component: AdminPanelComponent}]},
+    { path: 'users', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
+            path: '', component: MedicalStaffListComponent}]},
   { path: 'add-medical', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
       path: '', component: AddMedicalStaffComponent}]  },
   { path: 'edit-admin/:id', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{

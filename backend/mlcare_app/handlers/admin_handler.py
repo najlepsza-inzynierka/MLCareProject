@@ -146,6 +146,13 @@ def get_user_as_admin(user_id):
                     'user': user.data})
 
 
-
+@app.route('/api/adminss', methods=['GET'])
+def get_admins():
+    dao = AdminDAO()
+    patients = dao.find_all_admins()
+    result = []
+    for patient in patients:
+        result.append(patient.data)
+    return jsonify(result)
 
 

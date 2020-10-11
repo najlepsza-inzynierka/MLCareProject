@@ -11,9 +11,9 @@ import {AdminService} from '../../../services/admin.service';
 })
 export class MedicalStaffListComponent implements OnInit {
 
-  medicals: Medical[];
+  medicals: any;
   displayedColumns: string[] = ['id', 'firstName', 'lastName', 'birth', 'address'];
-  dataSource: MatTableDataSource<Medical>;
+  dataSource: MatTableDataSource<any>;
   constructor(private adminService: AdminService, private router: Router) {
     this.dataSource = new MatTableDataSource(this.medicals);
   }
@@ -26,7 +26,7 @@ export class MedicalStaffListComponent implements OnInit {
     this.adminService.getAllMedicals().
     subscribe(medicals => {this.medicals = medicals;
                            console.log(medicals);
-                           this.dataSource.data = medicals; }
+                            }
     );
   }
 

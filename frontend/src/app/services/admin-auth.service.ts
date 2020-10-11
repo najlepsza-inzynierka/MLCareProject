@@ -10,11 +10,31 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class AdminAuthService {
   admin;
   token = '';
+  adminToAdd;
+  institutionToAdd;
   constructor(private http: HttpClient,
               private router: Router,
               private snaackBar: MatSnackBar) { }
 
   public signIn(adminData: Admin, id){
+    // this.adminToAdd = {
+    //   firstName: 'Jakub',
+    //   middleName: 'Darek',
+    //   lastName: 'Nazwisko2',
+    //   address: 'Grr',
+    //   phoneNumber: '123123123',
+    //   email: 'jn@mail.com',
+    //   password: 'supertajnehaslo'
+    // };
+    // this.institutionToAdd = {
+    //   institutionName: 'aaaa szpital',
+    //   address: 'Katowice',
+    //   phoneNumber: '33333',
+    //   email: 'a@szpital.com',
+    //   usersLimit: 2
+    // };
+    // this.http.post('/api/institutions', this.institutionToAdd).subscribe(result => console.log(result));
+    // this.http.post('/api/institutions/5f81cde70fa8a2c83359d1d1/admin', this.adminToAdd).subscribe(result => console.log(result));
     this.http.post('/api/admins/login', adminData).subscribe(r => {
       this.admin = r;
       console.log(r);
