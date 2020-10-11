@@ -1,6 +1,6 @@
 <div class="example-container">
     <div>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
             <mat-label>Exam name</mat-label>
             <input matInput
                    placeholder="Exam name"
@@ -9,7 +9,7 @@
                    name="examName"
                    [(ngModel)]="exam.name">
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
             <mat-label>Exam Date</mat-label>
             <input matInput
                    [matDatepicker]="picker"
@@ -21,7 +21,7 @@
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <br>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
             <mat-label>Feature name</mat-label>
             <input matInput
                    placeholder="Feature name"
@@ -30,7 +30,7 @@
                    name="featureName"
                    [(ngModel)]="feature.name">
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
             <mat-label>Feature value</mat-label>
             <input matInput
                    placeholder="Feature value"
@@ -39,7 +39,7 @@
                    name="featureValue"
                    [(ngModel)]="feature.value">
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline">
             <mat-label>Feature unit</mat-label>
             <input matInput
                    placeholder="Feature unit"

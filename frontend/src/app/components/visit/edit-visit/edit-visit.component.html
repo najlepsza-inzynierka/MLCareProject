@@ -1,7 +1,7 @@
 <p>Visit id: {{visit._id}}</p>
 <button mat-raised-button (click)="goBack()">Go back</button>
 <br>
-<mat-form-field appearance="fill">
+<mat-form-field appearance="outline">
     <mat-label>Doctor name</mat-label>
     <input matInput
            placeholder="Doctor name"
@@ -9,7 +9,7 @@
            name="doctorName"
            [(ngModel)]="visit.doctorName">
 </mat-form-field>
-<mat-form-field appearance="fill">
+<mat-form-field appearance="outline">
     <mat-label>Visit Date</mat-label>
     <input matInput
            [matDatepicker]="picker"

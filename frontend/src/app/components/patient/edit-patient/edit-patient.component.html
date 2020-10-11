@@ -1,7 +1,7 @@
 <div class="example-container">
     <div>
         <form class="add-patient-form" #addPatient="ngForm">
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>First name</mat-label>
                 <label>
                     <input matInput
@@ -12,7 +12,7 @@
                            [(ngModel)]="patient.firstName">
                 </label>
             </mat-form-field>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Middle name</mat-label>
                 <input matInput
                        placeholder="Middle Name"
@@ -22,7 +22,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Last name</mat-label>
                 <input matInput
                        placeholder="Last Name"
@@ -31,7 +31,7 @@
                        name="lastName"
                        [(ngModel)]="patient.lastName">
             </mat-form-field>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Gender</mat-label>
                 <mat-select disableRipple
                             required
@@ -44,7 +44,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Address</mat-label>
                 <input matInput
                        placeholder="Address"
@@ -53,7 +53,7 @@
                        name="address"
                        [(ngModel)]="patient.address">
             </mat-form-field>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Patient Id</mat-label>
                 <input matInput
                        placeholder="Patient Id"
@@ -64,7 +64,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Birth Date</mat-label>
                 <input matInput
                        [matDatepicker]="picker"
@@ -76,7 +76,7 @@
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Birth Place</mat-label>
                 <input matInput
                        placeholder="Birth Place"
@@ -87,7 +87,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Phone number</mat-label>
                 <input matInput
                        placeholder="Phone number"
@@ -95,7 +95,7 @@
                        name="phoneNumber"
                        [(ngModel)]="patient.phoneNumber">
             </mat-form-field>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="outline">
                 <mat-label>Email</mat-label>
                 <input matInput
                        placeholder="Email"
