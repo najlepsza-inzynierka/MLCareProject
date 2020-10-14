@@ -48,6 +48,7 @@ export class AddMedicalStaffComponent implements OnInit {
   clearMedicalData(){
     this.added = false;
     this.medical = {
+      _id: '',
       userId: '',
       firstName: '',
       middleName: '',

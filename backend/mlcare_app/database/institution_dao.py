@@ -10,7 +10,7 @@ class InstitutionDAO:
 
     # Create
     def insert_one(self, institution):
-        self.coll.insert_one(institution.data)
+        return self.coll.insert_one(institution.data).inserted_id
 
     # Read
     def find_one(self, query):

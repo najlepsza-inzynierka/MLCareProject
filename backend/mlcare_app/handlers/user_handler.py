@@ -63,7 +63,7 @@ def add_user():
                             'system assigned to following institutions: '
                             f'{institutions_list}. You can add them also to '
                             f'your institution with force request but this '
-                            f'will not change user\'s login credentials', 409)
+                            f'will not change user\'s login credentials', 450)
 
     user_old = user_dao.find_one_by_email(user.email)
     if user_old:
@@ -90,9 +90,11 @@ def add_user_force():
         'firstName': body.get('firstName', None),
         'middleName': body.get('middleName', None),
         'lastName': body.get('lastName', None),
+        'email': body.get('email', None),
         'title': body.get('title', None),
         'address': body.get('address', None),
         'phoneNumber': body.get('phoneNumber', None),
+        'password': body.get('password', None),
         'active': True,
         'registeredOn': datetime.datetime.now(),
         'registeredBy': g.admin.id

@@ -1,1 +1,12 @@
-<p>medical-staff-details works!</p>
+<h1>{{medical.firstName}}
+    <span *ngIf="medical.middleName"> {{medical.middleName}}</span>
+    {{medical.lastName}}
+    <button mat-raised-button color="primary" routerLink="/patient/edit/{{medical._id}}">Edit user</button>
+<!--    <button mat-raised-button color="warn" (click)="confirmDialog()">Delete patient</button>-->
+</h1>
+<p>Address: {{medical.address}}</p>
+<p>Email: {{medical.email}}</p>
+<p>Phone number: {{medical.phoneNumber}}</p>
+<p>ID: {{medical.userId}}</p>
+<button mat-raised-button (click)="goBack()">Go back</button>
+<br>

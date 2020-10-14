@@ -1,4 +1,5 @@
 export interface Medical {
+    _id: string;
     userId: string;
     firstName: string;
     middleName: string;

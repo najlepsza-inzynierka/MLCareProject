@@ -33,7 +33,8 @@ def add_institution():
     institution_old = institution_dao.find_one_by_email(institution.email)
     if institution_old:
         return mk_error('Email already taken', 409)
-    institution_dao.insert_one(institution)
+    inst_id = institution_dao.insert_one(institution)
 
-    return jsonify({"confirmation": "OK"})
+    return jsonify({"confirmation": "OK",
+                    "newInst": inst_id})
 

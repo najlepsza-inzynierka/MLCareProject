@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Admin} from '../../../interfaces/admin';
 import {AdminService} from '../../../services/admin.service';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
@@ -26,7 +25,6 @@ export class AdminPanelComponent implements OnInit {
     this.admin = this.adminAuthService.admin;
     this.adminService.getAdmin().subscribe(r => {
       this.admin = r.admin;
-      console.log(r);
     });
   }
 

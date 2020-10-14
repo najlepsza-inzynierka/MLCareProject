@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {Router} from '@angular/router';
-import {Medical} from '../../../interfaces/medical';
 import {AdminService} from '../../../services/admin.service';
 
 @Component({
@@ -10,23 +9,23 @@ import {AdminService} from '../../../services/admin.service';
   styleUrls: ['./medical-staff-list.component.css']
 })
 export class MedicalStaffListComponent implements OnInit {
-
-  medicals: any;
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'birth', 'address'];
+  institution: any;
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'address', 'email', 'phoneNumber'];
   dataSource: MatTableDataSource<any>;
   constructor(private adminService: AdminService, private router: Router) {
-    this.dataSource = new MatTableDataSource(this.medicals);
+    this.dataSource = new MatTableDataSource(this.institution);
   }
 
   ngOnInit(): void {
-    this.getPatients();
+    this.getMedical();
   }
 
-  getPatients(){
+  getMedical(){
     this.adminService.getAllMedicals().
-    subscribe(medicals => {this.medicals = medicals.institution.users;
+    subscribe(medicals => {
+                           this.institution = medicals.institution;
                            console.log(medicals);
-                           this.dataSource.data = this.medicals;
+                           this.dataSource.data = this.institution.users;
     }
     );
   }

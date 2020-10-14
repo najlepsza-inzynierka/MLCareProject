@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Medical} from '../interfaces/medical';
-import {Admin} from '../interfaces/admin';
 
 const registerURL = '/api/users/register';
 const registerForceURL = '/api/users/register/force';
@@ -27,6 +26,10 @@ export class AdminService {
 
   getAllMedicals(){
     return this.http.get<any>(medicalURL);
+  }
+
+  getMedical(id){
+    return this.http.get<any>(`${adminURL}/user/${id}`);
   }
 
   // admin part
