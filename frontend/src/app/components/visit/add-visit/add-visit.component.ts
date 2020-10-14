@@ -10,7 +10,7 @@ import {Location} from '@angular/common';
 @Component({
   selector: 'app-add-visit',
   templateUrl: './add-visit.component.html',
-  styleUrls: ['./add-visit.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', './add-visit.component.css']
 })
 export class AddVisitComponent implements OnInit {
   visit: Visit;

@@ -30,7 +30,7 @@ export class EditAdminComponent implements OnInit {
           this.openSnackBar('Your data edited successfully', 'Close');
         },
         error => {
-          this.openSnackBar('Something went wrong :(', 'Close');
+          this.openSnackBar(error.error.message, 'Close');
           console.log(error);
         }
     );

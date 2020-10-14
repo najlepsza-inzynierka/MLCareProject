@@ -9,7 +9,7 @@ import {ExamService} from '../../../services/exam.service';
 @Component({
   selector: 'app-add-exam',
   templateUrl: './add-exam.component.html',
-  styleUrls: ['./add-exam.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', './add-exam.component.css']
 })
 export class AddExamComponent implements OnInit {
   exam: Exam;

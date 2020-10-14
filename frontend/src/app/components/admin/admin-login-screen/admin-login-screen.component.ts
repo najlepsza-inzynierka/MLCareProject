@@ -5,7 +5,7 @@ import {Admin} from '../../../interfaces/admin';
 @Component({
   selector: 'app-admin-login-screen',
   templateUrl: './admin-login-screen.component.html',
-  styleUrls: ['./admin-login-screen.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', './admin-login-screen.component.css']
 })
 export class AdminLoginScreenComponent implements OnInit {
   id: string;

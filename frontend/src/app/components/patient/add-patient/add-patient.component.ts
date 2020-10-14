@@ -6,7 +6,7 @@ import {Patient} from '../../../interfaces/patient';
 @Component({
   selector: 'app-add-patient',
   templateUrl: './add-patient.component.html',
-  styleUrls: ['./add-patient.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', './add-patient.component.css']
 })
 export class AddPatientComponent implements OnInit {
   patient: Patient;

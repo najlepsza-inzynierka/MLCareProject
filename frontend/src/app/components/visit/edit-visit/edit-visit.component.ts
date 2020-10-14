@@ -7,7 +7,7 @@ import {Location} from '@angular/common';
 @Component({
   selector: 'app-edit-visit',
   templateUrl: './edit-visit.component.html',
-  styleUrls: ['./edit-visit.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', './edit-visit.component.css']
 })
 export class EditVisitComponent implements OnInit {
   visit: Visit;

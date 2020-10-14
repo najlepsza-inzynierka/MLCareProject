@@ -8,7 +8,7 @@ import {Location} from '@angular/common';
 @Component({
   selector: 'app-edit-patient',
   templateUrl: './edit-patient.component.html',
-  styleUrls: ['./edit-patient.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', './edit-patient.component.css']
 })
 export class EditPatientComponent implements OnInit {
   patient: Patient;
