@@ -75,3 +75,8 @@ class User(AuthUser):
             self.institutions)
         self.remove_password()
 
+    def prepare_to_send_for_institution(self):
+        self.remove_password()
+        return self.data
+
+

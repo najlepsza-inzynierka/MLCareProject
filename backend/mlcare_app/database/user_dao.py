@@ -47,7 +47,9 @@ class UserDAO:
         return self.find(query)
 
     def find_users_of_institution(self, institution_users):
-        return [self.find_one_by_id(user_id).data for user_id in institution_users]
+        return [
+            self.find_one_by_id(user_id).prepare_to_send_for_institution()
+            for user_id in institution_users]
 
     # Update
     def update_one_by_id(self, _id, new_user):

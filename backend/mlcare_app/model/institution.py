@@ -21,6 +21,9 @@ class Institution(ModelDocument):
     def __init__(self, data):
         super().__init__(data)
 
+        # uses specified setters
+        self.registered_on = self.registered_on
+
     @property
     def institution_name(self):
         return self._data['institutionName']
