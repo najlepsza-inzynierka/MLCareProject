@@ -43,6 +43,7 @@ export class PatientDetailsComponent implements OnInit {
         visits => {
           this.dataSource.data = visits;
           this.patientVisit = visits;
+          console.log(visits);
         }
     );
   }

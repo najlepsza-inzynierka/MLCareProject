@@ -22,16 +22,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
     // Clone the request and set the new header in one step.
     if (isNotNullOrUndefined(authAdminToken)){
-      console.log('maaaaacedonia');
       this.authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + authAdminToken } });
     }
     else if (isNotNullOrUndefined(authToken)){
-      console.log('hehehehe');
       this.authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + authToken } });
     }
     else{
-      console.log('buhuhuhuhu');
-
       this.authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + authToken } });
     }
 

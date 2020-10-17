@@ -22,12 +22,12 @@
   <!--  ID column  -->
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
   </ng-container>
   <!--  Visit date column  -->
   <ng-container matColumnDef="visitDate">
     <mat-header-cell *matHeaderCellDef> Visit Date </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+    <mat-cell *matCellDef="let element"> {{element.date | date: 'short'}} </mat-cell>
   </ng-container>
 
   <!--  Doctor Id column  -->
