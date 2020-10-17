@@ -51,7 +51,7 @@ const routes: Routes = [
             path: '', component: MedicalStaffListComponent}]},
   { path: 'add-medical', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
       path: '', component: AddMedicalStaffComponent}]  },
-  { path: 'edit-admin/:id', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
+  { path: 'edit-admin', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
       path: '', component: EditAdminComponent}]  },
 ];
 

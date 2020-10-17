@@ -39,10 +39,11 @@ export class AdminAuthService {
       this.admin = r;
       console.log(r);
       if (this.admin.status === 'success'){
-        localStorage.setItem('ACCESS_TOKEN_ADMIN', 'access_token');
-        this.router.navigateByUrl(`/admin-panel`);
         this.token = this.admin.auth_token;
+        console.log(this.token);
+        localStorage.setItem('ACCESS_TOKEN_ADMIN', this.token);
         this.openSnackBar('Successfully logged in as admin', 'Close');
+        this.router.navigateByUrl(`/admin-panel`);
       }
     },
         error => {
@@ -72,6 +73,7 @@ export class AdminAuthService {
   }
 
   public getAuthorizationToken(){
-    return this.token;
+    console.log(localStorage.getItem('ACCESS_TOKEN_ADMIN'));
+    return localStorage.getItem('ACCESS_TOKEN_ADMIN');
   }
 }

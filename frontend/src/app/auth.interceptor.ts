@@ -7,7 +7,8 @@ import {
 import {AdminAuthService} from './services/admin-auth.service';
 import {AuthService} from './services/auth.service';
 import {Observable, of} from 'rxjs';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -20,13 +21,17 @@ export class AuthInterceptor implements HttpInterceptor {
     const authToken = this.auth.getAuthorizationToken();
 
     // Clone the request and set the new header in one step.
-    if (authAdminToken !== ''){
+    if (isNotNullOrUndefined(authAdminToken)){
+      console.log('maaaaacedonia');
       this.authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + authAdminToken } });
     }
-    else if (authToken !== ''){
+    else if (isNotNullOrUndefined(authToken)){
+      console.log('hehehehe');
       this.authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + authToken } });
     }
     else{
+      console.log('buhuhuhuhu');
+
       this.authReq = req.clone({ setHeaders: { Authorization: 'Bearer ' + authToken } });
     }
 
