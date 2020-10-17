@@ -23,7 +23,7 @@ def add_institution():
         'email': body.get('email', None),
         'admins': [],
         'users': [],
-        'usersLimit': body.get('usersLimit', None),
+        'usersLimit': int(body.get('usersLimit', None)),
         'usersNo': 0,
         'registeredOn': datetime.datetime.now()
     }

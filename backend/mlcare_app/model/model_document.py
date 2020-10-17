@@ -21,3 +21,6 @@ class ModelDocument:
     @id.setter
     def id(self, new_id):
         self._data["_id"] = new_id
+
+    def __get__(self, instance, owner):
+        return self._data
