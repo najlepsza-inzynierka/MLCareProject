@@ -25,12 +25,12 @@ export class PickDiseaseDialogComponent implements OnInit {
   }
 
   predictDiseases(){
-    this.predictionService.createVisitPrediction(this.data.visitId).subscribe(p => {
-      this.prediction = p;
-      this.predictionService.prediction = p;
-      console.log(p);
-      this.router.navigateByUrl(`patient/${this.data.patientId}/prediction/${this.prediction._id}`);
-    });
+    // this.predictionService.createVisitPrediction(this.data.visitId).subscribe(p => {
+    //   this.prediction = p;
+    //   this.predictionService.prediction = p;
+    //   console.log(p);
+    //   this.router.navigateByUrl(`patient/${this.data.patientId}/prediction/${this.prediction._id}`);
+    // });
   }
 
 }

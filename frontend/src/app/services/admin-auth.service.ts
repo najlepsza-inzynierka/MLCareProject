@@ -17,30 +17,10 @@ export class AdminAuthService {
               private snaackBar: MatSnackBar) { }
 
   public signIn(adminData: Admin){
-    // this.adminToAdd = {
-    //   firstName: 'Jakub',
-    //   middleName: 'Darek',
-    //   lastName: 'Nazwisko2',
-    //   address: 'Grr',
-    //   phoneNumber: '123123123',
-    //   email: 'jn@mail.com',
-    //   password: 'supertajnehaslo'
-    // };
-    // this.institutionToAdd = {
-    //   institutionName: 'aaaa szpital',
-    //   address: 'Katowice',
-    //   phoneNumber: '33333',
-    //   email: 'a@szpital.com',
-    //   usersLimit: 2
-    // };
-    // this.http.post('/api/institutions', this.institutionToAdd).subscribe(result => console.log(result));
-    // this.http.post('/api/institutions/5f81cde70fa8a2c83359d1d1/admin', this.adminToAdd).subscribe(result => console.log(result));
     this.http.post('/api/admins/login', adminData).subscribe(r => {
       this.admin = r;
-      console.log(r);
       if (this.admin.status === 'success'){
         this.token = this.admin.auth_token;
-        console.log(this.token);
         localStorage.setItem('ACCESS_TOKEN_ADMIN', this.token);
         this.openSnackBar('Successfully logged in as admin', 'Close');
         this.router.navigateByUrl(`/admin-panel`);
@@ -64,7 +44,6 @@ export class AdminAuthService {
   public logout(){
     this.http.post('/api/admins/logout', this.admin).subscribe(r => {
       this.admin = r;
-      console.log(r);
       if (this.admin.status === 'success'){
         this.router.navigateByUrl(`/admin-login`);
       }
@@ -73,7 +52,6 @@ export class AdminAuthService {
   }
 
   public getAuthorizationToken(){
-    console.log(localStorage.getItem('ACCESS_TOKEN_ADMIN'));
     return localStorage.getItem('ACCESS_TOKEN_ADMIN');
   }
 }

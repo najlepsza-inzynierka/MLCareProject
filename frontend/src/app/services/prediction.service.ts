@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 
 const baseUrl = 'api/visit';
 const predictionUrl = 'api/prediction';
+const diseasesUrl = 'api/diseases';
 
 @Injectable({
   providedIn: 'root'
@@ -16,48 +17,15 @@ export class PredictionService {
     return this.http.get(`${predictionUrl}/${predictionId}`);
   }
 
-  createVisitPrediction(){
-    // return this.http.post(`${baseUrl}/${visitId}/make_prediction`,
-    // {
-    //   disease: 'breast cancer',
-    //   features: [
-    //     {
-    //       name: 'Age',
-    //       value: 22
-    //     },
-    //     {
-    //       name: 'BMI',
-    //       value: 23.7
-    //     },
-    //     {
-    //       name: 'Glucose',
-    //       value: 73
-    //     },
-    //     {
-    //       name: 'Insulin',
-    //       value: 3.01
-    //     },
-    //     {
-    //       name: 'HOMA',
-    //       value: 0.61245
-    //     },
-    //     {
-    //       name: 'Leptin',
-    //       value: 8.7657
-    //     },
-    //     {
-    //       name: 'Adiponectin',
-    //       value: 13.11
-    //     },
-    //     {
-    //       name: 'Resistin',
-    //       value: 6.92
-    //     },
-    //     {
-    //       name: 'MCP.1',
-    //       value: 711.33
-    //     }]
-    // }
-    // );
+  createVisitPrediction(visitId, prediction){
+    return this.http.post(`${baseUrl}/${visitId}/make_prediction`, prediction);
+  }
+
+  createMultiplePredictions(visitId, predictionsData){
+    return this.http.post(`${baseUrl}/${visitId}/make_multi_prediction`, predictionsData);
+  }
+
+  getDiseases(){
+    return this.http.get(`${diseasesUrl}`);
   }
 }

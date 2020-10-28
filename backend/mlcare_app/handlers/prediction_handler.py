@@ -19,7 +19,7 @@ prediction_bp = Blueprint('predictions', __name__)
 @check_token
 def add_prediction(visit_id):
     """
-    {"disease": ["disease1"],                   disease to predict
+    {"disease": "disease1",                   disease to predict
      "features": [
             {"name": "feature1",
              "value": value

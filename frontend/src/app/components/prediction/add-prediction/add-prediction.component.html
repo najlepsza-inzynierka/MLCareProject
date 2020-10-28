@@ -1,4 +1,7 @@
 <h1>Choose disease to predict</h1>
-<div *ngFor="let disease of diseases">
-    <p></p>
-</div>
+<form [formGroup]="diseasesFormGroup">
+    <div *ngFor="let disease of diseases; let i = index">
+        <mat-checkbox (change)="onChange($event)" [value]="disease">{{disease.name}}</mat-checkbox>
+    </div>
+</form>
+<button mat-raised-button (click)="submit()">Predict</button>

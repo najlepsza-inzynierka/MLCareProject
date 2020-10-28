@@ -1,5 +1,6 @@
+import {Feature} from './feature';
+
 export interface Prediction {
-    date: string;
     disease: string;
-    description: string;
+    features: Feature;
 }

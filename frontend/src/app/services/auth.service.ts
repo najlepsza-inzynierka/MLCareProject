@@ -17,10 +17,8 @@ export class AuthService {
   public signIn(userData: User){
     this.http.post('/api/users/login', userData).subscribe(r => {
       this.result = r;
-      console.log(r);
       if (this.result.status === 'success'){
         this.token = this.result.auth_token;
-        console.log(this.token);
         localStorage.setItem('ACCESS_TOKEN_USER', this.token);
         this.openSnackBar('Successfully logged in', 'Close');
         this.router.navigateByUrl('/patients');
@@ -44,7 +42,6 @@ export class AuthService {
   public logout(){
     this.http.post('/api/users/logout', this.result).subscribe(r => {
       this.result = r;
-      console.log(r);
       if (this.result.status === 'success'){
         this.router.navigateByUrl('/login');
       }
@@ -53,7 +50,6 @@ export class AuthService {
     }
 
   public getAuthorizationToken(){
-    console.log(localStorage.getItem('ACCESS_TOKEN_USER'));
     return localStorage.getItem('ACCESS_TOKEN_USER');
   }
 }
