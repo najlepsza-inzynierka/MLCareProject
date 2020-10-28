@@ -1,13 +1,12 @@
 from datetime import datetime
 
-from bson import ObjectId
 from flask import jsonify, Blueprint, g
 
 from .. import app
 from ..database.prediction_dao import PredictionDAO
 from ..database.visit_dao import VisitDAO
 from ..machine_learning.predict import predict, result_map
-from ..model.exceptions import PredictionException
+from ..model.exceptions import PredictionException, PredictionFeatureException
 from ..model.prediction import Prediction
 from ..validate import expect_mime, json_body, mk_error, check_token
 
@@ -19,7 +18,22 @@ prediction_bp = Blueprint('predictions', __name__)
 @json_body
 @check_token
 def add_prediction(visit_id):
+    """
+    {"disease": ["disease1"],                   disease to predict
+     "features": [
+            {"name": "feature1",
+             "value": value
+             },
+             {"name": "feature2",
+             ...}
+             ],                                 all features to predict from
+                                                (value may be string)
+    }
+
+    @:return prediction data in json format
+    """
     body = g.body
+    user = g.user
 
     dao = VisitDAO()
     visit = dao.find_one_by_id(visit_id)
@@ -30,14 +44,20 @@ def add_prediction(visit_id):
         'visitId': visit_id,
         'disease': body.get('disease', None),
         'date': datetime.utcnow(),
-        'features': body.get('features')}
+        'features': body.get('features', [])
+    }
 
     if not prediction_data.get('disease'):
         return mk_error('Cannot make prediction without disease name', 500)
 
     prediction = Prediction(prediction_data)
     try:
+        prediction.filter_features()
+    except PredictionFeatureException as exc:
+        return mk_error(exc.args, 409)
+    try:
         prediction = predict(prediction)
+        prediction.added_by = user.id
     except PredictionException as exc:
         return mk_error(exc.args, 500)
 
@@ -57,9 +77,82 @@ def add_prediction(visit_id):
     return jsonify(prediction_front.data)
 
 
+@app.route('/api/visit/<visit_id>/make_multi_prediction', methods=['POST'])
+@expect_mime('application/json')
+@json_body
+@check_token
+def add_multi_prediction(visit_id):
+    """
+    {"diseases": ["disease1", "disease2"],      diseases to predict
+     "features": [
+            {"name": "feature1",
+             "value": value
+             },
+             {"name": "feature2",
+             ...}
+             ],                                 all features to predict from
+                                                (value may be string)
+    }
+
+    @:return list of prediction data in json format
+    """
+    body = g.body
+
+    dao = VisitDAO()
+    visit = dao.find_one_by_id(visit_id)
+    if not visit:
+        return mk_error('Visit not in database', 404)
+
+    predictions_data = {
+        'diseases': body.get('diseases', []),
+        'date': datetime.utcnow(),
+        'features': body.get('features', [])
+    }
+
+    if not predictions_data.get('diseases'):
+        return mk_error('Cannot make prediction without disease name', 500)
+
+    predictions_result = []
+
+    for disease in predictions_data['diseases']:
+        prediction_data = {
+            'visitId': visit_id,
+            'disease': disease,
+            'date': predictions_data['date'],
+            'features': predictions_data['features']
+        }
+        prediction = Prediction(prediction_data)
+        try:
+            prediction.filter_features()
+        except PredictionFeatureException:
+            prediction.predicted_class = ('Not predicted. Lack of obligatory '
+                                          'features.')
+            predictions_result.append(prediction.data)
+            continue
+        try:
+            prediction = predict(prediction)
+        except PredictionException as exc:
+            print(exc)
+            prediction.predicted_class = ('Not predicted. There is no model '
+                                          'for this disease.')
+            predictions_result.append(prediction.data)
+            continue
+
+        prediction_dao = PredictionDAO()
+        prediction_dao.insert_one(prediction)
+
+        predictions_result.append(prediction.data)
+
+    return jsonify(predictions_result)
+
+
 @app.route('/api/predictions/<visit_id>', methods=['GET'])
 @check_token
 def get_all_predictions_by_visit_id(visit_id):
+    """
+    :param visit_id: visit id in which predictions are
+    :return: list of prediction data
+    """
     dao = VisitDAO()
     visit = dao.find_one_by_id(visit_id)
     if not visit:
@@ -74,6 +167,10 @@ def get_all_predictions_by_visit_id(visit_id):
 @app.route('/api/prediction/<prediction_id>', methods=['GET'])
 @check_token
 def get_prediction(prediction_id):
+    """
+    :param prediction_id: prediction database id
+    :return: prediction data in json format
+    """
     dao = PredictionDAO()
     prediction = dao.find_one_by_id(prediction_id)
     if not prediction:
