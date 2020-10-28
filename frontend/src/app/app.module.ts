@@ -45,6 +45,7 @@ import {AuthInterceptor} from './auth.interceptor';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { SideNavAdminComponent } from './components/admin/side-nav-admin/side-nav-admin.component';
 import { MedicalStaffDetailsComponent } from './components/admin/medical-staff-details/medical-staff-details.component';
+import { AddPredictionComponent } from './components/prediction/add-prediction/add-prediction.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { MedicalStaffDetailsComponent } from './components/admin/medical-staff-d
     SideNavComponent,
     SideNavAdminComponent,
     MedicalStaffDetailsComponent,
+    AddPredictionComponent,
   ],
     imports: [
         BrowserModule,

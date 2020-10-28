@@ -20,6 +20,7 @@ import {SideNavComponent} from './components/side-nav/side-nav.component';
 import {SideNavAdminComponent} from './components/admin/side-nav-admin/side-nav-admin.component';
 import {MedicalStaffListComponent} from './components/admin/medical-staff-list/medical-staff-list.component';
 import {MedicalStaffDetailsComponent} from './components/admin/medical-staff-details/medical-staff-details.component';
+import {AddPredictionComponent} from './components/prediction/add-prediction/add-prediction.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -42,6 +43,9 @@ const routes: Routes = [
       path: '', component: AddPatientComponent}]  },
   { path: 'add_visit/:id', component: SideNavComponent, canActivate: [AuthGuard], children: [{
       path: '', component: AddVisitComponent}]  },
+    { path: 'add-prediction', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+            path: '', component: AddPredictionComponent}]  },
+    // admin
   { path: 'admin-login', component: AdminLoginScreenComponent},
   { path: 'admin-panel', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
       path: '', component: AdminPanelComponent}]},
