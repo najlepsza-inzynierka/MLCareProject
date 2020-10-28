@@ -42,7 +42,7 @@ def add_user():
     institution_dao = InstitutionDAO()
     institution = institution_dao.find_one_by_id(admin_user.institution_id)
     if institution.user_no >= institution.user_limit:
-        mk_error('Institution achieved maximum medical staff number', 409)
+        mk_error('Institution achieved maximum medical staff number', 407)
 
     user = User(user_data)
 
@@ -67,7 +67,7 @@ def add_user():
 
     user_old = user_dao.find_one_by_email(user.email)
     if user_old:
-        return mk_error('Email already taken', 409)
+        return mk_error('Email already taken', 406)
     user_id = user_dao.insert_one(user)
 
     # add user to institution

@@ -1,9 +1,11 @@
 import datetime
 
 from bson import ObjectId
+import numpy as np
 
+from .exceptions import PredictionFeatureException
 from .model_document import ModelDocument
-from .visit import Visit
+from ..database.diseases_dao import DiseaseDAO
 
 
 class Prediction(ModelDocument):
@@ -15,11 +17,12 @@ class Prediction(ModelDocument):
       visitId: ObjectId,
       date: string,        # unique
       model: string,
-      predicted_class: string,
+      predictedClass: string,
       accuracy: double,
       features: list[Feature],
-      probability_map: map,
-      classes_map: map,
+      probabilityMap: map,
+      classesMap: map,
+      addedBy: ObjectId (user id)
     }
     """
 
@@ -29,6 +32,7 @@ class Prediction(ModelDocument):
         # uses specified setters
         self.visit_id = self.visit_id
         self.date = self.date if self.date else datetime.datetime.utcnow()
+        self.features = self.features
 
     @property
     def disease(self):
@@ -45,6 +49,14 @@ class Prediction(ModelDocument):
     @visit_id.setter
     def visit_id(self, new_visit_id):
         self._data['visitId'] = ObjectId(new_visit_id)
+
+    @property
+    def added_by(self):
+        return self._data['addedBy']
+
+    @added_by.setter
+    def added_by(self, new_user_id):
+        self._data['addedBy'] = ObjectId(new_user_id)
 
     @property
     def date(self):
@@ -84,6 +96,14 @@ class Prediction(ModelDocument):
 
     @features.setter
     def features(self, new_features):
+        for feature in new_features:
+            value = feature['value']
+            if isinstance(value, str):
+                if value.lower() in ['true', 'false']:
+                    value = value.lower() == 'true'
+                else:
+                    value = float(value)
+                feature['value'] = value
         self._data['features'] = new_features
 
     @property
@@ -101,6 +121,30 @@ class Prediction(ModelDocument):
     @classes_map.setter
     def classes_map(self, new_map):
         self._data['classes_map'] = new_map
+
+    def filter_features(self):
+        disease_dao = DiseaseDAO()
+        disease_tag = '_'.join(self.disease.split()).lower()
+        obligatory_features = (
+            disease_dao.find_obligatory_features_by_disease_tag(disease_tag))
+        all_features = disease_dao.find_all_features_by_disease_tag(disease_tag)
+        filtered_features = [f for f in self.features if f['name']
+                             in all_features]
+        for f in filtered_features:
+            if f['name'] in all_features:
+                all_features.remove(f['name'])
+            if f['name'] in obligatory_features:
+                obligatory_features.remove(f['name'])
+
+        if any(obligatory_features):
+            raise PredictionFeatureException(f'Those obligatory features are '
+                                             f'not filled {obligatory_features}')
+        for feature in all_features:
+            filtered_features.append({
+                'name': feature,
+                'value': np.nan
+            })
+        self.features = filtered_features
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:

@@ -4,3 +4,7 @@ class PredictionException(Exception):
 
 class BlacklistedTokenException(Exception):
     pass
+
+
+class PredictionFeatureException(Exception):
+    pass
