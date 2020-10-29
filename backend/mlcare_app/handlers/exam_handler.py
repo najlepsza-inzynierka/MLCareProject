@@ -28,10 +28,10 @@ def add_exam(visit_id):
     body = g.body
 
     exam_data = {
-        'name': body.get['name', None],
+        'name': body.get('name', None),
         'visitId': visit_id,
-        'date': body.get['date', None],
-        'features': body.get['features', None]
+        'date': body.get('date', None),
+        'features': body.get('features', None)
     }
 
     exam = Exam(exam_data)
