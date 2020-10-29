@@ -27,7 +27,7 @@ def get_all_visits_by_patient_id(patient_id):
 
     dao = VisitDAO()
     visits = dao.find_all_visits_by_patient_id(patient_id)
-    result = [visit.data for visit in visits]
+    result = [visit.prepare_to_send().data for visit in visits]
     return jsonify(result)
 
 
@@ -40,16 +40,7 @@ def get_visit(visit_id):
         return mk_error('Visit not in database', 404)
 
     visit.date = str(visit.date)
-
-    examDAO = ExamDAO()
-    exams = examDAO.find_all_exams_by_visit_id(visit_id)
-    exams_data = [exam.data for exam in exams]
-    visit.exams = exams_data
-
-    predictionDAO = PredictionDAO()
-    predictions = predictionDAO.find_all_predictions_by_visit_id(visit_id)
-    predictions_data = [prediction.data for prediction in predictions]
-    visit.predictions = predictions_data
+    visit.prepare_to_send()
     return jsonify(visit.data)
 
 
