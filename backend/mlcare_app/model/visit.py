@@ -82,6 +82,17 @@ class Visit(ModelDocument):
         if prediction.id not in predictions_ids:
             self._data['predictions'].append(prediction)
 
+    def prepare_to_send(self, exam_dao, prediction_dao):
+        exams = exam_dao.find_all_exams_by_visit_id(self.id)
+        exams_data = [exam.data for exam in exams]
+        self.exams = exams_data
+
+        predictions = prediction_dao.find_all_predictions_by_visit_id(self.id)
+        predictions_data = [prediction.data for prediction in predictions]
+        self.predictions = predictions_data
+
+        return self
+
     def __eq__(self, other):
         if self.__class__ != other.__class__:
             return False
