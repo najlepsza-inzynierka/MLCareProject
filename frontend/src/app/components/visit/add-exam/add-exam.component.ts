@@ -60,7 +60,7 @@ export class AddExamComponent implements OnInit {
     const visitId = this.route.snapshot.paramMap.get('visitId');
     // this.exam.visitId = visitId;
     console.log(this.exam);
-    this.examService.createExam(this.exam).subscribe(
+    this.examService.createExam(visitId, this.exam).subscribe(
         response => {
           console.log(response);
           this.added = true;

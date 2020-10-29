@@ -17,8 +17,8 @@ export class ExamService {
     return this.http.delete(`${baseUrl}/delete_exam/${id}`);
   }
 
-  createExam(exam){
-    return this.http.post(baseUrl, exam);
+  createExam(id, exam){
+    return this.http.post(`/api/visit/${id}/add_exam`, exam);
   }
 
   updateExam(exam, id){

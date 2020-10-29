@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {PredictionService} from '../../../services/prediction.service';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {VisitService} from '../../../services/visit.service';
 
 @Component({
   selector: 'app-add-prediction',
@@ -9,15 +11,25 @@ import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 })
 export class AddPredictionComponent implements OnInit {
   diseases;
+  features;
   diseasesFormGroup: FormGroup;
+  featuresFormGroup: FormGroup;
   selected;
   dis;
+  visitId;
+  id;
+  visits;
 
   constructor(private predictionService: PredictionService,
+              private route: ActivatedRoute,
+              private visitService: VisitService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.visitId = this.route.snapshot.paramMap.get('visitId');
+    this.id = this.route.snapshot.paramMap.get('id');
     this.getDiseases();
+    this.getVisits();
   }
 
   getDiseases(){
@@ -29,6 +41,19 @@ export class AddPredictionComponent implements OnInit {
     });
   }
 
+  getVisits(){
+    this.visitService.getVisit(this.visitId).subscribe(r => console.log(r));
+    this.visitService.getAllPatientVisits(this.id).subscribe(
+        visits => {
+          this.visits = visits;
+          console.log(visits);
+          this.featuresFormGroup = this.formBuilder.group({
+            features: this.formBuilder.array([])
+          });
+        }
+    );
+  }
+
   onChange(event){
     const diseases = this.diseasesFormGroup.get('diseases') as FormArray;
     if (event.checked){
@@ -37,13 +62,26 @@ export class AddPredictionComponent implements OnInit {
       const i = diseases.controls.findIndex(d => d.value === event.source.value);
       diseases.removeAt(i);
     }
+    this.selected = this.diseasesFormGroup.value.diseases;
+  }
+
+  onFeatureChange(event){
+    const features = this.featuresFormGroup.get('features') as FormArray;
+    if (event.checked){
+      features.push(new FormControl(event.source.value));
+    } else{
+      const i = features.controls.findIndex(d => d.value === event.source.value);
+      features.removeAt(i);
+    }
+    this.features = this.diseasesFormGroup.value.features;
   }
 
   submit(){
-    const diseasesName = this.diseasesFormGroup.value.map(d => d.name);
     console.log(this.diseasesFormGroup.value);
-    this.predictionService.createMultiplePredictions('5f99d07e9b3b3436da81eab2',
+    console.log(this.featuresFormGroup.value);
+    const diseasesName = this.diseasesFormGroup.value.diseases.map(d => d.name);
+    this.predictionService.createMultiplePredictions(this.visitId,
         {diseases: diseasesName,
-        features: [{name: 'Nausea', value: 'True'}]}).subscribe(e => console.log(e));
+        features: this.featuresFormGroup.value}).subscribe(e => console.log(e));
   }
 }

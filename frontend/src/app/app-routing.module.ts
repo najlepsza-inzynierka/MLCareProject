@@ -43,7 +43,7 @@ const routes: Routes = [
       path: '', component: AddPatientComponent}]  },
   { path: 'add_visit/:id', component: SideNavComponent, canActivate: [AuthGuard], children: [{
       path: '', component: AddVisitComponent}]  },
-    { path: 'add-prediction', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+    { path: 'patient/:id/:visitId/add-prediction', component: SideNavComponent, canActivate: [AuthGuard], children: [{
             path: '', component: AddPredictionComponent}]  },
     // admin
   { path: 'admin-login', component: AdminLoginScreenComponent},

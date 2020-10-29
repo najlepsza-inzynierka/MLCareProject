@@ -5,3 +5,27 @@
     </div>
 </form>
 <button mat-raised-button (click)="submit()">Predict</button>
+
+<h1>Choose features to use</h1>
+<form [formGroup]="featuresFormGroup">
+    <ul *ngFor="let visit of visits; let i = index">
+        Visit date: {{visit.date | date: 'short'}}
+        <ul *ngFor="let exam of visit.exams; let j = index">
+            Exam: {{exam.name}}
+            <div *ngFor="let feature of exam.features; let k = index">
+                <mat-checkbox (change)="onFeatureChange($event)" [value]="feature">{{feature.name}} - {{feature.value}} {{feature.unit}}</mat-checkbox>
+            </div>
+        </ul>
+    </ul>
+</form>
+
+
+
+<div *ngFor="let disease of selected">
+    {{disease.name}}:
+    <ul *ngFor="let feature of disease.feature_importances.all">
+        {{feature[0]}}
+    </ul>
+</div>
+
+
