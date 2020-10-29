@@ -1,8 +1,6 @@
 from bson import ObjectId
 
 from .model_document import ModelDocument
-from ..database.exam_dao import ExamDAO
-from ..database.prediction_dao import PredictionDAO
 
 
 class Visit(ModelDocument):
@@ -84,13 +82,11 @@ class Visit(ModelDocument):
         if prediction.id not in predictions_ids:
             self._data['predictions'].append(prediction)
 
-    def prepare_to_send(self):
-        exam_dao = ExamDAO()
+    def prepare_to_send(self, exam_dao, prediction_dao):
         exams = exam_dao.find_all_exams_by_visit_id(self.id)
         exams_data = [exam.data for exam in exams]
         self.exams = exams_data
 
-        prediction_dao = PredictionDAO()
         predictions = prediction_dao.find_all_predictions_by_visit_id(self.id)
         predictions_data = [prediction.data for prediction in predictions]
         self.predictions = predictions_data
