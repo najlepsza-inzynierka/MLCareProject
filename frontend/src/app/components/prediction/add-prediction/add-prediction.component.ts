@@ -82,6 +82,6 @@ export class AddPredictionComponent implements OnInit {
     const diseasesName = this.diseasesFormGroup.value.diseases.map(d => d.name);
     this.predictionService.createMultiplePredictions(this.visitId,
         {diseases: diseasesName,
-        features: this.featuresFormGroup.value}).subscribe(e => console.log(e));
+        features: this.featuresFormGroup.value.features}).subscribe(e => console.log(e));
   }
 }
