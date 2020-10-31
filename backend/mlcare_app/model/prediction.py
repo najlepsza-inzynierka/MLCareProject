@@ -7,6 +7,9 @@ from .exceptions import PredictionFeatureException
 from .model_document import ModelDocument
 from ..database.diseases_dao import DiseaseDAO
 
+STATUS_SUCCESS = 'success'
+STATUS_FAILED = 'failure'
+
 
 class Prediction(ModelDocument):
     """
@@ -23,6 +26,8 @@ class Prediction(ModelDocument):
       probabilityMap: map,
       classesMap: map,
       addedBy: ObjectId (user id)
+      status: success/failure           # only for frontend after prediction
+                                          is made
     }
     """
 
@@ -122,6 +127,14 @@ class Prediction(ModelDocument):
     def classes_map(self, new_map):
         self._data['classes_map'] = new_map
 
+    @property
+    def status(self):
+        return self._data['status']
+
+    @status.setter
+    def status(self, new_status):
+        self._data['status'] = new_status
+
     def filter_features(self):
         disease_dao = DiseaseDAO()
         disease_tag = '_'.join(self.disease.split()).lower()
@@ -145,6 +158,10 @@ class Prediction(ModelDocument):
                 'value': np.nan
             })
         self.features = filtered_features
+
+    def prepare_to_db(self):
+        self.features = [f for f in self.features if f['value'] != np.nan]
+        return self
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:
