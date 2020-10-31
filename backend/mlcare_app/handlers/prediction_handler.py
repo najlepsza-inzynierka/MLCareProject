@@ -7,7 +7,7 @@ from ..database.prediction_dao import PredictionDAO
 from ..database.visit_dao import VisitDAO
 from ..machine_learning.predict import predict, result_map
 from ..model.exceptions import PredictionException, PredictionFeatureException
-from ..model.prediction import Prediction
+from ..model.prediction import Prediction, STATUS_SUCCESS, STATUS_FAILED
 from ..validate import expect_mime, json_body, mk_error, check_token
 
 prediction_bp = Blueprint('predictions', __name__)
@@ -62,7 +62,9 @@ def add_prediction(visit_id):
         return mk_error(exc.args, 500)
 
     prediction_dao = PredictionDAO()
+    prediction.prepare_to_db()
     prediction_dao.insert_one(prediction)
+    prediction.status = STATUS_SUCCESS
 
     return jsonify(prediction.data)
 
@@ -123,6 +125,7 @@ def add_multi_prediction(visit_id):
         except PredictionFeatureException:
             prediction.predicted_class = ('Not predicted. Lack of obligatory '
                                           'features.')
+            prediction.status = STATUS_FAILED
             predictions_result[prediction.disease] = prediction.data
             continue
         try:
@@ -130,12 +133,15 @@ def add_multi_prediction(visit_id):
         except PredictionException:
             prediction.predicted_class = ('Not predicted. There is no model '
                                           'for this disease.')
+            prediction.status = STATUS_FAILED
             predictions_result[prediction.disease] = prediction.data
             continue
 
         prediction_dao = PredictionDAO()
+        prediction.prepare_to_db()
         prediction_dao.insert_one(prediction)
 
+        prediction.status = STATUS_SUCCESS
         predictions_result[prediction.disease] = prediction.data
 
     return jsonify(predictions_result)
@@ -172,13 +178,27 @@ def get_prediction(prediction_id):
         return mk_error('Prediction not in database', 404)
     # front end should get readable data
     prediction_front = Prediction(prediction.data)
-    class_map = result_map[prediction_front.model]
-    new_pred = {class_map[int(class_num)]: prob for (class_num, prob) in
-                prediction_front.probability_map.items()}
-    prediction_front.probability_map = new_pred
-    prediction_front.predicted_class = class_map[
-        int(prediction_front.predicted_class)]
     return jsonify(prediction_front.data)
+
+
+@app.route('/api/prediction/patient/<patient_id>', methods=['GET'])
+@check_token
+def get_prediction_by_patient_id(patient_id):
+    """
+    :param patient_id: patient database id
+    :return: list of prediction data in json format
+    """
+    visits_dao = VisitDAO()
+    visits = visits_dao.find_all_visits_by_patient_id(patient_id)
+
+    prediction_dao = PredictionDAO()
+    all_predictions = []
+    for visit in visits:
+        all_predictions.extend(
+            prediction_dao.find_all_predictions_by_visit_id(visit.id))
+
+    result = [prediction.data for prediction in all_predictions]
+    return jsonify({"predictions": result})
 
 
 @app.route('/api/predictions/delete_prediction/<prediction_id>', methods=[

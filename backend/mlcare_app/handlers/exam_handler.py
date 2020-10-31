@@ -1,14 +1,9 @@
-from datetime import datetime
-
 from bson import ObjectId
 from flask import jsonify, Blueprint, g
 
 from .. import app
 from ..database.exam_dao import ExamDAO
-from ..database.patient_dao import PatientDAO
-from ..database.visit_dao import VisitDAO
 from ..model.exam import Exam
-from ..model.visit import Visit
 from ..validate import expect_mime, json_body, mk_error, check_token
 
 exam_bp = Blueprint('exams', __name__)
