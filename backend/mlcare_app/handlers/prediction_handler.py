@@ -62,19 +62,9 @@ def add_prediction(visit_id):
         return mk_error(exc.args, 500)
 
     prediction_dao = PredictionDAO()
-    prediction_id = prediction_dao.insert_one(prediction)
-    prediction_db = prediction_dao.find_one_by_id(prediction_id)
+    prediction_dao.insert_one(prediction)
 
-    # front end should get readable data
-    prediction_front = Prediction(prediction_db.data)
-    class_map = result_map[prediction_front.model]
-    new_pred = {class_map[int(class_num)]: prob for (class_num, prob) in
-                prediction_front.probability_map.items()}
-    prediction_front.probability_map = new_pred
-    prediction_front.predicted_class = class_map[
-        int(prediction_front.predicted_class)]
-
-    return jsonify(prediction_front.data)
+    return jsonify(prediction.data)
 
 
 @app.route('/api/visit/<visit_id>/make_multi_prediction', methods=['POST'])
@@ -101,6 +91,7 @@ def add_multi_prediction(visit_id):
     }
     """
     body = g.body
+    user = g.user
 
     dao = VisitDAO()
     visit = dao.find_one_by_id(visit_id)
@@ -126,6 +117,7 @@ def add_multi_prediction(visit_id):
             'features': predictions_data['features']
         }
         prediction = Prediction(prediction_data)
+        prediction.added_by = user.id
         try:
             prediction.filter_features()
         except PredictionFeatureException:
@@ -135,17 +127,16 @@ def add_multi_prediction(visit_id):
             continue
         try:
             prediction = predict(prediction)
-        except PredictionException as exc:
-            print(exc)
+        except PredictionException:
             prediction.predicted_class = ('Not predicted. There is no model '
                                           'for this disease.')
-            predictions_result[prediction.disease] =  prediction.data
+            predictions_result[prediction.disease] = prediction.data
             continue
 
         prediction_dao = PredictionDAO()
         prediction_dao.insert_one(prediction)
 
-        predictions_result[prediction.disease] =  prediction.data
+        predictions_result[prediction.disease] = prediction.data
 
     return jsonify(predictions_result)
 
@@ -165,7 +156,7 @@ def get_all_predictions_by_visit_id(visit_id):
     dao = PredictionDAO()
     predictions = dao.find_all_predictions_by_visit_id(visit_id)
     result = [prediction.data for prediction in predictions]
-    return jsonify(result)
+    return jsonify({"predictions": result})
 
 
 @app.route('/api/prediction/<prediction_id>', methods=['GET'])
