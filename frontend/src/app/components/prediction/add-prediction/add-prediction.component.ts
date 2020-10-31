@@ -84,4 +84,5 @@ export class AddPredictionComponent implements OnInit {
         {diseases: diseasesName,
         features: this.featuresFormGroup.value.features}).subscribe(e => console.log(e));
   }
+
 }

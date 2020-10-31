@@ -25,6 +25,10 @@ export class PredictionService {
     return this.http.post(`${baseUrl}/${visitId}/make_multi_prediction`, predictionsData);
   }
 
+  deletePrediction(id){
+    return this.http.delete(`${predictionUrl}s/delete_prediction/${id}`);
+  }
+
   getDiseases(){
     return this.http.get(`${diseasesUrl}`);
   }

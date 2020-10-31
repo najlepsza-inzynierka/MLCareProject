@@ -9,6 +9,7 @@ import {VisitService} from '../../../services/visit.service';
 import {ConfirmDialogComponent, ConfirmDialogModel} from '../../confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {PredictionService} from '../../../services/prediction.service';
 
 @Component({
   selector: 'app-patient-details',
@@ -24,6 +25,7 @@ export class PatientDetailsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'visitDate', 'doctorId', 'doctorName'];
   constructor(private patientService: PatientService,
               private visitService: VisitService,
+              private predictionService: PredictionService,
               private route: ActivatedRoute,
               private router: Router,
               private location: Location,
@@ -35,6 +37,10 @@ export class PatientDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getPatient();
     this.loadVisits();
+  }
+
+  deletePrediction(){ // todo trzeba przeniesc do wizyty pozniej
+    this.predictionService.deletePrediction('5f9d6e4a30489d0cd678ca96').subscribe(e => console.log(e));
   }
 
   loadVisits(){
