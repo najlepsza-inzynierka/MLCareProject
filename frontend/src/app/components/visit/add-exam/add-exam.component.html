@@ -21,15 +21,23 @@
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
         <br>
-        <mat-form-field appearance="outline">
-            <mat-label>Feature name</mat-label>
-            <input matInput
-                   placeholder="Feature name"
-                   type="text"
-                   required
-                   name="featureName"
-                   [(ngModel)]="feature.name">
-        </mat-form-field>
+        <form [formGroup]="featureForm">
+            <mat-form-field appearance="outline">
+                <input type="text"
+                       matInput
+                       placeholder="Feature name"
+                       formControlName="featureGroup"
+                       required
+                       [matAutocomplete]="autoGroup">
+                <mat-autocomplete #autoGroup="matAutocomplete">
+                    <mat-optgroup *ngFor="let group of featureGroupOptions | async" [label]="group.disease">
+                        <mat-option *ngFor="let name of group.names" [value]="name">
+                            {{name}}
+                        </mat-option>
+                    </mat-optgroup>
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
         <mat-form-field appearance="outline">
             <mat-label>Feature value</mat-label>
             <input matInput
@@ -62,23 +70,7 @@
                 color="primary">Submit</button>
     </div>
 
-    <form [formGroup]="featureForm">
-        <mat-form-field>
-            <input type="text"
-                   matInput
-                   placeholder="Feature name"
-                   formControlName="featureGroup"
-                   required
-                   [matAutocomplete]="autoGroup">
-            <mat-autocomplete #autoGroup="matAutocomplete">
-                <mat-optgroup *ngFor="let group of featureGroupOptions | async" [label]="group.disease">
-                    <mat-option *ngFor="let name of group.names" [value]="name">
-                        {{name}}
-                    </mat-option>
-                </mat-optgroup>
-            </mat-autocomplete>
-        </mat-form-field>
-    </form>
+
 
 
 </div>
