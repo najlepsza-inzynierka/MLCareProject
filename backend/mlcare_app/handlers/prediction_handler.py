@@ -80,7 +80,7 @@ def add_prediction(visit_id):
 @app.route('/api/visit/<visit_id>/make_multi_prediction', methods=['POST'])
 @expect_mime('application/json')
 @json_body
-# @check_token
+@check_token
 def add_multi_prediction(visit_id):
     """
     {"diseases": ["disease1", "disease2"],      diseases to predict
@@ -94,7 +94,11 @@ def add_multi_prediction(visit_id):
                                                 (value may be string)
     }
 
-    @:return list of prediction data in json format
+    @:return
+    {
+        "disease_name1": disease1_prediction,
+        "disease_name2": disease2_prediction
+    }
     """
     body = g.body
 
