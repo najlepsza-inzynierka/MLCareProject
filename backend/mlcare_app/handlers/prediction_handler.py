@@ -94,7 +94,11 @@ def add_multi_prediction(visit_id):
                                                 (value may be string)
     }
 
-    @:return list of prediction data in json format
+    @:return
+    {
+        "disease_name1": disease1_prediction,
+        "disease_name2": disease2_prediction
+    }
     """
     body = g.body
 
@@ -112,7 +116,7 @@ def add_multi_prediction(visit_id):
     if not predictions_data.get('diseases'):
         return mk_error('Cannot make prediction without disease name', 500)
 
-    predictions_result = []
+    predictions_result = {}
 
     for disease in predictions_data['diseases']:
         prediction_data = {
@@ -127,7 +131,7 @@ def add_multi_prediction(visit_id):
         except PredictionFeatureException:
             prediction.predicted_class = ('Not predicted. Lack of obligatory '
                                           'features.')
-            predictions_result.append(prediction.data)
+            predictions_result[prediction.disease] = prediction.data
             continue
         try:
             prediction = predict(prediction)
@@ -135,13 +139,13 @@ def add_multi_prediction(visit_id):
             print(exc)
             prediction.predicted_class = ('Not predicted. There is no model '
                                           'for this disease.')
-            predictions_result.append(prediction.data)
+            predictions_result[prediction.disease] =  prediction.data
             continue
 
         prediction_dao = PredictionDAO()
         prediction_dao.insert_one(prediction)
 
-        predictions_result.append(prediction.data)
+        predictions_result[prediction.disease] =  prediction.data
 
     return jsonify(predictions_result)
 
