@@ -31,7 +31,7 @@ const routes: Routes = [
       path: '', component: PatientDetailsComponent}]},
   { path: 'patient/edit/:id', component: SideNavComponent, canActivate: [AuthGuard], children: [{
       path: '', component: EditPatientComponent}]  },
-  { path: 'patient/:id/prediction/:predictionId', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+  { path: 'patient/:id/:visitId/prediction/:predictionId', component: SideNavComponent, canActivate: [AuthGuard], children: [{
       path: '', component: PredictionDetailsComponent}]  },
   { path: 'patient/:id/:visitId', component: SideNavComponent, canActivate: [AuthGuard], children: [{
       path: '', component: VisitDetailsComponent}]  },

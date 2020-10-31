@@ -65,3 +65,33 @@
 </table>
 
 <button mat-raised-button color="accent" routerLink="/patient/{{this.patientId}}/add-exam/{{this.visitId}}">Add exam</button>
+
+<h2>Patient predictions</h2>
+
+<table mat-table [dataSource]="predictionDataSource" class="mat-elevation-z8">
+  <!--  ID column  -->
+  <ng-container matColumnDef="Id">
+    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
+  </ng-container>
+  <!--  Visit date column  -->
+  <ng-container matColumnDef="Date">
+    <mat-header-cell *matHeaderCellDef> Prediction Date </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.date | date: 'short'}} </mat-cell>
+  </ng-container>
+
+  <!--  Doctor Id column  -->
+  <ng-container matColumnDef="Disease">
+    <mat-header-cell *matHeaderCellDef> Disease </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.disease}} </mat-cell>
+  </ng-container>
+
+  <!--  Doctor Name column  -->
+  <ng-container matColumnDef="Result">
+    <mat-header-cell *matHeaderCellDef> Result </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.predicted_class}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="columnsToDisplayPrediction"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: columnsToDisplayPrediction;" routerLink="/patients" class="row-link"></mat-row>
+</table>

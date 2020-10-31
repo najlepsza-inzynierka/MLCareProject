@@ -5,6 +5,7 @@
     </div>
 </form>
 <button mat-raised-button (click)="submit()">Predict</button>
+<button mat-button (click)="goBack()">Go back</button>
 
 <h1>Choose features to use</h1>
 <form [formGroup]="featuresFormGroup">
@@ -24,7 +25,7 @@
 <div *ngFor="let disease of selected">
     {{disease.name}}:
     <ul *ngFor="let feature of disease.feature_importances.all">
-        {{feature[0]}}
+        {{feature[2]}}
     </ul>
 </div>
 

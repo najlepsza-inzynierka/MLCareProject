@@ -21,7 +21,6 @@ import { AddPatientComponent } from './components/patient/add-patient/add-patien
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { VisitDetailsComponent } from './components/visit/visit-details/visit-details.component';
-import { PickDiseaseDialogComponent } from './components/prediction/pick-disease-dialog/pick-disease-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
@@ -54,7 +53,6 @@ import { AddPredictionComponent } from './components/prediction/add-prediction/a
     PatientsComponent,
     AddPatientComponent,
     VisitDetailsComponent,
-    PickDiseaseDialogComponent,
     AddVisitComponent,
     PredictionDetailsComponent,
     ConfirmDialogComponent,
@@ -99,7 +97,7 @@ import { AddPredictionComponent } from './components/prediction/add-prediction/a
         MatNativeDateModule,
         ReactiveFormsModule
     ],
-  entryComponents: [PickDiseaseDialogComponent, ConfirmDialogComponent],
+  entryComponents: [ConfirmDialogComponent],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

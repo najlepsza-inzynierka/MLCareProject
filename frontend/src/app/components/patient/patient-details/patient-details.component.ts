@@ -40,7 +40,7 @@ export class PatientDetailsComponent implements OnInit {
   }
 
   deletePrediction(){ // todo trzeba przeniesc do wizyty pozniej
-    this.predictionService.deletePrediction('5f9d6e4a30489d0cd678ca96').subscribe(e => console.log(e));
+    this.predictionService.deletePrediction('5f9db99eafa390363fa326aa').subscribe(e => console.log(e));
   }
 
   loadVisits(){

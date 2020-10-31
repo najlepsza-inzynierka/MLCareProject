@@ -7,11 +7,12 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Exam} from '../../../interfaces/exam';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {MatDialog} from '@angular/material/dialog';
-import {PickDiseaseDialogComponent} from '../../prediction/pick-disease-dialog/pick-disease-dialog.component';
 import {Disease} from '../../../interfaces/disease';
 import {VisitService} from '../../../services/visit.service';
 import {ConfirmDialogComponent, ConfirmDialogModel} from '../../confirm-dialog/confirm-dialog.component';
-import {ExamService} from "../../../services/exam.service";
+import {ExamService} from '../../../services/exam.service';
+import {Prediction} from '../../../interfaces/prediction';
+import {PredictionService} from '../../../services/prediction.service';
 
 @Component({
   selector: 'app-visit-details',
@@ -27,8 +28,11 @@ import {ExamService} from "../../../services/exam.service";
 })
 export class VisitDetailsComponent implements OnInit {
   visit: Visit;
+  predictions: Prediction[];
   dataSource: MatTableDataSource<Exam>;
+  predictionDataSource: MatTableDataSource<Prediction>;
   columnsToDisplay = ['Id', 'Name', 'Date', 'Action'];
+  columnsToDisplayPrediction = ['Id', 'Disease', 'Date', 'Result'];
   featuresColumnsToDisplay = ['featureName', 'featureValue'];
   expandedElement: Exam | null;
   diseases: Disease[];
@@ -38,15 +42,18 @@ export class VisitDetailsComponent implements OnInit {
 
   constructor(private patientService: PatientService,
               private visitService: VisitService,
+              private predictionService: PredictionService,
               private examService: ExamService,
               private route: ActivatedRoute,
               private location: Location,
               public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<Exam>();
+    this.predictionDataSource = new MatTableDataSource<Prediction>();
     this.visitId = this.route.snapshot.paramMap.get('visitId');
     this.patientId = this.route.snapshot.paramMap.get('id');
     this.loadVisit();
     this.loadDiseases();
+    this.loadPredictions();
   }
 
   ngOnInit(): void {
@@ -57,22 +64,18 @@ export class VisitDetailsComponent implements OnInit {
                                                               console.log(v.exams);
                                                               this.dataSource.data = this.visit.exams;
       });
+  }
 
+  loadPredictions(){
+    this.predictionService.getPredictionsByVisit(this.visitId).subscribe(p => {
+      this.predictions = p.predictions;
+      console.log(p);
+      this.predictionDataSource.data = this.predictions;
+    });
   }
 
   loadDiseases(){
     this.patientService.getAllDiseases().subscribe(diss => this.diseases = diss);
-  }
-
-  openPickDiseases(){
-    const dis = this.diseases;
-    const visitId = this.visitId;
-    const patientId = this.patientId;
-
-    console.log(dis);
-    this.dialog.open(PickDiseaseDialogComponent, {
-      data: {dis, visitId, patientId}
-    });
   }
 
   openPickExams(){
