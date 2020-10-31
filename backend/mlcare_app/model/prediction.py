@@ -160,7 +160,7 @@ class Prediction(ModelDocument):
         self.features = filtered_features
 
     def prepare_to_db(self):
-        self.features = [f for f in self.features if f['value'] != np.nan]
+        self.features = [f for f in self.features if not f['value'] is np.nan]
         return self
 
     def __eq__(self, other):
