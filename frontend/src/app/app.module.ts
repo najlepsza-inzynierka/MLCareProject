@@ -45,6 +45,7 @@ import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { SideNavAdminComponent } from './components/admin/side-nav-admin/side-nav-admin.component';
 import { MedicalStaffDetailsComponent } from './components/admin/medical-staff-details/medical-staff-details.component';
 import { AddPredictionComponent } from './components/prediction/add-prediction/add-prediction.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { AddPredictionComponent } from './components/prediction/add-prediction/a
         MatSelectModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatAutocompleteModule
     ],
   entryComponents: [ConfirmDialogComponent],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
