@@ -28,6 +28,7 @@
                        placeholder="Feature name"
                        formControlName="featureGroup"
                        required
+                       [(ngModel)]="feature.name"
                        [matAutocomplete]="autoGroup">
                 <mat-autocomplete #autoGroup="matAutocomplete">
                     <mat-optgroup *ngFor="let group of featureGroupOptions | async" [label]="group.disease">
@@ -41,20 +42,11 @@
         <mat-form-field appearance="outline">
             <mat-label>Feature value</mat-label>
             <input matInput
-                   placeholder="Feature value"
+                   placeholder="Feature value (True/False or Numerical value)"
                    type="text"
                    required
                    name="featureValue"
                    [(ngModel)]="feature.value">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Feature unit</mat-label>
-            <input matInput
-                    placeholder="Feature unit"
-                   type="text"
-                   required
-                   name="featureUnit"
-                   [(ngModel)]="feature.unit">
         </mat-form-field>
         <br>
         <button mat-raised-button

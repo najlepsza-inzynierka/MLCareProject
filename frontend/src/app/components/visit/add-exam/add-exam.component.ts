@@ -33,13 +33,16 @@ export class AddExamComponent implements OnInit {
   });
   featureGroup: FeatureGroup[] = [{
     disease: 'acute_inflammations',
-    names: []
+    names: [],
+    real_names: []
   }, {
     disease: 'breast_cancer_wisconsin',
-    names: []
+    names: [],
+    real_names: []
   }, {
     disease: 'breast_cancer_coimbra',
-    names: []
+    names: [],
+    real_names: []
   }];
   featureGroupOptions: Observable<FeatureGroup[]>;
 
@@ -69,10 +72,13 @@ export class AddExamComponent implements OnInit {
       this.diseases.forEach(item => {
         if (item.disease_tag === 'acute_inflammations'){
           this.featureGroup[0].names = item.feature_importances.all.map(a => a[2]);
+          this.featureGroup[0].real_names = item.feature_importances.all.map(a => a[0]);
         } else if (item.disease_tag === 'breast_cancer_wisconsin'){
           this.featureGroup[1].names = item.feature_importances.all.map(a => a[2]);
+          this.featureGroup[0].real_names = item.feature_importances.all.map(a => a[0]);
         } else if (item.disease_tag === 'breast_cancer_coimbra'){
           this.featureGroup[2].names = item.feature_importances.all.map(a => a[2]);
+          this.featureGroup[0].real_names = item.feature_importances.all.map(a => a[0]);
         }
       });
       console.log(this.featureGroup);
@@ -140,7 +146,7 @@ export class AddExamComponent implements OnInit {
   private _filterGroup(value: string): FeatureGroup[] {
     if (value) {
       return this.featureGroup
-          .map(group => ({disease: group.disease, names: autocompletefilter(group.names, value)}))
+          .map(group => ({disease: group.disease, names: autocompletefilter(group.names, value), real_names: group.real_names}))
           .filter(group => group.names.length > 0);
     }
   }
