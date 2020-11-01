@@ -93,5 +93,5 @@
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="columnsToDisplayPrediction"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: columnsToDisplayPrediction;" routerLink="/patients" class="row-link"></mat-row>
+  <mat-row *matRowDef="let row; columns: columnsToDisplayPrediction;" routerLink="prediction/{{row._id}}" class="row-link"></mat-row>
 </table>
