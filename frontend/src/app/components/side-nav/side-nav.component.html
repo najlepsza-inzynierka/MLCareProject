@@ -1,3 +1,4 @@
+<router-outlet name="top"></router-outlet>
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" fixedInViewport
              [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -8,7 +9,6 @@
         <a mat-list-item routerLink="/">Home Page</a>
         <a mat-list-item routerLink="/patients">Patient Data</a>
         <a mat-list-item routerLink="/add-patient">Add patient</a>
-        <button mat-raised-button (click)="signOutUser()">User sign out</button>
     </mat-nav-list>
 </mat-sidenav>
 <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content>

@@ -123,8 +123,4 @@ export class VisitDetailsComponent implements OnInit {
     });
   }
 
-  openDialog(message, message1){
-    console.log(message);
-  }
-
 }

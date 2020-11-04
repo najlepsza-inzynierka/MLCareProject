@@ -46,6 +46,8 @@ import { SideNavAdminComponent } from './components/admin/side-nav-admin/side-na
 import { MedicalStaffDetailsComponent } from './components/admin/medical-staff-details/medical-staff-details.component';
 import { AddPredictionComponent } from './components/prediction/add-prediction/add-prediction.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { EditExamComponent } from './components/visit/edit-exam/edit-exam.component';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     SideNavAdminComponent,
     MedicalStaffDetailsComponent,
     AddPredictionComponent,
+    EditExamComponent,
+    TopBarComponent,
   ],
     imports: [
         BrowserModule,

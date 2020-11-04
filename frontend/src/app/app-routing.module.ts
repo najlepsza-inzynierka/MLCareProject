@@ -21,14 +21,17 @@ import {SideNavAdminComponent} from './components/admin/side-nav-admin/side-nav-
 import {MedicalStaffListComponent} from './components/admin/medical-staff-list/medical-staff-list.component';
 import {MedicalStaffDetailsComponent} from './components/admin/medical-staff-details/medical-staff-details.component';
 import {AddPredictionComponent} from './components/prediction/add-prediction/add-prediction.component';
+import {EditExamComponent} from './components/visit/edit-exam/edit-exam.component';
+import {TopBarComponent} from './components/top-bar/top-bar.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginScreenComponent},
   { path: 'patients', component: SideNavComponent, canActivate: [AuthGuard], children: [{
     path: '', component: PatientsComponent}] },
-  { path: 'patient/:id', component: SideNavComponent, canActivate: [AuthGuard], children: [{
-      path: '', component: PatientDetailsComponent}]},
+  { path: 'patient/:id', component: SideNavComponent, canActivate: [AuthGuard], children: [
+      {path: '', component: TopBarComponent, outlet: 'top'},
+          {path: '', component: PatientDetailsComponent}]},
   { path: 'patient/edit/:id', component: SideNavComponent, canActivate: [AuthGuard], children: [{
       path: '', component: EditPatientComponent}]  },
   { path: 'patient/:id/:visitId/prediction/:predictionId', component: SideNavComponent, canActivate: [AuthGuard], children: [{
@@ -43,6 +46,8 @@ const routes: Routes = [
       path: '', component: AddPatientComponent}]  },
   { path: 'add_visit/:id', component: SideNavComponent, canActivate: [AuthGuard], children: [{
       path: '', component: AddVisitComponent}]  },
+    { path: 'edit_exam/:id', component: SideNavComponent, canActivate: [AuthGuard], children: [{
+            path: '', component: EditExamComponent}]  },
     { path: 'patient/:id/:visitId/add-prediction', component: SideNavComponent, canActivate: [AuthGuard], children: [{
             path: '', component: AddPredictionComponent}]  },
     // admin

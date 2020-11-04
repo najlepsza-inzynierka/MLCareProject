@@ -17,15 +17,9 @@ export class SideNavComponent implements OnInit {
           map(result => result.matches),
           shareReplay()
       );
-  constructor(private breakpointObserver: BreakpointObserver,
-              private adminAuthService: AdminAuthService,
-              private authService: AuthService,
-              private router: Router) {}
+  constructor(private breakpointObserver: BreakpointObserver) {}
 
-  signOutUser(){
-    this.authService.logout();
-    this.router.navigateByUrl(`/`);
-  }
+
 
 
   ngOnInit(): void {
