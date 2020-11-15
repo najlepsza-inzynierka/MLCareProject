@@ -1,4 +1,5 @@
-<h1>{{patient.firstName}}
+<div *ngIf="patient" class="patient-details">
+  <h1>{{patient.firstName}}
 <span *ngIf="patient.middleName"> {{patient.middleName}}</span>
   {{patient.lastName}}
   <button mat-raised-button color="primary" routerLink="/patient/edit/{{patient._id}}">Edit patient</button>
@@ -46,3 +47,4 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/patient/{{patient._id}}/{{row._id}}" class="row-link"></mat-row>
 </table>
+</div>

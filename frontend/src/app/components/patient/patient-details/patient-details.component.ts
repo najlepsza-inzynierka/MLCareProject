@@ -32,10 +32,10 @@ export class PatientDetailsComponent implements OnInit {
               public dialog: MatDialog,
               private snaackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource(this.patientVisit);
+    this.getPatient();
   }
 
   ngOnInit(): void {
-    this.getPatient();
     this.loadVisits();
   }
 

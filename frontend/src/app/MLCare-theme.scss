@@ -44,7 +44,7 @@ $my-green: (
 $ml-app-primary: mat-palette($my-green);
 $ml-app-accent: mat-palette($my-green, A200);
 //$ml-app-accent: mat-palette($mat-green, 700);
-$ml-app-foreground-color: rgb(185, 238, 166);
+$ml-app-foreground-color: rgb(255, 255, 255);
 
 // The warn palette is optional (defaults to red).
 $ml-app-warn:    mat-palette($mat-red);
