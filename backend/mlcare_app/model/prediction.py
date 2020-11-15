@@ -28,6 +28,7 @@ class Prediction(ModelDocument):
       addedBy: ObjectId (user id)
       status: success/failure           # only for frontend after prediction
                                           is made
+      image: 3D Numpy array with RGB image
     }
     """
 
@@ -134,6 +135,14 @@ class Prediction(ModelDocument):
     @status.setter
     def status(self, new_status):
         self._data['status'] = new_status
+
+    @property
+    def image(self):
+        return self._data['image']
+
+    @image.setter
+    def image(self, new_image):
+        self._data['image'] = new_image
 
     def filter_features(self):
         disease_dao = DiseaseDAO()

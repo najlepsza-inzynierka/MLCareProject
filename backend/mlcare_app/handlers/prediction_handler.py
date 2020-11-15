@@ -5,7 +5,7 @@ from flask import jsonify, Blueprint, g
 from .. import app
 from ..database.prediction_dao import PredictionDAO
 from ..database.visit_dao import VisitDAO
-from ..machine_learning.predict import predict, result_map
+from ..machine_learning.predict import predict
 from ..model.exceptions import PredictionException, PredictionFeatureException
 from ..model.prediction import Prediction, STATUS_SUCCESS, STATUS_FAILED
 from ..validate import expect_mime, json_body, mk_error, check_token
