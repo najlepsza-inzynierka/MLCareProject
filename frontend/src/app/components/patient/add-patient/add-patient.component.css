@@ -1,13 +1,37 @@
-.mat-label, label, .mat-form-field{
-  margin: 10px;
+.add-patient{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  flex-direction: column;
 }
 
 .mat-form-field{
   margin: 1%;
-  width: 30%;
+  width: 70%;
 }
 
 .mat-raised-button{
   margin-left: 1%;
   width: 10%;
+}
+
+.form-wrapper{
+  width: 71%;
+  display: inline-flex;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.add-patient-form{
+  width: 100%;
+}
+
+#form-div{
+  width: 75%;
+  border-radius: 10px;
+  display: block;
+  text-align: center;
+  background-color: #F2F2F2;
 }

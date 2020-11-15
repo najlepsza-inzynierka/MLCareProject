@@ -1,7 +1,10 @@
+<div class="search-bar">
 <mat-form-field class="SearchBar">
-  <mat-label>Search</mat-label>
+<mat-label>Search</mat-label>
   <input matInput (keyup)="filterName($event)" placeholder="Patient">
 </mat-form-field>
+  <button mat-raised-button routerLink="/add-patient" class="add-patient-button">Add patient</button>
+</div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!--  ID column  -->
   <ng-container matColumnDef="id">
