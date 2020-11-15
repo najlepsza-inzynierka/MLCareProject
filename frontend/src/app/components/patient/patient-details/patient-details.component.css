@@ -11,3 +11,15 @@
 .mat-form-field {
   font-size: 14px;
 }
+
+.info{
+  width: 90%;
+}
+
+.info-left{
+  text-align: left;
+}
+
+.info-right{
+  float: right;
+}

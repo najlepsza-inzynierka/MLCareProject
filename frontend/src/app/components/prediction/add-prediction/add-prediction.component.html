@@ -4,8 +4,8 @@
         <mat-checkbox (change)="onChange($event)" [value]="disease">{{disease.name}}</mat-checkbox>
     </div>
 </form>
-<button mat-raised-button (click)="submit()">Predict</button>
-<button mat-button (click)="goBack()">Go back</button>
+<button mat-raised-button color="primary" (click)="submit()">Predict</button>
+<button mat-raised-button (click)="goBack()">Go back</button>
 
 <h1>Choose features to use</h1>
 <form [formGroup]="featuresFormGroup">

@@ -1,7 +1,26 @@
-table{
-  width: 50%;
+.visit-details{
+  margin: 2%;
 }
 
+.inline-visit{
+  display: inline-flex;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+table{
+  width: 90%;
+}
+
+h2{
+  margin-top: 3%;
+  margin-bottom: 0;
+  margin-left: 1%;
+}
+h1{
+  padding-top: 5%;
+}
 tr.example-detail-row {
   height: 0;
 }
@@ -10,10 +29,6 @@ tr.example-detail-row {
   background: #fafafa;
   border-bottom-width: 0;
 }
-/* Odpowiada za zmiane koloru w czasie klikniecia */
-/*tr.example-element-row:not(.example-expanded-row):active {*/
-/*  background: #efefef;*/
-/*}*/
 
 .example-element-detail {
   overflow: hidden;
