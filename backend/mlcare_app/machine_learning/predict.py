@@ -1,18 +1,12 @@
 import base64
-import os
 from io import BytesIO
-
-from PIL.Image import Image
-from bson import ObjectId
 
 from mlcare_app.model.exceptions import PredictionException
 from mlcare_app.model.feature import Feature
 from mlcare_app.model.prediction import Prediction
 import xgboost as xgb
-import numpy as np
 import pandas as pd
 import shap
-import cv2
 
 model_dir = 'mlcare_app/machine_learning/'
 
@@ -58,23 +52,24 @@ def predict(prediction: Prediction):
     index = list(res[0]).index(max(res[0]))
     predicted_class = model.classes_[index]
     prediction.predicted_class = result_map[model_name][predicted_class]
+    prediction.image = explain_prediction_with_image(model, data)
 
     prediction.model = model_name
-    prediction.image = explain_prediction_with_image(model, data)
+
     return prediction
 
 
 def explain_prediction_with_image(
         clf: xgb.XGBClassifier,
         x: pd.DataFrame) \
-        -> np.array:
+        -> base64:
     """
     Creates SHAP force plot to explain XGBoost prediction for a particular
     sample x.
     :param prediction_id: id of prediction to make chart for
     :param clf: trained XGBoost classifier
     :param x: Pandas DataFrame with sample that we want to explain
-    :return: 3D Numpy array with RGB image of SHAP force plot encoded to base64
+    :return: image of SHAP force plot encoded to base64
     """
     explainer = shap.TreeExplainer(clf)
     shap_values = explainer.shap_values(x.to_numpy())
@@ -93,13 +88,5 @@ def explain_prediction_with_image(
                 dpi=150,
                 bbox_inches='tight')
     buffer.seek(0)
-    buffer = buffer.read()
-
-    image = cv2.imdecode(np.frombuffer(buffer, np.uint8), -1)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    # cv2.imwrite(str(prediction_id) + '.png', image)
-    # with open(str(prediction_id) + '.png', 'rb') as image_file:
-    #     encoded_string = base64.b64encode(image_file.read())
-    #     image_file.close()
-    # os.remove(str(prediction_id) + '.png')
+    image = buffer.read()
     return base64.b64encode(image)
