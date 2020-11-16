@@ -1,22 +1,24 @@
-<p>Visit id: {{visit._id}}</p>
-<button mat-raised-button (click)="goBack()">Go back</button>
-<br>
-<mat-form-field appearance="outline">
-    <mat-label>Doctor name</mat-label>
-    <input matInput
-           placeholder="Doctor name"
-           type="text"
-           name="doctorName"
-           [(ngModel)]="visit.doctorName">
-</mat-form-field>
-<mat-form-field appearance="outline">
-    <mat-label>Visit Date</mat-label>
-    <input matInput
-           [matDatepicker]="picker"
-           [(ngModel)]="visit.date"
-           ngDefaultControl
-           required
-           name="birthDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
+<div *ngIf="visit">
+    <p>Visit id: {{visit._id}}</p>
+    <button mat-raised-button (click)="goBack()">Go back</button>
+    <br>
+    <mat-form-field appearance="outline">
+        <mat-label>Doctor name</mat-label>
+        <input matInput
+               placeholder="Doctor name"
+               type="text"
+               name="doctorName"
+               [(ngModel)]="visit.doctorName">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Visit Date</mat-label>
+        <input matInput
+               [matDatepicker]="picker"
+               [(ngModel)]="visit.date"
+               ngDefaultControl
+               required
+               name="birthDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</div>

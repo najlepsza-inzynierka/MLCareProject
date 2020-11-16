@@ -1,17 +1,19 @@
-<h1>{{patient.firstName}}
+<div *ngIf="patient" class="patient-details">
+  <h1>{{patient.firstName}}
 <span *ngIf="patient.middleName"> {{patient.middleName}}</span>
   {{patient.lastName}}
   <button mat-raised-button color="primary" routerLink="/patient/edit/{{patient._id}}">Edit patient</button>
   <button mat-raised-button color="warn" (click)="confirmDialog()">Delete patient</button>
 </h1>
-<p>Gender: {{genderMap[patient.gender]}}</p>
-<p>Birth Date: {{patient.birthDate | date: 'longDate'}}</p>
-<p>Birth Place: {{patient.birthPlace}}</p>
-<p>Address: {{patient.address}}</p>
+  <div class="info">
+  <p class="info-left">Gender: <span class="info-right">{{genderMap[patient.gender]}}</span></p>
+  <p class="info-left">Birth Date: <span class="info-right">{{patient.birthDate | date: 'longDate'}}</span></p>
+  <p class="info-left">Birth Place: <span class="info-right">{{patient.birthPlace}} </span></p>
+  <p class="info-left">Address: <span class="info-right">{{patient.address}}</span></p>
+  </div>
 <button mat-raised-button (click)="goBack()">Go back</button>
 <button mat-raised-button color="primary" routerLink="/add_visit/{{patient._id}}">Add visit</button>
 <br>
-<button mat-raised-button (click)="deletePrediction()" color="warn">Delete</button>
 
 <!-- Visits table -->
 <mat-form-field class="SearchBar">
@@ -46,3 +48,4 @@
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/patient/{{patient._id}}/{{row._id}}" class="row-link"></mat-row>
 </table>
+</div>

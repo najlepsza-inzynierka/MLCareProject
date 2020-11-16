@@ -1,7 +1,25 @@
+.patient-details{
+  width: 96%;
+  margin: auto;
+}
+
+
 .mat-raised-button{
   margin: 5px;
 }
 
 .mat-form-field {
   font-size: 14px;
+}
+
+.info{
+  width: 90%;
+}
+
+.info-left{
+  text-align: left;
+}
+
+.info-right{
+  float: right;
 }

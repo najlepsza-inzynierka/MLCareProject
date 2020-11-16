@@ -13,6 +13,7 @@ import {ConfirmDialogComponent, ConfirmDialogModel} from '../../confirm-dialog/c
 import {ExamService} from '../../../services/exam.service';
 import {Prediction} from '../../../interfaces/prediction';
 import {PredictionService} from '../../../services/prediction.service';
+import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 
 @Component({
   selector: 'app-visit-details',
@@ -31,13 +32,16 @@ export class VisitDetailsComponent implements OnInit {
   predictions: Prediction[];
   dataSource: MatTableDataSource<Exam>;
   predictionDataSource: MatTableDataSource<Prediction>;
-  columnsToDisplay = ['Id', 'Name', 'Date', 'Action'];
-  columnsToDisplayPrediction = ['Id', 'Disease', 'Date', 'Result'];
+  columnsToDisplay = ['Name', 'Date', 'Action'];
+  columnsToDisplayPrediction = ['Date', 'Disease', 'Result'];
   featuresColumnsToDisplay = ['featureName', 'featureValue'];
   expandedElement: Exam | null;
   diseases: Disease[];
   visitId;
   patientId;
+  patientFirstName;
+  patientMiddleName;
+  patientLastName;
 
 
   constructor(private patientService: PatientService,
@@ -54,6 +58,7 @@ export class VisitDetailsComponent implements OnInit {
     this.loadVisit();
     this.loadDiseases();
     this.loadPredictions();
+    this.loadPatientName();
   }
 
   ngOnInit(): void {
@@ -66,6 +71,10 @@ export class VisitDetailsComponent implements OnInit {
       });
   }
 
+  loadDiseases(){
+    this.patientService.getAllDiseases().subscribe(diss => this.diseases = diss);
+  }
+
   loadPredictions(){
     this.predictionService.getPredictionsByVisit(this.visitId).subscribe(p => {
       this.predictions = p.predictions;
@@ -74,12 +83,19 @@ export class VisitDetailsComponent implements OnInit {
     });
   }
 
-  loadDiseases(){
-    this.patientService.getAllDiseases().subscribe(diss => this.diseases = diss);
-  }
-
-  openPickExams(){
-
+  loadPatientName(){
+    if (isNotNullOrUndefined(this.patientService.patient)){
+      this.patientFirstName = this.patientService.patient.firstName;
+      this.patientMiddleName = this.patientService.patient.middleName;
+      this.patientLastName = this.patientService.patient.lastName;
+    } else{
+      this.patientService.getPatient(this.patientId).subscribe(p => {
+        this.patientService.patient = p;
+        this.patientFirstName = p.firstName;
+        this.patientMiddleName = p.middleName;
+        this.patientLastName = p.lastName;
+      });
+    }
   }
 
   goBack(): void {

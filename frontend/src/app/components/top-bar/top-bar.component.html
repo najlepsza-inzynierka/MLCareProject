@@ -1,4 +1,8 @@
-<div class="top-container">
-    <div>MLCare</div>
+<p>
+    <mat-toolbar class="top-container">
+    <a mat-button routerLink="/patients">MLCare</a>
+    <span class="filler"></span>
     <button mat-raised-button (click)="signOutUser()">User sign out</button>
-</div>
+    </mat-toolbar>
+</p>
+<router-outlet></router-outlet>

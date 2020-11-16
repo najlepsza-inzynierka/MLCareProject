@@ -19,7 +19,7 @@ export class SideNavComponent implements OnInit {
       );
   constructor(private breakpointObserver: BreakpointObserver) {}
 
-
+// todo - maybe to delete
 
 
   ngOnInit(): void {
