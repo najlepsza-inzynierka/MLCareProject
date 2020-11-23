@@ -1,51 +1,59 @@
-<div *ngIf="patient" class="patient-details">
+<div *ngIf="patient" class="main-container add-patient">
+  <button mat-raised-button (click)="goBack()">Go back</button>
+  <div class="form-div">
+    <div id="patient-name">
   <h1>{{patient.firstName}}
 <span *ngIf="patient.middleName"> {{patient.middleName}}</span>
   {{patient.lastName}}
-  <button mat-raised-button color="primary" routerLink="/patient/edit/{{patient._id}}">Edit patient</button>
+  <button mat-raised-button routerLink="/patient/edit/{{patient._id}}">Edit patient</button>
   <button mat-raised-button color="warn" (click)="confirmDialog()">Delete patient</button>
 </h1>
+    </div>
   <div class="info">
   <p class="info-left">Gender: <span class="info-right">{{genderMap[patient.gender]}}</span></p>
   <p class="info-left">Birth Date: <span class="info-right">{{patient.birthDate | date: 'longDate'}}</span></p>
   <p class="info-left">Birth Place: <span class="info-right">{{patient.birthPlace}} </span></p>
   <p class="info-left">Address: <span class="info-right">{{patient.address}}</span></p>
   </div>
-<button mat-raised-button (click)="goBack()">Go back</button>
-<button mat-raised-button color="primary" routerLink="/add_visit/{{patient._id}}">Add visit</button>
 <br>
 
 <!-- Visits table -->
-<mat-form-field class="SearchBar">
-  <mat-label>Search</mat-label>
-  <input matInput (keyup)="filterName($event)" placeholder="Visit">
-</mat-form-field>
+  <div class="table">
+    <div class="search-bar">
+    <mat-form-field class="SearchBar">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="filterName($event)" placeholder="Visit">
+    </mat-form-field>
+    <button mat-raised-button class="add-patient-button" color="primary" routerLink="/add_visit/{{patient._id}}">Add visit</button>
+    </div>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!--  ID column  -->
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
-  </ng-container>
-  <!--  Visit date column  -->
-  <ng-container matColumnDef="visitDate">
-    <mat-header-cell *matHeaderCellDef> Visit Date </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.date | date: 'short'}} </mat-cell>
-  </ng-container>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <!--  ID column  -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
+      </ng-container>
+      <!--  Visit date column  -->
+      <ng-container matColumnDef="visitDate">
+        <mat-header-cell *matHeaderCellDef> Visit Date </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.date | date: 'short'}} </mat-cell>
+      </ng-container>
 
-  <!--  Doctor Id column  -->
-  <ng-container matColumnDef="doctorId">
-    <mat-header-cell *matHeaderCellDef> Doctor Id </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.doctorId}} </mat-cell>
-  </ng-container>
+      <!--  Doctor Id column  -->
+      <ng-container matColumnDef="doctorId">
+        <mat-header-cell *matHeaderCellDef> Doctor Id </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.doctorId}} </mat-cell>
+      </ng-container>
 
-  <!--  Doctor Name column  -->
-  <ng-container matColumnDef="doctorName">
-    <mat-header-cell *matHeaderCellDef> Doctor Name </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.doctorName}} </mat-cell>
-  </ng-container>
+      <!--  Doctor Name column  -->
+      <ng-container matColumnDef="doctorName">
+        <mat-header-cell *matHeaderCellDef> Doctor Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.doctorName}} </mat-cell>
+      </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/patient/{{patient._id}}/{{row._id}}" class="row-link"></mat-row>
-</table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/patient/{{patient._id}}/{{row._id}}" class="row-link"></mat-row>
+    </table>
+  </div>
+  </div>
 </div>

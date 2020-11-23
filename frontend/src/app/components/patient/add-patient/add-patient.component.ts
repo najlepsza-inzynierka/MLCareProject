@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PatientService} from '../../../services/patient.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Patient} from '../../../interfaces/patient';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-add-patient',
@@ -11,7 +12,9 @@ import {Patient} from '../../../interfaces/patient';
 export class AddPatientComponent implements OnInit {
   patient: Patient;
   added = false;
-  constructor(private patientService: PatientService, private snaackBar: MatSnackBar) {
+  constructor(private patientService: PatientService,
+              private location: Location,
+              private snaackBar: MatSnackBar) {
     this.clearPatientData();
   }
 
@@ -57,6 +60,10 @@ export class AddPatientComponent implements OnInit {
       visits: [],
       predictions: []
     };
+  }
+
+  goBack(){
+    this.location.back();
   }
 
 }

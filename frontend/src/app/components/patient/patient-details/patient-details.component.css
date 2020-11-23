@@ -1,11 +1,9 @@
-.patient-details{
-  width: 96%;
-  margin: auto;
+.mat-raised-button{
+  margin: 5px 5px 5px 0;
 }
 
-
-.mat-raised-button{
-  margin: 5px;
+.table{
+  margin: auto;
 }
 
 .mat-form-field {
@@ -13,13 +11,42 @@
 }
 
 .info{
-  width: 90%;
+  margin: auto;
+  width: 100%;
 }
 
 .info-left{
+  margin: auto;
   text-align: left;
 }
 
 .info-right{
+  margin: auto;
   float: right;
+}
+
+.form-div{
+  height: 100%;
+  padding: 2%;
+  border-radius: 10px;
+  display: block;
+  background-color: #F2F2F2;
+}
+
+#patient-name{
+  text-align: center;
+}
+
+.search-bar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  margin: auto;
+}
+
+.add-patient-button{
+  margin-left: 10px;
+  margin-top: 5px;
 }

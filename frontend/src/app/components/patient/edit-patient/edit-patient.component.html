@@ -1,6 +1,7 @@
-<div class="example-container" *ngIf="patient">
-    <div>
+<div class="add-patient" *ngIf="patient">
+    <div id="form-div">
         <form class="add-patient-form" #addPatient="ngForm">
+            <div class="form-wrapper">
             <mat-form-field appearance="outline">
                 <mat-label>First name</mat-label>
                 <label>
@@ -20,6 +21,7 @@
                        name="middleName"
                        [(ngModel)]="patient.middleName">
             </mat-form-field>
+            </div>
             <br>
 
             <mat-form-field appearance="outline">

@@ -1,17 +1,20 @@
-<div *ngIf="visit" class="visit-details">
+<div *ngIf="visit" class="main-container">
   <div class="inline-visit">
     <button mat-raised-button (click)="goBack()">Go back</button>
     <h1>{{patientFirstName}} <span *ngIf="patientMiddleName"> {{patientMiddleName}} </span>{{patientLastName}}</h1>
   </div>
   <p>Visit Date: {{visit.date | date: 'short'}}
-  <button mat-raised-button color="primary" routerLink="/patient/{{this.patientId}}/visit/edit/{{this.visitId}}">Edit visit</button>
-  <button mat-raised-button color="warn" (click)="confirmDeleteVisitDialog()">Delete visit</button>
   </p>
   <p>Doctor: {{visit.doctorName}}</p>
   <br>
+  <button mat-raised-button color="primary" routerLink="/patient/{{this.patientId}}/visit/edit/{{this.visitId}}">Edit visit</button>
+  <button mat-raised-button color="warn" (click)="confirmDeleteVisitDialog()">Delete visit</button>
 
-  <h2>Exams</h2>
-  <button mat-raised-button color="primary" routerLink="/patient/{{this.patientId}}/add-exam/{{this.visitId}}">Add exam</button>
+  <h2>
+    Exams
+    <button mat-raised-button color="primary" routerLink="/patient/{{this.patientId}}/add-exam/{{this.visitId}}">Add exam</button>
+  </h2>
+
 
   <table mat-table
          [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
@@ -66,9 +69,10 @@
   </table>
 
 
-  <h2>Predictions</h2>
-  <button mat-raised-button color="primary" [disabled]="this.diseases == null" routerLink="add-prediction">Predict disease</button>
-
+  <h2>
+    Predictions
+    <button mat-raised-button color="primary" [disabled]="this.diseases == null" routerLink="add-prediction">Predict disease</button>
+  </h2>
   <table mat-table [dataSource]="predictionDataSource" class="mat-elevation-z8">
     <!--  Visit date column  -->
     <ng-container matColumnDef="Date">

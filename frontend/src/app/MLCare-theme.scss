@@ -54,6 +54,11 @@ $ml-app-theme: mat-light-theme($ml-app-primary, $ml-app-accent, $ml-app-warn);
 
 $foreground: map-get($ml-app-theme, foreground);
 $foreground: map_merge($foreground, (foreground: $ml-app-foreground-color));
+$ml-app-background-color: #FFFFFF;
+$background: map-get($ml-app-theme, background);
+$background: map_merge($background, (background: $ml-app-background-color));
+$ml-app-theme: map_merge($ml-app-theme, (background: $background));
+
 $ml-app-theme: map_merge($ml-app-theme, (foreground: $foreground));
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component

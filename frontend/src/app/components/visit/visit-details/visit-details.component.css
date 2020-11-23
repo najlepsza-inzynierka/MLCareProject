@@ -3,7 +3,7 @@
 }
 
 .inline-visit{
-  display: inline-flex;
+  /*display: inline-flex;*/
   margin-left: auto;
   margin-right: auto;
   text-align: left;
@@ -13,14 +13,9 @@
   height: 90%;
 }
 
-table{
-  width: 90%;
-}
-
 h2{
   margin-top: 1%;
   margin-bottom: 0;
-  margin-left: 1%;
 }
 h1{
   padding-top: 5%;
@@ -50,5 +45,5 @@ tr.example-detail-row {
 }
 
 .mat-raised-button{
-  margin: 10px;
+  margin: 1% 1% 1% 0;
 }
