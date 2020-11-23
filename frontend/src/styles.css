@@ -3,11 +3,20 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Nunito, sans-serif; }
 table, .SearchBar{
-  margin: 0 10px;
-  width: 90%;
+  /*margin: 0 10px;*/
+  width: 100%;
 }
 .row-link:hover {
   background-color: rgba(0, 0, 0, .05);
   cursor: pointer;
+}
+
+.main-container{
+  width: 88%;
+  margin: auto;
+}
+
+.mat-button, .mat-form-field-appearance-outline .mat-form-field-outline{
+  border-width: 5px!important;
 }
 
