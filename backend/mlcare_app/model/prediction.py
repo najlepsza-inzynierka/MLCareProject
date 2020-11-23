@@ -145,22 +145,29 @@ class Prediction(ModelDocument):
         self._data['image'] = new_image
 
     def filter_features(self):
+        # get disease data from database
         disease_dao = DiseaseDAO()
         disease_tag = '_'.join(self.disease.split()).lower()
+
+        # get features sets for given disease model
         obligatory_features = (
             disease_dao.find_obligatory_features_by_disease_tag(disease_tag))
         all_features = disease_dao.find_all_features_by_disease_tag(disease_tag)
+
+        # choose only features defined in the model
         filtered_features = [f for f in self.features if f['name']
                              in all_features]
         for f in filtered_features:
-            if f['name'] in all_features:
-                all_features.remove(f['name'])
+            all_features.remove(f['name'])
             if f['name'] in obligatory_features:
                 obligatory_features.remove(f['name'])
 
+        # check for not filled obligatory features
         if any(obligatory_features):
             raise PredictionFeatureException(f'Those obligatory features are '
                                              f'not filled {obligatory_features}')
+
+        # fill in not given features
         for feature in all_features:
             filtered_features.append({
                 'name': feature,

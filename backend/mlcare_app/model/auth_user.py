@@ -132,7 +132,7 @@ class AuthUser(ModelDocument):
     def decode_auth_token(auth_token):
         """
         Decodes the auth token
-        :param auth_token:
+        :param auth_token: authentication token to decode
         :return: token string
         """
         try:
