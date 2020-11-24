@@ -54,7 +54,7 @@ $ml-app-theme: mat-light-theme($ml-app-primary, $ml-app-accent, $ml-app-warn);
 
 $foreground: map-get($ml-app-theme, foreground);
 $foreground: map_merge($foreground, (foreground: $ml-app-foreground-color));
-$ml-app-background-color: #FFFFFF;
+$ml-app-background-color: #f2f2f2;
 $background: map-get($ml-app-theme, background);
 $background: map_merge($background, (background: $ml-app-background-color));
 $ml-app-theme: map_merge($ml-app-theme, (background: $background));

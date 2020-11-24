@@ -1,4 +1,9 @@
 <div class="add-patient" *ngIf="patient">
+        <h1>
+            Edit Patient
+            <button mat-raised-button class="warn-title-button" color="warn" (click)="confirmDialog()">Delete patient</button>
+        </h1>
+
     <div id="form-div">
         <form class="add-patient-form" #addPatient="ngForm">
             <div class="form-wrapper">

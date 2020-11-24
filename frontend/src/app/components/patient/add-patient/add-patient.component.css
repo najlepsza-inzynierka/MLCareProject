@@ -7,6 +7,12 @@
   flex-direction: column;
 }
 
+h1{
+  display: flex;
+  align-self: normal;
+  margin-left: 15%;
+}
+
 .mat-form-field{
   margin: 1%;
   width: 70%;
@@ -17,6 +23,7 @@
   width: 12%;
 }
 
+/* change below only in add/edit patient!! */
 .form-wrapper{
   width: 71%;
   display: inline-flex;
@@ -30,9 +37,9 @@
 }
 
 #form-div{
-  width: 75%;
+  width: 70%;
   border-radius: 10px;
   display: block;
   text-align: center;
-  background-color: #F2F2F2;
+  background-color: white;
 }

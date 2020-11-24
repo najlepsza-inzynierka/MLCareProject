@@ -1,6 +1,7 @@
 <div *ngIf="visit">
     <p>Visit id: {{visit._id}}</p>
     <button mat-raised-button (click)="goBack()">Go back</button>
+    <button mat-raised-button color="warn" (click)="confirmDeleteVisitDialog()">Delete visit</button>
     <br>
     <mat-form-field appearance="outline">
         <mat-label>Doctor name</mat-label>

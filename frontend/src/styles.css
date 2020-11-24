@@ -20,3 +20,21 @@ table, .SearchBar{
   border-width: 5px!important;
 }
 
+.search-bar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  margin: auto;
+}
+
+.SearchBar{
+  width: 96%;
+  margin-right: 1%;
+}
+
+.add-patient-button{
+  float: right;
+  margin: 0;
+}

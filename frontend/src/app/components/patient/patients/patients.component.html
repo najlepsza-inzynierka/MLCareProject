@@ -4,7 +4,7 @@
       <mat-label>Search</mat-label>
       <input matInput (keyup)="filterName($event)" placeholder="Patient">
     </mat-form-field>
-    <button mat-raised-button routerLink="/add-patient" class="add-patient-button">Add patient</button>
+    <button mat-raised-button color="primary" routerLink="/add-patient" class="add-patient-button">Add patient</button>
   </div>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 patientTable">
     <!--  ID column  -->

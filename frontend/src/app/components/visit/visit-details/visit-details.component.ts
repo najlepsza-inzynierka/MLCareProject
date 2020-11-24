@@ -103,24 +103,6 @@ export class VisitDetailsComponent implements OnInit {
     this.location.back();
   }
 
-  confirmDeleteVisitDialog(): void {
-    const message = `Are you sure you want to delete visit?`;
-
-    const dialogData = new ConfirmDialogModel('Confirm Delete', message);
-
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: '400px',
-      data: dialogData
-    });
-
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult){
-        this.visitService.deleteVisit(this.visit._id).subscribe(result => console.log(result),
-            err => console.error(err));
-      }
-    });
-  }
-
   confirmDeleteExamDialog(id): void {
     const message = `Are you sure you want to delete exam?`;
 
@@ -137,6 +119,16 @@ export class VisitDetailsComponent implements OnInit {
             err => console.error(err));
       }
     });
+  }
+
+  filterExamName(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  filterPredictionName(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
