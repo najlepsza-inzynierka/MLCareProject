@@ -9,7 +9,7 @@ import {MatDialog} from '@angular/material/dialog';
 @Component({
   selector: 'app-edit-visit',
   templateUrl: './edit-visit.component.html',
-  styleUrls: ['../../login-screen/login-screen.component.css', './edit-visit.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', '../../patient/add-patient/add-patient.component.css', './edit-visit.component.css']
 })
 export class EditVisitComponent implements OnInit {
   visit: Visit;
