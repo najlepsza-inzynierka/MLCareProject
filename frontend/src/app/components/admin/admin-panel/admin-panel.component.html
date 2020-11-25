@@ -1,10 +1,14 @@
-<h1>{{admin.firstName}}
-    {{admin.lastName}}
-    <!--    todo link ponizej-->
-    <button mat-raised-button color="accent" routerLink="/edit-admin/{{admin.id}}">Edit data</button>
-</h1>
-<p>Phone number: {{admin.phoneNumber}}</p>
-<p>Email: {{admin.email}}</p>
-<p>Address: {{admin.address}}</p>
-<button mat-raised-button color="accent" routerLink="/add-medical/{{admin.id}}">Add medical staff</button>
-<br>
+<div *ngIf="admin" class="main-container add-patient">
+
+    <div class="form-div">
+        <h1>{{admin.firstName}}
+            {{admin.lastName}}
+            <button mat-raised-button routerLink="/edit-admin/{{admin.id}}">Edit data</button>
+        </h1>
+        <p class="info-left">Phone number: <span class="info-right">{{admin.phoneNumber}}</span></p>
+        <p class="info-left">Email: <span class="info-right">{{admin.email}}</span></p>
+        <p class="info-left">Address: <span class="info-right">{{admin.address}}</span></p>
+        <button mat-raised-button color="primary" routerLink="/add-medical/{{admin.id}}">Add medical staff</button>
+        <br>
+    </div>
+</div>

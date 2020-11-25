@@ -7,7 +7,7 @@ import {of} from 'rxjs';
 @Component({
   selector: 'app-add-medical-staff',
   templateUrl: './add-medical-staff.component.html',
-  styleUrls: ['../../login-screen/login-screen.component.css', './add-medical-staff.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', '../../patient/add-patient/add-patient.component.css', './add-medical-staff.component.css']
 })
 export class AddMedicalStaffComponent implements OnInit {
 

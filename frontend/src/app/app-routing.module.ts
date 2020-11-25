@@ -50,15 +50,15 @@ const routes: Routes = [
             path: '', component: AddPredictionComponent}]  },
     // admin
   { path: 'admin-login', component: AdminLoginScreenComponent},
-  { path: 'admin-panel', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
+  { path: 'admin-panel', component: TopBarComponent, canActivate: [AdminGuard], children: [{
       path: '', component: AdminPanelComponent}]},
-    { path: 'user/:id', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
+    { path: 'user/:id', component: TopBarComponent, canActivate: [AdminGuard], children: [{
             path: '', component: MedicalStaffDetailsComponent}]},
-    { path: 'users', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
+    { path: 'users', component: TopBarComponent, canActivate: [AdminGuard], children: [{
             path: '', component: MedicalStaffListComponent}]},
-  { path: 'add-medical', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
+  { path: 'add-medical', component: TopBarComponent, canActivate: [AdminGuard], children: [{
       path: '', component: AddMedicalStaffComponent}]  },
-  { path: 'edit-admin', component: SideNavAdminComponent, canActivate: [AdminGuard], children: [{
+  { path: 'edit-admin', component: TopBarComponent, canActivate: [AdminGuard], children: [{
       path: '', component: EditAdminComponent}]  },
 ];
 

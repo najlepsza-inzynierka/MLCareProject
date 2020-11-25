@@ -137,13 +137,12 @@
        color: red!important;
    }
 
-
-    .mat-raised-button.mat-accent,
-    .mat-stroked-button.mat-accent,
-    .mat-flat-button.mat-accent,
-    .mat-button.mat-accent {
-        align-self: end;
-        margin-right: 10%;
-        background-color: white;
-        border: solid 2px;
-    }
+.mat-raised-button.mat-accent,
+.mat-stroked-button.mat-accent,
+.mat-flat-button.mat-accent,
+.mat-button.mat-accent {
+    align-self: end;
+    margin-right: 10%;
+    background-color: #f2f2f2;
+    border: solid 2px;
+}
