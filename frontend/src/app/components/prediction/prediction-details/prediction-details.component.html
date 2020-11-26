@@ -1,15 +1,26 @@
-<h1>
-    Disease: {{prediction.disease}}
-</h1>
-<p>
-    Model: {{prediction.model}}
-</p>
-<p>
-    Result: {{prediction.predicted_class}}
-</p>
-<p>
-    Healthy probability: {{prediction.probability_map.Healthy | percent}}
-    <br>
-    Unhealthy probability: {{prediction.probability_map.Unhealthy | percent}}
-</p>
-<div id="chartContainer" style="height: 300px;"></div>
+<div class="add-patient">
+    <h1>New Medical Staff</h1>
+    <div id="form-div">
+
+        <h1>
+            Disease: {{prediction.disease}}
+        </h1>
+        <p>
+            Model: {{prediction.model}}
+        </p>
+        <p>
+            Result: {{prediction.predicted_class}}
+        </p>
+        <p>
+            Healthy probability: {{prediction.probability_map.Healthy | percent}}
+            <br>
+            Unhealthy probability: {{prediction.probability_map.Unhealthy | percent}}
+        </p>
+        <div class="image-container">
+        <div id="chartContainer" style="height: 300px;"></div>
+        </div>
+        <div class="image-container">
+        <img [src]="imagePath" class="prediction-image">
+        </div>
+    </div>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PredictionService} from '../../../services/prediction.service';
 import {ActivatedRoute} from '@angular/router';
 import * as CanvasJS from '../../../../canvasjs.min';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-prediction-details',
@@ -10,17 +11,23 @@ import * as CanvasJS from '../../../../canvasjs.min';
 })
 export class PredictionDetailsComponent implements OnInit {
   prediction;
+  imagePath;
+  imageBytes;
   constructor(private predictionService: PredictionService,
+              private sanitizer: DomSanitizer,
               private route: ActivatedRoute) {
-
   }
 
   ngOnInit(): void {
     if (!this.predictionService.prediction){
       this.predictionService.getPrediction(this.route.snapshot.paramMap.get('predictionId')).subscribe(
-          p => {this.prediction = p;
+          p => {
+                this.prediction = p;
                 console.log(this.prediction);
-                this.drawChart(); }
+                this.drawChart();
+                this.readImage();
+                console.log(this.imagePath);
+          }
           );
     }
     else{
@@ -48,4 +55,10 @@ export class PredictionDetailsComponent implements OnInit {
 
     chart.render();
   }
+
+  readImage(){
+    this.imageBytes = this.prediction.image.split('\'')[1];
+    this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + this.imageBytes);
+  }
+
 }
