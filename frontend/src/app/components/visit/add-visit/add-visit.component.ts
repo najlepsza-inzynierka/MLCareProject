@@ -80,8 +80,8 @@ export class AddVisitComponent implements OnInit {
     this.visit = {
       _id: '-1',
       date: '',
-      doctorId: '5ece8924947fa16b8c6129d5',
-      doctorName: 'Pan Wilk', // TODO - usunąć zahardkodowanego doktora, ale jak?
+      doctorId: '',
+      doctorName: '',
       exams: [],
       predictions: []
     };

@@ -36,7 +36,7 @@ h1{
   width: 100%;
 }
 
-#form-div{
+.form-div{
   width: 70%;
   border-radius: 10px;
   display: block;

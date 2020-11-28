@@ -1,24 +1,30 @@
-<h1>Choose disease to predict</h1>
-<form [formGroup]="diseasesFormGroup">
-    <div *ngFor="let disease of diseases; let i = index">
-        <mat-checkbox (change)="onChange($event)" [value]="disease">{{disease.name}}</mat-checkbox>
+<div class="add-patient">
+    <button mat-raised-button (click)="goBack()" id="go-back">Go back</button>
+    <h1>Choose disease to predict</h1>
+    <div class="form-div">
+            <form [formGroup]="diseasesFormGroup">
+                <div *ngFor="let disease of diseases; let i = index">
+                    <mat-checkbox (change)="onChange($event)" [value]="disease">{{disease.name}}</mat-checkbox>
+                </div>
+            </form>
+            <button mat-raised-button color="primary" (click)="submit()">Predict</button>
     </div>
-</form>
-<button mat-raised-button color="primary" (click)="submit()">Predict</button>
-<button mat-raised-button (click)="goBack()">Go back</button>
 
-<h1>Choose features to use</h1>
-<form [formGroup]="featuresFormGroup">
-    <ul *ngFor="let visit of visits; let i = index">
-        Visit date: {{visit.date | date: 'short'}}
-        <ul *ngFor="let exam of visit.exams; let j = index">
-            Exam: {{exam.name}}
-            <div *ngFor="let feature of exam.features; let k = index">
-                <mat-checkbox (change)="onFeatureChange($event)" [value]="feature">{{feature.name}} - {{feature.value}} {{feature.unit}}</mat-checkbox>
+    <h1>Choose features to use</h1>
+    <div class="form-div">
+        <form [formGroup]="featuresFormGroup">
+            <div *ngFor="let visit of visits; let i = index">
+                <span id="visit">Visit date: {{visit.date | date: 'short'}}</span>
+                <div *ngFor="let exam of visit.exams; let j = index" id="exam">
+                    <span>Exam: {{exam.name}}</span>
+                    <div *ngFor="let feature of exam.features; let k = index">
+                        <mat-checkbox (change)="onFeatureChange($event)" [value]="feature">{{feature.name}} - {{feature.value}} {{feature.unit}}</mat-checkbox>
+                    </div>
+                </div>
             </div>
-        </ul>
-    </ul>
-</form>
+        </form>
+    </div>
+</div>
 
 
 
