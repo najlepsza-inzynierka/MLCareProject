@@ -13,7 +13,8 @@ export class AddMedicalStaffComponent implements OnInit {
 
   medical: Medical;
   added = false;
-  constructor(private adminService: AdminService, private snaackBar: MatSnackBar) {
+  constructor(private adminService: AdminService,
+              private snaackBar: MatSnackBar) {
     this.clearMedicalData();
   }
 

@@ -14,10 +14,15 @@ export class LoginScreenComponent implements OnInit {
   isSubmitted  =  false;
 
   constructor(private authService: AuthService,
-              private snaackBar: MatSnackBar) { }
+              private router: Router,
+              private snaackBar: MatSnackBar) {}
+
 
   ngOnInit(): void {
     this.clearData();
+    if (this.authService.isLoggedIn()){
+      this.router.navigateByUrl('patients');
+    }
   }
 
   signIn(){

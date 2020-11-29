@@ -8,11 +8,12 @@ import {AdminService} from '../../../services/admin.service';
 @Component({
   selector: 'app-edit-admin',
   templateUrl: './edit-admin.component.html',
-  styleUrls: ['../../login-screen/login-screen.component.css', './edit-admin.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', '../../patient/add-patient/add-patient.component.css', './edit-admin.component.css']
 })
 export class EditAdminComponent implements OnInit {
   admin: Admin;
   id;
+  hidden = true;
 
   constructor(private adminService: AdminService,
               private route: ActivatedRoute,
@@ -27,7 +28,8 @@ export class EditAdminComponent implements OnInit {
   }
 
   saveAdmin(){
-    this.adminService.updateAdmin(this.admin, this.id).subscribe(
+    // @ts-ignore
+    this.adminService.updateAdmin(this.admin, this.admin._id).subscribe(
         response => {
           console.log(response);
           this.openSnackBar('Your data edited successfully', 'Close');

@@ -1,7 +1,8 @@
-<div class="example-container">
-    <div>
+<div class="add-patient" *ngIf="admin">
+    <h1>Your Data</h1>
+    <div class="form-div">
         <form class="add-patient-form" #addAdmin="ngForm">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>First name</mat-label>
                 <label>
                     <input matInput
@@ -12,7 +13,7 @@
                            [(ngModel)]="admin.firstName">
                 </label>
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Last name</mat-label>
                 <input matInput
                        placeholder="Last Name"
@@ -23,7 +24,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Address</mat-label>
                 <input matInput
                        placeholder="Address"
@@ -67,7 +68,7 @@
                     (click)="saveAdmin()"
                     class="btn btn-success"
                     [disabled]="!addAdmin.valid"
-                    color="primary">Edit your data</button>
+                    color="primary">Edit</button>
         </form>
     </div>
 </div>

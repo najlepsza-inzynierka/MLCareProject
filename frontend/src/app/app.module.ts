@@ -38,16 +38,15 @@ import { AdminComponent } from './components/authentication/admin/admin.componen
 import { AdminLoginScreenComponent } from './components/admin/admin-login-screen/admin-login-screen.component';
 import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.component';
 import { AddMedicalStaffComponent } from './components/admin/add-medical-staff/add-medical-staff.component';
-import { MedicalStaffListComponent } from './components/admin/medical-staff-list/medical-staff-list.component';
 import { EditAdminComponent } from './components/admin/edit-admin/edit-admin.component';
 import {AuthInterceptor} from './auth.interceptor';
 import { SideNavComponent } from './components/side-nav/side-nav.component';
-import { SideNavAdminComponent } from './components/admin/side-nav-admin/side-nav-admin.component';
 import { MedicalStaffDetailsComponent } from './components/admin/medical-staff-details/medical-staff-details.component';
 import { AddPredictionComponent } from './components/prediction/add-prediction/add-prediction.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { EditExamComponent } from './components/visit/edit-exam/edit-exam.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { EditMedicalStaffComponent } from './components/admin/edit-medical-staff/edit-medical-staff.component';
 
 @NgModule({
   declarations: [
@@ -68,14 +67,13 @@ import { TopBarComponent } from './components/top-bar/top-bar.component';
     AdminLoginScreenComponent,
     AdminPanelComponent,
     AddMedicalStaffComponent,
-    MedicalStaffListComponent,
     EditAdminComponent,
     SideNavComponent,
-    SideNavAdminComponent,
     MedicalStaffDetailsComponent,
     AddPredictionComponent,
     EditExamComponent,
     TopBarComponent,
+    EditMedicalStaffComponent,
   ],
     imports: [
         BrowserModule,

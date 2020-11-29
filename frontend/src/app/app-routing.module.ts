@@ -16,49 +16,45 @@ import {AdminPanelComponent} from './components/admin/admin-panel/admin-panel.co
 import {AddMedicalStaffComponent} from './components/admin/add-medical-staff/add-medical-staff.component';
 import {AdminGuard} from './guards/admin.guard';
 import {EditAdminComponent} from './components/admin/edit-admin/edit-admin.component';
-import {SideNavAdminComponent} from './components/admin/side-nav-admin/side-nav-admin.component';
-import {MedicalStaffListComponent} from './components/admin/medical-staff-list/medical-staff-list.component';
 import {MedicalStaffDetailsComponent} from './components/admin/medical-staff-details/medical-staff-details.component';
 import {AddPredictionComponent} from './components/prediction/add-prediction/add-prediction.component';
 import {EditExamComponent} from './components/visit/edit-exam/edit-exam.component';
 import {TopBarComponent} from './components/top-bar/top-bar.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'login', component: LoginScreenComponent},
-  { path: 'patients', component: TopBarComponent, canActivate: [AuthGuard], children: [{
-    path: '', component: PatientsComponent}] },
-  { path: 'patient/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'login', component: LoginScreenComponent},
+    { path: 'patients', component: TopBarComponent, canActivate: [AuthGuard], children: [{
+        path: '', component: PatientsComponent}] },
+    { path: 'patient/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [
           {path: '', component: PatientDetailsComponent}]},
-  { path: 'patient/edit/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
+    { path: 'patient/edit/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
       path: '', component: EditPatientComponent}]  },
-  { path: 'patient/:id/:visitId/prediction/:predictionId', component: TopBarComponent, canActivate: [AuthGuard], children: [{
+    { path: 'patient/:id/:visitId/prediction/:predictionId', component: TopBarComponent, canActivate: [AuthGuard], children: [{
       path: '', component: PredictionDetailsComponent}]  },
-  { path: 'patient/:id/:visitId', component: TopBarComponent, canActivate: [AuthGuard], children: [{
+    { path: 'patient/:id/:visitId', component: TopBarComponent, canActivate: [AuthGuard], children: [{
       path: '', component: VisitDetailsComponent}]  },
-  { path: 'patient/:id/visit/edit/:visitId', component: TopBarComponent, canActivate: [AuthGuard], children: [{
+    { path: 'patient/:id/visit/edit/:visitId', component: TopBarComponent, canActivate: [AuthGuard], children: [{
       path: '', component: EditVisitComponent}]  },
-  { path: 'patient/:id/add-exam/:visitId', component: TopBarComponent, canActivate: [AuthGuard], children: [{
+    { path: 'patient/:id/add-exam/:visitId', component: TopBarComponent, canActivate: [AuthGuard], children: [{
       path: '', component: AddExamComponent}]  },
-  { path: 'add-patient', component: TopBarComponent, canActivate: [AuthGuard], children: [{
+    { path: 'add-patient', component: TopBarComponent, canActivate: [AuthGuard], children: [{
       path: '', component: AddPatientComponent}]  },
-  { path: 'add_visit/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
+    { path: 'add_visit/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
       path: '', component: AddVisitComponent}]  },
     { path: 'edit_exam/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
             path: '', component: EditExamComponent}]  },
     { path: 'patient/:id/:visitId/add-prediction', component: TopBarComponent, canActivate: [AuthGuard], children: [{
             path: '', component: AddPredictionComponent}]  },
     // admin
-  { path: 'admin-login', component: AdminLoginScreenComponent},
-  { path: 'admin-panel', component: TopBarComponent, canActivate: [AdminGuard], children: [{
+    { path: 'admin-login', component: AdminLoginScreenComponent},
+    { path: 'admin-panel', component: TopBarComponent, canActivate: [AdminGuard], children: [{
       path: '', component: AdminPanelComponent}]},
     { path: 'user/:id', component: TopBarComponent, canActivate: [AdminGuard], children: [{
             path: '', component: MedicalStaffDetailsComponent}]},
-    { path: 'users', component: TopBarComponent, canActivate: [AdminGuard], children: [{
-            path: '', component: MedicalStaffListComponent}]},
-  { path: 'add-medical', component: TopBarComponent, canActivate: [AdminGuard], children: [{
+    { path: 'add-medical', component: TopBarComponent, canActivate: [AdminGuard], children: [{
       path: '', component: AddMedicalStaffComponent}]  },
-  { path: 'edit-admin', component: TopBarComponent, canActivate: [AdminGuard], children: [{
+    { path: 'edit-admin', component: TopBarComponent, canActivate: [AdminGuard], children: [{
       path: '', component: EditAdminComponent}]  },
 ];
 
