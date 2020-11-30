@@ -16,6 +16,7 @@ export class EditPatientComponent implements OnInit {
   patient: Patient;
   id;
   result = false;
+  hidden = true;
 
   constructor(private patientService: PatientService,
               private route: ActivatedRoute,
@@ -34,6 +35,7 @@ export class EditPatientComponent implements OnInit {
         response => {
           console.log(response);
           this.openSnackBar('Patient edited successfully', 'Close');
+          this.goBack();
         },
         error => {
           this.openSnackBar('Something went wrong :(', 'Close');

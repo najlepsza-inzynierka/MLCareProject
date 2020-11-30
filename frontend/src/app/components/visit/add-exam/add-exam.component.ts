@@ -28,6 +28,7 @@ export class AddExamComponent implements OnInit {
   feature: Feature;
   diseases;
   added = false;
+  hidden = true;
   featureForm: FormGroup = this.formBuilder.group({
     featureGroup: '',
   });

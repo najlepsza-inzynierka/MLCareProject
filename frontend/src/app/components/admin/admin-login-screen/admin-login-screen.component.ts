@@ -11,6 +11,7 @@ export class AdminLoginScreenComponent implements OnInit {
   id: string;
   admin: Admin;
   isSubmitted  =  false;
+  hidden = true;
 
   constructor(private adminAuthService: AdminAuthService) { }
 

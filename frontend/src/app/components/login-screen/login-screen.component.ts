@@ -12,6 +12,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class LoginScreenComponent implements OnInit {
   user: User;
   isSubmitted  =  false;
+  hidden = true;
 
   constructor(private authService: AuthService,
               private router: Router,

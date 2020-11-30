@@ -33,29 +33,31 @@
                        name="address"
                        [(ngModel)]="admin.address">
             </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Phone number</mat-label>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Phone number (optional)</mat-label>
                 <input matInput
-                       placeholder="Phone number"
+                       placeholder="Phone number (optional)"
                        type="text"
                        name="phoneNumber"
                        [(ngModel)]="admin.phoneNumber">
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Email (optional)</mat-label>
                 <input matInput
-                       placeholder="Email"
+                       placeholder="Email (optional)"
                        type="email"
+                       required
                        email
                        name="email"
                        [(ngModel)]="admin.email">
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Password</mat-label>
                 <input matInput
                        placeholder="Password"
+                       required
                        type="password"
                        name="password"
                        [(ngModel)]="admin.password">

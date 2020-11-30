@@ -29,6 +29,7 @@ export class AddVisitComponent implements OnInit {
   feature: Feature;
   diseases;
   added = false;
+  hidden = true;
   featureForm: FormGroup = this.formBuilder.group({
     featureGroup: '',
   });
@@ -149,6 +150,7 @@ export class AddVisitComponent implements OnInit {
           this.added = true;
           this.clearVisitData();
           this.openSnackBar('Visit added successfully', 'Close');
+          this.goBack();
         },
         error => {
             this.openSnackBar('Something went wrong :(', 'Close');

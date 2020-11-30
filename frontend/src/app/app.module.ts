@@ -40,7 +40,6 @@ import { AdminPanelComponent } from './components/admin/admin-panel/admin-panel.
 import { AddMedicalStaffComponent } from './components/admin/add-medical-staff/add-medical-staff.component';
 import { EditAdminComponent } from './components/admin/edit-admin/edit-admin.component';
 import {AuthInterceptor} from './auth.interceptor';
-import { SideNavComponent } from './components/side-nav/side-nav.component';
 import { MedicalStaffDetailsComponent } from './components/admin/medical-staff-details/medical-staff-details.component';
 import { AddPredictionComponent } from './components/prediction/add-prediction/add-prediction.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -68,7 +67,6 @@ import { EditMedicalStaffComponent } from './components/admin/edit-medical-staff
     AdminPanelComponent,
     AddMedicalStaffComponent,
     EditAdminComponent,
-    SideNavComponent,
     MedicalStaffDetailsComponent,
     AddPredictionComponent,
     EditExamComponent,

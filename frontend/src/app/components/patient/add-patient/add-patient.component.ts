@@ -12,6 +12,7 @@ import {Location} from '@angular/common';
 export class AddPatientComponent implements OnInit {
   patient: Patient;
   added = false;
+  hidden = true;
   constructor(private patientService: PatientService,
               private location: Location,
               private snaackBar: MatSnackBar) {
@@ -29,6 +30,7 @@ export class AddPatientComponent implements OnInit {
           this.added = true;
           this.clearPatientData();
           this.openSnackBar('Patient added successfully', 'Close');
+          this.goBack();
         },
         error => {
           this.openSnackBar(error.error.message, 'Close');

@@ -2,7 +2,7 @@
     <h1>Add Exam</h1>
 
     <div class="form-div">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
             <mat-label>Exam name</mat-label>
             <input matInput
                    placeholder="Exam name"
@@ -11,7 +11,7 @@
                    name="examName"
                    [(ngModel)]="exam.name">
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
             <mat-label>Exam Date</mat-label>
             <input matInput
                    [matDatepicker]="picker"
@@ -24,7 +24,7 @@
         </mat-form-field>
         <br>
         <form [formGroup]="featureForm">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <input type="text"
                        matInput
                        placeholder="Feature name"
@@ -41,8 +41,8 @@
                 </mat-autocomplete>
             </mat-form-field>
         </form>
-        <mat-form-field appearance="outline">
-            <mat-label>Feature value</mat-label>
+        <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+            <mat-label>Feature value (True/False or Numerical value)</mat-label>
             <input matInput
                    placeholder="Feature value (True/False or Numerical value)"
                    type="text"

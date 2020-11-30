@@ -12,8 +12,9 @@ import {MatDialog} from '@angular/material/dialog';
   styleUrls: ['../../patient/add-patient/add-patient.component.css', './edit-medical-staff.component.css']
 })
 export class EditMedicalStaffComponent implements OnInit {
-  user: Medical;
+  medical: Medical;
   id;
+  hidden = true;
 
   constructor(private adminService: AdminService,
               private route: ActivatedRoute,
@@ -24,17 +25,17 @@ export class EditMedicalStaffComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.adminService.getMedical(this.id).subscribe(med => this.user = med);
+    this.adminService.getMedical(this.id).subscribe(med => this.medical = med);
   }
 
-  savePatient(){
-    this.adminService.updateMedical(this.user, this.id).subscribe(
+  saveMedical(){
+    this.adminService.updateMedical(this.medical, this.id).subscribe(
         response => {
           console.log(response);
           this.openSnackBar('User edited successfully', 'Close');
         },
         error => {
-          this.openSnackBar('Something went wrong :(', 'Close');
+          this.openSnackBar(error.error.message, 'Close');
           console.log(error);
         }
     );

@@ -3,7 +3,7 @@
     <div class="form-div">
         <form class="add-patient-form" #addMedical="ngForm">
             <div class="form-wrapper">
-                <mat-form-field appearance="outline">
+                <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>First name</mat-label>
                 <label>
                     <input matInput
@@ -14,10 +14,10 @@
                            [(ngModel)]="medical.firstName">
                 </label>
             </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Middle name</mat-label>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Middle name (optional)</mat-label>
                 <input matInput
-                       placeholder="Middle Name"
+                       placeholder="Middle name (optional)"
                        type="text"
                        name="middleName"
                        [(ngModel)]="medical.middleName">
@@ -25,7 +25,7 @@
             </div>
             <br>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Last name</mat-label>
                 <input matInput
                        placeholder="Last Name"
@@ -34,7 +34,7 @@
                        name="lastName"
                        [(ngModel)]="medical.lastName">
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Title</mat-label>
                 <input matInput
                        placeholder="Title"
@@ -45,7 +45,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Address</mat-label>
                 <input matInput
                        placeholder="Address"
@@ -55,7 +55,7 @@
                        [(ngModel)]="medical.address">
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Phone number</mat-label>
                 <input matInput
                        placeholder="Phone number"
@@ -66,7 +66,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Medical staff Id</mat-label>
                 <input matInput
                        placeholder="Medical staff Id"
@@ -77,7 +77,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Email</mat-label>
                 <input matInput
                        placeholder="Email"
@@ -87,7 +87,7 @@
                        name="email"
                        [(ngModel)]="medical.email">
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Password</mat-label>
                 <input matInput
                        placeholder="Password"

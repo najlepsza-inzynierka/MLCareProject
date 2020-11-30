@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {VisitService} from '../../../services/visit.service';
 import {Visit} from '../../../interfaces/visit';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ConfirmDialogComponent, ConfirmDialogModel} from '../../confirm-dialog/confirm-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-visit',
@@ -13,10 +14,14 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class EditVisitComponent implements OnInit {
   visit: Visit;
+  hidden = true;
+
   constructor(private visitService: VisitService,
               private route: ActivatedRoute,
+              private router: Router,
               private location: Location,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private snaackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('visitId');
@@ -39,9 +44,20 @@ export class EditVisitComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult){
-        this.visitService.deleteVisit(this.visit._id).subscribe(result => console.log(result),
+        const id = this.route.snapshot.paramMap.get('id');
+        this.visitService.deleteVisit(this.visit._id).subscribe(result => {
+          console.log(result);
+          this.openSnackBar('Visit deleted successfully', 'Close');
+          this.router.navigateByUrl(`patient/${id}`);
+            },
             err => console.error(err));
       }
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snaackBar.open(message, action, {
+      duration: 2000,
     });
   }
 

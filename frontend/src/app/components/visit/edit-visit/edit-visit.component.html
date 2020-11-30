@@ -6,7 +6,7 @@
 
     <div class="form-div">
     <br>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
         <mat-label>Doctor name</mat-label>
         <input matInput
                placeholder="Doctor name"
@@ -14,7 +14,7 @@
                name="doctorName"
                [(ngModel)]="visit.doctorName">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
         <mat-label>Visit Date</mat-label>
         <input matInput
                [matDatepicker]="picker"

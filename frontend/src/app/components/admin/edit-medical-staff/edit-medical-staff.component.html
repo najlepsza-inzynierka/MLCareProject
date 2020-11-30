@@ -1,1 +1,113 @@
-<p>edit-medical-staff works!</p>
+<div class="add-patient">
+    <h1>New Medical Staff</h1>
+    <div class="form-div">
+        <form class="add-patient-form" #addMedical="ngForm">
+            <div class="form-wrapper">
+                <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                    <mat-label>First name</mat-label>
+                    <label>
+                        <input matInput
+                               placeholder="First Name"
+                               type="text"
+                               required
+                               name="firstName"
+                               [(ngModel)]="medical.firstName">
+                    </label>
+                </mat-form-field>
+                <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                    <mat-label>Middle name (optional)</mat-label>
+                    <input matInput
+                           placeholder="Middle name (optional)"
+                           type="text"
+                           name="middleName"
+                           [(ngModel)]="medical.middleName">
+                </mat-form-field>
+            </div>
+            <br>
+
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Last name</mat-label>
+                <input matInput
+                       placeholder="Last Name"
+                       type="text"
+                       required
+                       name="lastName"
+                       [(ngModel)]="medical.lastName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Title</mat-label>
+                <input matInput
+                       placeholder="Title"
+                       type="text"
+                       required
+                       name="title"
+                       [(ngModel)]="medical.title">
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Address</mat-label>
+                <input matInput
+                       placeholder="Address"
+                       type="text"
+                       required
+                       name="address"
+                       [(ngModel)]="medical.address">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Phone number</mat-label>
+                <input matInput
+                       placeholder="Phone number"
+                       type="text"
+                       required
+                       name="phoneNumber"
+                       [(ngModel)]="medical.phoneNumber">
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Medical staff Id</mat-label>
+                <input matInput
+                       placeholder="Medical staff Id"
+                       type="text"
+                       required
+                       name="medicalID"
+                       [(ngModel)]="medical.userId">
+            </mat-form-field>
+            <br>
+
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Email</mat-label>
+                <input matInput
+                       placeholder="Email"
+                       type="email"
+                       email
+                       required
+                       name="email"
+                       [(ngModel)]="medical.email">
+            </mat-form-field>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Password</mat-label>
+                <input matInput
+                       placeholder="Password"
+                       required
+                       type="text"
+                       name="password"
+                       [(ngModel)]="medical.password">
+            </mat-form-field>
+            <br>
+
+
+            <button mat-raised-button
+                    (click)="saveMedical()"
+                    class="btn btn-success"
+                    [disabled]="!addMedical.valid"
+                    color="primary">Submit</button>
+        </form>
+    </div>
+
+
+
+</div>
+

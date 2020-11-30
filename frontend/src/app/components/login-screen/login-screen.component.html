@@ -19,12 +19,12 @@
                     color="accent">Administrator Panel</button>
             <form class="add-patient-form" #login="ngForm">
                 <div id="login-title">Log in</div>
-                <mat-form-field appearance="outline" class="login">
+                <mat-form-field appearance="outline" class="login" [hideRequiredMarker]="hidden">
             <mat-label>Doctor Login</mat-label>
             <input matInput required type="email" name="email" [(ngModel)]="user.email">
         </mat-form-field>
             <br>
-            <mat-form-field appearance="outline" class="login">
+            <mat-form-field appearance="outline" class="login" [hideRequiredMarker]="hidden">
                 <mat-label>Password</mat-label>
                 <input matInput required type="password" name="password" [(ngModel)]="user.password">
             </mat-form-field>

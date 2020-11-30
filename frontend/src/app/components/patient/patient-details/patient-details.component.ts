@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PatientService} from '../../../services/patient.service';
 import {Patient} from '../../../interfaces/patient';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
 import {MatTableDataSource} from '@angular/material/table';
 import { Visit } from 'src/app/interfaces/visit';
@@ -24,6 +24,7 @@ export class PatientDetailsComponent implements OnInit {
               private visitService: VisitService,
               private predictionService: PredictionService,
               private route: ActivatedRoute,
+              private router: Router,
               private location: Location,
               private snaackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource(this.patientVisit);
@@ -32,10 +33,6 @@ export class PatientDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadVisits();
-  }
-
-  deletePrediction(){ // todo trzeba przeniesc do wizyty pozniej
-    this.predictionService.deletePrediction('5f9db99eafa390363fa326aa').subscribe(e => console.log(e));
   }
 
   loadVisits(){
@@ -65,7 +62,7 @@ export class PatientDetailsComponent implements OnInit {
 
   goBack(): void {
     this.patientService.wentBack = false;
-    this.location.back();
+    this.router.navigateByUrl('patients');
   }
 
   filterName(event: Event) {
