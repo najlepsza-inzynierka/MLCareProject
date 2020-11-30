@@ -153,7 +153,7 @@ export class AddVisitComponent implements OnInit {
           this.goBack();
         },
         error => {
-            this.openSnackBar('Something went wrong :(', 'Close');
+            this.openSnackBar(error.error.message, 'Close');
             console.log(error);
         }
     );

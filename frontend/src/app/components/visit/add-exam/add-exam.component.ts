@@ -128,7 +128,7 @@ export class AddExamComponent implements OnInit {
           this.openSnackBar('Exam added successfully', 'Close');
         },
         error => {
-          this.openSnackBar('Something went wrong :(', 'Close');
+          this.openSnackBar(error.error.message, 'Close');
           console.log(error);
         }
     );
