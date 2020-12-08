@@ -1,5 +1,12 @@
 <div class="add-patient">
-    <h1>Add Visit</h1>
+    <h1>
+        <button mat-icon-button class="material-icons" (click)="goBack()">
+            <mat-icon>
+                arrow_back
+            </mat-icon>
+        </button>
+        Add Visit
+    </h1>
 
     <div class="form-div">
         <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
@@ -42,7 +49,7 @@
             </mat-form-field>
         </form>
         <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
-            <mat-label>Feature value</mat-label>
+            <mat-label>Feature value (True/False or Numerical value)</mat-label>
             <input matInput
                    placeholder="Feature value (True/False or Numerical value)"
                    type="text"
@@ -59,12 +66,13 @@
         <button mat-raised-button
                 class="btn btn-success add-button"
                 (click)="pushAndClearExamData()"
+                [disabled]="exam.features.length == 0"
                 >Add exam</button>
         <br>
-        <button mat-raised-button (click)="goBack()">Go back</button>
         <button mat-raised-button
                     class="btn btn-success"
                     (click)="saveVisit()"
+                    [disabled]="visit.exams.length == 0"
                     color="primary">Submit</button>
     </div>
 

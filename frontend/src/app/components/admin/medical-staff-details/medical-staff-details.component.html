@@ -1,5 +1,9 @@
 <div *ngIf="medical" class="main-container add-patient">
-    <button mat-raised-button (click)="goBack()">Go back</button>
+    <button mat-icon-button class="material-icons" (click)="goBack()">
+        <mat-icon>
+            arrow_back
+        </mat-icon>
+    </button>
     <div class="form-div">
     <h1>{{medical.firstName}}
         <span *ngIf="medical.middleName"> {{medical.middleName}}</span>

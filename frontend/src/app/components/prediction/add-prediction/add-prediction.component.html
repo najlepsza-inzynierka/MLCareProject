@@ -1,5 +1,9 @@
 <div class="add-patient">
-    <button mat-raised-button (click)="goBack()" id="go-back">Go back</button>
+    <button mat-icon-button class="material-icons" (click)="goBack()">
+        <mat-icon>
+            arrow_back
+        </mat-icon>
+    </button>
     <h1>Choose disease to predict</h1>
     <div class="form-div">
             <form [formGroup]="diseasesFormGroup">
@@ -7,7 +11,7 @@
                     <mat-checkbox (change)="onChange($event)" [value]="disease">{{disease.name}}</mat-checkbox>
                 </div>
             </form>
-            <button mat-raised-button color="primary" (click)="submit()">Predict</button>
+            <button mat-raised-button color="primary" (click)="submit()" [disabled]="selected.length == 0">Predict</button>
     </div>
 
     <h1>Choose features to use</h1>

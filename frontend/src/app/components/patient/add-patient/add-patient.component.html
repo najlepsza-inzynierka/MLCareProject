@@ -1,5 +1,12 @@
 <div class="add-patient">
-  <h1>New Patient</h1>
+  <h1>
+    <button mat-icon-button class="material-icons" (click)="goBack()">
+      <mat-icon>
+        arrow_back
+      </mat-icon>
+    </button>
+    New Patient
+  </h1>
   <div class="form-div">
     <form class="add-patient-form" #addPatient="ngForm">
       <div class="form-wrapper">
@@ -110,7 +117,6 @@
     </mat-form-field>
     <br>
 
-      <button mat-raised-button (click)="goBack()">Go back</button>
       <button mat-raised-button
             (click)="savePatient()"
             class="btn btn-success"

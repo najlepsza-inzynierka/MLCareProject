@@ -1,6 +1,10 @@
 <div class="add-patient">
     <h1>Add Exam</h1>
-
+    <button mat-icon-button class="material-icons" (click)="goBack()">
+        <mat-icon>
+            arrow_back
+        </mat-icon>
+    </button>
     <div class="form-div">
         <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
             <mat-label>Exam name</mat-label>
@@ -57,8 +61,8 @@
                 >Add feature</button>
 
         <br>
-        <button mat-raised-button (click)="goBack()">Go back</button>
         <button mat-raised-button
+                [disabled]="exam.features.length == 0"
                 class="btn btn-success"
                 (click)="saveExam()"
                 color="primary">Submit</button>

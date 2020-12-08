@@ -126,6 +126,7 @@ export class AddExamComponent implements OnInit {
           this.added = true;
           this.clearVisitData();
           this.openSnackBar('Exam added successfully', 'Close');
+          this.goBack();
         },
         error => {
           this.openSnackBar(error.error.message, 'Close');

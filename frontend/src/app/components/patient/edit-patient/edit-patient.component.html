@@ -1,8 +1,16 @@
 <div class="add-patient" *ngIf="patient">
-        <h1>
-            Edit Patient
-            <button mat-raised-button class="warn-title-button" color="warn" (click)="confirmDialog()">Delete patient</button>
-        </h1>
+
+    <h1>
+        <button mat-icon-button class="material-icons" (click)="goBack()">
+            <mat-icon>
+                arrow_back
+            </mat-icon>
+        </button>
+        Edit Patient
+        <span class="material-icons" (click)="confirmDialog()">
+            delete
+        </span>
+    </h1>
 
     <div class="form-div">
         <form class="add-patient-form" #addPatient="ngForm">
@@ -112,9 +120,7 @@
                        [(ngModel)]="patient.email">
             </mat-form-field>
             <br>
-            <button mat-raised-button
-                    (click)="goBack()"
-                    class="btn btn-success">Go back</button>
+
             <button mat-raised-button
                     (click)="savePatient()"
                     class="btn btn-success"

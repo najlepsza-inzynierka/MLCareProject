@@ -15,8 +15,7 @@ export class AddPredictionComponent implements OnInit {
   features;
   diseasesFormGroup: FormGroup;
   featuresFormGroup: FormGroup;
-  selected;
-  dis;
+  selected = [];
   visitId;
   id;
   visits;

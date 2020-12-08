@@ -11,8 +11,12 @@
         <br>
     </div>
 
-
-    <h1>{{institution.institutionName}}</h1>
+    <div class="form-div">
+        <h1>{{institution.institutionName}}</h1>
+        <p class="info-left">Users limit: <span class="info-right">{{institution.usersLimit}}</span></p>
+        <p class="info-left">Registered users number: <span class="info-right">{{institution.usersNo}}</span></p>
+        <p class="info-left">Available user accounts left: <span class="info-right">{{institution.usersLimit - institution.usersNo}}</span></p>
+    </div>
     <div class="search-bar">
     <mat-form-field class="SearchBar">
         <mat-label>Search</mat-label>
