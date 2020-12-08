@@ -12,3 +12,10 @@ app.config['MONGO_URI'] = _db_conn_string
 app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 connection = MongoClient(_db_conn_string)
 db = connection[os.environ["DB_NAME"]]
+
+
+def clean_db():
+    # only collection diseases remains
+    collections = ['admins', 'exams', 'institutions', 'patients',
+                   'predictions', 'tokens', 'users', 'visits']
+    [db[collection].drop() for collection in collections]

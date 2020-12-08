@@ -38,3 +38,11 @@ def add_institution():
     return jsonify({"confirmation": "OK",
                     "newInst": inst_id})
 
+
+@app.route('/api/institutions', methods=['GET'])
+@json_body
+def get_institutions():
+    institution_dao = InstitutionDAO()
+    institutions = institution_dao.find_all_institutions()
+    resp = [inst.data for inst in institutions]
+    return jsonify(resp)

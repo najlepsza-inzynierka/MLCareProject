@@ -12,7 +12,7 @@ patient_bp = Blueprint('patients', __name__)
 
 # everywhere patient.id not patient.patientId
 @app.route('/api/patients', methods=['GET'])
-@check_token
+# @check_token
 def get_all_patients():
     dao = PatientDAO()
     patients = dao.find_all_patients()

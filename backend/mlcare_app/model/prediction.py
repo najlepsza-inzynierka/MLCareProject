@@ -66,7 +66,7 @@ class Prediction(ModelDocument):
 
     @property
     def date(self):
-        return self._data['date']
+        return self._data.get('date')
 
     @date.setter
     def date(self, new_date):
