@@ -20,10 +20,10 @@ export class LoginScreenComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.clearData();
     if (this.authService.isLoggedIn()){
       this.router.navigateByUrl('patients');
     }
+    this.clearData();
   }
 
   signIn(){

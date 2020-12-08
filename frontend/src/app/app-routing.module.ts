@@ -56,6 +56,7 @@ const routes: Routes = [
       path: '', component: AddMedicalStaffComponent}]  },
     { path: 'edit-admin', component: TopBarComponent, canActivate: [AdminGuard], children: [{
       path: '', component: EditAdminComponent}]  },
+    { path: '**', redirectTo: 'login'},
 ];
 
 

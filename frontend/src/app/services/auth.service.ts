@@ -40,6 +40,14 @@ export class AuthService {
   }
 
   public logout(){
+    console.log(this.getAuthorizationToken());
+    console.log(this.result);
+    this.result = {
+      auth_token: this.getAuthorizationToken(),
+      message: 'Successfully logged in.',
+      status: 'success',
+      user: ''
+    };
     this.http.post('/api/users/logout', this.result).subscribe(r => {
       this.result = r;
       if (this.result.status === 'success'){
