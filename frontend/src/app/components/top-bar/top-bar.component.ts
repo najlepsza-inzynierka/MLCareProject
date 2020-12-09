@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdminAuthService} from '../../services/admin-auth.service';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {AdminService} from '../../services/admin.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -9,12 +10,29 @@ import {Router} from '@angular/router';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent implements OnInit {
+  userName = '';
 
   constructor(private authService: AuthService,
+              private adminService: AdminService,
               private adminAuthService: AdminAuthService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.getName();
+  }
+
+  getName(){
+    if (this.adminAuthService.isLoggedIn()){
+      this.adminService.getAdmin().subscribe(r => {
+        this.userName = r.admin.firstName + ' ' + r.admin.lastName;
+      });
+    }
+  }
+
+  editUser(){
+    if (this.adminAuthService.isLoggedIn()) {
+      this.router.navigateByUrl(`/edit-admin`);
+    }
   }
 
   redirect(){

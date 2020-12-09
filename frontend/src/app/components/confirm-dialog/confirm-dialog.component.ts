@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 @Component({
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
-  styleUrls: ['./confirm-dialog.component.css']
+  styleUrls: ['../login-screen/login-screen.component.css', '../patient/add-patient/add-patient.component.css', './confirm-dialog.component.css']
 })
 export class ConfirmDialogComponent implements OnInit {
   title: string;

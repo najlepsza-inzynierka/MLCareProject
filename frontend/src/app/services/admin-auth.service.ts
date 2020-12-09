@@ -10,8 +10,6 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class AdminAuthService {
   admin;
   token = '';
-  adminToAdd;
-  institutionToAdd;
   constructor(private http: HttpClient,
               private router: Router,
               private snaackBar: MatSnackBar) { }

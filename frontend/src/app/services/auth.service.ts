@@ -9,6 +9,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class AuthService {
   private result;
+  user;
   token = '';
   constructor(private http: HttpClient,
               private router: Router,
@@ -17,6 +18,7 @@ export class AuthService {
   public signIn(userData: User){
     this.http.post('/api/users/login', userData).subscribe(r => {
       this.result = r;
+      this.user = this.result.user;
       if (this.result.status === 'success'){
         this.token = this.result.auth_token;
         localStorage.setItem('ACCESS_TOKEN_USER', this.token);
