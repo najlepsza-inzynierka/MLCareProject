@@ -1,5 +1,4 @@
 .image-container, .chartContainer{
-    width: 60%;
     margin: auto;
     padding: 2%;
 }
@@ -8,3 +7,4 @@
     width: 100%;
     margin: auto;
 }
+/*TODO HEIGHT 34px ARROW*/
