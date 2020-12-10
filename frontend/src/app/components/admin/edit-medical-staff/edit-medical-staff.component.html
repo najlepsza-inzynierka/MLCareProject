@@ -4,24 +4,24 @@
         <form class="add-patient-form" #addMedical="ngForm">
             <div class="form-wrapper">
                 <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
-                <mat-label>First name</mat-label>
-                <label>
+                    <mat-label>First name</mat-label>
+                    <label>
+                        <input matInput
+                               placeholder="First Name"
+                               type="text"
+                               required
+                               name="firstName"
+                               [(ngModel)]="medical.firstName">
+                    </label>
+                </mat-form-field>
+                <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                    <mat-label>Middle name (optional)</mat-label>
                     <input matInput
-                           placeholder="First Name"
+                           placeholder="Middle name (optional)"
                            type="text"
-                           required
-                           name="firstName"
-                           [(ngModel)]="medical.firstName">
-                </label>
-            </mat-form-field>
-            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
-                <mat-label>Middle name (optional)</mat-label>
-                <input matInput
-                       placeholder="Middle name (optional)"
-                       type="text"
-                       name="middleName"
-                       [(ngModel)]="medical.middleName">
-            </mat-form-field>
+                           name="middleName"
+                           [(ngModel)]="medical.middleName">
+                </mat-form-field>
             </div>
             <br>
 

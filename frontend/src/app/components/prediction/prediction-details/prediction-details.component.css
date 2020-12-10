@@ -1,0 +1,10 @@
+.image-container, .chartContainer{
+    margin: auto;
+    padding: 2%;
+}
+
+.prediction-image{
+    width: 100%;
+    margin: auto;
+}
+/*TODO HEIGHT 34px ARROW*/

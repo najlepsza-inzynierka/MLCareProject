@@ -1,5 +1,5 @@
 .mat-raised-button{
-  margin: 5px 5px 5px 0;
+  margin: 5px 0 5px 0;
 }
 
 .table{
@@ -11,8 +11,7 @@
 }
 
 .info{
-  margin: auto;
-  width: 100%;
+  width: 30%;
 }
 
 .info-left{
@@ -30,23 +29,9 @@
   padding: 2%;
   border-radius: 10px;
   display: block;
-  background-color: #F2F2F2;
+  background-color: white;
 }
 
 #patient-name{
   text-align: center;
-}
-
-.search-bar{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
-  margin: auto;
-}
-
-.add-patient-button{
-  margin-left: 10px;
-  margin-top: 5px;
 }

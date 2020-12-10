@@ -25,20 +25,20 @@ $my-green: (
         A400: #08a884,
         A700: #08a884,
         contrast: (
-                50: white,
-                100: white,
-                200: white,
-                300: white,
-                400: white,
-                500: white,
-                600: white,
-                700: white,
-                800: white,
-                900: white,
-                A100: white,
-                A200: white,
-                A400: white,
-                A700: white,
+                50: #f2f2f2,
+                100: #f2f2f2,
+                200: #f2f2f2,
+                300: #f2f2f2,
+                400: #f2f2f2,
+                500: #f2f2f2,
+                600: #f2f2f2,
+                700: #f2f2f2,
+                800: #f2f2f2,
+                900: #f2f2f2,
+                A100: #f2f2f2,
+                A200: #f2f2f2,
+                A400: #f2f2f2,
+                A700: #f2f2f2,
         )
 );
 $ml-app-primary: mat-palette($my-green);
@@ -54,7 +54,7 @@ $ml-app-theme: mat-light-theme($ml-app-primary, $ml-app-accent, $ml-app-warn);
 
 $foreground: map-get($ml-app-theme, foreground);
 $foreground: map_merge($foreground, (foreground: $ml-app-foreground-color));
-$ml-app-background-color: #FFFFFF;
+$ml-app-background-color: #f2f2f2;
 $background: map-get($ml-app-theme, background);
 $background: map_merge($background, (background: $ml-app-background-color));
 $ml-app-theme: map_merge($ml-app-theme, (background: $background));

@@ -1,21 +1,28 @@
-<div *ngIf="visit" class="main-container">
-  <div class="inline-visit">
-    <button mat-raised-button (click)="goBack()">Go back</button>
+<div *ngIf="visit" class="main-container add-patient">
+  <div class="form-div">
+    <button mat-icon-button class="material-icons" (click)="goBack()">
+        <mat-icon>
+          arrow_back
+        </mat-icon>
+    </button>
     <h1>{{patientFirstName}} <span *ngIf="patientMiddleName"> {{patientMiddleName}} </span>{{patientLastName}}</h1>
-  </div>
   <p>Visit Date: {{visit.date | date: 'short'}}
   </p>
   <p>Doctor: {{visit.doctorName}}</p>
   <br>
-  <button mat-raised-button color="primary" routerLink="/patient/{{this.patientId}}/visit/edit/{{this.visitId}}">Edit visit</button>
-  <button mat-raised-button color="warn" (click)="confirmDeleteVisitDialog()">Delete visit</button>
+    <span class="material-icons" routerLink="/patient/{{this.patientId}}/visit/edit/{{this.visitId}}">
+       create
+    </span>
 
-  <h2>
-    Exams
-    <button mat-raised-button color="primary" routerLink="/patient/{{this.patientId}}/add-exam/{{this.visitId}}">Add exam</button>
-  </h2>
+  <h2>Exams</h2>
 
-
+    <div class="search-bar">
+      <mat-form-field class="SearchBar">
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="filterExamName($event)" placeholder="Exam">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="add-patient-button" routerLink="/patient/{{this.patientId}}/add-exam/{{this.visitId}}">Add exam</button>
+    </div>
   <table mat-table
          [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="Name">
@@ -33,7 +40,6 @@
         <a (click)="confirmDeleteExamDialog(element._id)">Delete</a>
       </td>
     </ng-container>
-
 
   <!--  &lt;!&ndash; Expanded Content Column - The detail row is made up of this one column that spans across all columns &ndash;&gt;-->
     <ng-container matColumnDef="expandedDetail">
@@ -69,10 +75,16 @@
   </table>
 
 
-  <h2>
-    Predictions
-    <button mat-raised-button color="primary" [disabled]="this.diseases == null" routerLink="add-prediction">Predict disease</button>
-  </h2>
+  <h2>Predictions</h2>
+
+    <div class="search-bar">
+      <mat-form-field class="SearchBar">
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="filterPredictionName($event)" placeholder="Prediction">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="add-patient-button" [disabled]="this.diseases == null" routerLink="add-prediction">Predict disease</button>
+
+    </div>
   <table mat-table [dataSource]="predictionDataSource" class="mat-elevation-z8">
     <!--  Visit date column  -->
     <ng-container matColumnDef="Date">
@@ -95,4 +107,5 @@
     <mat-header-row *matHeaderRowDef="columnsToDisplayPrediction"></mat-header-row>
     <mat-row *matRowDef="let row; columns: columnsToDisplayPrediction;" routerLink="prediction/{{row._id}}" class="row-link"></mat-row>
   </table>
+</div>
 </div>

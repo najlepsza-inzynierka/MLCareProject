@@ -1,7 +1,15 @@
-<div class="example-container">
-    <div>
+<div class="add-patient" *ngIf="admin">
+    <h1>
+        <button mat-icon-button class="material-icons" (click)="goBack()">
+            <mat-icon>
+                arrow_back
+            </mat-icon>
+        </button>
+        Your Data
+    </h1>
+    <div class="form-div">
         <form class="add-patient-form" #addAdmin="ngForm">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>First name</mat-label>
                 <label>
                     <input matInput
@@ -12,7 +20,7 @@
                            [(ngModel)]="admin.firstName">
                 </label>
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Last name</mat-label>
                 <input matInput
                        placeholder="Last Name"
@@ -23,7 +31,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Address</mat-label>
                 <input matInput
                        placeholder="Address"
@@ -32,42 +40,41 @@
                        name="address"
                        [(ngModel)]="admin.address">
             </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Phone number</mat-label>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Phone number (optional)</mat-label>
                 <input matInput
-                       placeholder="Phone number"
+                       placeholder="Phone number (optional)"
                        type="text"
                        name="phoneNumber"
                        [(ngModel)]="admin.phoneNumber">
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Email</mat-label>
                 <input matInput
-                       placeholder="Email"
+                       placeholder="Email (optional)"
                        type="email"
+                       required
                        email
                        name="email"
                        [(ngModel)]="admin.email">
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Password</mat-label>
                 <input matInput
                        placeholder="Password"
+                       required
                        type="password"
                        name="password"
                        [(ngModel)]="admin.password">
             </mat-form-field>
             <br>
             <button mat-raised-button
-                    (click)="goBack()"
-                    class="btn btn-success">Go back</button>
-            <button mat-raised-button
                     (click)="saveAdmin()"
                     class="btn btn-success"
                     [disabled]="!addAdmin.valid"
-                    color="primary">Edit your data</button>
+                    color="primary">Edit</button>
         </form>
     </div>
 </div>

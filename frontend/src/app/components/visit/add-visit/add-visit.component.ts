@@ -6,26 +6,65 @@ import {VisitService} from '../../../services/visit.service';
 import {ActivatedRoute} from '@angular/router';
 import {Feature} from '../../../interfaces/feature';
 import {Location} from '@angular/common';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {FeatureGroup} from '../../../interfaces/feature-group';
+import {Observable} from 'rxjs';
+import {PredictionService} from '../../../services/prediction.service';
+import {map, startWith} from 'rxjs/operators';
+
+export const autocompletefilter = (opt: string[], value: string): string[] => {
+  const filterValue = value.toLowerCase();
+
+  return opt.filter(item => item.toLowerCase().indexOf(filterValue) === 0);
+};
 
 @Component({
   selector: 'app-add-visit',
   templateUrl: './add-visit.component.html',
-  styleUrls: ['../../login-screen/login-screen.component.css', './add-visit.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', '../../patient/add-patient/add-patient.component.css', './add-visit.component.css']
 })
 export class AddVisitComponent implements OnInit {
   visit: Visit;
   exam: Exam;
   feature: Feature;
+  diseases;
   added = false;
+  hidden = true;
+  featureForm: FormGroup = this.formBuilder.group({
+    featureGroup: '',
+  });
+  featureGroup: FeatureGroup[] = [{
+    disease: 'acute_inflammations',
+    names: [],
+    real_names: []
+  }, {
+    disease: 'breast_cancer_wisconsin',
+    names: [],
+    real_names: []
+  }, {
+    disease: 'breast_cancer_coimbra',
+    names: [],
+    real_names: []
+  }];
+  featureGroupOptions: Observable<FeatureGroup[]>;
 
   constructor(private visitService: VisitService,
+              private predictionService: PredictionService,
+              private formBuilder: FormBuilder,
               private route: ActivatedRoute,
               private location: Location,
               private snaackBar: MatSnackBar) {
     this.clearVisitData();
+    this.getDiseases();
   }
 
   ngOnInit(): void {
+    // tslint:disable-next-line:no-non-null-assertion
+    this.featureGroupOptions = this.featureForm.get('featureGroup')!.valueChanges
+        .pipe(
+            startWith(''),
+            map(value => this._filterGroup(value))
+        );
   }
 
   clearVisitData(){
@@ -42,11 +81,31 @@ export class AddVisitComponent implements OnInit {
     this.visit = {
       _id: '-1',
       date: '',
-      doctorId: '5ece8924947fa16b8c6129d5',
-      doctorName: 'Pan Wilk',
+      doctorId: '',
+      doctorName: '',
       exams: [],
       predictions: []
     };
+  }
+
+  getDiseases(){
+    this.predictionService.getDiseases().subscribe(d => {
+      this.diseases = d;
+      console.log(d);
+      this.diseases.forEach(item => {
+        if (item.disease_tag === 'acute_inflammations'){
+          this.featureGroup[0].names = item.feature_importances.all.map(a => a[2]);
+          this.featureGroup[0].real_names = item.feature_importances.all.map(a => a[0]);
+        } else if (item.disease_tag === 'breast_cancer_wisconsin'){
+          this.featureGroup[1].names = item.feature_importances.all.map(a => a[2]);
+          this.featureGroup[0].real_names = item.feature_importances.all.map(a => a[0]);
+        } else if (item.disease_tag === 'breast_cancer_coimbra'){
+          this.featureGroup[2].names = item.feature_importances.all.map(a => a[2]);
+          this.featureGroup[0].real_names = item.feature_importances.all.map(a => a[0]);
+        }
+      });
+      console.log(this.featureGroup);
+    });
   }
 
   saveVisitData(){
@@ -91,9 +150,10 @@ export class AddVisitComponent implements OnInit {
           this.added = true;
           this.clearVisitData();
           this.openSnackBar('Visit added successfully', 'Close');
+          this.goBack();
         },
         error => {
-            this.openSnackBar('Something went wrong :(', 'Close');
+            this.openSnackBar(error.error.message, 'Close');
             console.log(error);
         }
     );
@@ -107,6 +167,14 @@ export class AddVisitComponent implements OnInit {
 
   goBack(){
     this.location.back();
+  }
+
+  private _filterGroup(value: string): FeatureGroup[] {
+    if (value) {
+      return this.featureGroup
+          .map(group => ({disease: group.disease, names: autocompletefilter(group.names, value), real_names: group.real_names}))
+          .filter(group => group.names.length > 0);
+    }
   }
 
 }

@@ -1,8 +1,9 @@
 <p>
     <mat-toolbar class="top-container">
-    <a mat-button routerLink="/patients">MLCare</a>
+    <a id="app-title" mat-button (click)="redirect()">MLCare</a>
     <span class="filler"></span>
-    <button mat-raised-button (click)="signOutUser()">User sign out</button>
+        <a mat-button (click)="editUser()">{{this.userName}}</a>
+        <button mat-raised-button (click)="signOutUser()">Sign out</button>
     </mat-toolbar>
 </p>
 <router-outlet></router-outlet>

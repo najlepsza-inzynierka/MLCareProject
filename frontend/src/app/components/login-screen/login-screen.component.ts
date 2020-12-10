@@ -12,11 +12,17 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class LoginScreenComponent implements OnInit {
   user: User;
   isSubmitted  =  false;
+  hidden = true;
 
   constructor(private authService: AuthService,
-              private snaackBar: MatSnackBar) { }
+              private router: Router,
+              private snaackBar: MatSnackBar) {}
+
 
   ngOnInit(): void {
+    if (this.authService.isLoggedIn()){
+      this.router.navigateByUrl('patients');
+    }
     this.clearData();
   }
 

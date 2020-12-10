@@ -1,8 +1,12 @@
-<div *ngIf="visit">
-    <p>Visit id: {{visit._id}}</p>
-    <button mat-raised-button (click)="goBack()">Go back</button>
+<div *ngIf="visit" class="add-patient">
+    <h1>
+        Edit Visit
+        <button mat-raised-button color="warn" (click)="confirmDeleteVisitDialog()">Delete visit</button>
+    </h1>
+
+    <div class="form-div">
     <br>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
         <mat-label>Doctor name</mat-label>
         <input matInput
                placeholder="Doctor name"
@@ -10,7 +14,7 @@
                name="doctorName"
                [(ngModel)]="visit.doctorName">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
         <mat-label>Visit Date</mat-label>
         <input matInput
                [matDatepicker]="picker"
@@ -21,4 +25,6 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+        <br>
+    </div>
 </div>

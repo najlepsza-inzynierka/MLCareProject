@@ -6,8 +6,6 @@ import { Location } from '@angular/common';
 import {MatTableDataSource} from '@angular/material/table';
 import { Visit } from 'src/app/interfaces/visit';
 import {VisitService} from '../../../services/visit.service';
-import {ConfirmDialogComponent, ConfirmDialogModel} from '../../confirm-dialog/confirm-dialog.component';
-import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {PredictionService} from '../../../services/prediction.service';
 
@@ -20,7 +18,6 @@ export class PatientDetailsComponent implements OnInit {
   patientVisit: Visit[];
   dataSource: MatTableDataSource<Visit>;
   genderMap = {0: 'Male', 1: 'Female'};
-  result = false;
   @Input() patient: Patient;
   displayedColumns: string[] = ['id', 'visitDate', 'doctorId', 'doctorName'];
   constructor(private patientService: PatientService,
@@ -29,7 +26,6 @@ export class PatientDetailsComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private location: Location,
-              public dialog: MatDialog,
               private snaackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource(this.patientVisit);
     this.getPatient();
@@ -37,10 +33,6 @@ export class PatientDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadVisits();
-  }
-
-  deletePrediction(){ // todo trzeba przeniesc do wizyty pozniej
-    this.predictionService.deletePrediction('5f9db99eafa390363fa326aa').subscribe(e => console.log(e));
   }
 
   loadVisits(){
@@ -70,39 +62,12 @@ export class PatientDetailsComponent implements OnInit {
 
   goBack(): void {
     this.patientService.wentBack = false;
-    this.location.back();
+    this.router.navigateByUrl('patients');
   }
 
   filterName(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  confirmDialog(): void {
-    const message = `Are you sure you want to delete patient?`;
-
-    const dialogData = new ConfirmDialogModel('Confirm Delete', message);
-
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: '400px',
-      data: dialogData
-    });
-
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      this.result = dialogResult;
-      if (dialogResult){
-        this.patientService.deletePatient(this.patient._id).subscribe(response => {
-              console.log(response);
-              this.openSnackBar('Patient deleted successfully', 'Close');
-              this.router.navigateByUrl(`patients`);
-            },
-            error => {
-              this.openSnackBar('Something went wrong :(', 'Close');
-              console.log(error);
-            }
-        );
-      }
-    });
   }
 
   openSnackBar(message: string, action: string) {

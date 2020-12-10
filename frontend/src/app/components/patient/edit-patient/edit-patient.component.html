@@ -1,8 +1,21 @@
 <div class="add-patient" *ngIf="patient">
-    <div id="form-div">
+
+    <h1>
+        <button mat-icon-button class="material-icons" (click)="goBack()">
+            <mat-icon>
+                arrow_back
+            </mat-icon>
+        </button>
+        Edit Patient
+        <span class="material-icons" (click)="confirmDialog()">
+            delete
+        </span>
+    </h1>
+
+    <div class="form-div">
         <form class="add-patient-form" #addPatient="ngForm">
             <div class="form-wrapper">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>First name</mat-label>
                 <label>
                     <input matInput
@@ -13,10 +26,10 @@
                            [(ngModel)]="patient.firstName">
                 </label>
             </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Middle name</mat-label>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Middle name (optional)</mat-label>
                 <input matInput
-                       placeholder="Middle Name"
+                       placeholder="Middle name (optional)"
                        type="text"
                        name="middleName"
                        [(ngModel)]="patient.middleName">
@@ -24,7 +37,7 @@
             </div>
             <br>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Last name</mat-label>
                 <input matInput
                        placeholder="Last Name"
@@ -33,7 +46,7 @@
                        name="lastName"
                        [(ngModel)]="patient.lastName">
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Gender</mat-label>
                 <mat-select disableRipple
                             required
@@ -46,7 +59,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Address</mat-label>
                 <input matInput
                        placeholder="Address"
@@ -55,7 +68,7 @@
                        name="address"
                        [(ngModel)]="patient.address">
             </mat-form-field>
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Patient Id</mat-label>
                 <input matInput
                        placeholder="Patient Id"
@@ -66,7 +79,7 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Birth Date</mat-label>
                 <input matInput
                        [matDatepicker]="picker"
@@ -78,7 +91,7 @@
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
                 <mat-label>Birth Place</mat-label>
                 <input matInput
                        placeholder="Birth Place"
@@ -89,27 +102,25 @@
             </mat-form-field>
             <br>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Phone number</mat-label>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Phone number (optional)</mat-label>
                 <input matInput
-                       placeholder="Phone number"
+                       placeholder="Phone number (optional)"
                        type="text"
                        name="phoneNumber"
                        [(ngModel)]="patient.phoneNumber">
             </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <mat-label>Email (optional)</mat-label>
                 <input matInput
-                       placeholder="Email"
+                       placeholder="Email (optional)"
                        type="email"
                        email
                        name="email"
                        [(ngModel)]="patient.email">
             </mat-form-field>
             <br>
-            <button mat-raised-button
-                    (click)="goBack()"
-                    class="btn btn-success">Go back</button>
+
             <button mat-raised-button
                     (click)="savePatient()"
                     class="btn btn-success"

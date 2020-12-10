@@ -1,6 +1,15 @@
-<div class="example-container">
-    <div>
-        <mat-form-field appearance="outline">
+<div class="add-patient">
+    <h1>
+        <button mat-icon-button class="material-icons" (click)="goBack()">
+            <mat-icon>
+                arrow_back
+            </mat-icon>
+        </button>
+        Add Visit
+    </h1>
+
+    <div class="form-div">
+        <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
             <mat-label>Exam name</mat-label>
             <input matInput
                    placeholder="Exam name"
@@ -9,7 +18,7 @@
                    name="examName"
                    [(ngModel)]="exam.name">
         </mat-form-field>
-<mat-form-field appearance="outline">
+<mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
            <mat-label>Exam Date</mat-label>
            <input matInput
                   [matDatepicker]="picker"
@@ -21,61 +30,63 @@
            <mat-datepicker #picker></mat-datepicker>
        </mat-form-field>
         <br>
-        <mat-form-field appearance="outline">
-            <mat-label>Feature name</mat-label>
+        <form [formGroup]="featureForm">
+            <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+                <input type="text"
+                       matInput
+                       placeholder="Feature name"
+                       formControlName="featureGroup"
+                       required
+                       [(ngModel)]="feature.name"
+                       [matAutocomplete]="autoGroup">
+                <mat-autocomplete #autoGroup="matAutocomplete">
+                    <mat-optgroup *ngFor="let group of featureGroupOptions | async" [label]="group.disease">
+                        <mat-option *ngFor="let name of group.names" [value]="name">
+                            {{name}}
+                        </mat-option>
+                    </mat-optgroup>
+                </mat-autocomplete>
+            </mat-form-field>
+        </form>
+        <mat-form-field appearance="outline" [hideRequiredMarker]="hidden">
+            <mat-label>Feature value (True/False or Numerical value)</mat-label>
             <input matInput
-                   placeholder="Feature name"
+                   placeholder="Feature value (True/False or Numerical value)"
                    type="text"
-                   required
-                   name="featureName"
-                   [(ngModel)]="feature.name">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Feature value</mat-label>
-            <input matInput
-                   placeholder="Feature value"
-                   type="number"
                    required
                    name="featureValue"
                    [(ngModel)]="feature.value">
         </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Feature unit</mat-label>
-            <input matInput
-                   placeholder="Feature unit"
-                   type="text"
-                   required
-                   name="featureUnit"
-                   [(ngModel)]="feature.unit">
-        </mat-form-field>
         <br>
         <button mat-raised-button
-                class="btn btn-success"
+                class="btn btn-success add-button"
                 (click)="pushAndClearFeatureData()"
-                color="primary">Add feature</button>
-        <button mat-raised-button
-                class="btn btn-success"
-                (click)="pushAndClearExamData()"
-                color="primary">Add exam</button>
+                >Add feature</button>
         <br>
-        <button mat-raised-button (click)="goBack()">Go back</button>
+        <button mat-raised-button
+                class="btn btn-success add-button"
+                (click)="pushAndClearExamData()"
+                [disabled]="exam.features.length == 0"
+                >Add exam</button>
+        <br>
         <button mat-raised-button
                     class="btn btn-success"
                     (click)="saveVisit()"
+                    [disabled]="visit.exams.length == 0"
                     color="primary">Submit</button>
     </div>
-<div>
-    <ul *ngFor="let ff of exam.features">
-        {{ff.name}}  {{ff.value}} {{ff.unit}}
-    </ul>
-    <ul *ngFor="let e of visit.exams">
-    {{e.name}}
-    <ul *ngFor="let f of e.features">
-        <li>{{f.name}}  {{f.value}} {{f.unit}}</li>
-    </ul>
-    </ul>
-</div>
 
+    <div>
+        <ul *ngFor="let ff of exam.features">
+            {{ff.name}}  {{ff.value}} {{ff.unit}}
+        </ul>
+        <ul *ngFor="let e of visit.exams">
+        {{e.name}}
+        <ul *ngFor="let f of e.features">
+            <li>{{f.name}}  {{f.value}} {{f.unit}}</li>
+        </ul>
+        </ul>
+    </div>
 
 </div>
 

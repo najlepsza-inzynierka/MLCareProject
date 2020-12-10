@@ -2,6 +2,14 @@
   margin: 2%;
 }
 
+.form-div{
+  height: 100%;
+  padding: 2%;
+  border-radius: 10px;
+  display: block;
+  background-color: white;
+}
+
 .inline-visit{
   /*display: inline-flex;*/
   margin-left: auto;
@@ -14,11 +22,8 @@
 }
 
 h2{
-  margin-top: 1%;
+  margin-top: 5%;
   margin-bottom: 0;
-}
-h1{
-  padding-top: 5%;
 }
 tr.example-detail-row {
   height: 0;
@@ -44,6 +49,5 @@ tr.example-detail-row {
   right: 1%;
 }
 
-.mat-raised-button{
-  margin: 1% 1% 1% 0;
-}
+
+

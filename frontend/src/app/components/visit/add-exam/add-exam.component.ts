@@ -21,13 +21,14 @@ export const autocompletefilter = (opt: string[], value: string): string[] => {
 @Component({
   selector: 'app-add-exam',
   templateUrl: './add-exam.component.html',
-  styleUrls: ['../../login-screen/login-screen.component.css', './add-exam.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', '../../patient/add-patient/add-patient.component.css', './add-exam.component.css']
 })
 export class AddExamComponent implements OnInit {
   exam: Exam;
   feature: Feature;
   diseases;
   added = false;
+  hidden = true;
   featureForm: FormGroup = this.formBuilder.group({
     featureGroup: '',
   });
@@ -125,9 +126,10 @@ export class AddExamComponent implements OnInit {
           this.added = true;
           this.clearVisitData();
           this.openSnackBar('Exam added successfully', 'Close');
+          this.goBack();
         },
         error => {
-          this.openSnackBar('Something went wrong :(', 'Close');
+          this.openSnackBar(error.error.message, 'Close');
           console.log(error);
         }
     );

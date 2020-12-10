@@ -7,20 +7,3 @@
 .mat-form-field {
   font-size: 14px;
 }
-
-.search-bar{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  width: 100%;
-  margin: auto;
-}
-
-.SearchBar{
-  width: 90%;
-}
-.add-patient-button{
-  margin-left: 10px;
-  margin-top: 5px;
-}

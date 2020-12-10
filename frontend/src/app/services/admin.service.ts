@@ -25,6 +25,10 @@ export class AdminService {
     return this.http.post(registerForceURL, medical);
   }
 
+  updateMedical(medical, id){
+    return this.http.put(`${adminURL}/update/${id}`, medical); // todo
+  }
+
   getAllMedicals(){
     return this.http.get<any>(medicalURL);
   }

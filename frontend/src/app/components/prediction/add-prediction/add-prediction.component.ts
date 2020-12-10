@@ -8,15 +8,14 @@ import {Location} from '@angular/common';
 @Component({
   selector: 'app-add-prediction',
   templateUrl: './add-prediction.component.html',
-  styleUrls: ['./add-prediction.component.css']
+  styleUrls: ['../../patient/add-patient/add-patient.component.css', './add-prediction.component.css']
 })
 export class AddPredictionComponent implements OnInit {
   diseases;
   features;
   diseasesFormGroup: FormGroup;
   featuresFormGroup: FormGroup;
-  selected;
-  dis;
+  selected = [];
   visitId;
   id;
   visits;

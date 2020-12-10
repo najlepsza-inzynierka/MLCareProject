@@ -1,0 +1,38 @@
+.mat-raised-button{
+    margin: 5px 0 5px 0;
+}
+
+.table{
+    margin: auto;
+}
+
+.mat-form-field {
+    font-size: 14px;
+}
+
+.info{
+    margin: auto;
+    width: 100%;
+}
+
+.info-left{
+    margin: auto;
+    text-align: left;
+}
+
+.info-right{
+    margin: auto;
+    float: right;
+}
+
+.form-div{
+    height: 100%;
+    padding: 2%;
+    border-radius: 10px;
+    display: block;
+    background-color: white;
+}
+
+#patient-name{
+    text-align: center;
+}

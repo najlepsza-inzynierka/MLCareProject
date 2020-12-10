@@ -3,17 +3,21 @@ import {AdminService} from '../../../services/admin.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Medical} from '../../../interfaces/medical';
 import {of} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-medical-staff',
   templateUrl: './add-medical-staff.component.html',
-  styleUrls: ['../../login-screen/login-screen.component.css', './add-medical-staff.component.css']
+  styleUrls: ['../../login-screen/login-screen.component.css', '../../patient/add-patient/add-patient.component.css', './add-medical-staff.component.css']
 })
 export class AddMedicalStaffComponent implements OnInit {
-
   medical: Medical;
   added = false;
-  constructor(private adminService: AdminService, private snaackBar: MatSnackBar) {
+  hidden = true;
+
+  constructor(private adminService: AdminService,
+              private router: Router,
+              private snaackBar: MatSnackBar) {
     this.clearMedicalData();
   }
 
@@ -28,6 +32,7 @@ export class AddMedicalStaffComponent implements OnInit {
           this.added = true;
           this.clearMedicalData();
           this.openSnackBar('Medical staff added successfully', 'Close');
+          this.router.navigateByUrl('admin-panel');
         },
         error => {
           if (error.status === 450){

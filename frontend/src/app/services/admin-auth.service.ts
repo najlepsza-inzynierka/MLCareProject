@@ -12,8 +12,6 @@ const uri = 'http://localhost:5000';
 export class AdminAuthService {
   admin;
   token = '';
-  adminToAdd;
-  institutionToAdd;
   constructor(private http: HttpClient,
               private router: Router,
               private snaackBar: MatSnackBar) { }

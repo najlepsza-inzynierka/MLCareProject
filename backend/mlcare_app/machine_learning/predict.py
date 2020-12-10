@@ -6,7 +6,7 @@ from model.feature import Feature
 from model.prediction import Prediction
 import xgboost as xgb
 import pandas as pd
-import shap
+# import shap
 # import shap_fix
 
 
@@ -57,7 +57,7 @@ def predict(prediction: Prediction):
     index = list(res[0]).index(max(res[0]))
     predicted_class = model.classes_[index]
     prediction.predicted_class = result_map[model_name][predicted_class]
-    # prediction.image = explain_prediction_with_image(model, data)
+    # prediction.image = str(explain_prediction_with_image(model, data))
 
     prediction.model = model_name
 
