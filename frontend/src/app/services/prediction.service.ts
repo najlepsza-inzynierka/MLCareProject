@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Prediction} from '../interfaces/prediction';
 
-const baseUrl = 'api/visit';
-const predictionUrl = 'api/prediction';
-const diseasesUrl = 'api/diseases';
+const uri = 'http://localhost:5000';
+const baseUrl = `${uri}/api/visit`;
+const predictionUrl = `${uri}/api/prediction`;
+const diseasesUrl = `${uri}/api/diseases`;
 
 @Injectable({
   providedIn: 'root'

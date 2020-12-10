@@ -5,7 +5,7 @@ import numpy as np
 
 from .exceptions import PredictionFeatureException
 from .model_document import ModelDocument
-from ..database.diseases_dao import DiseaseDAO
+from database.diseases_dao import DiseaseDAO
 
 STATUS_SUCCESS = 'success'
 STATUS_FAILED = 'failure'

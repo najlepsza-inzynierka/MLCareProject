@@ -2,10 +2,10 @@ import datetime
 
 from flask import jsonify, Blueprint, g
 
-from .. import app
-from ..database.institution_dao import InstitutionDAO
-from ..model.institution import Institution
-from ..validate import expect_mime, json_body, mk_error, check_token
+from app_setup import app
+from database.institution_dao import InstitutionDAO
+from model.institution import Institution
+from validate import expect_mime, json_body, mk_error
 
 institution_bp = Blueprint('institutions', __name__)
 

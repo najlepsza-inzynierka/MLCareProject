@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import {Exam} from '../interfaces/exam';
 import {HttpClient} from '@angular/common/http';
 
-const baseUrl = 'api/exams';
-const examUrl = 'api/exam';
+const uri = 'http://localhost:5000';
+const baseUrl = `${uri}/api/exams`;
+const examUrl = `${uri}/api/exam`;
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class ExamService {
   }
 
   createExam(id, exam){
-    return this.http.post(`/api/visit/${id}/add_exam`, exam);
+    return this.http.post(`${uri}/api/visit/${id}/add_exam`, exam);
   }
 
   updateExam(exam, id){

@@ -2,14 +2,14 @@ import datetime
 
 from flask import jsonify, Blueprint, g
 
-from .. import app, bcrypt
-from ..database.admin_dao import AdminDAO
-from ..database.institution_dao import InstitutionDAO
-from ..database.token_dao import TokenDAO
-from ..database.user_dao import UserDAO
-from ..model.admin import Admin
-from ..model.blacklisted_token import BlacklistedToken
-from ..validate import expect_mime, json_body, mk_error, check_admin_token
+from app_setup import app, bcrypt
+from database.admin_dao import AdminDAO
+from database.institution_dao import InstitutionDAO
+from database.token_dao import TokenDAO
+from database.user_dao import UserDAO
+from model.admin import Admin
+from model.blacklisted_token import BlacklistedToken
+from validate import expect_mime, json_body, mk_error, check_admin_token
 
 admin_bp = Blueprint('admins', __name__)
 

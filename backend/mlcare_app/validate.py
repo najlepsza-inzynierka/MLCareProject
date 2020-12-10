@@ -1,10 +1,11 @@
+import jwt
 from flask import g, request, jsonify
 from functools import wraps
 
-from mlcare_app.database.admin_dao import AdminDAO
-from mlcare_app.database.user_dao import UserDAO
-from mlcare_app.model.auth_user import AuthUser
-from mlcare_app.model.exceptions import BlacklistedTokenException
+from database.admin_dao import AdminDAO
+from database.user_dao import UserDAO
+from model.auth_user import AuthUser
+from model.exceptions import BlacklistedTokenException
 
 
 def mk_error(message, code=400):
@@ -78,6 +79,10 @@ def check_token(f):
             except IndexError:
                 return mk_error('Bearer token malformed', 401)
             except BlacklistedTokenException as e:
+                return mk_error(e.args, 401)
+            except jwt.ExpiredSignatureError as e:
+                return mk_error(e.args, 401)
+            except jwt.InvalidTokenError as e:
                 return mk_error(e.args, 401)
         else:
             return mk_error('Provide a valid token', 401)

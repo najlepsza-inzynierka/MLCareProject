@@ -1,7 +1,7 @@
 from bson import ObjectId
 
-from . import db
-from ..model.admin import Admin
+from database import db
+from model.admin import Admin
 
 
 class AdminDAO:

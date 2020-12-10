@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
+const uri = 'http://localhost:5000';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +17,7 @@ export class AuthService {
               private snaackBar: MatSnackBar) { }
 
   public signIn(userData: User){
-    this.http.post('/api/users/login', userData).subscribe(r => {
+    this.http.post(`${uri}/api/users/login`, userData).subscribe(r => {
       this.result = r;
       if (this.result.status === 'success'){
         this.token = this.result.auth_token;
@@ -40,7 +42,7 @@ export class AuthService {
   }
 
   public logout(){
-    this.http.post('/api/users/logout', this.result).subscribe(r => {
+    this.http.post(`${uri}/api/users/logout`, this.result).subscribe(r => {
       this.result = r;
       if (this.result.status === 'success'){
         this.router.navigateByUrl('/login');

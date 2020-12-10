@@ -3,7 +3,7 @@ from bson import ObjectId
 from . import db
 from .exam_dao import ExamDAO
 from .prediction_dao import PredictionDAO
-from ..model.visit import Visit
+from model.visit import Visit
 
 
 class VisitDAO:

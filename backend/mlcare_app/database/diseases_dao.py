@@ -3,7 +3,7 @@ import datetime
 from bson import ObjectId
 
 from . import db
-from ..model.disease_db import DiseaseDB
+from model.disease_db import DiseaseDB
 
 
 class DiseaseDAO:

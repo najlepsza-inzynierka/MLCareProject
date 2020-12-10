@@ -1,7 +1,7 @@
 from bson import ObjectId
 
 from . import db
-from ..model.exam import Exam
+from model.exam import Exam
 
 
 class ExamDAO:

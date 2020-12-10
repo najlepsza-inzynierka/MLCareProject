@@ -2,7 +2,7 @@ from bson import ObjectId
 
 from . import db
 from .visit_dao import VisitDAO
-from ..model.patient import Patient
+from model.patient import Patient
 
 
 class PatientDAO:

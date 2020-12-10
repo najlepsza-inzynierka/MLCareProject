@@ -2,13 +2,13 @@ import datetime
 
 from flask import jsonify, Blueprint, g
 
-from .. import app, bcrypt
-from ..database.institution_dao import InstitutionDAO
-from ..database.token_dao import TokenDAO
-from ..database.user_dao import UserDAO
-from ..model.blacklisted_token import BlacklistedToken
-from ..model.user import User
-from ..validate import (
+from app_setup import app, bcrypt
+from database.institution_dao import InstitutionDAO
+from database.token_dao import TokenDAO
+from database.user_dao import UserDAO
+from model.blacklisted_token import BlacklistedToken
+from model.user import User
+from validate import (
     expect_mime, json_body, mk_error, check_admin_token, check_token)
 
 user_bp = Blueprint('users', __name__)
@@ -157,7 +157,7 @@ def login_user():
                 return jsonify(response_object), 200
         else:
             return mk_error('Email or password incorrect', 401)
-    except Exception:
+    except Exception as e:
         return mk_error('Something went wrong, try again', 500)
 
 

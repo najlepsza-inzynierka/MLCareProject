@@ -1,7 +1,7 @@
 from bson import ObjectId
 
-from . import db
-from ..model.institution import Institution
+from database import db
+from model.institution import Institution
 
 
 class InstitutionDAO:
