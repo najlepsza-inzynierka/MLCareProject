@@ -11,14 +11,11 @@
           <span *ngIf="patient.middleName"> {{patient.middleName}}</span>
             {{patient.lastName}}
         </span>
-        <button mat-icon-button class="material-icons" routerLink="/patient/edit/{{patient._id}}">
+        <button mat-icon-button class="material-icons mat-icons-custom" routerLink="/patient/edit/{{patient._id}}">
           <mat-icon>
             create
           </mat-icon>
         </button>
-        <span class="material-icons info-right" routerLink="/patient/edit/{{patient._id}}">
-          create
-        </span>
       </h1>
     </div>
   <div class="info">
@@ -29,6 +26,7 @@
   </div>
 <br>
 
+    <h2>Visits</h2>
 <!-- Visits table -->
   <div class="table">
     <div class="search-bar">
@@ -40,29 +38,21 @@
     </div>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!--  ID column  -->
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
-      </ng-container>
       <!--  Visit date column  -->
       <ng-container matColumnDef="visitDate">
         <mat-header-cell *matHeaderCellDef> Visit Date </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.date | date: 'short'}} </mat-cell>
       </ng-container>
-
-      <!--  Doctor Id column  -->
-      <ng-container matColumnDef="doctorId">
-        <mat-header-cell *matHeaderCellDef> Doctor Id </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.doctorId}} </mat-cell>
-      </ng-container>
-
       <!--  Doctor Name column  -->
       <ng-container matColumnDef="doctorName">
         <mat-header-cell *matHeaderCellDef> Doctor Name </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.doctorName}} </mat-cell>
       </ng-container>
-
+      <!--  Exams number column  -->
+      <ng-container matColumnDef="examsNumber">
+        <mat-header-cell *matHeaderCellDef> No. of exams </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.exams.length}} </mat-cell>
+      </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="/patient/{{patient._id}}/{{row._id}}" class="row-link"></mat-row>
     </table>
