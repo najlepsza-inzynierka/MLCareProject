@@ -5,16 +5,19 @@
           arrow_back
         </mat-icon>
     </button>
-    <h1>{{patientFirstName}} <span *ngIf="patientMiddleName"> {{patientMiddleName}} </span>{{patientLastName}}</h1>
-  <p>Visit Date: {{visit.date | date: 'short'}}
+    <h1>Visit details</h1>
+  <p>Visit Date: {{visit.date | date: 'short'}}   <button mat-icon-button class="material-icons mat-icons-custom" routerLink="/patient/{{this.patientId}}/visit/edit/{{this.visitId}}">
+    <mat-icon>
+      create
+    </mat-icon>
+  </button>
   </p>
-  <p>Doctor: {{visit.doctorName}}</p>
+    <p>Patient: {{patientFirstName}} <span *ngIf="patientMiddleName"> {{patientMiddleName}} </span>{{patientLastName}}</p>
   <br>
-    <span class="material-icons" routerLink="/patient/{{this.patientId}}/visit/edit/{{this.visitId}}">
-       create
-    </span>
 
-  <h2>Exams</h2>
+    <p>Doctor: {{visit.doctorName}}</p>
+
+    <h2>Exams</h2>
 
     <div class="search-bar">
       <mat-form-field class="SearchBar">

@@ -19,7 +19,7 @@ export class PatientDetailsComponent implements OnInit {
   dataSource: MatTableDataSource<Visit>;
   genderMap = {0: 'Male', 1: 'Female'};
   @Input() patient: Patient;
-  displayedColumns: string[] = ['id', 'visitDate', 'doctorId', 'doctorName'];
+  displayedColumns: string[] = ['visitDate', 'doctorName', 'examsNumber'];
   constructor(private patientService: PatientService,
               private visitService: VisitService,
               private predictionService: PredictionService,
