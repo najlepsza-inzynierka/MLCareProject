@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PredictionService} from '../../../services/prediction.service';
 import {ActivatedRoute} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-prediction-details',
@@ -14,6 +15,7 @@ export class PredictionDetailsComponent implements OnInit {
   imageBytes;
   constructor(private predictionService: PredictionService,
               private sanitizer: DomSanitizer,
+              private location: Location,
               private route: ActivatedRoute) {
   }
 
@@ -21,10 +23,9 @@ export class PredictionDetailsComponent implements OnInit {
     if (!this.predictionService.prediction){
       this.predictionService.getPrediction(this.route.snapshot.paramMap.get('predictionId')).subscribe(
           p => {
-                this.prediction = p;
-                console.log(this.prediction);
-                this.readImage();
-                console.log(this.imagePath);
+            console.log(p);
+            this.prediction = p;
+            this.readImage();
           }
           );
     }
@@ -38,6 +39,10 @@ export class PredictionDetailsComponent implements OnInit {
   readImage(){
     this.imageBytes = this.prediction.image.split('\'')[1];
     this.imagePath = this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + this.imageBytes);
+  }
+
+  goBack(){
+    this.location.back();
   }
 
 }

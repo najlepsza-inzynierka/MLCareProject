@@ -39,7 +39,7 @@
     <ng-container matColumnDef="Action">
       <th mat-header-cell *matHeaderCellDef> Action </th>
       <td mat-cell *matCellDef="let element" class="action-link">
-        <a routerLink="/edit_exam/{{element._id}}">Edit</a> |
+<!--        <a routerLink="/edit_exam/{{visitId}}/{{element._id}}">Edit</a> TODO correct |-->
         <a (click)="confirmDeleteExamDialog(element._id)">Delete</a>
       </td>
     </ng-container>
@@ -89,26 +89,35 @@
 
     </div>
   <table mat-table [dataSource]="predictionDataSource" class="mat-elevation-z8">
-    <!--  Visit date column  -->
+    <!--  Date column  -->
     <ng-container matColumnDef="Date">
       <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.date | date: 'short'}} </mat-cell>
+      <mat-cell *matCellDef="let element" routerLink="prediction/{{element._id}}"> {{element.date | date: 'short'}} </mat-cell>
     </ng-container>
 
-    <!--  Doctor Id column  -->
+    <!--  Disease column  -->
     <ng-container matColumnDef="Disease">
       <mat-header-cell *matHeaderCellDef> Disease </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.disease}} </mat-cell>
+      <mat-cell *matCellDef="let element" routerLink="prediction/{{element._id}}"> {{element.disease}} </mat-cell>
     </ng-container>
 
-    <!--  Doctor Name column  -->
+    <!--  Result column  -->
     <ng-container matColumnDef="Result">
       <mat-header-cell *matHeaderCellDef> Result </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.predicted_class}} </mat-cell>
+      <mat-cell *matCellDef="let element" routerLink="prediction/{{element._id}}"> {{element.predicted_class}} </mat-cell>
+    </ng-container>
+
+    <!--  Actions column  -->
+    <ng-container matColumnDef="Action">
+      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element" class="action-link">
+        <!--        <a routerLink="/edit_exam/{{visitId}}/{{element._id}}">Edit</a> TODO correct |-->
+        <a (click)="confirmDeletePredictionDialog(element._id)">Delete</a>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="columnsToDisplayPrediction"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: columnsToDisplayPrediction;" routerLink="prediction/{{row._id}}" class="row-link"></mat-row>
+    <mat-row *matRowDef="let row; columns: columnsToDisplayPrediction;" class="row-link"></mat-row>
   </table>
 </div>
 </div>

@@ -22,7 +22,7 @@ export class ExamService {
   }
 
   updateExam(exam, id){
-    return this.http.put(`${baseUrl}/update/${id}`, exam);
+    return this.http.put(`${baseUrl}/edit_exam/${id}`, exam);
   }
 
 }

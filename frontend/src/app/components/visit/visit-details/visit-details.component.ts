@@ -14,6 +14,7 @@ import {ExamService} from '../../../services/exam.service';
 import {Prediction} from '../../../interfaces/prediction';
 import {PredictionService} from '../../../services/prediction.service';
 import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-visit-details',
@@ -33,7 +34,7 @@ export class VisitDetailsComponent implements OnInit {
   dataSource: MatTableDataSource<Exam>;
   predictionDataSource: MatTableDataSource<Prediction>;
   columnsToDisplay = ['Name', 'Date', 'Action'];
-  columnsToDisplayPrediction = ['Date', 'Disease', 'Result'];
+  columnsToDisplayPrediction = ['Date', 'Disease', 'Result', 'Action'];
   featuresColumnsToDisplay = ['featureName', 'featureValue'];
   expandedElement: Exam | null;
   diseases: Disease[];
@@ -50,7 +51,8 @@ export class VisitDetailsComponent implements OnInit {
               private examService: ExamService,
               private route: ActivatedRoute,
               private location: Location,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private snaackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource<Exam>();
     this.predictionDataSource = new MatTableDataSource<Prediction>();
     this.visitId = this.route.snapshot.paramMap.get('visitId');
@@ -115,10 +117,45 @@ export class VisitDetailsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult){
-        this.examService.deleteExam(id).subscribe(result => console.log(result),
+        this.examService.deleteExam(id).subscribe(result => {
+          this.openSnackBar('Exam deleted successfully', 'Close');
+          this.refresh();
+            },
             err => console.error(err));
       }
     });
+  }
+
+  confirmDeletePredictionDialog(id): void {
+    const message = `Are you sure you want to delete prediction?`;
+
+    const dialogData = new ConfirmDialogModel('Confirm Delete', message);
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '400px',
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult){
+        this.predictionService.deletePrediction(id).subscribe(result => {
+              this.openSnackBar('Prediction deleted successfully', 'Close');
+              this.refresh();
+            },
+            err => console.error(err));
+      }
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snaackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+  refresh(){
+    this.loadVisit();
+    this.loadPredictions();
   }
 
   filterExamName(event: Event) {

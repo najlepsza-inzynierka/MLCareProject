@@ -42,7 +42,7 @@ const routes: Routes = [
       path: '', component: AddPatientComponent}]  },
     { path: 'add_visit/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
       path: '', component: AddVisitComponent}]  },
-    { path: 'edit_exam/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
+    { path: 'edit_exam/:visitId/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
             path: '', component: EditExamComponent}]  },
     { path: 'patient/:id/:visitId/add-prediction', component: TopBarComponent, canActivate: [AuthGuard], children: [{
             path: '', component: AddPredictionComponent}]  },

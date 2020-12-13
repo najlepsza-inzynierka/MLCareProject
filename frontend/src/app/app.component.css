@@ -19,3 +19,10 @@
 .mat-icons-custom{
   height: 90% !important;
 }
+
+::ng-deep .mat-icon-button .mat-icon {
+  height: 35px !important;
+/*  TODO WSADZIC TO W INNE MIEJSCA (PRZYCISKI) I PRZESTAWIC TYTULY NAD BIALE PROSTOKATY*/
+}
+
+

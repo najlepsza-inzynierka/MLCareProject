@@ -1,14 +1,25 @@
-<div class="add-patient">
-    <h1>Prediction results</h1>
+<div class="add-patient" *ngIf="prediction">
+    <h1 class="title">
+        <button mat-icon-button (click)="goBack()">
+            <mat-icon>
+                arrow_back
+            </mat-icon>
+        </button>
+        <span [ngClass]="{
+            'red' : prediction.probability_map.Unhealthy > 0.6,
+            'orange' : prediction.probability_map.Unhealthy > 0.4,
+            'green' : prediction.probability_map.Unhealthy > 0
+         }">{{prediction.disease}} probability: {{prediction.probability_map.Unhealthy | percent}}</span></h1>
     <div class="form-div">
-        <h1>
-           {{prediction.disease}} probability: {{prediction.probability_map.Unhealthy | percent}}
-        </h1>
-        <p>
-            Model: {{prediction.model}}
-        </p>
+        <div class="info">
+        <p class="info-left">Prediction date: <span class="info-right">{{prediction.date | date: 'short'}}</span></p>
+        </div>
         <div class="image-container">
-        <img [src]="imagePath" class="prediction-image">
+            <img [src]="imagePath" class="prediction-image">
+        </div>
+        <h2 class="info-left">Features used</h2>
+        <div class="info" *ngFor="let feature of prediction.features">
+            <p class="info-left">{{feature.name}} <span class="info-right">{{feature.value}} {{feature.unit}}</span></p>
         </div>
     </div>
 </div>

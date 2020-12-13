@@ -8,3 +8,47 @@
     margin: auto;
 }
 /*TODO HEIGHT 34px ARROW*/
+
+.green{
+    color: #08a884;
+}
+
+.orange{
+    color: darkgoldenrod;
+}
+
+.red{
+    color: crimson;
+}
+
+.info{
+    width: 30%;
+}
+
+.info-left{
+    margin: auto;
+    text-align: left;
+}
+
+.info-right{
+    margin: auto;
+    float: right;
+}
+
+h2{
+    margin-top: 4%;
+    margin-bottom: 0;
+}
+
+.form-div{
+    height: 100%;
+    padding: 2%;
+    border-radius: 10px;
+    display: block;
+    background-color: white;
+}
+
+
+.title{
+    text-align: left;
+}

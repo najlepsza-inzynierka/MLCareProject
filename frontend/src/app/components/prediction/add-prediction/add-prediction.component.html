@@ -11,7 +11,6 @@
                     <mat-checkbox (change)="onChange($event)" [value]="disease">{{disease.name}}</mat-checkbox>
                 </div>
             </form>
-            <button mat-raised-button color="primary" (click)="submit()" [disabled]="selected.length == 0">Predict</button>
     </div>
 
     <h1>Choose features to use</h1>
@@ -27,6 +26,7 @@
                 </div>
             </div>
         </form>
+        <button mat-raised-button color="primary" (click)="submit()" [disabled]="selected.length == 0">Predict</button>
     </div>
 </div>
 

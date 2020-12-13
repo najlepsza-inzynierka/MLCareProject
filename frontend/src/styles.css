@@ -38,3 +38,7 @@ table, .SearchBar{
   float: right;
   margin: 0;
 }
+
+::ng-deep .mat-icon-button .mat-icon {
+  height: 35px !important;
+}
