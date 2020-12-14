@@ -1,6 +1,3 @@
-import base64
-from io import BytesIO
-
 from model.exceptions import PredictionException
 from model.feature import Feature
 from model.prediction import Prediction

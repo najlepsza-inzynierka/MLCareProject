@@ -3,6 +3,7 @@ import datetime
 from flask import jsonify, Blueprint, g
 
 from app_setup import app
+from database.admin_dao import AdminDAO
 from database.institution_dao import InstitutionDAO
 from model.institution import Institution
 from validate import expect_mime, json_body, mk_error
@@ -46,3 +47,21 @@ def get_institutions():
     institutions = institution_dao.find_all_institutions()
     resp = [inst.data for inst in institutions]
     return jsonify(resp)
+
+
+@app.route('/api/institutions/<institution_id>', methods=['DELETE'])
+@json_body
+def delete_institution(institution_id):
+    institution_dao = InstitutionDAO()
+    admin_dao = AdminDAO()
+    institution = institution_dao.find_one_by_id(institution_id)
+    if not institution:
+        return mk_error('Institution with given id not found')
+    else:
+        if len(institution.users):
+            return mk_error('Cannot delete institution when there are users '
+                            'that belong to it', 400)
+        for admin_id in institution.admins:
+            admin_dao.delete_one_by_id(admin_id)
+        institution_dao.delete_one_by_id(institution_id)
+    return jsonify(f'Institution {institution_id} deleted')

@@ -158,9 +158,13 @@ class Prediction(ModelDocument):
         filtered_features = [f for f in self.features if f['name']
                              in all_features]
         for f in filtered_features:
-            all_features.remove(f['name'])
-            if f['name'] in obligatory_features:
-                obligatory_features.remove(f['name'])
+            try:
+                all_features.remove(f['name'])
+                if f['name'] in obligatory_features:
+                    obligatory_features.remove(f['name'])
+            except ValueError:
+                raise PredictionFeatureException(f'More than one value for '
+                                                 f'"{f["name"]}" given')
 
         # check for not filled obligatory features
         if any(obligatory_features):

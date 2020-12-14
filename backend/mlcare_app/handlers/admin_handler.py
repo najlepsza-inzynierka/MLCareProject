@@ -1,5 +1,6 @@
 import datetime
 
+from bson import ObjectId
 from flask import jsonify, Blueprint, g
 
 from app_setup import app, bcrypt
@@ -145,4 +146,65 @@ def get_user_as_admin(user_id):
     return jsonify({'confirmation': 'OK',
                     'user': user.data})
 
+
+@app.route('/api/admins/<admin_id>', methods=['DELETE'])
+def delete_admin(admin_id):
+    admin_dao = AdminDAO()
+    admin = admin_dao.find_one_by_id(admin_id)
+    if not admin:
+        return mk_error('There is no admin with given id', 404)
+
+    institution_id = admin.institution_id
+    institution_dao = InstitutionDAO()
+    institution = institution_dao.find_one_by_id(institution_id)
+    if institution:
+        if len(institution.admins) != 1:
+            admin_dao.delete_one_by_id(admin_id)
+            institution.admins.remove(ObjectId(admin_id))
+            institution_dao.update_one_by_id(institution_id, institution)
+            return jsonify(f'Admin {admin_id} deleted')
+        else:
+            return mk_error('There is only one admin in given admin\'s '
+                            'institution. You cannot delete the only admin of '
+                            'institution', 400)
+    else:
+        return mk_error('This admin has no institution')
+
+
+@app.route('/api/admins/change_passwd', methods=['PUT'])
+@expect_mime('application/json')
+@json_body
+@check_admin_token
+def update_password_self():
+    body = g.body
+    admin = g.admin
+
+    admin.password = body.get('password')
+
+    admin_dao = AdminDAO()
+    admin_dao.update_one_by_id(admin.id, admin.data)
+
+    return jsonify({'confirmation': 'OK'})
+
+
+@app.route('/api/admins/update', methods=['PUT'])
+@expect_mime('application/json')
+@json_body
+@check_admin_token
+def update_user_by_admin(user_id):
+    body = g.body
+    admin = g.admin
+
+    admin_dao = AdminDAO()
+
+    # only following data could be changed
+    admin.first_name = body.get('firstName', admin.first_name)
+    admin.middle_name = body.get('middleName', admin.middle_name)
+    admin.last_name = body.get('lastName', admin.last_name)
+    admin.phone_no = body.get('phoneNumber', admin.phone_no)
+    admin.address = body.get('address', admin.address)
+
+    admin_dao.update_one_by_id(user_id, admin)
+
+    return jsonify({'confirmation': 'OK'})
 

@@ -44,6 +44,11 @@ class PatientDAO:
         query = {}
         return self.find(query)
 
+    def find_patient_by_visit_id(self, visit_id):
+        visit = self.visit_dao.find_one_by_id(visit_id)
+        patient_id = visit.patient_id
+        return self.find_one_by_id(patient_id)
+
     # Update
     def update_one_by_id(self, _id, new_patient):
         new_patient.id = ObjectId(_id)
