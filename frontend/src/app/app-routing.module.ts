@@ -18,7 +18,6 @@ import {AdminGuard} from './guards/admin.guard';
 import {EditAdminComponent} from './components/admin/edit-admin/edit-admin.component';
 import {MedicalStaffDetailsComponent} from './components/admin/medical-staff-details/medical-staff-details.component';
 import {AddPredictionComponent} from './components/prediction/add-prediction/add-prediction.component';
-import {EditExamComponent} from './components/visit/edit-exam/edit-exam.component';
 import {TopBarComponent} from './components/top-bar/top-bar.component';
 
 const routes: Routes = [
@@ -42,8 +41,6 @@ const routes: Routes = [
       path: '', component: AddPatientComponent}]  },
     { path: 'add_visit/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
       path: '', component: AddVisitComponent}]  },
-    { path: 'edit_exam/:visitId/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
-            path: '', component: EditExamComponent}]  },
     { path: 'patient/:id/:visitId/add-prediction', component: TopBarComponent, canActivate: [AuthGuard], children: [{
             path: '', component: AddPredictionComponent}]  },
     // admin

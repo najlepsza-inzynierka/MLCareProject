@@ -1,23 +1,22 @@
 <div *ngIf="patient" class="main-container add-patient">
-  <div class="form-div">
+  <h1>
     <button mat-icon-button class="material-icons" (click)="goBack()">
       <mat-icon>
         arrow_back
       </mat-icon>
     </button>
-    <div>
-      <h1>{{patient.firstName}}
-        <span class="info-left">
+    {{patient.firstName}}
+    <span class="info-left">
           <span *ngIf="patient.middleName"> {{patient.middleName}}</span>
-            {{patient.lastName}}
+      {{patient.lastName}}
         </span>
-        <button mat-icon-button class="material-icons mat-icons-custom" routerLink="/patient/edit/{{patient._id}}">
-          <mat-icon>
-            create
-          </mat-icon>
-        </button>
-      </h1>
-    </div>
+    <button mat-icon-button class="material-icons mat-icons-custom" routerLink="/patient/edit/{{patient._id}}">
+      <mat-icon>
+        create
+      </mat-icon>
+    </button>
+  </h1>
+  <div class="form-div">
   <div class="info">
   <p class="info-left">Gender: <span class="info-right">{{genderMap[patient.gender]}}</span></p>
   <p class="info-left">Birth Date: <span class="info-right">{{patient.birthDate | date: 'longDate'}}</span></p>

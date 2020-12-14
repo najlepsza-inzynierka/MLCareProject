@@ -1,16 +1,18 @@
-<div class="add-patient">
-    <button mat-icon-button class="material-icons" (click)="goBack()">
-        <mat-icon>
-            arrow_back
-        </mat-icon>
-    </button>
-    <h1>Choose disease to predict</h1>
+<div class="add-patient main-container">
+    <h1>
+        <button mat-icon-button class="material-icons" (click)="goBack()">
+            <mat-icon>
+                arrow_back
+            </mat-icon>
+        </button>
+        Choose disease to predict
+    </h1>
     <div class="form-div">
-            <form [formGroup]="diseasesFormGroup">
-                <div *ngFor="let disease of diseases; let i = index">
-                    <mat-checkbox (change)="onChange($event)" [value]="disease">{{disease.name}}</mat-checkbox>
-                </div>
-            </form>
+        <form [formGroup]="diseasesFormGroup">
+            <div *ngFor="let disease of diseases; let i = index">
+                <mat-checkbox (change)="onChange($event)" [value]="disease">{{disease.name}}</mat-checkbox>
+            </div>
+        </form>
     </div>
 
     <h1>Choose features to use</h1>

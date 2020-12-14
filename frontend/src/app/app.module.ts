@@ -43,7 +43,6 @@ import {AuthInterceptor} from './auth.interceptor';
 import { MedicalStaffDetailsComponent } from './components/admin/medical-staff-details/medical-staff-details.component';
 import { AddPredictionComponent } from './components/prediction/add-prediction/add-prediction.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { EditExamComponent } from './components/visit/edit-exam/edit-exam.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { EditMedicalStaffComponent } from './components/admin/edit-medical-staff/edit-medical-staff.component';
 
@@ -69,7 +68,6 @@ import { EditMedicalStaffComponent } from './components/admin/edit-medical-staff
     EditAdminComponent,
     MedicalStaffDetailsComponent,
     AddPredictionComponent,
-    EditExamComponent,
     TopBarComponent,
     EditMedicalStaffComponent,
   ],

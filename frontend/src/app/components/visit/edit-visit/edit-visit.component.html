@@ -1,7 +1,16 @@
 <div *ngIf="visit" class="add-patient">
     <h1>
+        <button mat-icon-button class="material-icons" (click)="goBack()">
+            <mat-icon>
+                arrow_back
+            </mat-icon>
+        </button>
         Edit Visit
-        <button mat-raised-button color="warn" (click)="confirmDeleteVisitDialog()">Delete visit</button>
+        <button mat-icon-button class="material-icons" (click)="confirmDeleteVisitDialog()">
+            <mat-icon>
+                delete
+            </mat-icon>
+        </button>
     </h1>
 
     <div class="form-div">

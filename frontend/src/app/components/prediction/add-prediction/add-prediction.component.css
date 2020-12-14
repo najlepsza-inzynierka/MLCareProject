@@ -5,7 +5,18 @@
 #exam{
     margin-top: 2%;
 }
+h1{
+    margin-top: 2%;
+    margin-bottom: 0;
+}
 
-#go-back{
-    width: 8%;
+.form-div{
+    height: 100%;
+    padding: 2%;
+    border-radius: 10px;
+    display: block;
+    background-color: white;
+}
+.mat-raised-button{
+    height: 90%;
 }

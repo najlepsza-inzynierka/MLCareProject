@@ -7,7 +7,7 @@ import {Location} from '@angular/common';
 @Component({
   selector: 'app-prediction-details',
   templateUrl: './prediction-details.component.html',
-  styleUrls: ['../../patient/add-patient/add-patient.component.css', './prediction-details.component.css']
+  styleUrls: ['./prediction-details.component.css']
 })
 export class PredictionDetailsComponent implements OnInit {
   prediction;

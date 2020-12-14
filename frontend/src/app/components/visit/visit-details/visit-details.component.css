@@ -21,10 +21,15 @@
   height: 90%;
 }
 
-h2{
-  margin-top: 5%;
+h2, h1{
+  margin-top: 4%;
   margin-bottom: 0;
 }
+
+h1 {
+  margin-top: 2%;
+}
+
 tr.example-detail-row {
   height: 0;
 }
