@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Medical} from '../interfaces/medical';
 
-const registerURL = '/api/users/register';
-const registerForceURL = '/api/users/register/force';
-const medicalURL = '/api/admins/institution';
-const adminURL = 'api/admins';
+const uri = 'http://localhost:5000';
+const registerURL = `${uri}/api/users/register`;
+const registerForceURL = `${uri}/api/users/register/force`;
+const medicalURL = `${uri}/api/admins/institution`;
+const adminURL = `${uri}api/admins`;
 
 
 @Injectable({

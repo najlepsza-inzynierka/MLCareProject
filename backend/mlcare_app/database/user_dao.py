@@ -1,7 +1,7 @@
 from bson import ObjectId
 
-from . import db
-from ..model.user import User
+from database import db
+from model.user import User
 
 
 class UserDAO:

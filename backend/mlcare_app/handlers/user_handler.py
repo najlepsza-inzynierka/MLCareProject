@@ -1,14 +1,15 @@
 import datetime
 
+from bson import ObjectId
 from flask import jsonify, Blueprint, g
 
-from .. import app, bcrypt
-from ..database.institution_dao import InstitutionDAO
-from ..database.token_dao import TokenDAO
-from ..database.user_dao import UserDAO
-from ..model.blacklisted_token import BlacklistedToken
-from ..model.user import User
-from ..validate import (
+from app_setup import app, bcrypt
+from database.institution_dao import InstitutionDAO
+from database.token_dao import TokenDAO
+from database.user_dao import UserDAO
+from model.blacklisted_token import BlacklistedToken
+from model.user import User
+from validate import (
     expect_mime, json_body, mk_error, check_admin_token, check_token)
 
 user_bp = Blueprint('users', __name__)
@@ -157,7 +158,7 @@ def login_user():
                 return jsonify(response_object), 200
         else:
             return mk_error('Email or password incorrect', 401)
-    except Exception:
+    except Exception as e:
         return mk_error('Something went wrong, try again', 500)
 
 
@@ -189,5 +190,89 @@ def get_user():
 
     return jsonify({'confirmation': 'OK',
                     'user': user.data})
+
+
+@app.route('/api/users/<user_id>', methods=['DELETE'])
+@check_admin_token
+def delete_user(user_id):
+    admin = g.admin
+
+    user_dao = UserDAO()
+    user = user_dao.find_one_by_id(user_id)
+    if not user:
+        return mk_error('There is no user with given id', 404)
+
+    institution_id = admin.institution_id
+    institution_dao = InstitutionDAO()
+    institution = institution_dao.find_one_by_id(institution_id)
+    if institution:
+        if ObjectId(user_id) not in institution.users:
+            return mk_error('You cannot remove this user as they do not belong '
+                            'to your institution')
+
+        institution.users.remove(ObjectId(user_id))
+        institution.user_no -= 1
+        institution_dao.update_one_by_id(institution_id, institution)
+
+        user.institutions.remove(institution_id)
+        user_dao.delete_one_by_id(user_id)
+        if len(user.institutions):
+            return jsonify('User was successfully deleted only from your '
+                           'institution')
+        else:
+            return jsonify(f'User was successfully deleted from system as '
+                           f'they were in no other institutions')
+    else:
+        return mk_error('Your institution not found', 404)
+
+
+@app.route('/api/users/change_passwd', methods=['PUT'])
+@expect_mime('application/json')
+@json_body
+@check_token
+def update_user_password_self():
+    body = g.body
+    user = g.user
+
+    user.password = body.get('password')
+
+    user_dao = UserDAO()
+    user_dao.update_one_by_id(user.id, user.data)
+
+    return jsonify({'confirmation': 'OK'})
+
+
+@app.route('/api/users/update/<user_id>', methods=['PUT'])
+@expect_mime('application/json')
+@json_body
+@check_admin_token
+def update_user_by_admin(user_id):
+    body = g.body
+    admin = g.admin
+
+    institution_dao = InstitutionDAO()
+    institution = institution_dao.find_one_by_id(admin.institution_id)
+    if institution:
+        if ObjectId(user_id) not in institution.users:
+            return mk_error('You cannot change this user as they do not belong '
+                            'to your institution')
+
+    user_dao = UserDAO()
+    user = user_dao.find_one_by_id(user_id)
+    if not user:
+        return mk_error('User not in database', 404)
+
+    # only following data could be changed
+    user.first_name = body.get('firstName', user.first_name)
+    user.middle_name = body.get('middleName', user.middle_name)
+    user.last_name = body.get('lastName', user.last_name)
+    user.title = body.get('title', user.title)
+    user.phone_no = body.get('phoneNumber', user.phone_no)
+    user.address = body.get('address', user.address)
+
+    user_dao.update_one_by_id(user_id, user)
+
+    return jsonify({'confirmation': 'OK'})
+
 
 

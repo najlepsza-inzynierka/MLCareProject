@@ -1,4 +1,4 @@
-from mlcare_app.model.utils import parse_id
+from model.utils import parse_id
 
 
 class ModelDocument:

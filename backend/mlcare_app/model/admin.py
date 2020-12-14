@@ -1,5 +1,5 @@
-from mlcare_app.database.institution_dao import InstitutionDAO
-from mlcare_app.model.auth_user import AuthUser
+from database.institution_dao import InstitutionDAO
+from model.auth_user import AuthUser
 
 
 class Admin(AuthUser):

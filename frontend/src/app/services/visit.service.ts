@@ -3,10 +3,10 @@ import {HttpClient} from '@angular/common/http';
 import {Visit} from '../interfaces/visit';
 import {Observable} from 'rxjs';
 
-
-const baseUrl = 'api/visits';
-const visitUrl = 'api/visit';
-const addUrl = 'api/patient';
+const uri = 'http://localhost:5000';
+const baseUrl = `${uri}/api/visits`;
+const visitUrl = `${uri}/api/visit`;
+const addUrl = `${uri}/api/patient`;
 
 @Injectable({
   providedIn: 'root'

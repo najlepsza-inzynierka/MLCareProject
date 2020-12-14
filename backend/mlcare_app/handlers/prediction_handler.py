@@ -1,14 +1,15 @@
 from datetime import datetime
 
-from flask import jsonify, Blueprint, g
+from flask import Blueprint, jsonify, g
 
-from .. import app
-from ..database.prediction_dao import PredictionDAO
-from ..database.visit_dao import VisitDAO
-from ..machine_learning.predict import predict
-from ..model.exceptions import PredictionException, PredictionFeatureException
-from ..model.prediction import Prediction, STATUS_SUCCESS, STATUS_FAILED
-from ..validate import expect_mime, json_body, mk_error, check_token
+from app_setup import app
+from database.patient_dao import PatientDAO
+from database.prediction_dao import PredictionDAO
+from database.visit_dao import VisitDAO
+from machine_learning.predict import predict
+from model.exceptions import PredictionFeatureException, PredictionException
+from model.prediction import Prediction, STATUS_FAILED, STATUS_SUCCESS
+from validate import check_token, mk_error, expect_mime, json_body
 
 prediction_bp = Blueprint('predictions', __name__)
 
@@ -52,6 +53,12 @@ def add_prediction(visit_id):
 
     prediction = Prediction(prediction_data)
     try:
+        patient_dao = PatientDAO()
+        patient = patient_dao.find_patient_by_visit_id(visit_id)
+        prediction.features.append({
+                'name': 'Age',
+                'value': patient.count_patient_age()
+            })
         prediction.filter_features()
     except PredictionFeatureException as exc:
         return mk_error(exc.args, 409)

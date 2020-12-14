@@ -3,10 +3,10 @@ from datetime import datetime
 from bson import ObjectId
 from flask import jsonify, Blueprint, g
 
-from .. import app
-from ..database.diseases_dao import DiseaseDAO
+from app_setup import app
+from database.diseases_dao import DiseaseDAO
 
-from ..validate import expect_mime, json_body, check_token
+from validate import expect_mime, json_body, check_token
 
 diseases_bp = Blueprint('diseases', __name__)
 

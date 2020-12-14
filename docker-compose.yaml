@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  mlcare-flask:
+    image: "mlcare/backend:latest"
+    ports:
+      - "5000:5000"
+    networks:
+      - backend-net
+  mlcare-angular:
+    image: "mlcare/frontend:latest"
+    ports:
+      - "80:4200"
+    networks:
+      - backend-net
+
+networks:
+  backend-net:
+    driver: bridge

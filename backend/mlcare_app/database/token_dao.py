@@ -1,7 +1,7 @@
 from bson import ObjectId
 
-from . import db
-from ..model.blacklisted_token import BlacklistedToken
+from database import db
+from model.blacklisted_token import BlacklistedToken
 
 
 class TokenDAO:

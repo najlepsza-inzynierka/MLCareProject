@@ -2,10 +2,10 @@ import os
 
 from flask import jsonify, Blueprint, g
 
-from .. import app
-from ..database.patient_dao import PatientDAO
-from ..model.patient import Patient
-from ..validate import expect_mime, json_body, mk_error, check_token
+from database.patient_dao import PatientDAO
+from model.patient import Patient
+from app_setup import app
+from validate import expect_mime, json_body, mk_error, check_token
 
 patient_bp = Blueprint('patients', __name__)
 

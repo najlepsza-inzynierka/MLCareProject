@@ -1,7 +1,7 @@
 from bson import ObjectId
 
 from . import db
-from ..model.prediction import Prediction
+from model.prediction import Prediction
 
 
 class PredictionDAO:

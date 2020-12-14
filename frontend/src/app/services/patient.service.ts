@@ -4,9 +4,10 @@ import {Patient} from '../interfaces/patient';
 import {Observable} from 'rxjs';
 import {Disease} from '../interfaces/disease';
 
-const baseURL = 'api/patients';
-const patientURL = 'api/patient';
-const diseaseURL = 'api/diseases';
+const uri = 'http://localhost:5000';
+const baseURL = `${uri}/api/patients`;
+const patientURL = `${uri}/api/patient`;
+const diseaseURL = `${uri}/api/diseases`;
 
 @Injectable({
   providedIn: 'root'

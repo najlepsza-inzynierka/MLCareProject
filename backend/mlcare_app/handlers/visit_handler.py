@@ -4,14 +4,14 @@ from datetime import datetime
 from bson import ObjectId
 from flask import jsonify, Blueprint, g
 
-from .. import app
-from ..database.exam_dao import ExamDAO
-from ..database.patient_dao import PatientDAO
-from ..database.prediction_dao import PredictionDAO
-from ..database.visit_dao import VisitDAO
-from ..model.exam import Exam
-from ..model.visit import Visit
-from ..validate import expect_mime, json_body, mk_error, check_token
+from app_setup import app
+from database.exam_dao import ExamDAO
+from database.patient_dao import PatientDAO
+from database.prediction_dao import PredictionDAO
+from database.visit_dao import VisitDAO
+from model.exam import Exam
+from model.visit import Visit
+from validate import expect_mime, json_body, mk_error, check_token
 
 visit_bp = Blueprint('visits', __name__)
 

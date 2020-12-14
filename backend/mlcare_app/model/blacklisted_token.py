@@ -1,4 +1,4 @@
-from mlcare_app.model.model_document import ModelDocument
+from model.model_document import ModelDocument
 
 
 class BlacklistedToken(ModelDocument):

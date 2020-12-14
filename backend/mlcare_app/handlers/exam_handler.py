@@ -1,10 +1,10 @@
 from bson import ObjectId
 from flask import jsonify, Blueprint, g
 
-from .. import app
-from ..database.exam_dao import ExamDAO
-from ..model.exam import Exam
-from ..validate import expect_mime, json_body, mk_error, check_token
+from app_setup import app
+from database.exam_dao import ExamDAO
+from model.exam import Exam
+from validate import expect_mime, json_body, mk_error, check_token
 
 exam_bp = Blueprint('exams', __name__)
 

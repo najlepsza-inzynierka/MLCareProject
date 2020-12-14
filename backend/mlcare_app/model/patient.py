@@ -1,5 +1,4 @@
 from .model_document import ModelDocument
-from .visit import Visit
 
 
 class Patient(ModelDocument):
@@ -103,6 +102,11 @@ class Patient(ModelDocument):
     @birth_place.setter
     def birth_place(self, new_place):
         self._data['birthPlace'] = new_place
+
+    def count_patient_age(self):
+        import datetime
+        now = datetime.datetime.now()
+        return now.year - int(self.birth_date[:4])
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:

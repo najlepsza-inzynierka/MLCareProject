@@ -3,10 +3,11 @@ import datetime
 import jwt
 import json
 
-from mlcare_app import bcrypt, app, MongoJSONEncoder
-from mlcare_app.database.token_dao import TokenDAO
-from mlcare_app.model.exceptions import BlacklistedTokenException
-from mlcare_app.model.model_document import ModelDocument
+from database.token_dao import TokenDAO
+from model.exceptions import BlacklistedTokenException
+from model.model_document import ModelDocument
+
+from app_setup import app, bcrypt, MongoJSONEncoder
 
 
 class AuthUser(ModelDocument):
@@ -132,21 +133,16 @@ class AuthUser(ModelDocument):
     def decode_auth_token(auth_token):
         """
         Decodes the auth token
-        :param auth_token:
+        :param auth_token: authentication token to decode
         :return: token string
         """
-        try:
-            payload = jwt.decode(auth_token, app.config.get('SECRET_KEY'),
-                                 algorithm='HS256')
-            token_dao = TokenDAO()
-            if token_dao.find_one_by_token(auth_token):
-                raise BlacklistedTokenException('Token blacklisted. Please '
-                                                'log in again.')
-            return payload['sub'].strip('"')
-        except jwt.ExpiredSignatureError:
-            return 'Signature expired. Please log in again.'
-        except jwt.InvalidTokenError:
-            return 'Invalid token. Please log in again.'
+        payload = jwt.decode(auth_token, app.config.get('SECRET_KEY'),
+                             algorithm='HS256')
+        token_dao = TokenDAO()
+        if token_dao.find_one_by_token(auth_token):
+            raise BlacklistedTokenException('Token blacklisted. Please '
+                                            'log in again.')
+        return payload['sub'].strip('"')
 
     def __eq__(self, other):
         if self.__class__ != other.__class__:
