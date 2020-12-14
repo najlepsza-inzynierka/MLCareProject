@@ -7,8 +7,9 @@ import pandas as pd
 # import shap_fix
 
 
-result_map = {'breast_cancer_coimbra': {1: 'Healthy', 2: 'Unhealthy'},
-              'acute_inflammations': {'yes': 'Unhealthy', 'no': 'Healthy'}}
+result_map = {'breast_cancer_coimbra': {False: 'Healthy', True: 'Unhealthy'},
+              'acute_inflammations': {True: 'Unhealthy', False: 'Healthy'},
+              'breast_cancer_wisconsin': {True: 'Unhealthy', False: 'Healthy'}}
 
 
 def choose_model(disease):
@@ -34,17 +35,18 @@ def predict(prediction: Prediction):
     from pathlib import Path
 
     path = Path(__file__).parent
-    path = path.joinpath(model_name + '.model')
+    path = path.joinpath(model_name + '.xgb')
     model.load_model(path.as_uri())
     data = create_dataframe(prediction.features)
 
+    import pdb
+    pdb.set_trace()
     # response is [[class%, 1-class%]]
     res = model.predict_proba(data)
 
     # translate names from model
     classes_names = [class_name for class_name in model.classes_]
-    translated_names = [result_map[model_name][class_name] for class_name in
-                        classes_names]
+    translated_names = [result_map[model_name][class_name] for class_name in classes_names]
     probabilities = [float(prob) for prob in res[0]]
 
     # adjust classes names to probabilities

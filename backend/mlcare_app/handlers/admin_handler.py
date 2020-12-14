@@ -175,7 +175,7 @@ def delete_admin(admin_id):
 @expect_mime('application/json')
 @json_body
 @check_admin_token
-def update_password_self():
+def update_password_admin_self():
     body = g.body
     admin = g.admin
 
@@ -191,7 +191,7 @@ def update_password_self():
 @expect_mime('application/json')
 @json_body
 @check_admin_token
-def update_user_by_admin(user_id):
+def update_admin_by_admin(user_id):
     body = g.body
     admin = g.admin
 
