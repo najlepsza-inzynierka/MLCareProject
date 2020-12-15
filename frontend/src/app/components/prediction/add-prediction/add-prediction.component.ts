@@ -81,6 +81,7 @@ export class AddPredictionComponent implements OnInit {
     this.predictionService.createMultiplePredictions(this.visitId,
         {diseases: diseasesName,
         features: this.featuresFormGroup.value.features}).subscribe(response => {
+          console.log(response);
           this.goBack();
     }, error => {
     });
