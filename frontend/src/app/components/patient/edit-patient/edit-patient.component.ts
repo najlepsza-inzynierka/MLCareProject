@@ -33,13 +33,11 @@ export class EditPatientComponent implements OnInit {
   savePatient(){
     this.patientService.updatePatient(this.patient, this.id).subscribe(
         response => {
-          console.log(response);
           this.openSnackBar('Patient edited successfully', 'Close');
           this.goBack();
         },
         error => {
           this.openSnackBar(error.error.message, 'Close');
-          console.log(error);
         }
     );
   }
@@ -64,13 +62,11 @@ export class EditPatientComponent implements OnInit {
       this.result = dialogResult;
       if (dialogResult){
         this.patientService.deletePatient(this.patient._id).subscribe(response => {
-              console.log(response);
               this.openSnackBar('Patient deleted successfully', 'Close');
               this.router.navigateByUrl(`patients`);
             },
             error => {
               this.openSnackBar(error.error.message, 'Close');
-              console.log(error);
             }
         );
       }

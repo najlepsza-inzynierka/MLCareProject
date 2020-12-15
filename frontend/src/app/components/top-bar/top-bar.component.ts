@@ -25,8 +25,6 @@ export class TopBarComponent implements OnInit {
     if (this.adminAuthService.isLoggedIn()){
       this.adminService.getAdmin().subscribe(r => {
         this.userName = r.admin.firstName + ' ' + r.admin.lastName;
-        console.log(r);
-        console.log(this.userName);
       });
     }
   }

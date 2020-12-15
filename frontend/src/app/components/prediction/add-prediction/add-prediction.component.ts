@@ -44,11 +44,9 @@ export class AddPredictionComponent implements OnInit {
   }
 
   getVisits(){
-    this.visitService.getVisit(this.visitId).subscribe(r => console.log(r));
     this.visitService.getAllPatientVisits(this.id).subscribe(
         visits => {
           this.visits = visits;
-          console.log(visits);
           this.featuresFormGroup = this.formBuilder.group({
             features: this.formBuilder.array([])
           });
@@ -79,16 +77,12 @@ export class AddPredictionComponent implements OnInit {
   }
 
   submit(){
-    console.log(this.diseasesFormGroup.value);
-    console.log(this.featuresFormGroup.value);
     const diseasesName = this.diseasesFormGroup.value.diseases.map(d => d.name);
     this.predictionService.createMultiplePredictions(this.visitId,
         {diseases: diseasesName,
         features: this.featuresFormGroup.value.features}).subscribe(response => {
-          console.log(response);
           this.goBack();
     }, error => {
-          console.log(error);
     });
   }
 

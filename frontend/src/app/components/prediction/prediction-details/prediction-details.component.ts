@@ -23,7 +23,6 @@ export class PredictionDetailsComponent implements OnInit {
     if (!this.predictionService.prediction){
       this.predictionService.getPrediction(this.route.snapshot.paramMap.get('predictionId')).subscribe(
           p => {
-            console.log(p);
             this.prediction = p;
             this.readImage();
           }
@@ -32,7 +31,6 @@ export class PredictionDetailsComponent implements OnInit {
     else{
       this.prediction = this.predictionService.prediction;
     }
-    console.log(this.prediction);
   }
 
 

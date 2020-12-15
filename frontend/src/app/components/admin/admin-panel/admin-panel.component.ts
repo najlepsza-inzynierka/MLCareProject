@@ -39,7 +39,6 @@ export class AdminPanelComponent implements OnInit {
     this.adminService.getAllMedicals().
     subscribe(medicals => {
           this.institution = medicals.institution;
-          console.log(medicals);
           this.dataSource.data = this.institution.users;
         }
     );

@@ -46,7 +46,7 @@ export class AdminService {
     return this.http.get<any>(`${adminURL}/admin`);
   }
 
-  updateAdmin(admin, id){
+  updateAdmin(admin){
     return this.http.put(`${adminURL}/update`, admin);
   }
 

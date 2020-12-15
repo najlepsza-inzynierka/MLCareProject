@@ -28,20 +28,17 @@ export class EditMedicalStaffComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id');
     this.adminService.getMedical(this.id).subscribe(med => {
       this.medical = med.user;
-      console.log(med);
     });
   }
 
   saveMedical(){
     this.adminService.updateMedical(this.medical, this.id).subscribe(
         response => {
-          console.log(response);
           this.openSnackBar('User edited successfully', 'Close');
           this.goBack();
         },
         error => {
           this.openSnackBar(error.error.message, 'Close');
-          console.log(error);
         }
     );
   }
@@ -59,13 +56,11 @@ export class EditMedicalStaffComponent implements OnInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult){
         this.adminService.deleteMedical(this.medical._id).subscribe(response => {
-              console.log(response);
               this.openSnackBar('User deleted successfully', 'Close');
               this.router.navigateByUrl(`admin-panel`);
             },
             error => {
               this.openSnackBar(error.error.message, 'Close');
-              console.log(error);
             }
         );
       }

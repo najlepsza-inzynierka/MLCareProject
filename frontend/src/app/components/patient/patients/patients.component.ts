@@ -24,9 +24,8 @@ export class PatientsComponent implements OnInit {
   getPatients(){
     this.patientService.wentBack = false;
     this.patientService.getAllPatients().
-      subscribe(patients => {this.patients = patients;
-                             console.log(patients);
-                             this.dataSource.data = patients; }
+      subscribe(patients => { this.patients = patients;
+                              this.dataSource.data = patients; }
       );
   }
 

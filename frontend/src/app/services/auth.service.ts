@@ -44,8 +44,6 @@ export class AuthService {
   }
 
   public logout(){
-    console.log(this.getAuthorizationToken());
-    console.log(this.result);
     this.result = {
       auth_token: this.getAuthorizationToken(),
       message: 'Successfully logged in.',

@@ -91,7 +91,6 @@ export class AddVisitComponent implements OnInit {
   getDiseases(){
     this.predictionService.getDiseases().subscribe(d => {
       this.diseases = d;
-      console.log(d);
       this.diseases.forEach(item => {
         if (item.disease_tag === 'acute_inflammations'){
           this.featureGroup[0].names = item.feature_importances.all.map(a => a[2]);
@@ -104,22 +103,7 @@ export class AddVisitComponent implements OnInit {
           this.featureGroup[0].real_names = item.feature_importances.all.map(a => a[0]);
         }
       });
-      console.log(this.featureGroup);
     });
-  }
-
-  saveVisitData(){
-    this.added = false;
-    this.pushAndClearFeatureData();
-    this.pushAndClearExamData();
-    this.visit = {
-      _id: '-1',
-      date: '',
-      doctorId: '5ece8924947fa16b8c6129d5',
-      doctorName: 'Pan Wilk',
-      exams: [],
-      predictions: []
-    };
   }
 
   pushAndClearFeatureData(){
@@ -143,10 +127,8 @@ export class AddVisitComponent implements OnInit {
   saveVisit(){
     this.added = false;
     const patientId = this.route.snapshot.paramMap.get('id');
-    console.log(this.visit);
     this.visitService.createVisit(patientId, this.visit).subscribe(
         response => {
-          console.log(response);
           this.added = true;
           this.clearVisitData();
           this.openSnackBar('Visit added successfully', 'Close');
@@ -154,7 +136,6 @@ export class AddVisitComponent implements OnInit {
         },
         error => {
             this.openSnackBar(error.error.message, 'Close');
-            console.log(error);
         }
     );
   }

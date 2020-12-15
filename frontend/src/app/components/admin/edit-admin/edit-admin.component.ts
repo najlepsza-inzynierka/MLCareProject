@@ -23,7 +23,6 @@ export class EditAdminComponent implements OnInit {
   ngOnInit(): void {
     this.adminService.getAdmin().subscribe(admin => {
       this.admin = admin.admin;
-      console.log(admin);
     });
   }
 
@@ -31,13 +30,11 @@ export class EditAdminComponent implements OnInit {
     // @ts-ignore
     this.adminService.updateAdmin(this.admin, this.admin._id).subscribe(
         response => {
-          console.log(response);
           this.openSnackBar('Your data edited successfully', 'Close');
           this.goBack();
         },
         error => {
           this.openSnackBar(error.error.message, 'Close');
-          console.log(error);
         }
     );
   }

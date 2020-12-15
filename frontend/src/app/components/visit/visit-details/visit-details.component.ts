@@ -67,9 +67,10 @@ export class VisitDetailsComponent implements OnInit {
   }
 
   loadVisit(){
-    this.visitService.getVisit(this.visitId).subscribe(v => { this.visit = v;
-                                                              console.log(v.exams);
-                                                              this.dataSource.data = this.visit.exams;
+    this.visitService.getVisit(this.visitId).subscribe(
+        v => {
+          this.visit = v;
+          this.dataSource.data = this.visit.exams;
       });
   }
 
@@ -80,7 +81,6 @@ export class VisitDetailsComponent implements OnInit {
   loadPredictions(){
     this.predictionService.getPredictionsByVisit(this.visitId).subscribe(p => {
       this.predictions = p.predictions;
-      console.log(p);
       this.predictionDataSource.data = this.predictions;
     });
   }

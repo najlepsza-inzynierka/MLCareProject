@@ -26,7 +26,6 @@ export class AddPatientComponent implements OnInit {
     this.added = false;
     this.patientService.createPatient(this.patient).subscribe(
         response => {
-          console.log(response);
           this.added = true;
           this.clearPatientData();
           this.openSnackBar('Patient added successfully', 'Close');
@@ -34,7 +33,6 @@ export class AddPatientComponent implements OnInit {
         },
         error => {
           this.openSnackBar(error.error.message, 'Close');
-          console.log(error);
         }
     );
   }

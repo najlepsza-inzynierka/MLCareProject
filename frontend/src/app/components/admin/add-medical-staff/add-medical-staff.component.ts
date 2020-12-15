@@ -30,7 +30,6 @@ export class AddMedicalStaffComponent implements OnInit {
     this.added = false;
     this.adminService.createMedical(this.medical).subscribe(
         response => {
-          console.log(response);
           this.added = true;
           this.clearMedicalData();
           this.openSnackBar('Medical staff added successfully', 'Close');
@@ -43,7 +42,6 @@ export class AddMedicalStaffComponent implements OnInit {
             return of(error);
           }
           this.openSnackBar(error.error.message, 'Close');
-          console.log(error);
         }
     );
   }

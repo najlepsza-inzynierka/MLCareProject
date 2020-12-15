@@ -69,7 +69,6 @@ export class AddExamComponent implements OnInit {
   getDiseases(){
     this.predictionService.getDiseases().subscribe(d => {
       this.diseases = d;
-      console.log(d);
       this.diseases.forEach(item => {
         if (item.disease_tag === 'acute_inflammations'){
           this.featureGroup[0].names = item.feature_importances.all.map(a => a[2]);
@@ -82,7 +81,6 @@ export class AddExamComponent implements OnInit {
           this.featureGroup[0].real_names = item.feature_importances.all.map(a => a[0]);
         }
       });
-      console.log(this.featureGroup);
     });
   }
 
@@ -100,12 +98,6 @@ export class AddExamComponent implements OnInit {
 
   }
 
-  saveVisitData(){
-    this.added = false;
-    this.pushAndClearFeatureData();
-
-  }
-
   pushAndClearFeatureData(){
     this.exam.features.push(this.feature);
     this.feature = {
@@ -119,10 +111,8 @@ export class AddExamComponent implements OnInit {
     this.added = false;
     const visitId = this.route.snapshot.paramMap.get('visitId');
     // this.exam.visitId = visitId;
-    console.log(this.exam);
     this.examService.createExam(visitId, this.exam).subscribe(
         response => {
-          console.log(response);
           this.added = true;
           this.clearVisitData();
           this.openSnackBar('Exam added successfully', 'Close');
@@ -130,7 +120,6 @@ export class AddExamComponent implements OnInit {
         },
         error => {
           this.openSnackBar(error.error.message, 'Close');
-          console.log(error);
         }
     );
   }

@@ -46,7 +46,6 @@ export class EditVisitComponent implements OnInit {
       if (dialogResult){
         const id = this.route.snapshot.paramMap.get('id');
         this.visitService.deleteVisit(this.visit._id).subscribe(result => {
-          console.log(result);
           this.openSnackBar('Visit deleted successfully', 'Close');
           this.router.navigateByUrl(`patient/${id}`);
             },
