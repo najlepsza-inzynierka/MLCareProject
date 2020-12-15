@@ -33,7 +33,7 @@
       <mat-label>Search</mat-label>
       <input matInput (keyup)="filterName($event)" placeholder="Visit">
     </mat-form-field>
-    <button mat-raised-button class="add-patient-button" color="primary" routerLink="/add_visit/{{patient._id}}">Add visit</button>
+    <button mat-raised-button class="add-patient-button" color="primary" routerLink="/add-visit/{{patient._id}}">Add visit</button>
     </div>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

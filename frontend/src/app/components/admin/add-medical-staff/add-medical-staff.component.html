@@ -1,5 +1,12 @@
 <div class="add-patient">
-    <h1>New Medical Staff</h1>
+    <h1>
+        <button mat-icon-button class="material-icons" (click)="goBack()">
+            <mat-icon>
+                arrow_back
+            </mat-icon>
+        </button>
+        New Medical User
+    </h1>
     <div class="form-div">
         <form class="add-patient-form" #addMedical="ngForm">
             <div class="form-wrapper">

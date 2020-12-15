@@ -36,3 +36,11 @@
 #patient-name{
     text-align: center;
 }
+
+h2, h1{
+    margin-top: 4%;
+    margin-bottom: 0;
+}
+h1{
+    margin-top: 2%;
+}

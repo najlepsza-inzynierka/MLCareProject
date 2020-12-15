@@ -33,6 +33,7 @@ export class EditAdminComponent implements OnInit {
         response => {
           console.log(response);
           this.openSnackBar('Your data edited successfully', 'Close');
+          this.goBack();
         },
         error => {
           this.openSnackBar(error.error.message, 'Close');

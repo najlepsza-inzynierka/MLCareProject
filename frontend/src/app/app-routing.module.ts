@@ -19,6 +19,7 @@ import {EditAdminComponent} from './components/admin/edit-admin/edit-admin.compo
 import {MedicalStaffDetailsComponent} from './components/admin/medical-staff-details/medical-staff-details.component';
 import {AddPredictionComponent} from './components/prediction/add-prediction/add-prediction.component';
 import {TopBarComponent} from './components/top-bar/top-bar.component';
+import {EditMedicalStaffComponent} from './components/admin/edit-medical-staff/edit-medical-staff.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -39,7 +40,7 @@ const routes: Routes = [
       path: '', component: AddExamComponent}]  },
     { path: 'add-patient', component: TopBarComponent, canActivate: [AuthGuard], children: [{
       path: '', component: AddPatientComponent}]  },
-    { path: 'add_visit/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
+    { path: 'add-visit/:id', component: TopBarComponent, canActivate: [AuthGuard], children: [{
       path: '', component: AddVisitComponent}]  },
     { path: 'patient/:id/:visitId/add-prediction', component: TopBarComponent, canActivate: [AuthGuard], children: [{
             path: '', component: AddPredictionComponent}]  },
@@ -53,6 +54,8 @@ const routes: Routes = [
       path: '', component: AddMedicalStaffComponent}]  },
     { path: 'edit-admin', component: TopBarComponent, canActivate: [AdminGuard], children: [{
       path: '', component: EditAdminComponent}]  },
+    { path: 'edit-user/:id', component: TopBarComponent, canActivate: [AdminGuard], children: [{
+            path: '', component: EditMedicalStaffComponent}]  },
     { path: '**', redirectTo: 'login'},
 ];
 

@@ -1,5 +1,17 @@
-<div class="add-patient">
-    <h1>New Medical Staff</h1>
+<div class="add-patient" *ngIf="medical">
+    <h1>
+        <button mat-icon-button class="material-icons" (click)="goBack()">
+            <mat-icon>
+                arrow_back
+            </mat-icon>
+        </button>
+        Edit Medical User
+        <button mat-icon-button class="material-icons" (click)="confirmDialog()">
+            <mat-icon>
+                delete
+            </mat-icon>
+        </button>
+    </h1>
     <div class="form-div">
         <form class="add-patient-form" #addMedical="ngForm">
             <div class="form-wrapper">
@@ -91,7 +103,6 @@
                 <mat-label>Password</mat-label>
                 <input matInput
                        placeholder="Password"
-                       required
                        type="text"
                        name="password"
                        [(ngModel)]="medical.password">

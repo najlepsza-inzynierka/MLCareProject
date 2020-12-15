@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Medical} from '../../../interfaces/medical';
 import {of} from 'rxjs';
 import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-add-medical-staff',
@@ -17,6 +18,7 @@ export class AddMedicalStaffComponent implements OnInit {
 
   constructor(private adminService: AdminService,
               private router: Router,
+              private location: Location,
               private snaackBar: MatSnackBar) {
     this.clearMedicalData();
   }
@@ -64,6 +66,10 @@ export class AddMedicalStaffComponent implements OnInit {
       email: '',
       password: '',
     };
+  }
+
+  goBack(){
+    this.location.back();
   }
 
 }

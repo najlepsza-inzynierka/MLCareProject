@@ -6,8 +6,8 @@ const uri = 'http://localhost:5000';
 const registerURL = `${uri}/api/users/register`;
 const registerForceURL = `${uri}/api/users/register/force`;
 const medicalURL = `${uri}/api/admins/institution`;
-const adminURL = `${uri}api/admins`;
-
+const adminURL = `${uri}/api/admins`;
+const userURL = `${uri}/api/users`;
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,11 @@ export class AdminService {
   }
 
   updateMedical(medical, id){
-    return this.http.put(`${adminURL}/update/${id}`, medical); // todo
+    return this.http.put(`${userURL}/update/${id}`, medical);
+  }
+
+  deleteMedical(id){
+    return this.http.delete(`${userURL}/${id}`);
   }
 
   getAllMedicals(){
@@ -43,7 +47,7 @@ export class AdminService {
   }
 
   updateAdmin(admin, id){
-    return this.http.put(`${adminURL}/update/${id}`, admin);
+    return this.http.put(`${adminURL}/update`, admin);
   }
 
 }

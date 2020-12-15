@@ -1,9 +1,11 @@
 <div *ngIf="admin && institution" class="main-container add-patient">
     <div class="form-div">
         <h1>{{institution.institutionName}}</h1>
-        <p class="info-left">Users limit: <span class="info-right">{{institution.usersLimit}}</span></p>
-        <p class="info-left">Registered users number: <span class="info-right">{{institution.usersNo}}</span></p>
-        <p class="info-left">Available user accounts left: <span class="info-right">{{institution.usersLimit - institution.usersNo}}</span></p>
+        <div class="info">
+            <p class="info-left">Users limit: <span class="info-right">{{institution.usersLimit}}</span></p>
+            <p class="info-left">Registered users number: <span class="info-right">{{institution.usersNo}}</span></p>
+            <p class="info-left">Available user accounts left: <span class="info-right">{{institution.usersLimit - institution.usersNo}}</span></p>
+        </div>
     </div>
 
 
