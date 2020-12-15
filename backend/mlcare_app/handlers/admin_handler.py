@@ -191,7 +191,7 @@ def update_password_admin_self():
 @expect_mime('application/json')
 @json_body
 @check_admin_token
-def update_admin_by_admin(user_id):
+def update_admin_by_admin():
     body = g.body
     admin = g.admin
 
@@ -204,7 +204,7 @@ def update_admin_by_admin(user_id):
     admin.phone_no = body.get('phoneNumber', admin.phone_no)
     admin.address = body.get('address', admin.address)
 
-    admin_dao.update_one_by_id(user_id, admin)
+    admin_dao.update_one_by_id(admin.id, admin)
 
     return jsonify({'confirmation': 'OK'})
 
