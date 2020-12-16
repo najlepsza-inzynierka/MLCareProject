@@ -76,12 +76,18 @@
                     color="primary">Submit</button>
     </div>
 
-    <div>
+    <div class="form-div features" *ngIf="exam.features.length > 0 || visit.exams.length > 0">
+        <h1>
+            Added Features
+        </h1>
         <ul *ngFor="let ff of exam.features">
             {{ff.name}}  {{ff.value}} {{ff.unit}}
         </ul>
+        <h1>
+            Added Exams
+        </h1>
         <ul *ngFor="let e of visit.exams">
-        {{e.name}}
+            <span id="exam">{{e.name}}</span>
         <ul *ngFor="let f of e.features">
             <li>{{f.name}}  {{f.value}} {{f.unit}}</li>
         </ul>

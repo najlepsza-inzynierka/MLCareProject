@@ -1,7 +1,9 @@
 .mat-raised-button{
     margin: 1%;
 }
-
-.add-button{
-/*    todo - zeby te dwa przyciski byly po lewej*/
+.features{
+    margin-top: 2%;
+}
+#exam{
+    font-weight: bold;
 }

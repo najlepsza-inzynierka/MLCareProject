@@ -15,6 +15,18 @@
         </form>
     </div>
 
+    <div *ngIf="selected.length > 0">
+        <h1>Obligatory features for choosen diseases</h1>
+        <div class="form-div">
+            <div *ngFor="let disease of selected">
+                <span id="diseaseName">{{disease.name}}:</span>
+                <ul *ngFor="let feature of disease.feature_importances.all">
+                    {{feature[2]}}
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <h1>Choose features to use</h1>
     <div class="form-div">
         <form [formGroup]="featuresFormGroup">
@@ -31,14 +43,3 @@
         <button mat-raised-button color="primary" (click)="submit()" [disabled]="selected.length == 0">Predict</button>
     </div>
 </div>
-
-
-
-<div *ngFor="let disease of selected">
-    {{disease.name}}:
-    <ul *ngFor="let feature of disease.feature_importances.all">
-        {{feature[2]}}
-    </ul>
-</div>
-
-

@@ -75,10 +75,10 @@ export class AddExamComponent implements OnInit {
           this.featureGroup[0].real_names = item.feature_importances.all.map(a => a[0]);
         } else if (item.disease_tag === 'breast_cancer_wisconsin'){
           this.featureGroup[1].names = item.feature_importances.all.map(a => a[2]);
-          this.featureGroup[0].real_names = item.feature_importances.all.map(a => a[0]);
+          this.featureGroup[1].real_names = item.feature_importances.all.map(a => a[0]);
         } else if (item.disease_tag === 'breast_cancer_coimbra'){
           this.featureGroup[2].names = item.feature_importances.all.map(a => a[2]);
-          this.featureGroup[0].real_names = item.feature_importances.all.map(a => a[0]);
+          this.featureGroup[2].real_names = item.feature_importances.all.map(a => a[0]);
         }
       });
     });
@@ -99,6 +99,13 @@ export class AddExamComponent implements OnInit {
   }
 
   pushAndClearFeatureData(){
+    for (const dis of this.featureGroup){
+      for (let i = 0; i < dis.names.length; ++i){
+        if (dis.names[i] === this.feature.name){
+          this.feature.name = dis.real_names[i];
+        }
+      }
+    }
     this.exam.features.push(this.feature);
     this.feature = {
       name: '',
